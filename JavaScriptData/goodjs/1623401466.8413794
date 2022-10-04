@@ -1,0 +1,229 @@
+
+  dataLayer = [{
+  'elogin': '0',
+  'esubdom': 'eksisozluk',
+  'etitle': '',
+  'ecat1': 'sağlık',
+  'econtentid': '',
+  'epagetype': 'main',
+  'epublishdate': '',
+  'epublishtime': '',
+  'econtenttype': '',
+  'efiltre': '',
+  'adu': '',
+  }];
+
+
+    var NativeAdPub = window.NativeAdPub || [];
+
+(function (w, d) { var s = d.createElement("script"); s.src = "https://delivery.adrecover.com/41209/adRecover.js"; s.type = "text/javascript"; s.async = true; (d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0]).appendChild(s); })(window, document);
+
+            
+            
+
+/* IL_JOB_STARTS */
+
+!(function () {
+  //avoid message trigger twice for pnp accounts
+  if (window.IL_MessageTriggered) return;
+  adpushup = window.adpushup || {};
+  adpushup.que = adpushup.que || [];
+  adpushup.que.push(function () {
+    var w = window;
+    var ap = adpushup;
+    var EU_COUNTRY_LIST = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","GB","GF","GP","MQ","ME","YT","RE","MF","GI","AX","PM","GL","BL","SX","AW","CW","WF","PF","NC","TF","AI","BM","IO","VG","KY","FK","MS","PN","SH","GS","TC","AD","LI","MC","SM","VA","JE","GG","GI",];
+    if (EU_COUNTRY_LIST.includes(ap.config.country)) return;
+    var utils = ap.utils;
+    utils.log("Impression Logging (IL) started.");
+    var impressionLoggingKey = "IL_";
+    var iframeFound = false;
+    var dataEventName = "data";
+    var errorEventName = "error";
+    var cdnorigin_domain = "https://cdnorigin.staging.adpushup.com";
+    var adpushup_client = "https://client.adpushup.com";
+    var logging_endpoint = "https://aplogger.adpushup.com/log";
+    var message = {
+      origin: adpushup_client,
+      userId: ap.config.packetId,
+    };
+    function generateUniqueId() {
+      return (
+        "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+          var r = (Math.random() * 16) | 0,
+            v = c == "x" ? r : (r & 0x3) | 0x8;
+          return v.toString(16);
+        }) +
+        "-" +
+        new Date().valueOf()
+      );
+    }
+    function isParsableJson(str) {
+      try {
+        JSON.parse(str);
+      } catch (e) {
+        return false;
+      }
+      return true;
+    }
+    function triggerRequest(eventName, data) {
+      if (isParsableJson(data)) {
+        var stringJson = data;
+      } else {
+        var stringJson = JSON.stringify(data);
+        //stringifying the error object returns empty object
+        //https://stackoverflow.com/questions/18391212/is-it-not-possible-to-stringify-an-error-using-json-stringify
+        if (stringJson === "{}")
+          stringJson = JSON.stringify(data, Object.getOwnPropertyNames(data));
+      }
+      var encodedStringJson = btoa(stringJson);
+      var pixel = document.createElement("img");
+      pixel.src =
+        logging_endpoint +
+        "?event=" +
+        impressionLoggingKey +
+        eventName +
+        "&data=" +
+        encodedStringJson;
+      utils.log("IL request triggered." + stringJson);
+    }
+    function checkIframe() {
+      if (w.IL_MessageTriggered) return;
+      utils.log("IL checking if Iframe already exists.");
+      var iframes = document.getElementsByTagName("iframe");
+      for (var i = 0; i < iframes.length; i++) {
+        var ifm = iframes[i];
+        if (ifm.src.includes(cdnorigin_domain)) {
+          var iframe = ifm;
+          iframeFound = true;
+          break;
+        }
+      }
+      if (!iframeFound) return;
+      triggerMessage(iframe);
+    }
+    function createIframe() {
+      utils.log("IL iframe not found. Creating new iframe.");
+      return new Promise(function (resolve, reject) {
+        var ifm = document.createElement("iframe");
+        ifm.src = cdnorigin_domain + "/02/IL_.html";
+        ifm.style.cssText = "display:none; width:0; height:0;";
+        ifm.onload = function () {
+          resolve(ifm);
+        };
+        ifm.onerror = function () {
+          reject();
+        };
+        (document.body || document.head).appendChild(ifm);
+      });
+    }
+    function generateImpressionLoggingJson(trackerObj) {
+      var uniqueId = generateUniqueId();
+      var obj = {
+        country: ap.config.country,
+        date: Date.now(),
+        domain: w.location.hostname,
+        pathname: w.location.pathname,
+        platform: ap.config.platform,
+        siteId: ap.config.siteId,
+        uniqueId: uniqueId,
+      };
+      trackerObj = Object.assign(trackerObj, obj);
+      return trackerObj;
+    }
+    function attachListeners() {
+      w.addEventListener("error", function (event) {
+        try {
+          var error = event.error;
+          if (error) {
+            var message = error.message;
+            var stack = error.stack;
+          }
+          var log = {
+            message: message || event.message,
+            stack: stack || "",
+            type: "uncaughterror",
+          };
+          triggerRequest(errorEventName, log);
+		  utils.log("IL error occured." + JSON.stringify(log));
+        } catch (error) {
+          triggerRequest(errorEventName, error);
+		  utils.log("IL error occured." + JSON.stringify(error));
+        }
+      });
+      w.addEventListener("message", function (e) {
+        var origin = cdnorigin_domain;
+        if (e.origin !== origin) return;
+        if (!isParsableJson(e.data)) return;
+        var trackerObj = JSON.parse(e.data);
+        if (!trackerObj) return;
+        if (!trackerObj.userId) trackerObj.userId = ap.config.packetId;
+        utils.log("IL message received from iframe.");
+        if (!!trackerObj["origin"]) delete trackerObj["origin"];
+        trackerObj = generateImpressionLoggingJson(trackerObj);
+        triggerRequest(dataEventName, trackerObj);
+      });
+    }
+    function triggerMessage(ifm) {
+      if (w.IL_MessageTriggered) return;
+      w.IL_MessageTriggered = true;
+      utils.log("IL message sent to iframe.");
+      ifm.contentWindow.postMessage(JSON.stringify(message), cdnorigin_domain);
+    }
+    try {
+      attachListeners();
+      checkIframe();
+      if (w.IL_MessageTriggered) return; //this could be more cleaner ie inside createiframe
+      createIframe()
+        .then(function (ifm) {
+          utils.log("IL iframe created.");
+          triggerMessage(ifm);
+        })
+        .catch(function (error) {
+          if (error === undefined)
+            error = {
+              message:
+                "Custom error message. Error in createIframe(), could be because of promise rejection",
+            };
+          utils.log("IL error in iframe creation." + error);
+          triggerRequest(errorEventName, error);
+        });
+    } catch (error) {
+      utils.log("IL error in execution." + error);
+      triggerRequest(errorEventName, error);
+    }
+  });
+})();
+
+
+/* IL_JOB_ENDS */
+
+
+        
+
+var pp_gemius_identifier = 'bJub8NwkyDhwR5K9_vQ5U7PpLTCyoIOWs9yGN3kl4cz.d7';
+
+NativeAdPub.push({ target: '10924' , id: 'nativespot-unit-10924'});
+NativeAdPub.push({ domain: 'eksisozluk.nativespot.com', target: '10901' , id: 'nativespot-unit-10901'});
+
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/tr_TR/sdk.js#xfbml=1&version=v3.0&appId=151735074873255";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
+
+var google_conversion_id = 878852058;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+
+$(".eksiseyler-logo").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"seylereksisozluk_logo",Label:"click",noninteraction:"true",event:"gaEvent"})});$(".eksiseyler-logo-mobile").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"seylereksisozluk_logo",Label:"click",noninteraction:"true",event:"gaEvent"})});$("#options-dropdown li a").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"secenekler",Label:$(this).text(),event:"gaEvent"})});
+$(".dropdown.mobile-only li a").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"secenekler",Label:$(this).text(),event:"gaEvent"})});$("#a3-toggle").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"search",Label:"ok_icon_click",event:"gaEvent"})});$(".actions .primary").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"search",Label:$(this).text(),event:"gaEvent"})});
+$("#search-textbox").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"search",Label:"input-click",event:"gaEvent"})});$("#search-form .eksico").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"search",Label:"input-search-button",event:"gaEvent"})});$("#top-login-link").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"header",Label:"giris",event:"gaEvent"})});
+$("#top-navigation li").eq(3).click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"header",Label:"kayit-ol",event:"gaEvent"})});$(".eksiseyler-link").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"entry",Label:"mavi_eksi_logo_small",event:"gaEvent"})});$("#feed-info").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"left-iframe",Label:"yenile",event:"gaEvent"})});
+$(".big-thumb").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"right-video",Label:"click",event:"gaEvent"})});$(".primary").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"mesaj",Label:$(this).text(),event:"gaEvent"})});$(".mobile-notification-icons li a").click(function(a){dataLayer.push({Category:"eksisozlukEvent",Action:"mobile-notification-icons",Label:$(this).attr("href"),event:"gaEvent"})});
+window.Criteo = window.Criteo || {}; window.Criteo.events = window.Criteo.events || [];
+function tmpRender102564(json) {}
+function parseCriteoBids102564(json) {var runBidOnce = 0;if(json.length == 0) {window.top.networkAds.async102564.doneScript();} else {for(var i in json) {json[i].nativePayload.response_status = 0;json[i].nativePayload.zoneid = json[i].zoneId;json[i].nativePayload.runcode = json[i].zoneId;json[i].nativePayload.sprice = json[i].cpm;if("1" == "1" && runBidOnce == 0) {runBidOnce = 1;window.top.networkAds.async102564.actionScript(json[i].nativePayload, json[i].zoneId);}}}}
+Criteo.events.push(function() {var adUnit = {"placements": [{"slotid": "uni4", "zoneid": 1225136, "nativeCallback": tmpRender102564}]}; Criteo.RequestBids(adUnit, parseCriteoBids102564, 1500);})

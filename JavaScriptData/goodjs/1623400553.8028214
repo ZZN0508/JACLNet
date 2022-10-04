@@ -1,0 +1,73 @@
+document.domain="xywy.com";
+var fromurl=top.document.URL;
+var fromurl_forzy=encodeURI(fromurl);
+
+var displayref='';
+try{
+ displayref = encodeURIComponent(top.document.referrer);
+}catch(err){
+ displayref = encodeURIComponent(document.referrer);
+}
+
+fromurl=encodeURIComponent(fromurl);
+var td = new Date(), im = new Image, mk = Math, e = escape, ue = unescape, pa = parseInt, d = document, s = [], 
+   pu = "push", su = "substring", gt = "getTime", st = "setTime", tg = "toGMTString", rm = "random", 
+   i = "indexOf", c = "cookie", l = "length", cn = 'clientID', ac = 'clientac', 
+   u = "";
+function P(n, v) {
+ s[pu](n + '=' + v);
+}
+function S(n, v, s) {
+ td[st](td[gt]() + (s * 24 * 3600 * 1000 * 365));
+ d[c] = n + "=" + e(v) + ((s == null) ? "" : "; expires=" + td[tg]())+ "; domain=.xywy.com ;path=/"
+   + "";
+}
+function C(n) {
+ if (d[c][l] > 0) {
+  begin = d[c][i](n + "=");
+  if (begin != -1) {
+   begin += n[l] + 1;
+   end = d[c][i](";", begin);
+   if (end == -1)
+    end = d[c][l];
+   return ue(d[c][su](begin, end));
+  }
+ }
+ return;
+}
+if (!C(ac)) {
+ var nnum = pa(mk[rm](10, 1) * 1000000) + "";
+ if(nnum.length < 6){
+  for (var nnuml = nnum.length; nnuml < 6; nnuml++) {
+   nnum += "0"
+  }
+ }
+ u = td[gt]() + nnum;
+ P('clientID', (u + 'clientID'));
+ //将clientID存入cookie中 参数名为ac中  不在用clientID作为键值存储
+ S(ac, u, '5');
+} else {
+ P('clientID', (C(ac) + 'clientID'));
+}
+var loginID=C(ac);
+function recordVisitLink(position,custom_id,weizhi) {
+ try {
+  new Image().src="http://stat-z.xywy.com/e.png?clickname=click"+position+"&p="+weizhi+"&custom_id="+custom_id+"&ref="+displayref+"&fromurl="+fromurl+"&clientID="+loginID+"&time=" + new Date().getTime()+"time";//+"&num="+Math.random()
+  //new Image().src="http://stat-y.xywy.com/z.png?AcT="+fromurl_forzy+"&loginID="+loginID+"&clickType=1&adtype="+position+"&adposition="+weizhi+"&";
+ }
+ catch(err){}
+}
+function recordVisitLinkads(position,custom_id,weizhi) {
+ try {
+  new Image().src="http://stat-z.xywy.com/e.png?clickname=click"+position+"&p="+weizhi+"&custom_id="+custom_id+"&ref="+displayref+"&fromurl="+fromurl+"&clientID="+loginID+"&time=" + new Date().getTime()+"time";//+"&num="+Math.random()
+  //new Image().src="http://stat-y.xywy.com/z.png?AcT="+fromurl_forzy+"&loginID="+loginID+"&clickType=1&adtype="+position+"&adposition="+weizhi+"&";
+ }
+ catch(err){}
+}
+function recordVisitLinkbidd(position,custom_id,weizhi) {
+ try {
+  new Image().src="https://stat-ad.xywy.com/bid.png?clickname=click"+position+"&p="+weizhi+"&custom_id="+custom_id+"&ref="+displayref+"&fromurl="+fromurl+"&clientID="+loginID+"&time=" + new Date().getTime()+"time";//+"&num="+Math.random()
+  //new Image().src="http://stat-y.xywy.com/z.png?AcT="+fromurl_forzy+"&loginID="+loginID+"&clickType=1&adtype="+position+"&adposition="+weizhi+"&";
+ }
+ catch(err){}
+}

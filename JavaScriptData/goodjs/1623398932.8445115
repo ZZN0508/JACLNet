@@ -1,0 +1,10 @@
+(function() {
+    var yoneDiv = document.createElement('ins');
+    yoneDiv.id = 'yoneads109332';
+    document.body.appendChild(yoneDiv);
+
+    var yoneScript = document.createElement('script');
+    yoneScript.src = '//img.ak.impact-ad.jp/ic/pone/tags/0114/109332_8.js';
+    yoneScript.type = 'text/javascript';
+    yoneDiv.appendChild(yoneScript);
+}());

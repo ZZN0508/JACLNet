@@ -1,0 +1,57 @@
+
+    function OptanonWrapper() {
+        document.cookie = 'COOKIE_NAME=exoclick_login; Max-Age=0; path=/; domain=' + location.host;
+    }
+
+{"@context":"https:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/www.exoclick.com\/","name":"ExoClick","potentialAction":{"@type":"SearchAction","target":"https:\/\/www.exoclick.com\/?s={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/www.exoclick.com\/","sameAs":[],"@id":"https:\/\/www.exoclick.com\/#organization","name":"ExoClick","logo":"https:\/\/www.exoclick.com\/wp-content\/uploads\/2015\/04\/exoclick_new_baseline.png"}
+
+    if (self === top) {
+        var antiClickjack = document.getElementById("antiClickjack");
+        antiClickjack.parentNode.removeChild(antiClickjack);
+    } else {
+        top.location = self.location;
+    }
+
+
+    (function initPushNotifications() {
+        if (
+            typeof Exoclick === 'undefined' ||
+            typeof Exoclick.pushNotifications === 'undefined'
+        ) {
+            setTimeout(initPushNotifications, 2);
+        } else {
+            Exoclick.pushNotifications.init({
+                serverPublicKey: "BNViAalUEwPE7ikn3RWdHjGfbDlXPil3Ira0Yq0jHXDs70Vy43hXLyJ-Geyvw3ZtyJjrMN2bVScnbPHO8El00k4",
+                jsPath: "https:\/\/www.exoclick.com\/wp-content\/themes\/exoclick",
+                backendServer: "https:\/\/backend.exoclick.com",
+                GATrackingID: "UA-25865483-1"            });
+        }
+
+    })();
+
+
+            if (typeof jQuery !== 'undefined') {
+                (function ($) {
+                    $('.pp-tab-widget').on('click', 'li a', function (e) {
+                        e.preventDefault();
+                        var $tab = $(this),
+                            href = $tab.attr('href');
+
+                        $('.pp-active').removeClass('pp-active');
+                        $tab.addClass('pp-active');
+
+                        $('.pp-show')
+                            .removeClass('pp-show')
+                            .addClass('pp-hide')
+                            .hide();
+
+                        $(href)
+                            .removeClass('pp-hide')
+                            .addClass('pp-show')
+                            .hide()
+                            .fadeIn(550);
+                    });
+                })(jQuery);
+            }
+        

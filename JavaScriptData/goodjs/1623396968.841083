@@ -1,0 +1,198 @@
+
+ try {
+ window.firstHiddenTime = document.visibilityState === 'hidden' ? 0 : Infinity;
+ document.addEventListener('visibilitychange', function (event) {
+ window.firstHiddenTime = Math.min(window.firstHiddenTime, event.timeStamp);
+ }, { once: true });
+ if ('PerformanceLongTaskTiming' in window) {
+ var globalStats = window.__statsLongTasks = { tasks: [] };
+ globalStats.observer = new PerformanceObserver(function(list) {
+ globalStats.tasks = globalStats.tasks.concat(list.getEntries());
+ });
+ globalStats.observer.observe({ entryTypes: ['longtask'] });
+ }
+ if (PerformanceObserver && (PerformanceObserver.supportedEntryTypes || []).some(function(e) {
+ return e === 'element'
+ })) {
+ if (!window.oet) {
+ window.oet = [];
+ }
+ new PerformanceObserver(function(l) {
+ window.oet.push.apply(window.oet, l.getEntries());
+ }).observe({ entryTypes: ['element'] });
+ }
+ } catch (e) {
+ console.error(e);
+ }
+ 
+
+ window.dataLayer = [{"userAuth":0,"pageType":"Other","cityName":"rossiya","regionName":"R3"}];
+ (function(w, d, s, l, i) {
+ w[l] = w[l] || [];
+ w[l].push({
+ 'gtm.start': new Date().getTime(),
+ event: 'gtm.js'
+ });
+ var f = d.getElementsByTagName(s)[0],
+ j = d.createElement(s),
+ dl = l != 'dataLayer' ? '&l=' + l : '';
+ j.async = true;
+ j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+ var n=d.querySelector('[nonce]');
+ n&&j.setAttribute('nonce',n.nonce||n.getAttribute('nonce'));
+ f.parentNode.insertBefore(j, f);
+ })(window, document, 'script', 'dataLayer', 'GTM-KP9Q9H');
+ 
+
+ window.googletag = window.googletag || {cmd: []};
+ googletag.cmd.push(function() {
+ googletag.pubads().setForceSafeFrame(true);
+ });
+ 
+
+ window.capturedErrors = [];
+ window.addEventListener('error', function(error) {
+ window.capturedErrors.push(error);
+ });
+ 
+
+ window.avito = window.avito || {};
+ window.avito.platform = 'desktop';
+ window.avito.siteName = 'Авито';
+ window.avito.staticPrefix = 'https://www.avito.st';
+ window.avito.supportPrefix = 'https://support.avito.ru';
+ window.avito.pageId = 'main';
+ window.avito.categoryId = null;
+ window.avito.microCategoryId = 1;
+ window.avito.locationId = 621540;
+ window.avito.routeName = 'index';
+ window.avito.fromPage = '';
+ window.avito.sentry = {
+ dsn: 'https://1ede3b886c8b4efd9230509682fe2f12@sntr.avito.ru/41',
+ release: "rc-202106091631-205716"
+ };
+ window.avito.clickstream = {
+ buildId: "rc-202106091631-205716",
+ buildUid: null,
+ srcId: 96
+ };
+ window.avito.isAuthenticated = '' === '1';
+ window.avito.isVerifiedCompany = '' === '1';
+ window.avito.metrics = {};
+ window.avito.metrics.categoryId = null;
+ window.avito.metrics.browser = 'chrome.71';
+ window.avito.filtersGroup = 'desktop_catalog_filters';
+ window.avito.experiments = window.avito.experiments || {};
+ window.avito.abFeatures = window.avito.abFeatures || {};
+ // Messenger config section
+ window.avito.socketserver = 'wss://socket.avito.ru/socket';
+ window.avito.httpfallback = '';
+ window.avito.socketImageUploadUrl = 'https://socket.avito.ru/images';
+ window.avito.socketMetricsUrl = 'https://socket.avito.ru/metrics';
+ window.avito.fileStorageUploadUrl= 'https://files.avito.ru/upload/';
+ window.avito.isTestAccount = '' === '1';
+ window.avito.userId = '0';
+ 
+ window.avito.messenger = window.avito.messenger || {};
+ window.avito.messenger.experiments = window.avito.messenger.experiments || {};
+  window.avito.messenger.experiments['messenger_fallback'] = '';
+ 
+
+ window.avito.ads = {
+ userGroup: 55
+ };
+ 
+
+         if (avito.tracking && avito.tracking.initCriteo) {
+ var isRealty = false;
+ avito.tracking.initCriteo(isRealty ? [10019, 39534] : 39534, 0, "");
+ }
+       avito.tracking.trackCriteo(
+ { event: "viewHome", avito: "1" }
+ );
+    
+ var _comscore = _comscore || [];
+ _comscore.push({ c1: "2", c2: "9829393", c4: document.location.href, c5: "SearchAll" });
+ (function() {
+ var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+ s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+ el.parentNode.insertBefore(s, el);
+ })();
+  
+
+
+ var img = new Image();
+ img.src = '//www.tns-counter.ru/V13a***R>' + document.referrer.replace(/\*/g,'%2a') + '*avito_ru/ru/CP1251/tmsec=avito_main/' + Math.round(Math.random() * 1000000000);
+ 
+
+ window.avito = window.avito || {};
+
+var google_conversion_id=987009030,google_conversion_label="f8JaCLLjvAQQhqDS1gM",google_custom_params=window.google_tag_params,google_remarketing_only=!0;
+
+ function onSecuredTouchReady(callback) {
+ if (window['_securedTouchReady']) {
+ callback();
+ } else {
+ document.addEventListener('SecuredTouchReadyEvent', callback);
+ }
+ }
+ onSecuredTouchReady(function () {
+ _securedTouch.init({
+ url: "https://avito.securedtouch.com",
+ appId: "avito",
+ appSecret: "pYmrImQN8QLjIJ6SYznJXLyM",
+ userId: null,
+ sessionId: "2or4e8ec.cnfuwy.mkw294caelg0",
+ isDebugMode: false,
+ }).then(function () {
+ console.log("SecuredTouchSDK initialized successfully");
+ }).catch(function (e) {
+ console.error("An error occurred. Please check your init configuration", e);
+ });
+ });
+ function SecuredTouchTokenReadyEvent(callback) {
+ if (window['_securedTouchToken']) {
+ callback();
+ } else {
+ document.addEventListener('SecuredTouchTokenReadyEvent', callback);
+ }
+ }
+ SecuredTouchTokenReadyEvent(function () {
+ if (window.avito && window.avito.cookie && window.avito.cookie.set) {
+ window.avito.cookie.set('st', window['_securedTouchToken'], 60*60*24);
+ }
+ });
+ 
+    (function(apps) {
+        for (var key in apps) {
+            if (!apps.hasOwnProperty(key)) {
+                continue;
+            }
+
+            var app = apps[key];
+
+            if (
+                avito &&
+                avito.bundles &&
+                avito.bundles[app.name] &&
+                avito.bundles[app.name][app.version] &&
+                typeof avito.bundles[app.name][app.version].render === 'function'
+            ) {
+                render = avito.bundles[app.name][app.version].render;
+
+                app.instances.forEach(function(instance) {
+                    var mountNode = document.querySelector('.' + instance.selector);
+
+                    var props = {};
+
+                    try {
+                        props = JSON.parse(instance.props);
+                    } catch(error) {
+                        console.error('Failed to parse instance.props', error);
+                    }
+
+                    render(mountNode, props);
+                });
+            }
+        };
+    })({"bx-single-page-main":{"name":"@avito\/bx-single-page-main","version":"3.102.1","instances":[]}});

@@ -1,0 +1,22 @@
+// /116038490/gootop_pc/jx_badge350_1
+(function() {
+    var parentWindow;
+    var gptDiv;
+    var adDiv;
+    parentWindow = window.top;
+
+    gptDiv = document.createElement('div');
+    gptDiv.id = 'div-gpt-ad-1512970398278-0';
+    adDiv = parentWindow.document.getElementById('gooad-jx_badge350_1');
+    adDiv.appendChild(gptDiv);
+    parentWindow.googletag.cmd.push(function() { parentWindow.googletag.display('div-gpt-ad-1512970398278-0'); });
+    
+    var styleElem, headElem, styleDescription, sheet;
+    styleElem = parentWindow.document.createElement('style');
+    styleElem.type = 'text/css';
+    headElem = parentWindow.document.getElementsByTagName('head')[0];
+    headElem.appendChild(styleElem);
+    styleDescription = '#gooad-jx_badge350_1 {text-align:center;}';
+    sheet = styleElem.sheet;
+    sheet.insertRule(styleDescription, 0);
+}());

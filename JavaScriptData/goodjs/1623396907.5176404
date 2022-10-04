@@ -1,0 +1,64 @@
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardian.ng/#organization","name":"Guardian Nigeria","url":"https://guardian.ng/","sameAs":["https://www.facebook.com/ngrguardian","https://twitter.com/NGRGUARDIANNEWS"],"logo":{"@type":"ImageObject","@id":"https://guardian.ng/#logo","inLanguage":"en-US","url":"https://guardian.ng/wp-content/uploads/2019/08/guardian_logo@2x.png","width":1204,"height":154,"caption":"Guardian Nigeria"},"image":{"@id":"https://guardian.ng/#logo"}},{"@type":"WebSite","@id":"https://guardian.ng/#website","url":"https://guardian.ng/","name":"The Guardian Nigeria News - Nigeria and World News","description":"The Latest news in Nigeria and world news. The Guardian Nigeria Newspaper brings you the latest headlines, opinions, political news, business reports and international news.","publisher":{"@id":"https://guardian.ng/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://guardian.ng/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"CollectionPage","@id":"https://editor.guardian.ng/#webpage","url":"https://editor.guardian.ng/","name":"The Guardian Nigeria News - Nigeria and World News | The Latest news in Nigeria and world news. The Guardian Nigeria Newspaper brings you the latest headlines, opinions, political news, business reports and international news.","isPartOf":{"@id":"https://guardian.ng/#website"},"about":{"@id":"https://guardian.ng/#organization"},"description":"Breaking Nigerian News - Leading Nigeria Newspaper - Top News from Nigeria, Africa and the world","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://editor.guardian.ng/"]}]}]}
+
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    
+
+          window.Criteo = window.Criteo || {};
+          window.Criteo.events = window.Criteo.events || [];
+        
+
+    _atrk_opts = { atrk_acct:"Qzrpw1O7kI20L7", domain:"guardian.ng",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-45510343-1', {
+        site_speed_sample_rate: 100,
+        optimize_id: 'GTM-TFX5CKJ',
+    });
+    gtag('config', 'G-FJEQ3FB9QG');
+
+
+        if (/(android|bb\d+|meego)|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od|ad)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)) {
+            window.location.href = 'https://m.guardian.ng' + window.location.pathname;
+        }
+	
+
+    !function(n,e,o,r,i){if(!e){e=e||{},window.permutive=e,e.q=[],e.config=i||{},e.config.projectId=o,e.config.apiKey=r,e.config.environment=e.config.environment||"production";for(var t=["addon","identify","track","trigger","query","segment","segments","ready","on","once","user","consent"],c=0;c<t.length;c++){var f=t[c];e[f]=function(n){return function(){var o=Array.prototype.slice.call(arguments,0);e.q.push({functionName:n,arguments:o})}}(f)}}}(document,window.permutive,"4306aab6-6613-49be-bf56-cbe85e2ec46c","00269301-469f-48de-bc85-d0cdd07a4300",{});
+    var _permutiveGetMetaData=function(){for(var t={},e=document.getElementsByTagName("meta"),r=0;r<e.length;r++)switch(e[r].getAttribute("name")){case"author":t.author=e[r].getAttribute("content");break;case"description":t.description=e[r].getAttribute("content");break;case"keywords":t.keywords=e[r].getAttribute("content")}return t},_permutiveGetOpenGraphData=function(){for(var t={article:{}},e=document.getElementsByTagName("meta"),r=0;r<e.length;r++)switch(e[r].getAttribute("property")){case"og:title":t.title=e[r].getAttribute("content");break;case"og:type":t.type=e[r].getAttribute("content");break;case"og:description":t.description=e[r].getAttribute("content");break;case"og:url":t.url=e[r].getAttribute("content");break;case"og:locale":t.locale=e[r].getAttribute("content");break;case"article:author":t.article.author=e[r].getAttribute("content");break;case"article:section":t.article.section=e[r].getAttribute("content");break;case"article:tag":var a=t.article.tags||[];a.push(e[r].getAttribute("content")),t.article.tags=a}return t};
+    permutive.addon("web", { page: {
+            meta: _permutiveGetMetaData(),
+            og: _permutiveGetOpenGraphData()
+        }});
+
+
+    googletag.cmd.push(function() {
+        if (googletag.pubads().getTargeting('permutive').length == 0) {
+            var kvs = localStorage.getItem('_pdfps');
+            googletag.pubads().setTargeting('permutive', kvs ? JSON.parse(kvs) : []); }
+    });
+
+
+/* <![CDATA[ */
+var pollsL10n = {"ajax_url":"https:\/\/guardian.ng\/wp-admin\/admin-ajax.php","text_wait":"Your last request is still being processed. Please wait a while ...","text_valid":"Please choose a valid poll answer.","text_multiple":"Maximum number of choices allowed: ","show_loading":"1","show_fading":"1"};
+/* ]]> */
+
+
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"guardianngr"};
+/* ]]> */
+
+
+		window._io_config = window._io_config || {};
+		window._io_config["0.2.0"] = window._io_config["0.2.0"] || []; 
+		window._io_config["0.2.0"].push({
+			page_url: window.location.href,
+			page_url_canonical: "https://guardian.ng",
+			page_title: "The Guardian Nigeria News - Nigeria and World News | The Latest news in Nigeria and world news. The Guardian Nigeria Newspaper brings you the latest headlines, opinions, political news, business reports and international news. &mdash; The Guardian Nigeria News &#8211; Nigeria and World News",
+		   	page_type: "main",
+		   	page_language: "en"
+		});
+	

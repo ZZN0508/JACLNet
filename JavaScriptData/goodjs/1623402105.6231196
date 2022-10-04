@@ -1,0 +1,1 @@
+define(["./ad_s_async","./ad_s/locallink","./ad_s/linkstorage","./ad_s/init"],function(e,t,n,i){var a="warszawa",s=t.create(n.setRegion);return{init:i.init,setEventStats:function(t,n,i,a,s){e.vidEvent(n,i,a,s)},getLocalLinkCreation:s.get,setRegionStorageUser:n.setRegionStorageUser,getRegionUser:n.getRegionUser,getRegionDefault:function(){return a}}});

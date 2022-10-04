@@ -1,0 +1,84 @@
+if (typeof SKYPE == 'undefined') {
+ var SKYPE = {};
+}
+
+/**
+ * Hash dispatcher
+ */
+SKYPE.Hash = function() {
+ var listeners = [];
+ /**
+  * Initialize hash change listener
+  * Do hash check on page load
+  *
+  * @name  init
+  * @methodOf SKYPE.Hash
+  */
+ var _init = function() {
+  if (("onhashchange" in window) && !($.browser.msie)) {
+   $(window).on('hashchange', function(e) {
+    doOnHashChange();
+   });
+  }
+  else {
+   var prevHash = window.location.hash;
+   window.setInterval(function () {
+    if (window.location.hash != prevHash) {
+     doOnHashChange();
+     prevHash = window.location.hash;
+    }
+   }, 200);
+  }
+
+  //check hash on page load
+  doOnHashChange();
+ },
+
+ _addListener = function(f){
+  listeners.push(f);
+ },
+
+ _notifyListeners = function() {
+  for (var i=0; i<listeners.length; i++) {
+   var listener = listeners[i];
+   if (listener instanceof Function) {
+    try {
+     listener();
+    } catch (e) {
+    }
+   }
+  }
+ },
+
+ /**
+  * Find a link with appropriate 'data-hash-id' and trigger click event
+  *
+  * @name  doOnHashChange
+  * @methodOf SKYPE.Hash
+  */
+ doOnHashChange = function(){
+  _notifyListeners();
+
+  if (SKYPE.CurrentResponsiveState == 'mobile') {
+   //disabled for mobile
+   return;
+  }
+
+  var hash = window.location.hash.replace('#', '').replace(/[<>]/gm, ''),
+   $targetLink = $('a[data-hash-id=' + hash + ']');
+  if((hash != '') && $targetLink.length) {
+   $targetLink.first().click();
+  }
+ };
+
+
+ return {
+  init: _init,
+
+  addListener: _addListener
+ };
+}();
+
+$(document).ready(function() {
+ SKYPE.Hash.init();
+});

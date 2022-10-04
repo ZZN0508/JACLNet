@@ -1,0 +1,56 @@
+/**
+ * @date 2021-06-9 14:42:11
+ * @author FE:lihaisheng
+ * @description 推广悬浮窗广告
+ */
+;
+(function () {
+    var $link = '<link rel="stylesheet" href="https://icon.zol-img.com.cn/mainpage/20210609/a-link.css?' + new Date().getTime() + '" />'
+    var $width = '1000';
+    var $height = '500';
+
+    function mp4Str() {
+        return '<div class="zolad-container"><span class="soundBtn">取消静音</span><span class="a-d-close-video"></span>' +
+            '<div class="zolad-element" style="width: ' + $width + 'px; height: ' + $height + 'px;position: relative;overflow: hidden;">' +
+            '<video muted autoplay playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" id="videoTop" class="zolad-video" style="position: absolute;height: 100%;width: 100%;left: 0;top: 0;pointer-events: none;">' +
+            '<source src="https://icon.zol-img.com.cn/mainpage/20210603/oled.mp4" type="video/mp4">' +
+            '</video>' +
+            '<a class="zolad-link" onclick=""  rel="nofollow" target="_blank" href="https://tv.zol.com.cn/oled-experience/stop-me-if-you-can.html" style="position: absolute;height: 100%;width: 100%;left: 0;top: 0;z-index: 2;"></a>' +
+            '</div>' +
+            '</div>';
+    }
+    var mpadStr = $('<div class="content-asde"><div class="content-box"><span class="loopBtn cb"></span><span class="loopBtn cb cb-r"></span><span class="a-d-close"></span><span class="a-d-close a-d-close-r"></span><a class="side-a-d-link" href="https://tv.zol.com.cn/oled-experience/stop-me-if-you-can.html?videoType=LCD1"></a><a class="side-a-d-link side-a-d-r" href="https://tv.zol.com.cn/oled-experience/stop-me-if-you-can.html?videoType=OLED1"></a><span class="loopBtn loopBtn-l"></span><span class="loopBtn loopBtn-r"></span></div></div>');
+    $('head').append($link)
+    $('body').append(mp4Str())
+    $('body').append(mpadStr)
+    var elevideo = document.getElementById("videoTop");
+    elevideo.addEventListener('ended', function () {
+        $('.zolad-container').hide()
+    }, false);
+    $('body').delegate('.loopBtn', 'click', function () {
+        // if ($('.zolad-container').is(':hidden')) { 
+            $('.zolad-container').show()
+            elevideo.currentTime = 0;
+            elevideo.play();
+            elevideo.muted = false;
+            $('.soundBtn').addClass('on').html('静音')  
+        // }
+    }).delegate('.a-d-close', 'click', function () {
+        $('.zolad-container').hide();
+        $('.content-asde').hide();
+        elevideo.pause();
+    }).delegate('.a-d-close-video', 'click', function () {
+        $('.zolad-container').hide(); 
+        elevideo.pause();  
+    }).delegate('.soundBtn', 'click', function () {
+        if ($(this).hasClass('on')) {
+            $(this).removeClass('on').html('取消静音')
+            elevideo.muted = true;
+        } else {
+            $(this).addClass('on').html('静音')    
+            elevideo.muted = false;
+            
+        }
+        
+    })
+})()

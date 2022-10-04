@@ -1,0 +1,543 @@
+{"@context":"http://schema.org","@type":"WebPage","headline":"Consent","name":"Consent","publisher":{"@type":"Organization","logo":"https://www.spiegel.de/public/spon/images/logos/der-spiegel-h60.png","name":"DER SPIEGEL","sameAs":["https://www.facebook.com/derspiegel","https://www.instagram.com/spiegelmagazin/","https://twitter.com/derspiegel"]},"url":"https://www.spiegel.de/consent-a-"}
+
+{"general":{"cacheControl":{"breakingnews":{"sessionStorageMaxAge":900}},"consent":{"disabled":true,"minUpdatedAt":1607382001},"disableAds":true,"domain":"spon","noAds":true,"redirectConsentEnabled":true,"secondLevelDomain":"spiegel","subscriptions":{"noads":"Sppur","paid":["Spplus"]},"topLevelDomain":"de","urls":{"account":{"account":"https://gruppenkonto.spiegel.de/meinkonto/uebersicht.html","login":"https://gruppenkonto.spiegel.de/authenticate?requestAccessToken=true\u0026targetUrl=https%3A%2F%2Fwww.spiegel.de%2Fconsent-a-","logout":"https://gruppenkonto.spiegel.de/abmelden.html?targetUrl=https%3A%2F%2Fwww.spiegel.de%2F","register":"https://gruppenkonto.spiegel.de/registrieren.html?requestAccessToken=true\u0026targetUrl=https%3A%2F%2Fwww.spiegel.de%2Fconsent-a-"},"assetsBasePath":"https://cdn.prod.www.spiegel.de","base":"https://www.spiegel.de","offers":{"abo":"https://abo.spiegel.de/de/c/spiegelplus?requestAccessToken=true\u0026targetUrl=https%3A%2F%2Fwww.spiegel.de%2Fconsent-a-","antiquariat":"https://www.spiegel-antiquariat.de/?utm_campaign=spon\u0026utm_medium=text\u0026utm_source=sponarchiv","header":"https://abo.spiegel.de/?b=SPOHNAVABO\u0026requestAccessToken=true\u0026sara_icid=disp_upd_9h6L5hu8K1AAnttzYATx3hvk7taDkP\u0026targetUrl=https%3A%2F%2Fwww.spiegel.de%2Fconsent-a-","magazin":"https://magazin.spiegel.de/","noads":"https://abo.spiegel.de/de/c/microsites/pur/abo?requestAccessToken=true\u0026targetUrl=https%3A%2F%2Fwww.spiegel.de%2Fconsent-a-","paid":"https://abo.spiegel.de/de/c/spiegelplus?requestAccessToken=true\u0026targetUrl=https%3A%2F%2Fwww.spiegel.de%2Fconsent-a-","print":"https://abo.spiegel.de/de/c/amazon_spon/"}}}
+,"app":{"minOSVersions":{"android":{"nativeAudioPlayer":{"build":0,"major":5,"minor":0}},"ios":{"nativeAudioPlayer":{"build":0,"major":0,"minor":0}}},"minVersions":{"android":{"consent":158,"general":0,"nativeAudioPlayer":160,"offlineIssue":166},"ios":{"consent":142,"general":0,"nativeAudioPlayer":144,"offlineIssue":147}},"pageContext":{"headerTitle":"default","isCommentsEnabled":false,"isOfflineLibraryEnabled":false,"isSharingEnabled":false,"isTextToSpeechEnabled":false,"isTocEnabled":false,"route":"consent","socialMediaTitle":""},"products":{"android":{"Spplus":[{"id":"sp_iap_subscription_pdf","isSubscription":true,"minVersion":0}],"Sppur":[{"id":"spiegel_no_ads_monthly","isSubscription":true,"minVersion":0}]},"ios":{"Spplus":[{"id":"SpiegelPlusMonthly","isSubscription":true,"minVersion":0},{"id":"SpiegelPlusMonthlyIVW","isSubscription":true,"minVersion":148}],"Sppur":[{"id":"SpiegelAdFreeMonthly","isSubscription":true,"minVersion":0}]}},"storeUrl":{"android":"https://play.google.com/store/apps/details?id=de.spiegel.android.app.spon","ios":"https://apps.apple.com/de/app/spiegel-online-nachrichten/id424881832"}}
+,"guj":{"isIndexPage":false,"keywords":["nextgen"],"spmard":"","spmtid":"","spmtp":"default","spmurid":"","zone":"_default"}
+,"page":{"attributes":{"channel_slug":"","is_consent_required":false,"subchannel_slug":""},"category":{"route":"consent"},"info":{"canonical_url":"https://www.spiegel.de/consent-a-","domain":"spon","language":"de","title":"Consent"}}
+,"video":{}
+}
+!function () { var e = function () { var e, t = "__tcfapiLocator", a = [], n = window; for (; n;) { try { if (n.frames[t]) { e = n; break } } catch (e) { } if (n === window.top) break; n = n.parent } e || (!function e() { var a = n.document, r = !!n.frames[t]; if (!r) if (a.body) { var i = a.createElement("iframe"); i.style.cssText = "display:none", i.name = t, a.body.appendChild(i) } else setTimeout(e, 5); return !r }(), n.__tcfapi = function () { for (var e, t = arguments.length, n = new Array(t), r = 0; r < t; r++)n[r] = arguments[r]; if (!n.length) return a; if ("setGdprApplies" === n[0]) n.length > 3 && 2 === parseInt(n[1], 10) && "boolean" == typeof n[3] && (e = n[3], "function" == typeof n[2] && n[2]("set", !0)); else if ("ping" === n[0]) { var i = { gdprApplies: e, cmpLoaded: !1, cmpStatus: "stub" }; "function" == typeof n[2] && n[2](i) } else a.push(n) }, n.addEventListener("message", (function (e) { var t = "string" == typeof e.data, a = {}; try { a = t ? JSON.parse(e.data) : e.data } catch (e) { } var n = a.__tcfapiCall; n && window.__tcfapi(n.command, n.version, (function (a, r) { var i = { __tcfapiReturn: { returnValue: a, success: r, callId: n.callId } }; t && (i = JSON.stringify(i)), e.source.postMessage(i, "*") }), n.parameter) }), !1)) }; "undefined" != typeof module ? module.exports = e : e() }();
+window.SARAs_data = window.SARAs_data || [];
+
+    var GujAd = GujAd || {};
+    GujAd.cmd = GujAd.cmd || [];
+    var GujAdPositions = GujAdPositions || [];
+
+!function(e,a){var t="at-body-style";function n(){return a.getElementsByTagName("head")[0]}!function(e,t,n){if(e){var i=a.createElement("style");i.id=t,i.innerHTML=n,e.appendChild(i)}}(n(),t,"[data-target-hide] {opacity: 0 !important}"),setTimeout(function(){!function(e,t){if(e){var n=a.getElementById(t);n&&e.removeChild(n)}}(n(),t)},1000)}(window,document);
+
+            var event;
+            if (typeof(Event) === 'function') {
+                event = new Event('POLYGON_DOM_HEADER_READY');
+            } else {
+                event = document.createEvent('Event');
+                event.initEvent('POLYGON_DOM_HEADER_READY', false, false);
+            }
+            window.dispatchEvent(event);
+        
+
+            var event;
+            if (typeof(Event) === 'function') {
+                event = new Event('POLYGON_DOM_READY');
+            } else {
+                event = document.createEvent('Event');
+                event.initEvent('POLYGON_DOM_READY', false, false);
+            }
+            window.dispatchEvent(event);
+        
+
+    if (typeof GujAdPositions !== 'undefined') {
+    }
+
+_satellite["_runScript1"](function(event, target, Promise) {
+performance.mark('sara_load_libraries')
+});
+_satellite["_runScript2"](function(event, target, Promise) {
+var track_tag = 'Add Listener: Store Click Data';
+try {
+    _satellite.track_teaser = (function track_teaser(window) {
+      'use strict';
+
+      if (document.addEventListener) {
+        document.addEventListener('click', set_teaserStorage, false);
+        _satellite.logger.info('event listener added: set_teaserStorage');
+      } else {
+        document.attachEvent('onclick', set_teaserStorage);
+        _satellite.logger.info('event listener added: set_teaserStorage');
+      }
+
+      function set_teaserStorage(ev) {
+        var track_tag = "track_teaser";
+        var teaser_obj = (_satellite.getVar('event.info.action:sd', event) == 'click' && _satellite.getVar('event.attributes.target_url:sd', event).length > 1) ? {'click_id' : _satellite.getVar('event.attributes.click_id:sd', event), 'pos' : _satellite.getVar('event.attributes.pos:sd', event), 'target_url' : _satellite.getVar('event.attributes.target_url:sd:rw', event), 'headline' : _satellite.getVar('event.attributes.headline:sd', event)} : {'click_id': 'not_set'};
+        teaser_obj.referrer = _satellite.getVar('page.info.canonical_url:sd');
+        var valid_tags = ['A', 'H1', 'IMG', 'path', 'SPAN', 'svg'];
+        ev = ev || window.event;
+
+        if (valid_tags.indexOf(ev.target.tagName) == -1 || valid_tags.indexOf(ev.target.parentElement.tagName) == -1) {
+          _satellite.logger.info("NO Click Data saved:",ev);
+          return;
+        } else {
+          _satellite.cookie.set(_satellite.getVar('_config.store.sara-click-attributes:const'), JSON.stringify(teaser_obj), {expires: 1});
+          _satellite.logger.info("Click Data saved:",teaser_obj);
+        }
+      }
+  })(window);
+
+} catch(e) {
+  _satellite.logger.error(track_tag, e);
+}
+
+});
+_satellite["_runScript3"](function(event, target, Promise) {
+/* === Time Tracker === //
+Helper to keep track of media time played
+- Call update() on any relevant media event, especially those that change the playState!
+- The function isPlaying() must be provided to the TimeTracker Instance on creation.
+- Whenever the media item changes call reset()
+- Use getTimeDelta() to get the time since the last call to this function. Used for e.g. time between events!
+- Use onEvery(increment,callback) to get a continous callback every increment of elapsed playtime
+// === */
+
+
+window._satellite.MediaTimeTracker = function (isPlaying) {
+    var playBackState = false
+    var timePlayed = 0;
+    var lastPlayBackUpdateTS = undefined;
+    var lastEventPlaytime = timePlayed; // performance.now()
+    var stateTS = performance.now();
+
+    var everyStore = (function () {
+        var everyStore = []
+        return {
+            add: function (increment, callback) {
+                everyStore.push({ increment: increment, callback: callback, progress: 0 })
+            },
+            update: function (timePlayed) {
+                everyStore.forEach(function (store) {
+                    var dt = timePlayed - store.progress
+                    if (dt >= store.increment) { store.callback() }
+                    store.progress = Math.floor(timePlayed / store.increment) * store.increment
+                })
+            },
+            resetTime: function () {
+                everyStore.forEach(function (store) {
+                    store.progress = 0;
+                })
+            }
+        }
+    })()
+
+    var self = {
+        getTimePlayed: function () {
+            return timePlayed + (isPlaying() ? (stateTS - lastPlayBackUpdateTS) : 0)
+        },
+        update: function () { // call this anytime a player starts or pauses playback
+            stateTS = performance.now();
+            if (isPlaying() !== playBackState) { // onStateSwitch
+                playBackState = isPlaying()
+                if (!playBackState) { timePlayed += stateTS - (lastPlayBackUpdateTS || stateTS); } // add delta since last pause
+                lastPlayBackUpdateTS = stateTS
+            }
+            everyStore.update(self.getTimePlayed())
+            //trace('TimeTrackerDebug', timePlayed, isPlaying(), getTimePlayed(), state);
+        },
+        reset: function () { // call this whenever the player loads new media
+            timePlayed = 0;
+            lastEventPlaytime = timePlayed;
+            playBackState = false;
+            lastPlayBackUpdateTS = undefined;
+            everyStore.resetTime()
+        },
+        getTimePlayerDelta: function () { // returns the time played between now and the last call to this function!
+            var t = self.getTimePlayed()
+            var dt = t - lastEventPlaytime;
+            lastEventPlaytime = t;
+            return dt
+        },
+        onEvery: everyStore.add  // (increment,callback)
+    }
+    return self
+}
+});
+_satellite["_runScript4"](function(event, target, Promise) {
+// todo: callback every 10seconds... or callback every onTime if playing?
+
+window._satellite.jwwatcher = JWWatcher({
+    debug: true,
+    loggingFunction: _satellite.logger.debug
+})
+function JWWatcher(configObject) {
+    var config = {
+        debug: false,
+        loggingFunction: undefined
+    }
+    for (var ck in configObject) { config[ck] = configObject[ck] } // sufficient for flat config objects
+
+    var trace = function () { }
+    if (config.debug) {
+        trace = config.loggingFunction ? config.loggingFunction : Function.prototype.bind.apply(console.debug, [console, '[Engagement]'])
+    }
+
+    var milestones = {  // define the milestones: key => video duration in seconds, value: array of % completion
+        0: [0.95],
+        60: [0.5, 0.95],
+        300: [0.25, 0.5, 0.75, 0.95]
+    }
+    // sort milestones by integer keys
+    var mileStoneKeys = Object.keys(milestones).map(function (e) { return parseInt(e) }).sort(function (a, b) { return a - b });
+
+    var lastEventTS = performance.now()
+
+    function getMileStones(duration) {
+        var c = 0;
+        for (var i = 0, l = mileStoneKeys.length; i < l; i++) {
+            if (mileStoneKeys[i] > duration) break;
+            c = mileStoneKeys[i]
+        }
+        return milestones[c] ? milestones[c].slice() : [] // return a copy!
+    }
+
+    function formatItem(item) {
+        return {
+            title: item.title,
+            description: item.description,
+            file: item.file,
+            mediaid: item.mediaid,
+            type: item.sources && item.sources[0] && item.sources[0].type
+        }
+    }
+
+    function addWatcher(jwp) {
+        var dataAttribute = 'data-sara-jwwatcher'
+        if (jwp.getContainer().getAttribute(dataAttribute) !== null) {
+            trace('[JWWatcher]', jwp, 'already has an active watcher')
+            return
+        }
+        jwp.getContainer().setAttribute(dataAttribute, jwp.uniqueId)
+
+
+        // === states === // 
+        var rms = getMileStones(jwp.getDuration())
+        var ivwFired = false;
+        var startMute = jwp.getConfig().mute;
+        var played = false;
+        trace('[JWWatcher] Added watcher on player', jwp)
+
+        var thresholdFired = false;
+        var threshold = 60 * 1000; // first minute
+
+        var timeTracking = _satellite.MediaTimeTracker(isPlaying)
+
+        timeTracking.onEvery(10000, function () {// allow for a short delay
+            trace('[JWWatcher] 10secondsPlayed')
+            try {
+                window.stats.engage(10000); 
+            } catch (err) {
+                trace('onEvery Engage failed', err)
+            }
+        })
+
+        function isPlaying() {
+            return jwplayer().getState() === "playing"
+        }
+
+        function onPlaylistItem() { // when playlist item changes! but not the first time round!
+            trace('[JWWatcher]', jwp, 'event onPlaylistItem');
+            played = false; // reset played state
+            //var rms = getMileStones(jwp.getDuration()) // remaining milestones! => not available at this time!
+            //resetIWV() => not supposed to reset for ivw!
+            //startAutoplay = jwp.getConfig().autostart; // returns faulty values here!
+            startMute = jwp.getConfig().mute;
+            thresholdFired = false;
+            timeTracking.reset();
+        }
+
+        function fireIVWonPlayback(type) {
+            trace('[JWWatcher]', jwp, 'checking IVW Events resulting from', type, 'autostart:', jwp.getConfig().autostart, 'startMute:', startMute);
+            if (ivwFired) return;
+
+            // fire on first play click for [non-autoplay videos]
+            if (jwp.getConfig().autostart === false) {
+                sendEvent('ivw-click-to-play');
+                ivwFired = true;
+            }
+
+            // for on first play for [unmuted autoplaying videos]
+            if (jwp.getConfig().autostart === true && startMute === false) {
+                sendEvent('ivw-unmuted-autoplay');
+                ivwFired = true;
+            }
+        }
+
+        function onPlay(e) {
+            timeTracking.update();
+            if (played) return; // fires only once, reset by onPlaylistItem()
+            played = true;
+            rms = getMileStones(jwp.getDuration()); // get new milestones on first play
+            
+            if(jwp.getDuration()===Infinity) {
+              timeTracking.onEvery(5*60*1000, function() {
+                sendEvent('livestream-5-min-tracker');
+              })
+            }
+                                   
+            trace('[JWWatcher]', jwp, 'event onPlay. Duration', jwp.getDuration(), 'Milestones', rms.slice(), 'Event', e);
+            sendEvent('play');
+            fireIVWonPlayback('play')
+        }
+
+        function onAdImpression(e) {
+            timeTracking.update();
+            fireIVWonPlayback('adImpressions')
+        }
+
+        function onMute(e) {
+            timeTracking.update();
+            sendEvent(e.mute ? 'mute' : 'unmute')
+            // fire on first unmute for [muted autoplaying videos].
+            if (ivwFired === false && e.mute === false && jwp.getConfig().autostart === true && startMute === true) {
+                sendEvent('ivw-unmute-action');
+                ivwFired = true;
+            }
+        }
+
+        function onTime(e) {
+            timeTracking.update();
+            while (rms.length > 0 && rms[0] <= (e.position / e.duration)) { sendEvent('milestone ' + rms.shift() * 100 + '%') }
+
+            // track playback time
+            if (isPlaying()) {
+                if (timeTracking.getTimePlayed() > threshold && !thresholdFired) {
+                    thresholdFired = true
+                    sendEvent('first-minute')
+                }
+            }
+        }
+
+        function onComplete(e) {
+            timeTracking.update();
+            sendEvent('complete');
+        }
+
+        function sendEvent(identifier) {
+            var t = performance.now()
+            var dt = t - lastEventTS;
+            lastEventTS = t;
+
+            var ev = {
+                info: { action: "video", name: identifier },
+                attributes: {
+                    item: formatItem(jwp.getPlaylistItem()),
+                    autostart: jwp.getConfig().autostart,
+                    position: jwp.getPosition(),
+                    duration: jwp.getDuration(),
+                    progress: jwp.getPosition() / jwp.getDuration(),
+                    volume: jwp.getVolume(),
+                    mute: jwp.getMute(),
+                    state: jwp.getState(),
+                    viewable: jwp.getViewable(),
+                    playerID: jwp.id,
+                    dtPlayed: timeTracking.getTimePlayerDelta(),
+                    streamType: jwp.getConfig().streamType,
+                    source: 'launch|cc|jw-watcher'
+                }
+            }
+            trace('[JWWatcher]', jwp, ' Firing Analytics Event', ev)
+            window.SARAs_data = window.SARAs_data || []
+            window.SARAs_data.push({ event: ev })
+        }
+
+        // === Assign Functions === //
+        //jw.on('firstFrame', onFirst); // first has the problem that it runs AFTER play, but we need it for reset!
+        jwp.on('playlistItem', onPlaylistItem); // used to reset milestones etc. does not fire the first time round when the watcher is loaded.
+        jwp.on('adImpression', onAdImpression);
+
+        jwp.on('mute', onMute);
+        jwp.on('time', onTime);
+        jwp.on('complete', onComplete);
+
+        jwp.on('play', onPlay);
+        jwp.on('adPlay', timeTracking.update);
+        jwp.on('pause', timeTracking.update);
+        jwp.on('adPause', timeTracking.update);
+
+        return jwp
+    }
+
+    function init() {
+        var videoNodes = document.querySelectorAll('.jwplayer')
+        for (var i = 0, l = videoNodes.length; i < l; i++) {
+            var id = videoNodes[i].id
+            addWatcher(jwplayer(id))
+        }
+    }
+    trace('[JWWatcher] Ready. Video Milestones: ', milestones)
+    init()
+    return { addWatcher: addWatcher }
+}
+});
+
+// todo: callback every 10seconds... or callback every onTime if playing?
+
+window._satellite.podwatcher = PodWatcher({
+    debug: true,
+    loggingFunction: _satellite.logger.debug
+})
+function PodWatcher(configObject) {
+    var config = {
+        debug: false,
+        loggingFunction: undefined
+    }
+    for (var ck in configObject) { config[ck] = configObject[ck] } // sufficient for flat config objects
+
+    var trace = function () { }
+    if (config.debug) {
+        trace = config.loggingFunction ? config.loggingFunction : Function.prototype.bind.apply(console.debug, [console, '[Engagement]'])
+    }
+
+    var milestones = {  // define the milestones: key => video duration in seconds, value: array of % completion
+        0: [0.95],
+        60: [0.5, 0.95],
+        300: [0.25, 0.5, 0.75, 0.95]
+    }
+    // sort milestones by integer keys
+    var mileStoneKeys = Object.keys(milestones).map(function (e) { return parseInt(e) }).sort(function (a, b) { return a - b });
+
+    function getMileStones(duration) {
+        var c = 0;
+        for (var i = 0, l = mileStoneKeys.length; i < l; i++) {
+            if (mileStoneKeys[i] > duration) break;
+            c = mileStoneKeys[i]
+        }
+        return milestones[c] ? milestones[c].slice() : [] // return a copy!
+    }
+
+    function addWatcher(store, id) {
+        trace('[Podlove] Added watcher on player', id)
+        var rms = [];
+        var played = false;
+        var state = {} // updated by each event
+        var ivwFired = false;
+
+        var thresholdFired = false;
+        var threshold = 60 * 1000; // first minute
+
+        var timeTracking = _satellite.MediaTimeTracker(isPlaying)
+
+        timeTracking.onEvery(10000, function () {// allow for a short delay
+            trace('[Podlove] 10secondsPlayed')
+            /*
+            try {
+                window.stats.engage(10000); 
+            } catch (err) {
+                trace('onEvery Engage failed', err)
+            }
+            */
+        })
+
+        function isPlaying() {
+            return state && state.driver && state.driver.playing === true;
+        }
+
+        function getMediaID(furl) {
+            // reading media id from url
+            // e.g. https://traffic.omny.fm/d/clips/5ac1e950-45c7-4eb7-87c0-aa0f018441b8/7fd46a07-f73f-4fac-bf5c-abc000ffb06b/1c61e4f1-2351-44d5-86e5-ad24010d0df2/audio.mp3?in_playlist=1e8914c2-db00-454c-9997-abc000ffb06f&utm_source=CustomPlayer2&download=true
+            var r = furl.match(/\/([0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})\/audio.mp3/)
+            if (r) { return r[1] || '' }
+            return ''
+        }
+
+        function onPlay() { // runs only once - until reset
+            trace('[Podlove]', id, 'Play', rms)
+
+            // === initial play === //
+            if (played) { return }
+            played = true
+            rms = getMileStones(state.timepiece.duration / 1000) // set milestones on initial play. [ms] to [s]
+            sendEvent('play');
+            if (!ivwFired) { sendEvent('ivw-play'); ivwFired = true; } // never reset! Once per player
+        }
+      
+        function onInteraction(element) { // runs only once - until reset
+            trace('[Podlove]', id, 'Interaction', rms, element)
+            sendEvent('click-'+element);
+        }
+
+        function onTime() {
+
+            // milestones
+            while (rms.length > 0 && rms[0] <= (state.timepiece.playtime / state.timepiece.duration)) {
+                sendEvent('milestone ' + rms.shift() * 100 + '%')
+            }
+
+            // track playback time
+            if (isPlaying()) {
+                if (timeTracking.getTimePlayed() > threshold && !thresholdFired) {
+                    thresholdFired = true
+                    sendEvent('first-minute')
+                }
+            }
+        }
+
+        function onComplete() {
+            sendEvent('complete');
+        }
+
+        function reset() {
+            played = false;
+            rms = []
+            thresholdFired = false
+        }
+
+        function sendEvent(identifier) {
+            var ev = {
+                info: { action: "audio", name: identifier },
+                attributes: {
+                    item: {
+                        title: state.episode.title,
+                        series: state.show.title,
+                        description: state.episode.subtitle || '',
+                        file: state.files[0].url,
+                        mediaid: getMediaID(state.files[0].url),
+                        type: state.files[0].title
+                    },
+                    position: state.timepiece.playtime / 1000, // [ms] to [s]
+                    duration: state.timepiece.duration / 1000, // [ms] to [s]
+                    progress: state.timepiece.playtime / state.timepiece.duration,
+                    volume: state.audio.volume,
+                    mute: state.audio.muted,
+                    state: state.playstate,
+                    playerID: id,
+                    dtPlayed: timeTracking.getTimePlayerDelta()
+                }
+            }
+            trace('[Podlove]', id, 'Event', identifier)
+            window.SARAs_data = window.SARAs_data || []
+            window.SARAs_data.push({ event: ev })
+        }
+
+        store.subscribe(function () {
+            state = store.getState()
+            var action = state.lastAction.type;
+            var payload = state.lastAction.payload;
+
+            switch (action) {
+                case 'PLAYER_BACKEND_PLAY': timeTracking.update(); onPlay(); break;
+                case 'PLAYER_BACKEND_END': timeTracking.update(); onComplete(); break; // watched till end
+                case 'PLAYER_BACKEND_PAUSE': timeTracking.update(); break;
+                case 'PLAYER_BACKEND_PLAYTIME': timeTracking.update(); onTime(); break; // runs all the time during playback
+                case 'PLAYER_READY': timeTracking.reset(); reset(); break; // runs when new media is loaded? => Media Selector, see www.spiegel.de/audio/
+                case 'PLAYER_REQUEST_RESTART': timeTracking.reset(); reset(); break; // restart podcast
+                case 'BUTTON_SHOW_OVERLAY': timeTracking.update(); onInteraction('button-subscribe'); break; // restart podcast
+                case 'PLAYER_TOGGLE_TAB': timeTracking.update(); onInteraction('tab-'+payload); break; // restart podcast
+            }
+        })
+
+    }
+
+    trace('[Podlove] Ready. Audio Milestones: ', milestones)
+
+    return { addWatcher: addWatcher}
+}
+
+_satellite["_runScript5"](function(event, target, Promise) {
+var store=_satellite.getVar("_config.store.sara-count-end-of-article:const");sessionStorage.removeItem(store);
+});
+
+try{var iam_data=_satellite.getVar("external.ivw.iam_data:cc");iom.h(iam_data,1)}catch(e){}
+
+_satellite["_runScript6"](function(event, target, Promise) {
+var bannerdiv=document.getElementsByTagName("BODY")[0];bannerdiv.insertAdjacentHTML("afterend",'<div data-target-id="target-article-banner" data-target-hide="" class="at-element-marker"></div>');var mbox="target-article-banner",target_elem_selector="[data-target-id=target-article-banner]";adobe.target.getOffer({mbox:mbox,success:function(e){adobe.target.applyOffer({mbox:mbox,selector:target_elem_selector,offer:e}),_satellite.logger.info("request "+e+"with length "+e.length)},error:function(e,t){console.log("Error",e,t)}});
+});
+_satellite["_runScript7"](function(event, target, Promise) {
+performance.mark("sara_track_pageview");
+});

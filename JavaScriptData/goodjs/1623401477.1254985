@@ -1,0 +1,25 @@
+// Here "addEventListener" is for standards-compliant web browsers and "attachEvent" is for IE Browsers.
+var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+var eventer = window[eventMethod];
+
+// Now...
+// if
+//    "attachEvent", then we need to select "onmessage" as the event.
+// if
+//    "addEventListener", then we need to select "message" as the event
+
+var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+// Listen to message from child IFrame window
+eventer(messageEvent, function(e) {
+  var tempData = e.data.toString();
+  if (((window.location.host == "www.samsung.com") || (window.location.host == "shop.samsung.com")) && (e.origin == 'https://samsungasiasupport1.zendesk.com') && (tempData.indexOf('fcTrack') > -1)) {
+    eval(e.data);
+  } else if ((window.location.host.indexOf("shop.samsung.com") > -1) && (window.location.href.indexOf("checkout/orderConfirmation") > -1) && (e.origin == 'https://samsungasiasupport1.zendesk.com') && (tempData.indexOf('connected') > -1)) {
+    var orderID = document.getElementById('trackingOrderConfirmation').value;
+    _swg.iwg.sendOrderID(orderID, _swg.wSettings.partner_id);
+  } else if ((window.location.host.indexOf("www.samsung.com") > -1) && (window.location.href.indexOf("order-confirm") > -1) && (e.origin == 'https://samsungasiasupport1.zendesk.com') && (tempData.indexOf('connected') > -1)) {
+    var orderID = $('.order-success-order-no').find("strong").text().substr(1);
+    _swg.iwg.sendOrderID(orderID, _swg.wSettings.partner_id);
+  }
+}, false);

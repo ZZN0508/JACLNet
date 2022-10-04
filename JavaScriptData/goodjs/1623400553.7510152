@@ -1,0 +1,398 @@
+function recordVisitLink(link, action, category, position) {
+    try {
+        new Image().src = "http://stat-y.xywy.com/club_click.png?k=" + category + "&p=" + position + "&num=" + Math.random();
+        if (link.target == '_blank')
+            setTimeout("window.open('" + link.href + "')", 100);
+        else
+            setTimeout('document.location = "' + link.href + '"', 100);
+    } catch (err) {
+    }
+}
+
+function recordVisitLinks(link, action, category, position) {
+    try {
+        new Image().src = "http://stat-y.xywy.com/club_click.png?k=" + category + "&p=" + position + "&num=" + Math.random();
+    } catch (err) {
+    }
+}
+
+(function() {
+    /* cookie写入 */
+    function __setCookie(key, val, cotp) {
+        var _date = new Date();
+        var _year = _date.getFullYear();
+        var _day = _date.getDate();
+        var _cookie = "";
+
+        switch (cotp){
+            case 0:
+                _cookie = key + "=" + escape(val) + ";";
+                break;
+            case 1:
+                _date.setDate(_day + 1);
+                _date.setHours(0);
+                _date.setMinutes(0);
+                _date.setSeconds(0);
+                _cookie = key + "=" + escape(val) + ";expires=" + _date.toGMTString() + ";";
+                break;
+            case 2:
+                _date.setYear(_year + 10);
+                _cookie = key + "=" + escape(val) + ";expires=" + _date.toGMTString() + ";";
+                break;
+        }
+
+        var _domain = __getDomain(document.domain == "mipcache.bdstatic.com" ? "xywy.com" : document.domain);
+        if (_domain != "")
+            _cookie += "domain=." + _domain + ";";
+
+        _cookie += "path=" + "/;";
+        document.cookie = _cookie;
+    }
+
+    /* cookie读取 */
+    function __getCookie(key) {
+        var _cookie = document.cookie;
+        if (_cookie.length <= 0)
+            return "";
+
+        var _key = key + "=";
+        var _begin = _cookie.indexOf(_key);
+        if (_begin < 0)
+            return "";
+
+        _begin += _key.length;
+        var _end = _cookie.indexOf(";", _begin);
+        if (_end < 0) {
+            return unescape(_cookie.substring(_begin));
+        } else {
+            return unescape(_cookie.substring(_begin, _end));
+        }
+    }
+
+    /* 一级域名截取相关 */
+    function __ctryTopDomain(str) {
+        var pattern = /^aero$|^cat$|^coop$|^int$|^museum$|^pro$|^travel$|^xxx$|^com$|^net$|^gov$|^org$|^mil$|^edu$|^biz$|^info$|^name$|^ac$|^mil$|^co$|^ed$|^gv$|^nt$|^bj$|^hz$|^sh$|^tj$|^cq$|^he$|^nm$|^ln$|^jl$|^hl$|^js$|^zj$|^ah$|^hb$|^hn$|^gd$|^gx$|^hi$|^sc$|^gz$|^yn$|^xz$|^sn$|^gs$|^qh$|^nx$|^xj$|^tw$|^hk$|^mo$|^fj$|^ha$|^jx$|^sd$|^sx$/i;
+        if (str.match(pattern)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    function __ctryDomain(str) {
+        var pattern = /^a[cdefgilmnoqrstuwz]$|^b[abdefghijmorstvwyz]$|^c[acdfghiklmnorsuvxyz]$|^d[ejkmoz]$|^e[ceghrstu]$|^f[ijkmor]$|^ly$|^h[kmnrtu]$|^i[delmnorst]$|^j[emop]$|^k[eghimnprwyz]$|^l[abcikrstuvy]$|^g[abdefghilmnpqrstuwy]$|^m[acdghklmnopqrstuvwxyz]$|^n[acefgilopruz]$|^om$|^r[eouw]$|^p[aefghklmrstwy]$|^qa$|^w[fs]$|^s[abcdeghijklmnortuvyz]$|^t[cdfhgjkmnoprtvwz]$|^u[agkmsyz]$|^v[aceginu]$|^y[etu]$|^z[amrw]$/i;
+        if (str.match(pattern)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    function __getDomain(host) {
+        var _domain = host;
+        var _domainArray = _domain.split(".");
+        var _length = _domainArray.length;
+        var _ipRes;
+
+        if (_length < 3)
+            return _domain;
+
+        _ipRes = /^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[0-9]{1,2})(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[0-9]{1,2})){3}$/;
+        if (host.match(_ipRes))
+            return _domain;//lt than 4 and digital, return all
+
+        if (__ctryTopDomain(_domainArray[_length - 2]) && __ctryDomain(_domainArray[_length - 1]) ) {
+            _domain = _domainArray[_length - 3] + "." + _domainArray[_length - 2] + "." + _domainArray[_length - 1];
+        } else {
+            _domain = _domainArray[_length - 2] + "." + _domainArray[_length - 1];
+        }
+        return _domain;
+    }
+
+
+    /* 获取引用时的参数 */
+    /* 在引用标签上添加data-ipt属性,参数为要传入的数据。例:<script type="text/javascript" src="htt**\/a.js?key=value&key2=value"></script> */
+    function getInputPara(){
+        var tempObj = {};
+        var tempArr = [];
+        var dataScript = document.getElementsByTagName('script');
+        var data_temp;
+  
+        for(var i=0;i < dataScript.length;i++){
+            if(dataScript[i].getAttribute('src') != undefined && dataScript[i].getAttribute('src') != null && dataScript[i].getAttribute('src').toString().indexOf('stat.xywy.com/a.js') > -1 ){
+            data_temp = dataScript[i]
+            .getAttribute('src')
+            .split('?')[1];
+            break;
+            }
+        }
+        
+        if (!data_temp)
+            return {};
+
+        tempArr = data_temp.split('&');
+        for (var i = 0;i < tempArr.length;i++){
+            if (!(tempArr[i] && tempArr[i].split('=')[0] && tempArr[i].split('=')[1]))
+                continue;
+
+            tempObj[tempArr[i].split('=')[0]] = tempArr[i].split('=')[1];
+        }
+
+        return tempObj
+    }
+
+    /* 统计代码重复部署检测 */
+    function duplicateDetect(){
+        var scripts = document.getElementsByTagName('script');
+        var j = 0;
+        for(var i=0;i < scripts.length;i++){
+            if(scripts[i].getAttribute('src') != undefined && scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').toString().indexOf('stat.xywy.com/a.js') > -1 ){
+                j++;
+            }
+        }
+        return j > 1 ? true : false;
+    }
+
+    /* 动态创建iframe,解决跨域时不能判断cookie为同一用户的问题 */
+    function sendAc(data){
+        var mipUrl = document.URL;
+        var oIframe = document.createElement('iframe');
+        var url = 'https://stat.xywy.com/cross_domain.html';
+        if(mipUrl.indexOf('mipcache.bdstatic.com') > -1){
+            if (typeof url !== 'undefined') {
+                oIframe.name = '__XYWY__';
+                oIframe.style.display = 'none';
+                oIframe.src = url + '?clientId=' + data + '&t=' + new Date().getTime();
+                document.body.appendChild(oIframe);
+            }
+        }
+    }
+ function setCz(cn, cv, ds) {
+     var d = new Date();
+     d.setTime(d.getTime() + (ds*24*60*60*1000));
+     var expires = "expires="+d.toUTCString();
+     document.cookie = cn + "=" + cv + "; " + expires;
+ }
+ function clrCz(){
+  var ack = document.cookie.split(";");  
+  for (var i = 0; i < ack.length; i++) {  
+   var cnm = ack[i].split("=");
+   if(cnm[0].toString().trim().indexOf('CNZZDATA')==0){
+    setCz(cnm[0].toString().trim(), "", -1);
+   }
+  }
+ }
+ clrCz();
+    try{
+        /* 如果没有重复,处理相关信息 */
+        if (!duplicateDetect()){ 
+            var requestColumn = [],
+                ac_location = document.location.href;
+
+            //param参数处理
+            var dataIptObj = getInputPara();
+            var paramTemp;
+            if (dataIptObj.param){
+                paramTemp = dataIptObj.param.split(',');
+                for (var i = 0;i < paramTemp.length;i++){
+                    if (paramTemp[i]){
+                        requestColumn.push('param' + (i+1) + '=' + paramTemp[i]);
+                    }else{
+                        requestColumn.push('param' + (i+1) + '=');
+                    }
+                }
+            }
+            if (dataIptObj.projectid)
+                requestColumn.push('projectid=' + dataIptObj.projectid);
+
+            var ref = document.referrer,
+                redomain = "";
+            if (ref) {
+                var redomains = ref.match(/http[s]?:\/\/(.*?)([:\/]|$)/i);
+                redomain = redomains[1];
+                requestColumn.push('ref=' + encodeURIComponent(ref));
+                requestColumn.push('redoman=' + redomain);
+            }
+
+            var clientId = "",
+                date = new Date();
+            if (__getCookie('clientac')) {
+                sendAc(__getCookie('clientac')); //传入clientac
+                clientId = __getCookie('clientac');
+            }else{
+                var rmu = String(parseInt(Math.random() * 1000000));
+                if(rmu.length < 6){
+                    for (var rmul = rmu.length; rmul < 6; rmul++) {
+                        rmu += "0"
+                    }
+                }
+                clientId = date.getTime() + rmu;
+                sendAc(clientId); //传入clientac
+                __setCookie('clientac', clientId, 2);
+                //将clientID存入cookie中 参数名为ac中  不在用clientID作为键值存储
+            }
+            requestColumn.push('clientID=' + (clientId+'clientID'));
+
+            //session信息
+            var dataSessionStr = __getCookie('ajsDataSession');
+            var cookieSessionStrA = [];
+            var expireTime = 1800;
+            var sessionId = "";
+            var sessionNumber = 1;
+            var timeTemp = parseInt(date.getTime() / 1000);
+            var isHistory = "true";
+            var history = window.history.length;
+            var lastHistory = -1;
+            var lastUrl = __getCookie('xywylastUrl');
+            var lastRef = __getCookie('xywylastRef');
+            if (dataSessionStr == "") {
+                isHistory = "false";
+                sessionNumber = 1;
+                //sessionId 计算方式待定
+                sessionId = date.getTime() + String(parseInt(Math.random() * 1250)) + String(parseInt(Math.random() * 2500));
+            } else {
+                var arr = dataSessionStr.split("@");
+                var sessionTimeTemp = parseInt(arr[2]);
+                lastHistory = parseInt(arr[3]);
+                if (timeTemp - sessionTimeTemp > expireTime) {
+                    isHistory = "false";
+                    sessionNumber = 1;
+                    //sessionId 计算方式待定
+                    sessionId = date.getTime() + String(parseInt(Math.random() * 1250)) + String(parseInt(Math.random() * 2500));
+                } else {
+                    sessionId = arr[0];
+                    sessionNumber = parseInt(arr[1]) + 1;
+                    if (history != lastHistory) {
+                        isHistory = "false";
+                    } else if (document.referrer == lastRef && document.location.href != lastUrl) {
+                        isHistory = "false";
+                    }
+                }
+            }
+            requestColumn.push('SessionId=' + sessionId);
+            requestColumn.push('SessionNumber=' + sessionNumber);
+            requestColumn.push('History=' + String(history));
+            requestColumn.push('IsHistory=' + isHistory);
+            cookieSessionStrA.push(sessionId);
+            cookieSessionStrA.push(sessionNumber);
+            cookieSessionStrA.push(String(timeTemp));
+            if (history == 1 || isHistory == "false") {
+                cookieSessionStrA.push(String(history));
+                __setCookie('xywylastUrl',encodeURIComponent(document.location.href),0);
+                __setCookie('xywylastRef',encodeURIComponent(document.referrer),0);
+
+            } else {
+                cookieSessionStrA.push(String(lastHistory));
+                __setCookie('xywylastUrl',lastUrl,0);
+                __setCookie('xywylastRef',lastRef,0);
+            }
+            __setCookie('ajsDataSession',cookieSessionStrA.join('@'),0);
+
+            //subject_pid, subject没有取值
+            var pid = 0,
+                sid = 0;
+            if (typeof (subject_pid) == 'number') {
+                pid = subject_pid;
+            } else if (typeof (subject_pid) != 'undefined') {
+                if (Number(subject_pid) >= 0)
+                    pid = Number(subject_pid);
+            }
+            if (typeof (subject) == 'number') {
+                sid = subject;
+            } else if (typeof (subject) != 'undefined') {
+                if (Number(subject) >= 0)
+                    sid = Number(subject);
+            }
+            requestColumn.push('Pid=' + (pid + 'Pid'));
+            requestColumn.push('Sid=' + (sid + 'Sid'));
+
+            /** 处理用户id **/
+            var _loginId = "",
+                userType = "";
+            if (__getCookie("cookie_user") != "")
+                _loginId = __getCookie("cookie_user");
+            if (__getCookie("cookie_usertype") != "")
+                userType = __getCookie("cookie_usertype");
+            requestColumn.push('LoginID=' + _loginId);
+            requestColumn.push('usertype=' + userType);
+            /** 处理用户id结束  **/
+
+            /* 添加当前url */
+            requestColumn.push('AcT=' + encodeURIComponent(ac_location) + 'AcT');
+
+            /* 添加日志类型参数 */
+            requestColumn.push('clickType=' + 0);
+
+            /* 设备信息 */
+            var title = document.title;
+            requestColumn.push('title=' + encodeURIComponent(title));
+            /** 取参数结束 **/
+
+            /* 处理cookie存储搜索词的问题title */
+            var wd ="",
+                rd="";
+            /* 没有获取wd,rd的操作 */
+            if(wd != ""){
+                __setCookie('cookie_wd',wd,2);
+                __setCookie('cookie_wd_redoman',rd,2)
+            }
+            requestColumn.push('cookie_wd=' + __getCookie('cookie_wd')+'cookie_wd');
+            requestColumn.push('cookie_wd_redoman=' + __getCookie('cookie_wd_redoman')+'cookie_wd_redoman');
+            requestColumn.push('tempid=' + Math.random());
+
+            requestColumn.push('wd=' + encodeURIComponent(wd));//此处可能与cookie_wd重复?
+            requestColumn.push('Tkt=' + (Math.round(date.getTime() / 1000) + "Tkt"));
+
+            /* 记录并处理新老访客cookie */
+            /* 计算用户访问的日期 以天为单位 */
+            /* 用户访问网站的日期为空 说明之前没有存过这个cookie 那么这是一个新访客
+            /* 若已经记录了访问网站的日期 那么需要比较一下当前日期和这个日期 如果不是同一天 说明是老访客 如果是一天 说明是新访客 */
+            var vd_day = new Date(),
+                vd_dt = vd_day.getFullYear() + '-' + vd_day.getMonth() + '-' + vd_day.getDate();
+            if(!__getCookie('visit_dt')){
+                __setCookie('visit_dt', vd_dt, 2);
+                requestColumn.push('isNew_User=' + 'trueisNew_User');
+            }else{
+                if(__getCookie('visit_dt') == vd_dt){
+                    requestColumn.push('isNew_User=' + 'trueisNew_User');
+                }else{
+                    requestColumn.push('isNew_User=' + 'falseisNew_User');
+                }
+            }
+            /**  此部分结束 **/
+
+            /** 处理恶意刷新 导致pv统计不准的问题 根据cookie中储存的上一个请求和请求时间 判断是否需要发出z.png请求 **/
+
+            var canSendZpng = true,
+                tjLastUrl = __getCookie("tj_lastUrl"),
+                tjLastUrlTime = __getCookie("tj_lastUrl_time");
+            if(tjLastUrl && (ac_location == tjLastUrl) && tjLastUrlTime){
+                /*var offset = parseInt(new Date().getTime()) - parseInt(tjLastUrlTime);
+                if((document.location.host == 'm.so.xywy.com' || document.location.host == 'so.xywy.com') && parseInt(offset) < 10000){
+                    canSendZpng = false;
+                }else if(parseInt(offset) < 120000){
+                    canSendZpng = false;
+                }*/
+            }
+            /* 记载访问url和时间 */
+            __setCookie('tj_lastUrl',ac_location, 2);
+            __setCookie('tj_lastUrl_time',new Date().getTime(), 2);
+
+            /** 处理完毕 **/
+            if(canSendZpng){
+                var img = new Image;
+                var protocol = 'http';
+                if (document.location.protocol.match(/https/)){
+                    protocol = 'https';
+                }
+                img.src = protocol + ":\/\/stat-y.xywy.com\/z0.1.png?" + requestColumn.join('&');
+            }
+
+            //console.log(requestColumn.join('&'));
+        } 
+    }catch(err){
+            console.log(err);
+            /*
+            var img = new Image;
+            img.src = "http:\/\/stat-y.xywy.com\/vperr.png?msg=" + err.message + "&ErrRandomNum=" + Math.random() + "&" + requestColumn.join('&');
+            */
+    }
+})();

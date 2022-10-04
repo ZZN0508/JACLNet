@@ -1,0 +1,910 @@
+$(function(){
+    $(function(){
+        var index = {
+            init: function(){
+                // this.headerRes();
+                this.showNavSub();  //导航二级下拉
+                this.searchDrop();  //搜索下拉
+                this.departShow();  //科室疾病展示
+                this.slideShow();   //轮播图
+                this.healthShow();  //健康百科
+                this.illsHover();   //疾病自诊
+                this.illsLevel();   //查疾病
+                this.hotAnswer();   //热门回答
+                this.linksDrop();   //链接下拉
+                //this.returnTop();   //返回顶部
+                this.codeShow();     //悬浮二维码
+            },
+            headerRes: function(){
+                $.ajax({
+                  url: 'http://api.d.xywy.com/public/question-left-free-num?callback=callback',
+                  dataType: 'jsonp',
+                  jsonpCallback: 'guahao',
+                  success: function(res){
+                    if(res.code == 10000){
+                      $('#count_residue').html(res.data);
+                      $('.home-wz span').show();
+                    }
+                  }
+                })
+            },
+            showNavSub: function(){
+                var curIndex = 0;
+                var _RET_IP = { "status": "0", "data": { "ip": "124.207.180.37", "area": "|北京" } }
+                var city = _RET_IP.data.area;
+                if(city.indexOf('重庆') > -1){ //只限重庆地区显示体检
+                    $('.nav-list').addClass('nav-list-other');
+                    $('#check_body_menu').removeClass('none');
+                }else{
+                    $('#check_body_menu,#check_body').remove();
+                }
+                $('.nav-list dd').on({
+                    mouseenter: function(){
+                        curIndex = $(this).index();
+                        var index = $(this).index();
+                        var width1 = $(this).width() - 19 ;
+                        var pos = $(this).position().left;
+
+                        $('.nav-list dd').each(function(){
+                            if($(this).index() != 0){
+                                $(this).removeClass('cur');
+                            }
+                        });
+                        $('.nav-sub ul').hide();
+                        $(this).addClass('cur');
+                        if(index > 0){
+                            $('.nav-sub').show();
+                            $('.nav-sub ul').eq(index-1).show();
+                            var width2 = $('.nav-sub ul').eq(index-1).width();
+                            if(index == 1 || index == 2){
+                                $('.nav-sub ul').eq(index-1).css({
+                                    left: '190px',
+                                    marginLeft: '-5px'
+                                });
+                            }else if(index == 6 || index == 7){
+                                $('.nav-sub ul').eq(index-1).css({
+                                    left: 'auto',
+                                    right: '0px',
+                                    marginRight: '-15px'
+                                });
+                            }else{
+                                if(city.indexOf('重庆') > -1){
+                                    $('.nav-sub ul').eq(index-1).css('left', pos + ((width1-width2)/1.6));
+                                }else{
+                                    $('.nav-sub ul').eq(index-1).css('left', pos + ((width1-width2)/2));
+                                }
+                            }
+                        }
+
+                    },
+                    mouseleave: function(e){
+                        var target = $(e.relatedTarget);
+                        if(!target.parents().hasClass('nav-wrap')){
+                            $('.nav-sub ul').hide();$('.nav-sub').hide();
+                            $(this).removeClass('cur');
+                        }
+
+                    }
+                });
+                $('.nav-sub').on({
+                    mouseleave: function(){
+                        $('.nav-sub ul').hide();$('.nav-sub').hide();
+                        $('.nav-list dd').each(function(){
+                            if($(this).index() != 0){
+                                $(this).removeClass('cur');
+                            }
+                        });
+                    }
+                });
+            },
+            setCookie:function(name, value, time, num){
+                var options = {
+                        domain  : document.domain,
+                        path    : '/'
+                    },
+                    cookieValue = '',
+                    oDate = new Date();
+
+                oDate.setTime(oDate.getTime() + (time * 24 * 60 * 60 * 1000));
+                if(num){
+                    if(this.getCookie(name) != ''){
+                        cookieValue = encodeURIComponent(name) + '=' +encodeURIComponent(value)+ '|'+ encodeURIComponent(this.getCookie(name)) + ';expires=' + oDate.toUTCString() + ';domain=' + options.domain + ';path=' + options.path;
+                    }else{
+                        cookieValue = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + oDate.toUTCString() + ';domain=' + options.domain + ';path=' + options.path;
+                    }
+                }else{
+                    cookieValue = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + oDate.toUTCString() + ';domain=' + options.domain + ';path=' + options.path;
+                }
+                document.cookie = cookieValue;
+            },
+            getCookie:function(name){
+                var cookieArr = document.cookie.split('; '),
+                    cookieValue = '';
+
+                jQuery.each(cookieArr, function(key, value){
+                    var tempArr = value.split('=');
+                    if(decodeURIComponent(tempArr[0]) === name){
+                        cookieValue = decodeURIComponent(tempArr[1]);
+                        var valList = cookieValue.split('|');
+                        if(valList.length >= 8){
+                            valList.pop();
+                        }
+                        cookieValue = valList.join('|');
+                    }
+                });
+                return cookieValue;
+            },
+            searchDrop: function(){
+                var rTimer = null,
+                    countNum,
+                    that = this;
+
+                countNum = this.getCookie('countNum');
+                countNum++;
+                this.setCookie('countNum', countNum , 365*10, 0);
+                jQuery('.j-hold').hide();
+                jQuery('.j-search-text').on({
+                    keyup : function(){
+                        var valTxt = jQuery.trim(jQuery(this).val());
+                        if (valTxt == ''){
+                            recordNum();
+                            recordStyle();
+                            recordShow();
+                        }
+                    },
+                    blur : function(){
+                        var valTxt = jQuery.trim(jQuery(this).val());
+                        if(valTxt == ''){
+                            jQuery('.search-hold').show();
+                        }
+                    }
+                });
+                jQuery('.search-hold').on({
+                    click : function(){
+                        var valTxt = jQuery.trim(jQuery(this).html());
+                        that.delNum = that.getCookie('delNum');
+                        jQuery('.j-search-text').focus();
+                        if(valTxt == '可搜索医院、医生、病症、问答、药品'){
+                            jQuery(this).hide();
+                        }
+                        recordHide();
+                        if (valTxt == '可搜索医院、医生、病症、问答、药品' && jQuery('.search-guide').css('display') == 'none') {
+                            recordNum();
+                            recordStyle();
+                            recordShow();
+                        }
+                    }
+                });
+                jQuery(document).click(function(e){
+                    var target = jQuery(e.target);
+                    if(jQuery.isEmptyObject(target.closest('.search')[0])){
+                        recordHide();
+                    }
+                });
+                /*if(countNum <= 5){
+                    setTimeout(function(){
+                        jQuery('.j-search-text').focus();
+                        recordShow();
+                        clearTimeout(rTimer);
+                        rTimer = setTimeout(function(){
+                            recordHide();
+                            jQuery('.j-search-text').blur();
+                        }, 3500);
+                    }, 1000);
+                }*/
+
+                jQuery('.j-search-text').smartShow({
+                    url : '//so.xywy.com/ajax/suggest.php?source=1',
+                    param : 'keyword',
+                    panel : '.j-search-drop',
+                    dataWrap : "li",
+                    wrapClass : "cur",
+                    dataType: "jsonp",
+                    success : function(obj) {
+                        var str = '',
+                            arr = [];
+                        if (obj.result > 0 && obj.data) {
+                            arr = obj.data.split(',');
+                            jQuery.each(arr, function(index, val) {
+                                str += '<li><a href="javascript:;">' + val + '</a></li>';
+                            });
+                            jQuery('.search-guide').hide();
+                            jQuery('.j-search-drop').html(str).show();
+                            jQuery(document).on('keydown', function(e){
+                                if(e.keyCode == 9){
+                                    jQuery('.j-search-drop').html('').hide();
+                                }
+                            });
+                        } else {
+                            jQuery('.j-search-drop').html('').hide();
+                        }
+                    },
+                    operate : function() {
+                        jQuery('#j-search-form').submit();
+                    }
+                });
+                jQuery('#j-search-form').on('submit', function(){
+                    var textVal = jQuery.trim(jQuery('.j-search-text').val()),
+                        url = '',
+                        cookieArr = decodeURIComponent(that.getCookie('searchRecord')).split('|');
+                    if(textVal == '' || textVal == '可搜索医院、医生、病症、问答、药品'){
+                        url = '//so.xywy.com/';
+                        jQuery(this).attr('method', 'get').attr('action', url);
+                        jQuery('.search-hold').show();
+                    }
+                    else{
+                        if(arrIndex(cookieArr,textVal) == -1) {
+                            that.setCookie('searchRecord', textVal, 365 * 10, 1);
+                        }
+                        jQuery(this).attr('method', 'post').attr('action', '//so.xywy.com/comse.php?keyword=' + encodeURIComponent(textVal) + "&ie=utf-8&src=xywyhome");
+                        jQuery('.search-hold').hide();
+                    }
+                });
+                jQuery('.search').on('click','.j-search-record a',function(){
+                    var txt = jQuery(this).text();
+                    jQuery('.j-search-text').val(txt);
+                    jQuery('#j-search-form').attr('method', 'post').attr('action', '//so.xywy.com/comse.php?keyword=' + encodeURIComponent(txt) + "&ie=utf-8&src=xywyhome").submit();
+                    recordHide();
+                });
+                jQuery('.search').on('click', '.j-search-record i', function(e){
+                    var target = jQuery(e.target),
+                        cookieArr = decodeURIComponent(that.getCookie('searchRecord')).split('|');
+
+                    that.setCookie('delNum', target.parent().index(), 365*10, 0);
+                    that.delNum = parseInt(that.getCookie('delNum'));
+                    cookieArr.splice(that.delNum, 1);
+                    that.setCookie('searchRecord', cookieArr.join('|'), 365*10, 0);
+
+                    target.parent().remove();
+                    e.stopPropagation();
+                });
+                function arrIndex(arr,str){
+                    for(var i=0;i<arr.length;i++){
+                        if(str == arr[i]){
+                            return i;
+                        }
+                    }
+                    return -1;
+                }
+                function recordShow(){
+                    jQuery('.search-guide').slideDown('300');
+                }
+                function recordHide(){
+                    jQuery('.search-guide').slideUp('300');
+                }
+                //判断历史记录
+                function recordNum(){
+                    var recordArr = decodeURIComponent(that.getCookie('searchRecord')).split('|'),
+                        ele = '';
+                    if(recordArr != ''){
+                        if(recordArr.length <= 3){
+                            jQuery('.search-guide').attr('data-record',1);
+                            jQuery('.search-guide').addClass('record1').removeClass('record0').removeClass('record2');
+                        }else{
+                            jQuery('.search-guide').attr('data-record',2);
+                            jQuery('.search-guide').addClass('record2').removeClass('record0').removeClass('record1');
+                        }
+
+                        jQuery.each(recordArr, function(index, val) {
+                            ele += '<li><a href="javascript:;">' + val + '</a><i>删除</i></li>';
+                        });
+                        jQuery('.j-search-record').html(ele);
+
+                    }else{
+                        jQuery('.search-guide').attr('data-record',0);
+                        jQuery('.search-guide').addClass('record0').removeClass('record1').removeClass('record2');
+                    }
+                }
+
+                function recordStyle(){
+                    jQuery('.j-search-drop li:last,.j-search-guide li:last,.j-search-record li:last').find('a').css('borderBottom','none');
+                    jQuery('.j-search-drop li,.j-search-guide li,.j-search-record li').on({
+                        'mouseenter' : function(){
+                            jQuery(this).addClass('cur').siblings().removeClass('cur');
+                        },
+                        'mouseleave' : function(){
+                            jQuery(this).removeClass('cur');
+                        }
+                    });
+                }
+            },
+            departShow: function(){
+                $('.depart-wrap .first').find('li').on({
+                    mouseenter: function(){
+                        var index = $(this).index();
+                        $(this).addClass('cur').siblings().removeClass('cur');
+                        $('.depart-wrap .second').find('.items').hide();
+                        $('.depart-wrap .second').find('.items').eq(index).show();
+                    },
+                    mouseleave: function(e){
+                        var target = $(e.relatedTarget);
+                        if(!target.parents().hasClass('second')){
+                            $(this).removeClass('cur');
+                            $('.depart-wrap .second').find('.items').hide();
+                        }
+                    }
+                })
+
+                $('.depart-wrap .second').find('.items').on({
+                    mouseleave: function(){
+                        $(this).hide();
+                        $('.depart-wrap .first').find('li').removeClass('cur');
+                    }
+                });
+            },
+            slideShow: function(){
+                $('#slideBan').carousel({
+                    interval: 3000,
+                    pause: 'hover'
+                });
+                $('#slideBan2').carousel({
+                    interval: 3000,
+                    pause: 'hover'
+                });
+
+                jQuery('.ban-slides').on({
+                    'mouseenter' : function(){
+                        jQuery(this).find('.ban-arrow.left').animate({
+                            left : 0
+                        },200);
+                        jQuery(this).find('.ban-arrow.right').animate({
+                            right : 0
+                        },200);
+                    },
+                    'mouseleave' : function(){
+                        jQuery(this).find('.ban-arrow.left').animate({
+                            left : -30
+                        },200);
+                        jQuery(this).find('.ban-arrow.right').animate({
+                            right : -30
+                        },200);
+                    }
+                });
+
+
+            },
+            healthShow: function(){
+                var hFlag = true;
+                if(hFlag){
+                    $.ajax({
+                        type: 'get',
+                        url: '//api3gcms.xywy.com/pc_index_jiankangbaike.php',
+                        dataType: 'jsonp',
+                        jsonpCallback: 'returnMsg',
+                        beforeSend: function(){
+                            $('.sec-health .con1').append('<div id="loading" style="position:absolute;width:100%;top:0;left:0;height:360px;background:url(//img.static.xywy.com/zxyl/images/loading.gif) 50% 50% no-repeat #fff;opacity:0.8;filter:alpha(opacity=80);"></div>');
+                        },
+                        success: function(res){
+                            $('.sec-health .con1').find('#loading').remove();
+                            hFlag = false;
+                            var listhtml1 = '';
+                            var listhtml2 = '';
+                            $.each(res.list1,function(i,item){
+                                listhtml1 += '<li><i>['+ item.typename +']</i><a target="_blank" onmousedown="__sendClickOdm(\'01179972\', this,\'pcsy:sy_bkgd_nrbk'+ (i+1) +'+\')" href='+ item.url +'>'+ item.title +'</a></li>'
+                            });
+                            $.each(res.list2,function(i, item){
+                                listhtml2 += '<li><i>['+ item.typename +']</i><a target="_blank" onmousedown="__sendClickOdm(\'01179972\', this,\'pcsy:sy_bkgd_nrbk'+ (i+9) +'+\')" href='+ item.url +'>'+ item.title +'</a></li>'
+                            });
+                            var list1 = '<div class="clearfix dels">\
+                            <a target="_blank" onmousedown="__sendClickOdm(\'01179972\', this,\'pcsy:sy_bkgd_twbk1+\')" href='+ res.img[0].url +' class="pic fl"><img src='+ res.img[0].imgurl +' alt=""><span class="des">'+ res.img[0].title +'</span></a>\
+                            <div class="detail fl">\
+                                <a target="_blank" onmousedown="__sendClickOdm(\'01179972\', this,\'pcsy:sy_bkgd_ttbk1+\')" class="t" href='+ res.toutiao[0].url +'>'+ res.toutiao[0].title +'</a>\
+                                <div class="list">\
+                                    <ul class="clearfix">'+ listhtml1 +'</ul>\
+                                </div>\
+                            </div>\
+                        </div>';
+                            var list2 = '<div class="clearfix dels">\
+                            <a target="_blank" onmousedown="__sendClickOdm(\'01179972\', this,\'pcsy:sy_bkgd_twbk2+\')" href='+ res.img[1].url +' class="pic fl"><img src='+ res.img[1].imgurl +' alt=""><span class="des">'+ res.img[1].title +'</span></a>\
+                            <div class="detail fl">\
+                                <a target="_blank" onmousedown="__sendClickOdm(\'01179972\', this,\'pcsy:sy_bkgd_ttbk2+\')" class="t" href='+ res.toutiao[1].url +'>'+ res.toutiao[1].title +'</a>\
+                                <div class="list">\
+                                    <ul class="clearfix">'+ listhtml2 +'</ul>\
+                                </div>\
+                            </div>\
+                        </div>';
+                            $('.sec-health .con1').html(list1+list2);
+                        }
+                    });
+                }
+
+            },
+            illsHover: function(){
+                $('.j-doctors-tab .ills-title-list').find('li').on('mouseover', function(){
+                    if(!$(this).hasClass('cur')){
+                        $(this).addClass('cur').siblings('li').removeClass('cur');
+                        $('.doctors-con').eq($(this).index()).show().siblings('.doctors-con').hide();
+                    }
+                });
+                jQuery('.related-sick-title li').on({
+                    'mouseenter' : function(){
+                        jQuery(this).addClass('enter').siblings().removeClass('enter');
+                    },
+                    'mouseleave' : function(){
+                        jQuery(this).removeClass('enter');
+                    },
+                    click: function(){
+                        if(!$(this).hasClass('cur')){
+                            $(this).addClass('cur').siblings('li').removeClass('cur');
+                            $(this).parents('.related-sick-title').siblings('.related-sick-dels').addClass('none');
+                            $(this).parents('.related-sick-title').siblings('.related-sick-dels').eq($(this).index()).removeClass('none');
+                        }
+                    }
+                });
+
+
+                var timer = null;
+                jQuery('.related-sick-sex a').on({
+                    'click' :  function(){
+                        if(!jQuery(this).hasClass('cur')){
+                            jQuery(this).addClass('cur').siblings().removeClass('cur');
+                            jQuery('.related-sick-turn').eq(0).addClass('cur').siblings('.related-sick-turn').removeClass('cur');
+                            jQuery('.related-sick-p').removeClass('active');
+                            jQuery('.related-sick-items').addClass('none');
+                            if(jQuery('.related-sex-g').hasClass('cur')){
+                                jQuery('.related-sick-p.girl').addClass('active');
+                                jQuery('.related-sick-items.girl').removeClass('none');
+                            }else if(jQuery('.related-sex-m').hasClass('cur')){
+                                jQuery('.related-sick-p.man').addClass('active');
+                                jQuery('.related-sick-items.man').removeClass('none');
+                            }
+                        }
+
+                    }
+                });
+                jQuery('.related-sick-turn').on({
+                    mouseenter : function(){
+                        jQuery(this).addClass('enter');
+                        //jQuery(this).siblings('.related-sick-turn').addClass('cur');
+                    },
+                    mouseleave : function(){
+                        jQuery(this).removeClass('enter');
+                        //jQuery(this).siblings('.related-sick-turn').removeClass('cur');
+                    },
+                    click : function(){
+                        if(!$(this).hasClass('cur')){
+                            $(this).addClass('cur').siblings('.related-sick-turn').removeClass('cur');
+                            if(jQuery('.related-sick-p.man').hasClass('active')){
+                                jQuery('.related-sick-p.man').removeClass('active');
+                                jQuery('.related-sick-items.man').addClass('none');
+                                jQuery('.related-sick-p.man-b').addClass('active');
+                                jQuery('.related-sick-items.man-b').removeClass('none');
+                            }else if(jQuery('.related-sick-p.man-b').hasClass('active')){
+                                jQuery('.related-sick-p.man-b').removeClass('active');
+                                jQuery('.related-sick-items.man-b').addClass('none');
+                                jQuery('.related-sick-p.man').addClass('active');
+                                jQuery('.related-sick-items.man').removeClass('none');
+                            }else if(jQuery('.related-sick-p.girl').hasClass('active')){
+                                jQuery('.related-sick-p.girl').removeClass('active');
+                                jQuery('.related-sick-items.girl').addClass('none');
+                                jQuery('.related-sick-p.girl-b').addClass('active');
+                                jQuery('.related-sick-items.girl-b').removeClass('none');
+                            }else if(jQuery('.related-sick-p.girl-b').hasClass('active')){
+                                jQuery('.related-sick-p.girl-b').removeClass('active');
+                                jQuery('.related-sick-items.girl-b').addClass('none');
+                                jQuery('.related-sick-p.girl').addClass('active');
+                                jQuery('.related-sick-items.girl').removeClass('none');
+                            }
+                        }
+
+                    }
+                });
+                var curMan = [0],
+                    curManB = [0,1,2,3],
+                    curGirl = [1],
+                    curGirlB = [0,1,2,3];
+                jQuery('#map-m area').on({
+                    mouseenter : function(){
+                        var self = jQuery(this);
+                        curMan = [];
+                        jQuery('.related-sick-con .man').find('.j-sick-tab').each(function(){
+                            if(jQuery(this).css('display') == 'block'){
+                                if(jQuery(this).index() > 3){
+                                    curMan.push(jQuery(this).index()+1);
+                                }else if( jQuery(this).index() == 3){
+                                    curMan.push(3);curMan.push(4);
+                                }else{
+                                    curMan.push(jQuery(this).index());
+                                }
+                            }
+                        });
+                        if(!(self.attr('class') == jQuery('#map-m area').eq(curMan[0]).attr('class')||self.attr('class') == jQuery('#map-m area').eq(curMan[1]).attr('class'))){
+                            jQuery('.filter-m span').each(function(){
+                                if(!(jQuery(this).index() == curMan[0] || jQuery(this).index() == curMan[1])){
+                                    jQuery(this).hide();
+                                }
+                            });
+
+                            if(self.hasClass('map-m-head')){
+                                jQuery('.filter-m-head').show();
+                            }else if(self.hasClass('map-m-chest')){
+                                jQuery('.filter-m-chest').show();
+                            }else if(self.hasClass('map-m-belly')){
+                                jQuery('.filter-m-belly').show();
+                            }else if(self.hasClass('map-m-arm-l') || self.hasClass('map-m-arm-r')){
+                                jQuery('.filter-m-arm-l,.filter-m-arm-r').show();
+                            }else if(self.hasClass('map-m-sex')){
+                                jQuery('.filter-m-sex').show();
+                            }else if(self.hasClass('map-m-leg')){
+                                jQuery('.filter-m-leg').show();
+                            }
+                        }
+                    }
+                });
+                jQuery('.filter-m span').on({
+                    click : function(){
+                        var self = jQuery(this);
+                        curMan = [];
+                        if(jQuery(this).index() == 3 || jQuery(this).index() == 4){
+                            curMan.push(3);curMan.push(4);
+                        }else{
+                            curMan.push(jQuery(this).index());
+                        }
+                        //clearTimeout(timer);
+                        //timer = setTimeout(function() {
+                        if(self.hasClass('filter-m-head')){
+                            jQuery('.filter-m-head').show().siblings().hide();
+                            jQuery('.related-m-head').show().siblings().hide();
+                        }else if(self.hasClass('filter-m-chest')){
+                            jQuery('.filter-m-chest').show().siblings().hide();
+                            jQuery('.related-m-chest').show().siblings().hide();
+                        }else if(self.hasClass('filter-m-belly')){
+                            jQuery('.filter-m-belly').show().siblings().hide();
+                            jQuery('.related-m-belly').show().siblings().hide();
+                        }else if(self.hasClass('filter-m-arm-l') || self.hasClass('filter-m-arm-r')){
+                            jQuery('.filter-m span').hide();
+                            jQuery('.filter-m-arm-l,.filter-m-arm-r').show();
+                            jQuery('.related-m-arm').show().siblings().hide();
+                        }else if(self.hasClass('filter-m-sex')){
+                            jQuery('.filter-m-sex').show().siblings().hide();
+                            jQuery('.related-m-sex').show().siblings().hide();
+                        }else if(self.hasClass('filter-m-leg')){
+                            jQuery('.filter-m-leg').show().siblings().hide();
+                            jQuery('.related-m-leg').show().siblings().hide();
+                        }
+                        //}, 200);
+                    },
+                    mouseleave : function(){
+                        if(!(jQuery(this).index() == curMan[0] || jQuery(this).index() == curMan[1])){
+                            if(jQuery(this).hasClass('filter-m-arm-l') || jQuery(this).hasClass('filter-m-arm-r')){
+                                jQuery('.filter-m-arm-l,.filter-m-arm-r').hide();
+                            }else{
+                                jQuery(this).hide();
+                            }
+                        }
+                    }
+                });
+
+                jQuery('#map-m-b area').on({
+                    mouseenter : function() {
+                        var self = jQuery(this);
+                        curManB = [];
+                        jQuery('.related-sick-con .man-b').find('.j-sick-tab').each(function(){
+                            if(jQuery(this).css('display') == 'block'){
+                                if(jQuery(this).index() == 0){
+                                    curManB.push(0,1,2,3);
+                                }else if(jQuery(this).index() == 1){
+                                    curManB.push(4);
+                                }else if(jQuery(this).index() == 2){
+                                    curManB.push(5);
+                                }
+                            }
+                        });
+                        if(!(self.attr('class') == jQuery('#map-m-b area').eq(curManB[0]).attr('class')||self.attr('class') == jQuery('#map-m-b area').eq(curManB[1]).attr('class'))) {
+
+                            jQuery('.filter-m-b span').each(function () {
+                                if (!(jQuery(this).index() == curManB[0] || jQuery(this).index() == curManB[1] || jQuery(this).index() == curManB[2] || jQuery(this).index() == curManB[3])) {
+                                    jQuery(this).hide();
+                                }
+                            });
+                            //clearTimeout(timer);
+                            //timer = setTimeout(function() {
+                            if (self.hasClass('map-m-b-waist')) {
+                                jQuery('.filter-m-b-waist').show();
+                            } else if (self.hasClass('map-m-b-butt')) {
+                                jQuery('.filter-m-b-butt').show();
+                            } else if (self.hasClass('map-m-b-top') || self.hasClass('map-m-b-leg')) {
+                                jQuery('.filter-m-b-top,.filter-m-b-arm-l,.filter-m-b-arm-r,.filter-m-b-leg').show();
+                            }
+                            // }, 200);
+                        }
+                    }
+                });
+                jQuery('.filter-m-b span').on({
+                    click : function() {
+                        var self = jQuery(this);
+                        curManB = [];
+                        if(jQuery(this).index() == 0 || jQuery(this).index() == 1 || jQuery(this).index() == 2 || jQuery(this).index() == 3){
+                            curManB.push(0);curManB.push(1);curManB.push(2);curManB.push(3);
+                        }else{
+                            curManB.push(jQuery(this).index());
+                        }
+                        //clearTimeout(timer);
+                        // timer = setTimeout(function() {
+                        if (self.hasClass('filter-m-b-waist')) {
+                            jQuery('.filter-m-b-waist').show().siblings().hide();
+                            jQuery('.related-m-b-waist').show().siblings().hide();
+                        }else if (self.hasClass('filter-m-b-butt')) {
+                            jQuery('.filter-m-b-butt').show().siblings().hide();
+                            jQuery('.related-m-b-butt').show().siblings().hide();
+                        } else if (self.hasClass('filter-m-b-top') || self.hasClass('filter-m-b-leg')) {
+                            jQuery('.filter-m-b span').hide();
+                            jQuery('.filter-m-b-top,.filter-m-b-arm-l,.filter-m-b-arm-r,.filter-m-b-leg').show();
+                            jQuery('.related-m-b-top').show().siblings().hide();
+                        }
+                        //}, 200);
+                    },
+                    mouseleave : function(){
+                        if(!(jQuery(this).index() == curManB[0] || jQuery(this).index() == curManB[1] || jQuery(this).index() == curManB[2] || jQuery(this).index() == curManB[3])){
+                            if(jQuery(this).hasClass('filter-m-b-top') || jQuery(this).hasClass('filter-m-b-arm-l') || jQuery(this).hasClass('filter-m-b-arm-r') || jQuery(this).hasClass('filter-m-b-leg')){
+                                jQuery('.filter-m-b-top,.filter-m-b-arm-l,.filter-m-b-arm-r,.filter-m-b-leg').hide();
+                            }else{
+                                jQuery(this).hide();
+                            }
+                        }
+                    }
+                });
+
+                jQuery('#map-g area').on({
+                    mouseenter : function(){
+                        var self = jQuery(this);
+                        curGirl = [];
+                        jQuery('.related-sick-con .girl').find('.j-sick-tab').each(function(){
+                            if(jQuery(this).css('display') == 'block'){
+                                if(jQuery(this).index() > 2){
+                                    curGirl.push(jQuery(this).index()+1);
+                                }else if( jQuery(this).index() == 2){
+                                    curGirl.push(2);curGirl.push(3);
+                                }else{
+                                    curGirl.push(jQuery(this).index());
+                                }
+                            }
+                        });
+                        if(!(self.attr('class') == jQuery('#map-g area').eq(curGirl[0]).attr('class')||self.attr('class') == jQuery('#map-g area').eq(curGirl[1]).attr('class'))){
+                            jQuery('.filter-g span').each(function(){
+                                if(!(jQuery(this).index() == curGirl[0] || jQuery(this).index() == curGirl[1])){
+                                    jQuery(this).hide();
+                                }
+                            });
+                            if(self.hasClass('map-g-head')){
+                                jQuery('.filter-g-head').show();
+                            }else if(self.hasClass('map-g-chest')){
+                                jQuery('.filter-g-chest').show();
+                            }else if(self.hasClass('map-g-arm-l') || self.hasClass('map-g-arm-r')){
+                                jQuery('.filter-g-arm-l,.filter-g-arm-r').show();
+                            }else if(self.hasClass('map-g-waist')){
+                                jQuery('.filter-g-waist').show();
+                            }else if(self.hasClass('map-g-butt')){
+                                jQuery('.filter-g-butt').show();
+                            }else if(self.hasClass('map-g-leg')){
+                                jQuery('.filter-g-leg').show();
+                            }
+                        }
+                    }
+                });
+                jQuery('.filter-g span').on({
+                    click : function(){
+                        var self = jQuery(this);
+                        curGirl = [];
+                        if(jQuery(this).index() == 2 || jQuery(this).index() == 3){
+                            curGirl.push(2);curGirl.push(3);
+                        }else{
+                            curGirl.push(jQuery(this).index());
+                        }
+                        //clearTimeout(timer);
+                        //timer = setTimeout(function() {
+                        if(self.hasClass('filter-g-head')){
+                            jQuery('.filter-g-head').show().siblings().hide();
+                            jQuery('.related-g-head').show().siblings().hide();
+                        }else if(self.hasClass('filter-g-chest')){
+                            jQuery('.filter-g-chest').show().siblings().hide();
+                            jQuery('.related-g-chest').show().siblings().hide();
+                        }else if(self.hasClass('filter-g-arm-l') || self.hasClass('filter-g-arm-r')){
+                            jQuery('.filter-g span').hide();
+                            jQuery('.filter-g-arm-l,.filter-g-arm-r').show();
+                            jQuery('.related-g-arm').show().siblings().hide();
+                        }else if(self.hasClass('filter-g-waist')){
+                            jQuery('.filter-g-waist').show().siblings().hide();
+                            jQuery('.related-g-waist').show().siblings().hide();
+                        }else if(self.hasClass('filter-g-butt')){
+                            jQuery('.filter-g-butt').show().siblings().hide();
+                            jQuery('.related-g-butt').show().siblings().hide();
+                        }else if(self.hasClass('filter-g-leg')){
+                            jQuery('.filter-g-leg').show().siblings().hide();
+                            jQuery('.related-g-leg').show().siblings().hide();
+                        }
+                        //}, 200);
+                    },
+                    mouseleave : function(){
+                        if(!(jQuery(this).index() == curGirl[0] || jQuery(this).index() == curGirl[1])){
+                            if(jQuery(this).hasClass('filter-g-arm-l') || jQuery(this).hasClass('filter-g-arm-r')){
+                                jQuery('.filter-g-arm-l,.filter-g-arm-r').hide();
+                            }else{
+                                jQuery(this).hide();
+                            }
+                        }
+                    }
+                });
+
+                jQuery('#map-g-b area').on({
+                    mouseenter : function() {
+                        var self = jQuery(this);
+                        curGirlB = [];
+                        jQuery('.related-sick-con .girl-b').find('.j-sick-tab').each(function(){
+                            if(jQuery(this).css('display') == 'block'){
+                                if(jQuery(this).index() == 0){
+                                    curGirlB.push(0,1,2,3);
+                                }else if(jQuery(this).index() == 1){
+                                    curGirlB.push(4);
+                                }else if(jQuery(this).index() == 2){
+                                    curGirlB.push(5);
+                                }
+                            }
+                        });
+                        if(!(self.attr('class') == jQuery('#map-g-b area').eq(curGirlB[0]).attr('class')||self.attr('class') == jQuery('#map-g-b area').eq(curGirlB[1]).attr('class'))) {
+                            jQuery('.filter-g-b span').each(function () {
+                                if (!(jQuery(this).index() == curGirlB[0] || jQuery(this).index() == curGirlB[1] || jQuery(this).index() == curGirlB[2] || jQuery(this).index() == curGirlB[3])) {
+                                    jQuery(this).hide();
+                                }
+                            });
+                            //clearTimeout(timer);
+                            //timer = setTimeout(function() {
+                            if (self.hasClass('map-g-b-waist')) {
+                                jQuery('.filter-g-b-waist').show();
+                            } else if (self.hasClass('map-g-b-butt')) {
+                                jQuery('.filter-g-b-butt').show();
+                            } else if (self.hasClass('map-g-b-top') || self.hasClass('map-g-b-leg')) {
+                                jQuery('.filter-g-b-top,.filter-g-b-arm-l,.filter-g-b-arm-r,.filter-g-b-leg').show();
+                            }
+                            // }, 200);
+                        }
+                    }
+                });
+                jQuery('.filter-g-b span').on({
+                    click : function() {
+                        var self = jQuery(this);
+                        curGirlB = [];
+                        if(jQuery(this).index() == 0 || jQuery(this).index() == 1 || jQuery(this).index() == 2 || jQuery(this).index() == 3){
+                            curGirlB.push(0);curGirlB.push(1);curGirlB.push(2);curGirlB.push(3);
+                        }else{
+                            curGirlB.push(jQuery(this).index());
+                        }
+                        if (self.hasClass('filter-g-b-waist')) {
+                            jQuery('.filter-g-b-waist').show().siblings().hide();
+                            jQuery('.related-g-b-waist').show().siblings().hide();
+                        }else if (self.hasClass('filter-g-b-butt')) {
+                            jQuery('.filter-g-b-butt').show().siblings().hide();
+                            jQuery('.related-g-b-butt').show().siblings().hide();
+                        } else if (self.hasClass('filter-g-b-top') || self.hasClass('filter-g-b-leg')) {
+                            jQuery('.filter-g-b span').hide();
+                            jQuery('.filter-g-b-top,.filter-g-b-arm-l,.filter-g-b-arm-r,.filter-g-b-leg').show();
+                            jQuery('.related-g-b-top').show().siblings().hide();
+                        }
+                    },
+                    mouseleave : function(){
+                        if(!(jQuery(this).index() == curGirlB[0] || jQuery(this).index() == curGirlB[1] || jQuery(this).index() == curGirlB[2] || jQuery(this).index() == curGirlB[3])){
+                            if(jQuery(this).hasClass('filter-g-b-top') || jQuery(this).hasClass('filter-g-b-arm-l') || jQuery(this).hasClass('filter-g-b-arm-r') || jQuery(this).hasClass('filter-g-b-leg')){
+                                jQuery('.filter-g-b-top,.filter-g-b-arm-l,.filter-g-b-arm-r,.filter-g-b-leg').hide();
+                            }else{
+                                jQuery(this).hide();
+                            }
+                        }
+                    }
+                });
+            },
+            illsLevel: function(){
+
+                $('.j-ills-tab .ills-title-list').find('li').on('mouseover', function(){
+                    if(!$(this).hasClass('cur')){
+                        $(this).addClass('cur').siblings('li').removeClass('cur');
+                        $('.ills-con').eq($(this).index()).show().siblings('.ills-con').hide();
+                    }
+                });
+            },
+            hotAnswer: function(){
+                //热门回答
+                if($('.hot-answer').length){
+                    var timestamp = new Date().getTime(),
+                        limit = '150',
+                        Key = 'a8bb8295d7f98949848506844eb3e3a4',
+                        sign = md5( limit + timestamp + Key);
+                    jQuery.ajax({
+                        url: '//club.xywy.com/api/answer_list.php',
+                        type: 'get',
+                        data: {limit: limit,timestamp:timestamp,sign:sign},
+                        dataType: 'jsonp',
+                        jsonpCallback: 'test',
+                        beforeSend: function () {
+                            jQuery('.hot-answer').append('<div id="loading" style="position:absolute;width:100%;top:0;left:0;height:520px;background:url(//img.static.xywy.com/zxyl/images/loading.gif) 50% 50% no-repeat #fff;opacity:0.8;filter:alpha(opacity=80);"></div>');
+                        },
+                        success: function (msgs) {
+                            jQuery('.hot-answer').find('#loading').remove();
+                            jQuery('.hot-answer ul').html('');
+                            var pList = '',tmp = '';
+                            if(msgs.code == 200){
+                                jQuery.each(msgs.data,function(index,obj){
+                                    if(obj.content != "" || obj.content !=  "underfunded") {
+                                        var i = index + 1;
+                                        if (obj.time_stus == '刚刚') {
+                                            var status = '<span class="record first">' + obj.time_stus + '</span>';
+                                        } else {
+                                            var status = '<span class="record">' + obj.time_stus + '</span>';
+                                        }
+                                        tmp += '<li><a href="' + obj.url + '" target="_blank" onmousedown="__sendClickOdm(\'01179972\', this,\'pcsy:sy_emwd_wd' + i + '+\')" >' + status + '\
+         <div class="clearfix ">\<p class="Q-txt fl">' + obj.title + ' </p>\
+         </div>\
+         <div class="clearfix">\<p class="A-txt fl">' + obj.content + '</p>\
+         </div>\
+        </a>\
+       </li>';
+                                    }
+                                });
+                                jQuery('.hot-answer ul').append(tmp);
+                                jQuery('.hot-answer li:last-child').css('border-bottom','none');
+                                $('.hot-answer').textScroll({
+                                    vertical: true,
+                                    time: 5000
+                                });
+                            }
+                        }
+                    });
+                }
+            },
+            linksDrop : function(){
+                jQuery('.links-arrow').on('click', function(){
+                    if(!jQuery('.links').hasClass('cur')){
+                        jQuery('.links').addClass('cur');
+                    }else{
+                        jQuery('.links').removeClass('cur');
+                    }
+                });
+            },
+            returnTop: function(){
+                $(window).on('scroll', function(){
+                    var scrollTop = $(window).scrollTop();
+                    var h = $(window).height();
+                    if(scrollTop >= h){
+                        $('.return-top').show();
+                    }else{
+                        $('.return-top').hide();
+                    }
+                });
+
+                $('.return-top').on('click', function(){
+                    window.scrollTo(0,0);
+                });
+            },
+            codeShow: function(){
+                $('.code-bar-list').on({
+                    mouseenter : function(){
+                        $(this).addClass('on').siblings().removeClass('on');
+                        $('.code-bar-dels').css({'left': '38px'});
+                        $('.code-bar-dels').eq($(this).index()).css({
+                            'left' : '-140px'
+                        });
+                    },
+                    mouseleave : function(e){
+                        var target = $(e.relatedTarget);
+                        if(!target.parents().hasClass('code-bar')) {
+                            $(this).removeClass('on');
+                            $('.code-bar-dels').eq($(this).index()).css({
+                                'left': '38px'
+                            });
+                        }
+                    }
+                });
+                $('.code-bar-dels').on({
+                    mouseleave: function(){
+                        $('.code-bar-list').removeClass('on');
+                        $(this).css({
+                            'left' : '38px'
+                        });
+                    }
+                });
+            }
+        }
+
+        index.init();
+    });
+
+});

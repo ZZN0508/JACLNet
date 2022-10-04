@@ -1,0 +1,11 @@
+{"@context": "https://schema.org", "@type": "Corporation", "name": "Outbrain", "url": "https://www.outbrain.com", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/09/Outbrain-Logo.png", "sameAs": ["https://www.facebook.com/Outbrain/", "https://twitter.com/outbrain", "https://www.youtube.com/c/outbrain", "https://www.linkedin.com/company/outbrain/", "https://en.wikipedia.org/wiki/Outbrain", "https://www.outbrain.com", "https://github.com/outbrain"]}
+function OptanonWrapper(){};
+function getRandomInt(a,b){a=Math.ceil(a);b=Math.floor(b);return Math.floor(Math.random()*(b-a))+a}var random=getRandomInt(1,100);document.cookie=50>=random?"DriftPlaybook\x3dA":"DriftPlaybook\x3dB";
+window._trackJs={token:"eda72c8282ab4e99b9e4f4ad95ac9219",application:"www-outbrain-com"};
+setTimeout(function(){dataLayer.push({event:"3SecondDelay"})},3E3);
+setTimeout(function(){dataLayer.push({event:"2SecondDelay"})},2E3);
+setTimeout(function(){dataLayer.push({event:"Performance Delay"})},1E4);
+function CAPI(b,e){var c=document.cookie.split(";").filter(function(a){return a.includes("_fbp\x3d")}).map(function(a){return a.split("_fbp\x3d")[1]}),d=document.cookie.split(";").filter(function(a){return a.includes("_fbc\x3d")}).map(function(a){return a.split("_fbc\x3d")[1]});c=c.length&&c[0]||null;d=d.length&&d[0]||null;var f=new Headers;f.append("Content-Type","application/json");b={event:b,fbp:c,fbclid:d,user_agent:navigator.userAgent,url:window.location.origin+window.location.pathname};b=Object.assign({},
+b,e);e={method:"POST",headers:f,mode:"no-cors",body:JSON.stringify(b)};fetch("https://hooks.zapier.com/hooks/catch/5612991/bbt6cgn/",e)};
+document.addEventListener("scroll",scrollFunctionGtm);function scrollFunctionGtm(){dataLayer.push({event:"Functional Delay"});document.removeEventListener("scroll",scrollFunctionGtm,!1)};
+setTimeout(function(){dataLayer.push({event:"Targeting Delay"})},1E4);

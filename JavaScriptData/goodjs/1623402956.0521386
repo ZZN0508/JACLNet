@@ -1,0 +1,218 @@
+
+                    THD_GLOBAL = (typeof THD_GLOBAL !== 'undefined') ? THD_GLOBAL : {};
+                    THD_GLOBAL.isHomePage = true;
+                
+
+    THD_GLOBAL = (typeof THD_GLOBAL !== 'undefined') ? THD_GLOBAL : {};
+    THD_GLOBAL.isPv = false;
+
+
+                var browseAppVer = "CPR";
+            
+
+                    THD_GLOBAL = (typeof THD_GLOBAL !== 'undefined') ? THD_GLOBAL : {};
+                    THD_GLOBAL.enableHomeDesktopStickyHeader = true;
+                
+
+                    THD_GLOBAL = (typeof THD_GLOBAL !== 'undefined') ? THD_GLOBAL : {};
+                    THD_GLOBAL.enableHomeStickyHeader_msBrowser = true;
+                
+(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"true","rua.cpush":"true","rua.upre":"true","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"SJ-4be23fc1-b3c0-4c1a-a02b-9aec5fa44316","rua.cook":"false","rua.ims":"false","rua.ufprl":"true","rua.cfprl":"false","rua.isuxp":"false","rua.texp":"norulematch"}]);
+bazadebezolkohpepadr="1472328219"
+
+window.THD_GLOBAL = window.THD_GLOBAL || {};
+useCSSForms = true;
+	var certonaAvailable = false;
+	certonaAvailable = true;
+		//List of schemes will be pushed to the Javascript array and passed to the refresh function
+	//Certona Global Resx Object and initiate tracking cookie and call refresh function which calls Recommendation API
+
+
+
+window.THD_GLOBAL = (typeof THD_GLOBAL !== 'undefined') ? THD_GLOBAL : {};
+THD_GLOBAL.resx = {
+   appid: 'HOMEDEPOT01',
+   links: '',
+   maxProducts: '16',
+   
+   
+   
+};
+
+
+
+	THD_GLOBAL.lpEnabled = false;
+	
+
+		var digitalData = digitalData || {};
+
+var dataObj = dataObj || {
+		"displayAttributes" : {},
+		"filter" : []
+	};
+
+	
+
+digitalData.page={"pageInfo":{"pageName":"homepage","pageType":"homepage","abTest":"home:version:gen2","pageLoadEvent":"","pageTemplate":"default"},"onsiteSearchInfo":{"resultsType":"","correctedTerm":"","searchTypeAhead":""},"category":{"primaryCategory":"HomePage","subCategory1":"homepage","subCategory2":"homepage"}};
+;
+
+thdAnalyticsEvent={"category":{"primaryCategory":"homepage"},"eventInfo":{"eventName":""},"eventMode":"preload"};
+
+
+
+
+
+	
+
+                    if (typeof THD_GLOBAL !== 'undefined') {
+                        THD_GLOBAL_APP = THD_GLOBAL;
+                    }
+                
+
+                    {
+                        "@context": "http://schema.org",
+                        "@type": "WebSite",
+                        "url": "https://www.homedepot.com",
+                        "potentialAction": {
+                            "@type": "SearchAction",
+                            "target": "https://www.homedepot.com/s/{search_term_string}?NCNI-5&gsitesearch",
+                            "query-input": "required name=search_term_string"
+                        }
+                    }
+                
+
+      THD_GLOBAL.showExternalCategoryRecommendations = 'true';
+      THD_GLOBAL.showInternalCategoryRecommendations = 'true';
+
+      THD_GLOBAL.desktopSponsoredComponentsEnabled = 'true';
+      THD_GLOBAL.sponsoredTrafficRatio = '0';
+      THD_GLOBAL.SponsoredBanner = true;
+
+        THD_GLOBAL.getHeroBanner = true;
+        THD_GLOBAL.useFirstCarousel = true;
+
+
+      THD_GLOBAL.isTopDealsWidgetEnabled = 'true';
+
+  
+
+  var THD_GLOBAL = THD_GLOBAL || {};
+
+  THD_GLOBAL.instance = "";
+  THD_GLOBAL.env = "";
+  THD_GLOBAL.pro = false;
+  THD_GLOBAL.secureClient = "";
+  THD_GLOBAL.host = "//www.homedepot.com";
+  THD_GLOBAL.staticFlyClassic = false;
+  THD_GLOBAL.showSignInBubble = false;
+  THD_GLOBAL.cookieDomainStaging = ".homedepot.com";
+  THD_GLOBAL.cookieDomain = ".homedepot.com";
+  THD_GLOBAL.localizationApiHost = "//localization.thdws.com";
+  THD_GLOBAL.secureHostNameStaging = "www.hd-pr71stg.homedepot.com";
+  THD_GLOBAL.secureHostName = "www.homedepot.com";
+  THD_GLOBAL.nonSecureHostNameStaging = "hd-pr71stg.homedepot.com";
+  THD_GLOBAL.nonSecureHostName = "www.homedepot.com";
+  THD_GLOBAL.hasRunningFreeShipPromo = "false";
+  THD_GLOBAL.defStoreNum = 8125;
+  THD_GLOBAL.locStoreNumParam = "locStoreNum=";
+  THD_GLOBAL.freeShipThreshold = "";
+  THD_GLOBAL.numberItemsInCart = "0";
+  THD_GLOBAL.totalCartAmount = "$0.00";
+  THD_GLOBAL.orderQualifiesForFreeShip = "false";
+  THD_GLOBAL.THDLogonCmd = "https://www.homedepot.com/account/view/logon?";
+  THD_GLOBAL.OrderTrackingFormCmd = "https://www.homedepot.com/order/view/tracking?";
+  THD_GLOBAL.OrderStatusDisplayCmd = "https://www.homedepot.com/order/view/summary?";
+  THD_GLOBAL.discountDetailsDisplayViewURL = "";
+  THD_GLOBAL.searchUrl = "//www.homedepot.com/webapp/wcs/stores/servlet/Search?storeId=10051&langId=-1&catalogId=10053&";
+  THD_GLOBAL.localizationKillSwitch = true;
+  THD_GLOBAL.atcLegacyMCCFeatureKillSwitch = true;
+  THD_GLOBAL.SVOCIDFeatureKillSwitch = true;
+  THD_GLOBAL.HFTypeAheadV2 = true;
+  THD_GLOBAL.apiHost = "//origin.api.homedepot.com";
+  THD_GLOBAL.apiKey = "8Qg7Ztll8bnnEtlORRt7ReviHGrrnvo4";
+  THD_GLOBAL.typeAheadHost = "//www.thdws.com";
+  THD_GLOBAL.eParam = "21";
+  THD_GLOBAL.cookie_domain = ".homedepot.com";
+  THD_GLOBAL.ORIGIN_OR_APIGEE = "origin";
+  THD_GLOBAL.API_PROXY_ENV_NAME = "";
+  THD_GLOBAL.in_store_detection_on = "true";
+  THD_GLOBAL.inStoreDetectionAjaxCallFlag = false;
+  THD_GLOBAL.certonaOn = true;
+  THD_GLOBAL.HFTypeAheadV2 = true;
+  THD_GLOBAL.MWGcpRecommendationsSwitch = true;
+  THD_GLOBAL.thdRecommendationsApiHost = "www.homedepot.com";
+  THD_GLOBAL.storeSearchServiceHostName = "www.homedepot.com";
+  THD_GLOBAL.endpoint = {
+    dataCapture: "clickstream-producer.hd-personalization-prod.gcp.homedepot.com/clickstream-producer/v1/publish",
+    dataCaptureConfig: "clickstream-killswitch.hd-personalization-prod.gcp.homedepot.com/clickstream-killswitch/v1/detail"
+  };
+  THD_GLOBAL.throttle = {
+    dataCapture: 100
+  };
+  THD_GLOBAL.mobileCartThrottle = 100;
+  THD_GLOBAL.desktopCartThrottle = 100;
+  THD_GLOBAL.mobileRVThrottle = 100;
+  THD_GLOBAL.desktopRVThrottle = 100;
+
+  THD_GLOBAL.instore = {
+    mintraveldist: 0.05,
+    minmiddist: 0.5,
+    instoredist: 0.125,
+    instoreexpire: 1200000,
+    inStoreDetectionAjaxCallFlag: false
+  };
+
+  THD_GLOBAL.locationizer = {
+    storeradiusnarrow: 50,
+    storeradiuswide: 200
+  };
+  THD_GLOBAL.enableSignInBubble = true;
+  THD_GLOBAL.flyoutVersion = "8";
+  THD_GLOBAL.HFAPP_useCdnFlyout = true;
+  THD_GLOBAL.sf = {},
+  THD_GLOBAL.in_store_detection_on = true;
+  THD_GLOBAL.wcsHostSecure = "secured:";
+  THD_GLOBAL.wcsHostNonSecure = "nonsecure:";
+  THD_GLOBAL.imagePath = "";
+  THD_GLOBAL.channel = "web";
+  THD_GLOBAL.cacheTime = "1623398815437";
+  THD_GLOBAL.isGcp = true;
+
+  THD_GLOBAL.submitSearch = function submitSearch(form){
+    function trimStr(str) {
+      return str.replace(/^\s+|\s+$/g, '');
+    }
+    var action = form.getAttribute('data-action');
+    var input = form.querySelector('.SearchBox__searchBar .SearchBox__inputWrapper input');
+    var text = input.value;
+    var url;
+    var fix = new RegExp (/[^A-Za-z0-9,.\-_\/]|[<>\[\]?+\^\&]/g);
+    var safeText =  text.replace(fix," ");
+    var replaceText="?search="+ safeText;
+    if (action && safeText.length) {
+      url = action.replace('{0}',replaceText) ;
+      window.location = url;
+    } else if (safeText.length === 0) {
+      input.className += 'border-danger errorPlaceholder';
+      input.setAttribute('placeholder', 'Enter Keyword or SKU');
+    }
+    return false;
+  };
+  /* polyfill CustomEvent */
+  (function(){if(typeof window.CustomEvent==='function')return false;function CustomEvent(event,params){params=params||{bubbles:false,cancelable:false,detail:null};let evt=document.createEvent('CustomEvent');evt.initCustomEvent(event,params.bubbles,params.cancelable,params.detail);return evt;}CustomEvent.prototype=window.Event.prototype;window.CustomEvent=CustomEvent;})();
+  /* emit "beforeCleaner" event */
+  const cookiesUncleanedEvent=new CustomEvent('beforeCleaner');document.dispatchEvent(cookiesUncleanedEvent);
+
+  var cookieCleaner=(function mod(){function a(g){return g.replace(/^\s+|\s+$/g,"");}var d=["local",".local",".m",".secure2",".www","",".localhost",".m.hd-st72",".m.hd-qa74","m","secure2","www","localhost","m.hd-st72","m.hd-qa74"];
+  var c;if(typeof THD_TOUCH_GLOBALS!=="undefined"){c=THD_TOUCH_GLOBALS.cookie_domain;}else{if(typeof THD_GLOBAL!=="undefined"){c=THD_GLOBAL.cookieDomain;}else{c=".homedepot.com";
+  }}return{setCookie:function e(g){document.cookie=g;},getCookie:function b(){return document.cookie;},getAsObject:function(h){var l=[];var k;var o={};var p=h.split(";");
+  var g;var j;var m;var n;for(k=0;k<p.length;k++){j=p[k].split("=");if(j.length<2){continue;}m=a(j[0]);n=a(j[1]);if(typeof o[m]==="undefined"){o[m]=[];}o[m].push({index:k,value:n});
+  }return o;},getDuplicates:function(j){var g=this.getAsObject(j);var i;var h={};for(i in g){if(g.hasOwnProperty(i)){if(g[i].length>1){h[i]=g[i];}}}return h;
+  },removeCookieForAllDomains:function(h){for(var g=0;g<d.length;g++){this.setCookie(h+"=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain="+d[g]+c);}},setCookieExpireInSeconds:function f(n,m,j,g){var l=(typeof g!=="undefined")?g:null;
+  var i=new Date();i.setTime(i.getTime()+(j*1000));var h=(i===null)?"":i.toUTCString();var k=n+"="+m+"; expires="+h+"; path=/;";if(l){k+=" domain="+l;}this.setCookie(k);
+  },cleanup:function(){var l=[{name:"THD_PERSIST",length:86400*365*2},{name:"THD_FORCE_LOC",length:60*60*2},{name:"THD-LOC-STORE",length:86400*365*2}];var k=cookieCleaner.getDuplicates(document.cookie);
+  for(var h=0;h<l.length;h++){var g=l[h];if(k[g.name]){var j=k[g.name][k[g.name].length-1];cookieCleaner.removeCookieForAllDomains(g.name);cookieCleaner.setCookieExpireInSeconds(g.name,j.value,g.length,c);
+  }}}};})();cookieCleaner.cleanup();cookieCleaner=null;
+
+  /* emit "afterCleaner" event */
+  const cookiesCleanedEvent=new CustomEvent('afterCleaner');document.dispatchEvent(cookiesCleanedEvent);

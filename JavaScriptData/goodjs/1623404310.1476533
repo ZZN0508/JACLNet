@@ -1,0 +1,12 @@
+function lowIE() {
+         var browser = navigator.appVersion;
+         var version = browser.split(";");
+       if (version.length > 1) {
+             var ie_Version = parseInt(version[1].replace(/[ ]/g, "").replace(/MSIE/g, ""));
+             if (ie_Version < 10) {
+                 alert("您的浏览器版本过低，请升级！");
+             }
+         }
+       
+}
+lowIE();

@@ -1,0 +1,1131 @@
+if (typeof SKYPE == 'undefined') {
+
+ var SKYPE = {};
+
+}
+
+
+
+SKYPE.overlay = function() {
+
+ var _tabInfo,
+
+  _type,
+
+  overlayCallback,
+
+  showSecondTab = false;
+
+
+
+ var _initTabs = function(tabInfo){
+
+   _tabInfo = tabInfo;
+
+  },
+
+
+
+  _renderOverlay = function() {
+
+   var $overlayWrapper = $('#overlayWrapper'),
+
+    $overlay = $('#overlayWrapper .overlay'),
+
+    $overlayBackground = $("#overlayBackground"),
+
+    topMargin,
+
+    maxOverlayHeight;
+
+
+
+   if (SKYPE.CurrentResponsiveState == 'mobile') {
+
+    $('html, body').scrollTop(0);
+
+    $overlayWrapper.show();
+
+   } else {
+
+    $overlayWrapper.css('opacity', 0);
+
+    $overlayWrapper.show();
+
+
+
+    if (showSecondTab == false) {
+
+     setTimeout(function() {
+
+      _positionOverlay();
+
+      _tabClickHandlers();
+
+      $overlayWrapper.animate({'opacity' : 1}, {duration : 500});
+
+     }, 150);
+
+    }
+
+
+
+    else if (showSecondTab == true) {
+
+     setTimeout(function() {
+
+      _hideFirstTab();
+
+     }, 1000);
+
+    }
+
+   }
+
+  },
+
+
+
+  _checkOverlay = function() {
+
+
+
+   $(window).bind('resize', function(e) {
+
+    if (window.matchMedia('only screen and (max-width: 600px)').matches) {
+
+     $('#overlayWrapper').hide();
+
+     _hideOverlay();
+
+    } else {
+
+        _positionOverlay();
+
+       }
+
+   });
+
+  },
+
+
+
+  _positionOverlay = function() {
+
+
+
+   var windowHeight = $(window).height(),
+
+       overlayHeight = $('#overlayWrapper .overlay').height() + 60,
+
+       overlayPosition;
+
+
+
+      if (windowHeight > overlayHeight) {
+
+       overlayPosition = (windowHeight - overlayHeight) / 2;
+
+       $('#overlayWrapper .overlay').css('top', (overlayPosition)+'px');
+
+      }
+
+      else {
+
+       $('#overlayWrapper .overlay').css('top', '0px');
+
+      }
+
+  },
+
+
+
+  _showOverlay = function(params, isStatic, event) {
+
+   
+
+   var topPosition,
+
+    $overlay = $('#overlayWrapper'),
+
+    $target;
+
+   if (params) {
+
+    if (params.type == 'rates') {
+
+     _type = params.type;
+
+     $target = $(params.target);
+
+     $overlay.removeClass();
+
+     $overlay.addClass(params.overlayClass);
+
+     $('#overlayContent').html($target.html());
+
+     if (SKYPE.CurrentResponsiveState === 'mobile' && ($('.overlaySpacer').length === 0)) {
+
+      var spacerNodeHtml = '<div class="overlaySpacer noDesktop noTablet"></div>';
+
+      $(spacerNodeHtml).insertBefore('footer');
+
+     }
+
+    }
+
+    if (params.type == 'secondTab') {
+
+     showSecondTab = true;
+
+    }
+
+
+
+    if (params.isMobileOverlay) {
+
+     $overlay.addClass("noDesktop noTablet");
+
+    }
+
+   }
+
+
+
+   if (isStatic) {
+
+    _renderOverlay();
+
+   } else {
+
+    overlayCallback = function(){
+
+     _renderOverlay();
+
+    };
+
+   }
+
+
+
+   if (_type == 'rates') {
+
+    if (SKYPE.CurrentResponsiveState == 'mobile') {
+
+     topPosition = $('nav').height();
+
+     $('#overlayWrapper .overlay').css('top', topPosition);
+
+    }
+
+    $('header').addClass('overlayPageContentHiddenInMobile');
+
+    $('body section').addClass('overlayPageContentHiddenInMobile');
+
+    $('.overlaySpacer').css('height', $('.overlay').height());
+
+
+
+    //initialize height of rate links
+
+    $('.ratesBlockLink').each(function(){
+
+     $(this).height($(this).parent('.ratesBlock').outerHeight());
+
+    });
+
+   }
+
+
+
+   if (!params || !params.isMobileOverlay) {
+
+    var scrollWidth = window.innerWidth - $(window).width(),
+
+     isiPad = navigator.userAgent.match(/iPad/i) != null;
+
+    $('body').addClass('overlayOn').css('padding-right', scrollWidth);
+
+
+
+    if (isiPad) {
+
+
+
+     $('body').addClass('ipadOverlayOn');
+
+    }
+
+
+
+    document.body.scroll = "no";//IE fix
+
+   }
+
+
+
+   $(document).bind('keydown.overlay', function(event) {
+
+    
+
+    //ENTER == 27 || X == 88
+
+    if ((event.which == 27 || event.which == 88) && SKYPE.CurrentResponsiveState != 'mobile' && $('html').attr('data-overlay-standalone') != 'true') {
+
+
+
+     _hideOverlay();
+
+
+
+    } else if (event.which == 27 && SKYPE.CurrentResponsiveState != 'mobile' && $('html').attr('data-overlay-standalone') == 'true') {
+
+
+
+     var referrer = document.referrer;
+
+
+
+     if (/.skype.(net|com)/.test(referrer) && referrer != document.location.href) {
+
+
+
+      document.location.href = referrer;
+
+
+
+      return false;
+
+
+
+     } else {
+
+
+
+      document.location.href = '../';
+
+
+
+      return false;
+
+     }
+
+    }
+
+   });
+
+   
+
+   //initiate trapping of the focus
+
+   window.setTimeout(function() {
+
+    SKYPE.Accessibility.util.trapFocus($('#overlayWrapper'), $('#overlayInstructions'), $('#closeButton'), $(event.target));
+
+   },500);
+
+  },
+
+
+
+  /*
+
+   * Do initialization of accordion
+
+   *
+
+   * Add toggleable element (accordion) click handler
+
+   *
+
+   * @name  initializeAccordion
+
+   * @methodOf SKYPE.overlay
+
+   */
+
+
+
+  _initializeAccordion = function() {
+
+   $('.toggleContent,.mobileToggleContent').bind('click', function(event) {
+
+    if (SKYPE.CurrentResponsiveState !== 'mobile') {
+
+     return;
+
+    }
+
+    event.preventDefault();
+
+
+
+    var hiddenClass = $(this).is('.mobileToggleContent') ? 'noMobile':'hidden',
+
+     $content = $(this).parents('.contentWrapper').find('.toggleableContent').first(),
+
+     $parent = $(this).parent();
+
+
+
+    if (!$content.length) {
+
+     return;
+
+    }
+
+
+
+    if ($content.hasClass(hiddenClass)) {
+
+     $content.css({
+
+      'display': 'none'
+
+     }).removeClass(hiddenClass).slideDown(400, function() {
+
+       $parent.addClass('open');
+
+       $content.css({
+
+        'display': ''
+
+       });
+
+      });
+
+    } else {
+
+     $content.slideUp(400, function() {
+
+      $parent.removeClass('open');
+
+      $content.addClass(hiddenClass).css({
+
+       'display': ''
+
+      });
+
+     });
+
+    }
+
+   });
+
+  },
+
+
+
+  /*
+
+   * Do initialization of tabs after Ajax content is loaded
+
+   *
+
+   * add tab click handlers for desktop.
+
+   *
+
+   * @name  onOverlayContentLoaded
+
+   * @methodOf SKYPE.overlay
+
+   */
+
+
+
+  _onOverlayContentLoaded = function() {
+
+   if (typeof overlayCallback == 'function') {
+
+    overlayCallback();
+
+    overlayCallback = null;
+
+   }
+
+
+
+   // SKYPE.wizard.init();
+
+   // SKYPE.smsWidget.init();
+
+  },
+
+
+
+  _tabClickHandlers = function() {
+
+
+
+   // firstTab click handler
+
+   $('.overlay #firstTab').click(function(){
+
+    
+
+    if (!$('this').closest('.tab').hasClass('open')) {
+
+
+
+     $('#firstTab').closest('.tab').addClass('open');
+
+     $('#firstTab').attr('tabindex', -1).attr('aria-hidden', true).removeAttr('role');
+
+
+
+     $('#secondTab').closest('.tab').removeClass('open');
+
+     $('#secondTab').attr('tabindex', 0).attr('aria-hidden', false).attr('role', 'presentation');
+
+     
+
+     $('.overlay .secondTab').removeClass('open').addClass("hidden");
+
+     $('.overlay .firstTab').addClass('open').removeClass("hidden");
+
+     
+
+     $('#overlayInstructions').focus();
+
+     $('#overlayWrapper .overlay').addClass('animate');
+
+     setTimeout(function(){
+
+      $('#overlayWrapper .overlay').removeClass('animate');
+
+     },750);
+
+     _positionOverlay();
+
+    }
+
+   })
+
+
+
+   // secondTab click handler
+
+   $('.overlay #secondTab, .overlay #androidTab').click(function(event){
+
+
+
+    if (SKYPE.CurrentResponsiveState != 'mobile') {
+
+
+
+     event.preventDefault();
+
+    
+
+     if (!$('this').closest('.tab').hasClass('open')) {
+
+
+
+      $('#secondTab').closest('.tab').addClass('open');
+
+      $('#secondTab').attr('tabindex', -1).attr('aria-hidden', true).removeAttr('role');
+
+
+
+      $('#firstTab').closest('.tab').removeClass('open');
+
+      $('#firstTab').attr('tabindex', 0).attr('aria-hidden', false).attr('role', 'presentation');
+
+      
+
+      $('.overlay .firstTab').removeClass('open').addClass("hidden");
+
+      $('.overlay .secondTab').addClass('open').removeClass("hidden");
+
+
+
+      $('#overlayInstructions').focus();
+
+      $('#overlayWrapper .overlay').addClass('animate');
+
+      setTimeout(function(){
+
+       $('#overlayWrapper .overlay').removeClass('animate');
+
+      },750);
+
+      _positionOverlay();
+
+     }
+
+
+
+    }
+
+
+
+    // Special rule for Android App Providers
+
+    if (SKYPE.CurrentResponsiveState == 'mobile') {
+
+
+
+     var $content = $(this).parents('.contentWrapper').find('.toggleableContent').first(),
+
+      $parent = $(this).parents('.contentWrapper').find('#secondTabLink').first();
+
+
+
+     if (!$content.length) {
+
+      return;
+
+     }
+
+
+
+     if ($content.hasClass('hidden')) {
+
+      $content.css({
+
+       'display': 'none'
+
+      }).removeClass('hidden').slideDown(400, function() {
+
+       $parent.addClass('open');
+
+       $content.css({
+
+        'display': ''
+
+       });
+
+      });
+
+     }
+
+
+
+    }
+
+   })
+
+  },
+
+
+
+  _hideFirstTab = function() {
+
+
+
+   if (showSecondTab == true) {
+
+    $('#secondTab').closest('.tab').addClass('open');
+
+    $('#secondTab').attr('tabindex', -1).attr('aria-hidden', true).removeAttr('role');
+
+    $('#firstTab').closest('.tab').removeClass('open');
+
+    $('#firstTab').attr('tabindex', 0).attr('aria-hidden', false).attr('role', 'presentation');
+
+    $('.overlay .firstTab').removeClass('open').addClass("hidden");
+
+    $('.overlay .secondTab').addClass('open').removeClass("hidden");
+
+    $('#overlayInstructions').focus();
+
+    $('#overlayWrapper .overlay').addClass('animate');
+
+    _positionOverlay();
+
+    _tabClickHandlers();
+
+    $('#overlayWrapper').animate({'opacity' : 1}, {duration : 500});
+
+    showSecondTab = false;
+
+    setTimeout(function(){
+
+     $('#overlayWrapper .overlay').removeClass('animate');
+
+    },750);
+
+   }
+
+  },
+
+
+
+  _hideOverlay = function() {
+
+   var doHide = function(){
+
+    $('#overlayWrapper').removeClass().hide();
+
+    $('body').removeClass('overlayOn ipadOverlayOn').css('padding-right', 0);
+
+    $('#overlayContent').empty();
+
+    $('#overlayContent').removeClass('addMargin');
+
+    document.body.scroll = "yes";//IE fix
+
+   };
+
+   if (_type == 'rates') {
+
+    $('.overlaySpacer').remove();
+
+    $('.overlayPageContentHiddenInMobile').removeClass('overlayPageContentHiddenInMobile');
+
+   }
+
+
+
+   if (SKYPE.CurrentResponsiveState == 'mobile') {
+
+    doHide();
+
+   } else {
+
+    $('#overlayWrapper').fadeOut(500, function(){
+
+     doHide();
+
+    });
+
+   }
+
+
+
+   $(document).unbind('keypress.overlay');
+
+   SKYPE.Accessibility.util.releaseFocus();
+
+  },
+
+
+
+  _getAjaxContent = function(targetUrl) {
+
+
+
+   var ajaxUrl;
+
+
+
+   var tmp = document.createElement('a');
+
+    tmp.href = targetUrl;
+
+
+
+   var urlArr = tmp.pathname.split(".");
+
+
+
+   ajaxUrl = urlArr[0];
+
+
+
+   for (var i=0; i < urlArr.length; i++){
+
+
+
+    if (i === 0) {
+
+
+
+     // if (ajaxUrl.charAt(ajaxUrl.length - 1) == '/') {
+
+
+
+     //  ajaxUrl = ajaxUrl.substring(0, ajaxUrl.length - 1) + ".ajaxcontent/";
+
+
+
+     // } else {
+
+
+
+     //  ajaxUrl = ajaxUrl + '.ajaxcontent';
+
+     // }
+
+
+
+    } else {
+
+
+
+     ajaxUrl = ajaxUrl + "." + urlArr[i];
+
+    }
+
+   }
+
+
+
+   if (ajaxUrl.charAt(0) !== '/') {
+
+
+
+    ajaxUrl = '/' + ajaxUrl;
+
+   }
+
+
+
+   // $.ajax({
+
+   //  url: ajaxUrl,
+
+   //  success: function(response) {
+
+   //   $('#overlayContent').html(response);
+
+   //   _onOverlayContentLoaded();
+
+
+
+   //   // Also start media gallery script.
+
+   //   // SKYPE.MediaGallery.startMediaGallery();
+
+   //  }
+
+   // });
+
+
+
+   // $.ajax({ 
+
+   //  url: targetUrl,
+
+   //  dataType: 'html', 
+
+   //  success: function(response) { 
+
+   //   $('#overlayContent').html(response); 
+
+   //   _onOverlayContentLoaded(); 
+
+   //  } 
+
+   // });
+
+
+
+   // $.ajax({ 
+
+   //  url: ajaxUrl,
+
+   //  dataType: 'html', 
+
+   //  success: function(response) { 
+
+   //   $('#overlayContent').html($(response).find('#test').html());
+
+   //   _onOverlayContentLoaded(); 
+
+   //  } 
+
+   // });
+
+
+
+   $.ajax({ 
+
+    url: targetUrl,
+
+    dataType: 'html', 
+
+    success: function() { 
+
+     $('#overlayContent').load(targetUrl + " .overlay .contentBlock", function() {
+
+      // alert( "Load was performed." );
+
+      _onOverlayContentLoaded(); 
+
+     });
+
+    } 
+
+   });
+
+
+
+   // $('#overlayContent').load(targetUrl + " #test");
+
+   // _onOverlayContentLoaded(); 
+
+
+
+  },
+
+
+
+  /*
+
+   * Hide overlay when hash has been changed (to handle back/forward browser button)
+
+   *
+
+   * @name  onHashChange
+
+   * @methodOf SKYPE.overlay
+
+   */
+
+  _onHashChange = function(){
+
+   if ($('#overlayContent').html()) {
+
+    _hideOverlay();
+
+   }
+
+  };
+
+
+
+ return {
+
+  init: function(){
+
+   SKYPE.Hash.addListener(_onHashChange);
+
+   _checkOverlay();
+
+   _tabClickHandlers();
+
+   _initializeAccordion();
+
+   _initTabs({
+
+    'firstTab' : '#overlayContent .firstTab',
+
+    'secondTab' : '#overlayContent .secondTab'
+
+   });
+
+  },
+
+  show: function(event) {
+
+   _getAjaxContent(event.currentTarget.href);
+
+   _showOverlay(undefined, false, event);
+
+
+
+  },
+
+  showStatic: function(params, event) {
+
+   _showOverlay(params, true, event);
+
+  },
+
+  showSecond: function(params, event) {
+
+   _getAjaxContent(event.currentTarget.href);
+
+   _showOverlay(params, true, event);
+
+  },
+
+  hide: function() {
+
+   _hideOverlay();
+
+  }
+
+
+
+ };
+
+}();
+
+
+
+$(document).ready(function() {
+
+ SKYPE.overlay.init();
+
+
+
+ //BIND overlay show() and hide() actions to page elements
+
+ $(document).on('click.overlay', '.showOverlay', function(event) {
+
+  if (SKYPE.CurrentResponsiveState !== 'mobile') {
+
+   SKYPE.overlay.show(event);
+
+   event.preventDefault();
+
+  }
+
+ });
+
+
+
+ $(document).on('click.overlay', '.openOverlaySecondTab', function(event) {
+
+  if (SKYPE.CurrentResponsiveState !== 'mobile') {
+
+   SKYPE.overlay.showSecond({type:'secondTab'}, event);
+
+   event.preventDefault();
+
+  }
+
+ });
+
+
+
+ $(document).on('click.overlay', '.hideOverlay, .backLink', function(event) {
+
+  SKYPE.overlay.hide();
+
+  event.preventDefault();
+
+ });
+
+
+
+ $(document).on('click', '.showOverlaySecondTab', function(event) {
+
+  $('#overlayContent').html($('.secondTab').html());
+
+  $('#overlayContent').addClass('addMargin');
+
+  SKYPE.overlay.showStatic(undefined, event);
+
+  event.preventDefault();
+
+ });
+
+
+
+ $(document).on('click', '.showOverlayAllRates', function(event) {
+
+  SKYPE.overlay.showStatic({type:'rates', target: '.allRates', overlayClass: 'allRatesOverlay'}, event);
+
+  event.preventDefault();
+
+ });
+
+
+
+ $(document).on('click', '.showOverlaySubs', function(event) {
+
+  SKYPE.overlay.showStatic({type:'rates', target: '.subscriptionRatesContainer', overlayClass: 'subsOverlay', isMobileOverlay: true}, event);
+
+  event.preventDefault();
+
+ });
+
+
+
+ $(document).on('click', '.showCountriesOverlay', function(event) {
+
+  var target = $(this).attr('data-country-list-id');
+
+  SKYPE.overlay.showStatic({type:'rates', target: '#' + target, overlayClass: 'countriesOverlay'}, event);
+
+  event.preventDefault();
+
+ });
+
+
+
+ /**
+
+ * @var Dummy transparent PNG (1x1) as base64
+
+ */
+
+  
+
+  var closeBtn =  '<button type="button" class="closeButton noMobile hideOverlay" id="closeButton" title="'+SKYPE.settings.l10s.overlay.closeButton+'" aria-label="'+SKYPE.settings.l10s.overlay.closeButton+'">'+
+
+       '<span class="closeCircle" aria-hidden="true"></span>'+
+
+       '<span class="closeIcon" aria-hidden="true">'+
+
+        '<span class="overlaySprite" aria-hidden="true"></span>'+
+
+       '</span>'+
+
+      '</button>',
+
+ 
+
+  $overlay = $('<div id="overlayWrapper"><div id="overlayBackground" class="hideOverlay"></div><div class="overlayContainer"><div class="overlay"><span tabindex="0" class="instructions" id="overlayInstructions">'+SKYPE.settings.l10s.overlay.instructions+'</span><div id="overlayContent"></div>'+closeBtn+'</div></div></div>');
+
+
+
+ $overlay.insertBefore('footer'); //This has to be in the middle of the markup to detect focus escaping from overlay
+
+ $overlay.on('click.overlay', function(event) {
+
+
+
+  if ($(event.target).is('#overlayWrapper') && SKYPE.CurrentResponsiveState != 'mobile' && $('html').attr('data-overlay-standalone') != 'true') {
+
+
+
+   SKYPE.overlay.hide();
+
+
+
+  } else if ($(event.target).is('#overlayWrapper') && SKYPE.CurrentResponsiveState != 'mobile' && $('html').attr('data-overlay-standalone') == 'true') {
+
+
+
+   var referrer = document.referrer;
+
+
+
+   if (/.skype.(net|com)/.test(referrer) && referrer != document.location.href) {
+
+
+
+    document.location.href = referrer;
+
+
+
+    return false;
+
+
+
+   } else {
+
+
+
+    document.location.href = '../';
+
+
+
+    return false;
+
+   }
+
+  }
+
+ });
+
+ 
+
+ $overlay.find('.instructions').on('focus', function(){
+
+  $overlay.find('.overlay').addClass('inFocus');
+
+ }).on('blur', function(){
+
+  $overlay.find('.overlay').removeClass('inFocus');
+
+ });
+
+ 
+
+});

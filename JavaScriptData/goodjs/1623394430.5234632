@@ -1,0 +1,399 @@
+define('indexnew:component/ecommerce/ecommerce.js',["global","module","exports","require","indexnew:static/js/jquery.js","indexnew:component/ecommerce/countdown.js","indexnew:component/hotgoods/hotgoods.js"],function(global, module, exports, require, __115e408__, __76d2e08__, __ca6789e__){
+
+var $ = /*require('indexnew:static/js/jquery.js')*/__115e408__;
+var Countdown = /*require('indexnew:component/ecommerce/countdown.js')*/__76d2e08__;
+var HotGood = /*require('indexnew:component/hotgoods/hotgoods.js')*/__ca6789e__;
+
+var CLOSE_ECOMMERCE = 'CLOSE_ECOMMERCE';
+var CLOSE_ECOMMERCE_TIME = 'CLOSE_ECOMMERCE_TIME';
+
+/**
+ * è½®æ’­å›¾
+ */
+function lunbo() {try{
+    var liIndex = 0;
+    var lunboTimer = null;
+    var time = 4000; // æ—¶é—´
+
+    // èŽ·å–å…ƒç´ 
+    var $box = $('.product-banner');
+    var $ul = $('.product-list');
+
+    // å…‹éš†å…ƒç´ 
+    var baseLis = $ul.children();
+    baseLis.removeClass('product-active');
+    var firstLi = baseLis.eq(0);
+    var liWidth = firstLi.width(); // å•†å“å®½åº¦
+    var max = baseLis.size(); // å•†å“ä¸ªæ•°
+    var initLeft = -max * liWidth + 40; // å•†å“åˆ—è¡¨å®½åº¦
+    var apendLis = baseLis.clone();
+    var prependLis = baseLis.clone();
+    $ul.append(apendLis);
+    $ul.prepend(prependLis);
+    $ul.css('left', initLeft);
+    $ul.children().eq(max).addClass('product-active');
+
+    // èŽ·å–å…ƒç´ 
+    var $ulLi = $ul.children('li');
+
+    // 1. å¼€å¯è½®æ’­
+    lunboTimer = setInterval(moveLeft, time);
+
+    // 2. å…³é—­è½®æ’­
+    $box.on('mouseenter', function () {try{
+        clearInterval(lunboTimer);
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:43});}}});
+
+    // 3. å¼€å¯è½®æ’­
+    $box.on('mouseleave', function () {try{
+        clearInterval(lunboTimer);
+        lunboTimer = setInterval(moveLeft, time);
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:49});}}});
+
+    // 4. ç‚¹å‡»å·¦è’™å±‚
+    $('.leftCover').click(function (e) {try{
+        moveLeft();
+        e.preventDefault();
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:55});}}});
+
+    // 5. ç‚¹å‡»å³è’™å±‚
+    $('.rightCover').click(function (e) {try{
+        moveRight();
+        e.preventDefault();
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:61});}}});
+
+    function moveLeft() {try{
+        liIndex++;
+        if (liIndex > max) {
+            liIndex = 1;
+            $ul.css({
+                left: initLeft
+            });
+        }
+        $ul.animate({
+            left: '-=' + liWidth + 'px'
+        });
+        $ulLi.removeClass('product-active');
+        $ulLi.eq(liIndex + max).addClass('product-active');
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:76});}}}
+
+    function moveRight() {try{
+        liIndex--;
+        if (liIndex < -(max - 1)) {
+            liIndex = 0;
+            $ul.css({
+                left: initLeft - liWidth
+            });
+        }
+        $ul.animate({
+            left: '+=' + liWidth + 'px'
+        });
+        $ulLi.removeClass('product-active');
+        $ulLi.eq(liIndex + max).addClass('product-active');
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:91});}}}
+}catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:92});}}}
+
+/**
+ * å€’è®¡æ—¶
+ */
+function setTime(sel) {try{
+    var $activitys = $(sel).find('.time-detail');
+    var format = '<span>hh</span>'
+        + '<i>:</i>'
+        + '<span>mm</span>'
+        + '<i>:</i>'
+        + '<span>ss</span>';
+
+    for (var i = 0; i < $activitys.length; i++) {
+        (function (i) {try{
+            var $acti = $activitys.eq(i);
+            var remain = $acti.data('remain');
+            new Countdown($acti, {
+                format: format,
+                lastTime: remain,
+                cb: function () {try{
+                    var $li = $('.product').eq(i);
+                    var detail_url = $li.data('detail_url');
+                    $li.find('.coupon-purchase').attr('href', detail_url);
+                    $li.find('.activity').addClass('activity-end');
+                    $li.find('.activity-title').text('å·²ç»“æŸï¼š');
+                }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:118});}}}
+            });
+        }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:120});}}})(i);
+    }
+}catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:122});}}}
+
+/**
+ * æ°›å›´è¥é€ åŒº
+ */
+function atmosphere() {try{
+    var $uls = $('.atmosphere-ul');
+    for (var i = 0; i < $uls.length; i++) {
+        (function (i) {try{
+            // 1.æ•°æ®
+            var $ul = $uls.eq(i);
+            var $word = $ul.find('.word');
+            var height = $word.height();
+            var marginBottom = $word.css('marginBottom');
+            marginBottom = parseFloat(marginBottom.replace('px', ''));
+
+            // 2.å…‹éš†
+            var $initLis = $ul.children();
+            var len = $initLis.length;
+            for (var i = 0; i < $initLis.length; i++) {
+                var $elei = $ul.children().eq(i).clone();
+                $ul.append($elei);
+            }
+
+            // 3.è½®æ’­
+            var index = 0;
+            var top = 0;
+            var aotoTimer = setInterval(function () {try{
+                index++;
+                if (index > len) {
+                    $ul.css({
+                        'top': 0
+                    });
+                    index = 1;
+                    top = 0;
+                }
+                top -= height + marginBottom;
+                $ul.animate({
+                    'top': top
+                }, 3000);
+            }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:162});}}}, 7000);
+        }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:163});}}})(i);
+    }
+}catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:165});}}}
+
+/**
+ * ç»‘å®šäº‹ä»¶
+ */
+function bindEvent() {try{
+    $('.close-btn').click(function () {try{
+        try {
+            var date = +new Date();
+            window.localStorage.setItem(CLOSE_ECOMMERCE, 'true');
+            window.localStorage.setItem(CLOSE_ECOMMERCE_TIME, date);
+        } catch (error) {
+        }
+        $('.left-ecommerce-box').hide();
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:179});}}});
+}catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:180});}}}
+
+/**
+ * å¥½ç‰©æ¦œå•
+ */
+function bangdang() {try{
+    var $bdBox = $('#leftWrapperBox').find('.hot-goods'); // æ¦œå•å®¹å™¨
+    var $expandBtn = $('#leftWrapperBox').find('.expand-btn'); // å±•å¼€æŒ‰é’®
+    var goodList = []; // æ¦œå•æ•°æ®
+    let flag = 0; // ç‚¹å‡»æ¬¡æ•°
+
+    var singleBd = (function () {try{
+        var goodBd;
+        return function (args) {try{
+            if (!goodBd) {
+                goodBd = new HotGood(args);
+                setTime('.hot-goods');
+            }
+            return goodBd;
+        }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:199});}}};
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:200});}}})();
+
+    // 1. èŽ·å–æ¦œå•æ•°æ®
+    $.ajax('/api/getgoodthing?pageSize=3', {
+        dataType: 'json',
+        jsonpCallback: 'setRecom'
+    }).success(function (data) {try{
+        goodList = data.list || [];
+        if (goodList.length > 0) {
+            $expandBtn.show();
+            $('.haohuimai').addClass('hasBangdan');
+        } else {
+            $expandBtn.hide();
+            $('.haohuimai').removeClass('hasBangdan');
+        }
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:215});}}})
+        .fail(function (err) {try{
+            console.log(err);
+        }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:218});}}});
+
+    // 2. ç‚¹å‡»å±•å¼€æŒ‰é’®
+    $expandBtn.click(function () {try{
+        if (flag++ % 2 === 0) {
+            singleBd.call(this, {
+                container: $bdBox,
+                data: goodList,
+                pageSize: 3
+            });
+            $bdBox.show();
+            $(this).addClass('slideUp');
+        }
+        else {
+            $bdBox.hide();
+            $(this).removeClass('slideUp');
+        }
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:235});}}});
+}catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:236});}}}
+
+/**
+ * å¥½ä¼šä¹°
+ */
+function haohuimai() {try{
+    function initHaohuimai() {try{
+        // 1. å¦‚æžœå¥½ä¼šä¹°æ²¡æ•°æ®
+        var data = window.ecommerceData;
+        var position = window.ecommercePosition;
+        if (!data || !data.data || data.data.length <= 0) {
+            return;
+        }
+
+        // 2. å¦‚æžœå¥½ä¼šä¹°æœ‰æ•°æ®
+        var maiData = data.data;
+        var moreUrl = data.more_url;
+
+        var str = '<div class="left-ecommerce-box">'
+            + '<div class="haohuimai" alog-alias="ecommerce" monkey="ecommerce">'
+            + '    <div class="haohuimai-title">'
+            + '        <a class="haohuimai-logo" monkey="logo" href="' + moreUrl + '">'
+            + '            <span class="haohuimai-logo-img"></span>'
+            + '        </a>'
+            + '        <a class="more-url" monkey="more-products" href="' + moreUrl + '">æ›´å¤šå¥½ç‰©'
+            + '            <span class="more-icon"></span>'
+            + '        </a>'
+            + '    </div>'
+            + '    <div class="product-banner-wrap">'
+            + '        <div class="product-banner">'
+            + '            <ul class="product-list">';
+
+        for (let index = 0; index < maiData.length; index++) {
+            var product = maiData[index];
+            var productUrl = '';
+            var actClass = '';
+            var actTitle = '';
+            var purchaseTitle = '';
+
+            if (product.end_time > 0) {
+                productUrl = product.url;
+                actTitle = 'é™æ—¶æŠ¢ï¼š';
+                purchaseTitle = 'é¢†åˆ¸è´­ä¹°';
+            } else {
+                productUrl = product.detail_url;
+                actClass = 'activity-end';
+                actTitle = 'å·²ç»“æŸï¼š';
+                purchaseTitle = 'åŽ»è´­ä¹°';
+            }
+
+            str += '<li class="product" data-detail_url="' + product.detail_url + '">'
+                + '<a class="coupon-purchase" monkey="product" alog-text="' + product.title
+                + ' " href="' + productUrl + '" target="_blank">'
+                + '    <div class="product-show">'
+                + '        <img class="product-img" monkey="imgClick" src="' + product.imgurl + '" '
+                + 'onerror="this.src=\'http://t11.baidu.com/it/u=3049637327,2599848241&fm=179&app=35&f=PNG?w=560&h=560&s=39843C7A4B636F241C54C4DA0300E0B1\';"'
+                + '/>'
+                + '        <div class="product-title">'
+                + '            <img class="icon" src="' + product.iconimageurl + '">'
+                + '            <span class="title" monkey="titleClick">' + product.title + '</span>'
+                + '        </div>'
+                + '    </div>';
+
+            if (product.atmosphere_words && product.atmosphere_words.length > 0) {
+                str += '<div class="atmosphere-area">'
+                    + '<ul class="atmosphere-ul">';
+
+
+                var wordArr = product.atmosphere_words;
+                for (let index = 0; index < wordArr.length; index++) {
+                    var word = wordArr[index];
+                    str += '<li class="word">'
+                        + '    <span>'
+                        + word
+                        + '</span>'
+                        + '</li>';
+                }
+
+                str += '</ul></div>';
+            }
+
+            str += '<div class="product-info">'
+                + '        <div class="activity ' + actClass + '" monkey="timeClick">'
+                + '            <span class="activity-title">' + actTitle + '</span>'
+                + '            <span class="time-detail" data-remain="' + product.end_time + '">'
+                + '                <span></span>'
+                + '                <i>:</i>'
+                + '                <span></span>'
+                + '                <i>:</i>'
+                + '                <span></span>'
+                + '            </span>'
+                + '        </div>'
+                + '        <div class="price" monkey="priceClick">'
+                + '            <span class="discount-price"><i>Â¥</i>' + product.special_price + '</span>'
+                + '            <span class="initial-price"><i>Â¥</i>' + product.original_price + '</span>'
+                + '        </div>'
+                + '        <div class="product-link" monkey="purchaseBtnClick">' + purchaseTitle + '</div>'
+                + '    </div>'
+                + '    <div class="leftCover"></div>'
+                + '    <div class="rightCover"></div>'
+                + '</a>'
+                + '</li>';
+        }
+
+        str += '</ul>'
+            + '          </div>'
+            + '      </div>'
+            + '  </div>'
+            + '  <div class="hot-goods" alog-alias="hot-goods" monkey="hot-goods"></div>'
+            + '  <a class="close-btn" monkey="ecommerce-close" alog-text="ecommerce-close-btn"></a>'
+            + '  <a class="expand-btn" monkey="ecommerce-expand" alog-text="ecommerce-expand-btn"></a>'
+            + '  </div>';
+
+        if (position === '2') {
+            $('#bottom-be').before(str);
+        } else {
+            $('#leftWrapperBox').prepend(str);
+        }
+    }catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:354});}}}
+
+    initHaohuimai();
+    lunbo();
+    setTime('.haohuimai');
+    atmosphere();
+    bindEvent();
+    bangdang();
+}catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:362});}}}
+
+/**
+ * åˆå§‹åŒ–æ¨¡å—
+ */
+function initMoudle() {try{
+    var closeEcommerce = false;
+    var closeEcommerceTime;
+    var expired = true;
+    try {
+        closeEcommerce = window.localStorage.getItem(CLOSE_ECOMMERCE);
+        closeEcommerceTime = window.localStorage.getItem(CLOSE_ECOMMERCE_TIME);
+        closeEcommerceTime = parseInt(closeEcommerceTime, 10);
+    } catch (error) {
+    }
+
+    if (closeEcommerceTime) {
+        var nowTime = +new Date();
+        var oldTime = +new Date(closeEcommerceTime + 1000 * 60 * 60 * 24 * 7);
+        expired = nowTime > oldTime;
+    }
+
+    // å¦‚æžœå…³é—­äº†æ¨¡å—ï¼Œåˆ™ä¸æ˜¾ç¤ºæ¨¡å—
+    if (closeEcommerce === 'true' && !expired) {
+        return;
+    }
+
+    // å¦åˆ™æ˜¾ç¤ºæ¨¡å—
+    haohuimai();
+}catch(e){if(typeof alog != 'undefined'){alog('exception.fire','catch',{msg:e.message || e.description,path:'indexnew:component/ecommerce/ecommerce.js',ln:391});}}}
+
+initMoudle();
+
+module.exports = {};
+
+});

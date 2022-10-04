@@ -1,0 +1,9 @@
+var _smq = _smq || [];
+  _smq.push(['_setAccount', '1edb741', new Date()]);
+  _smq.push(['pageview']);
+  
+  (function() {
+  var sm = document.createElement('script'); sm.type = 'text/javascript'; sm.async = true;
+  sm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdnmaster.com/sitemaster/sm.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sm, s);
+  })();

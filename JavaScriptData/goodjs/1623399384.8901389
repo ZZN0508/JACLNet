@@ -1,0 +1,462 @@
+if (typeof SKYPE == 'undefined') {
+ var SKYPE = {};
+}
+
+/**
+ * Dynamic javascript fixes for some html elements that alters their behaviour to be compliant with the 
+ * MAS specification
+ *
+ * @author Darius Hodaei (dahodaei@microsoft.com)
+ */
+SKYPE.Accessibility = function(){
+
+ /**Provides cross-browser support for reliably listening to confirmed submissions on select element. By default, browsers raise 
+  * events at different times, and purely listening to 'onchange' is insufficient when we consider User may update caret position
+  * using arrow keys, home, end, clicking, enter, escaping etc.
+  *
+  * @method  select
+  * @param   {string|jQueryObject}  selector  The jQuery object or selector for a valid select html element in the current DOM
+  * @event  updatelabel({eventObj},{string})  Fired when a new text value should be displayed to the user. Note: the new text value is passed to callback handler
+  * @event  submission({eventObj},{int},{bool}) Fired when definite submission is selected, as opposed to onchange, which is triggered unreliably across browsers as the result of index change. Note: the new index is passed to callback handler, and bool value to see if this has changed
+  */
+ var _select = function(selector){
+  var ENTER = 13,
+   DOWN_ARROW = 40,
+   UP_ARROW = 38,
+   ALT = 18,
+   safari = (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1),
+   mac = (navigator.userAgent.indexOf('Mac') !== -1),
+   internetExplorer = (navigator.appName == 'Microsoft Internet Explorer'),
+   firefox = (navigator.userAgent.toLowerCase().indexOf('firefox') > -1);
+
+  return $(selector).each(function(){
+   // the underlying DOM element
+   var self = this,
+   $this = $(this),
+   initLanguageIndex = this.selectedIndex,
+   lastSelectedIndex = initLanguageIndex,
+   // callbacks for handlers
+   submission = function(){
+
+    var hasChanged = (lastSelectedIndex != self.selectedIndex);
+
+    lastSelectedIndex = self.selectedIndex;
+
+    $this.trigger('submission', [self.selectedIndex, hasChanged]);
+
+   },
+   updateLabel = function(){
+    $this.trigger('updatelabel', self.options[self.selectedIndex].innerHTML)
+   };
+
+   $this.live('click',function(){
+    
+    updateLabel();
+    
+    // after a click has occurred we treat any change as a submission, to fix
+    // the issue where the lang selector was not auto submitting the choice
+    if(mac && $.browser.webkit){
+     submission();
+    }
+    else if(!safari){ // non-safari running on non-mac
+
+     // this fixes the problem where the select would submit if you change index,
+     // closed the popup, but then opened it again with it having a different index
+     if($this.popup()){
+      // click always causes a submit
+      submission();
+     }
+    }
+    else submission(); // safari on non mac
+
+   }).live('popupclose',function(){
+
+    updateLabel();
+
+   }).live('keydown keypress', updateLabel).live('keyup',function(e){
+    
+    updateLabel();
+
+    var keycode = (e.charCode || e.keyCode || e.which);
+
+    // enter always causes a submit
+    if(keycode === ENTER){
+     submission();
+    }
+
+   }).live('change',function(){
+    
+    updateLabel();
+
+    if(mac && $.browser.webkit){
+     submission();
+    }
+   });
+    // This is so the label updates in real time as the user
+    // arrows through selections in the list
+
+   // Accounts for mobile browsers, particularly webkit bases (Safari and Chrome)
+   if(('ontouchend' in window) || (window.DocumentTouch && document instanceof DocumentTouch)){
+
+    $this.on('touchend',function(){
+     updateLabel();
+     // click always causes a submit
+     submission();
+    }).on('change', submission);
+   }
+
+   /////////////////////////////////////////////////////////////////////////////////////////////////
+
+   // No safari support because Safari does not raise another click event when you click again on an open 
+   // select element. Therefore it is hard to accurately track popup state
+   if(!safari){
+
+    // popup menu detection
+    var popup = false;
+
+    function updatePopupState(isOpen){
+     // if it was open, but now reportedly closed
+     if(!isOpen && popup){
+      // raise event
+      $this.trigger('popupclose');
+     }
+     else if(isOpen && !popup){
+      // if was closed, but now reportedly open
+      $this.trigger('popupopen');
+     }
+     // update flag
+     popup = isOpen;
+    }
+
+    $this.click(function(event){
+     // if open its now closed, and vice versa
+     updatePopupState(!popup);
+
+     event.stopImmediatePropagation();
+
+    }).on('keydown',function(e){
+
+     var code = e.which || e.keyCode;
+
+     // alt key, and left or right arrow
+     if(e.altKey && (code === DOWN_ARROW || code === UP_ARROW)){
+      // ie and ff close the dropdown if you press alt+(up/down)arrow whilst open
+      if(internetExplorer || firefox){
+       updatePopupState(!popup);
+      }
+      else if(!popup){
+       // ...chrome does not close the dropdown again
+       updatePopupState(true);
+      }
+     }
+
+    });
+
+    // we need to detect other interactions that will close the popup window
+    $(document).on('click', function(){
+
+     updatePopupState(false);
+
+    }).on('keypress keyup keydown',function(e){
+
+     var code = e.which || e.keyCode;
+     // need to guard again up/down arrow, otherwise the alt+arrow to open
+     // triggers a close event too!
+     if(code !== DOWN_ARROW && code !== UP_ARROW && code !== ALT){
+      updatePopupState(false); 
+     }
+
+    });
+
+    $(window).on('focus blur', function(){
+     updatePopupState(false);
+    });
+
+
+    // helper function
+    if(!$this.popup){
+
+     $this.popup = function(){
+
+      return popup;
+     }
+     // hacky way to add function to ONLY the jQuery objects we are interested in
+     $this.data('isOpen',$this.popup);
+    }
+
+   }
+  });
+ },
+ /**
+ * Provides dynamic high contrast support for images
+ */
+ _highContrast = function(){
+  // create style element in head
+  var styleInjection = document.createElement('style'),
+   head = (document.head || document.getElementsByTagName('head')[0]),
+   styleElementInjected = false; // only inject it when we need it
+
+   styleInjection.type = 'text/css';
+  
+  // we prepare the inject function based on the style properties (cross browser support)
+  var _injectFunction = styleInjection.styleSheet? 
+         function(css){
+          if(!styleElementInjected){
+           head.appendChild(styleInjection);
+           styleElementInjected = true;
+          }
+          styleInjection.styleSheet.cssText += css 
+         } : 
+         function(css){
+          if(!styleElementInjected){
+           head.appendChild(styleInjection);
+           styleElementInjected = true;
+          }
+          styleInjection.appendChild(document.createTextNode(css));
+         },
+   _rawPath = function(input){
+        
+    var ext = input.substr(input.length - 4);
+    // remove known extension
+    if(ext === '.png' || ext === '.svg') input = input.substring(0, input.length - 4);
+   
+    return input;
+   },
+   /**
+   * Generates the CSS required for elements identified by given selectors to make them high contrast static images
+   *
+   * @param properties an object containing the parameters for the css, eg selectors, path etc :
+   *  {
+   *   selectors : a csv of css style selectors,
+   *   path : the image path to be used,
+   *   svg : { (optional) include this for svg support
+   *     width : (optional) the width of the sprite used
+   *    },
+   *   x : the x coord if a sprite is being used,
+   *   y : the y coord if a sprite is being used,
+   *   width: the width of the image
+   *   height: the height of the image
+   *  }
+   */
+   _genStaticCss = function(properties){
+
+     var selectorsString = properties.selectors, bgRelative = "",bgPosition = "";
+
+     properties.selectors = properties.selectors.split(','); 
+     properties.path = _rawPath(properties.path);
+
+     properties.width = (properties.width !== "" && properties.width !== undefined) ? ("width:" + properties.width + ";") : '';
+     properties.height = (properties.height !== "" && properties.height !== undefined)? ("height:" + properties.height) + ";" : '';
+     
+     if((properties.x !== '' && properties.x !== undefined) || (properties.y !== '' && properties.y !== undefined)){
+
+      bgRelative = "position:relative;";
+      bgPosition = "*background-position:";
+
+      if(properties.x !== '' && properties.x !== undefined){
+
+       bgRelative += "left:" + properties.x + ";";
+       bgPosition += " " + properties.x;
+      }
+      else bgPosition += " 0px";
+
+      if(properties.y !== '' && properties.y !== undefined){
+
+       bgRelative += "top:" + properties.y + ";";
+       bgPosition += " " + properties.y;
+      }
+      else bgPosition += " 0px";
+
+      bgPosition += ';';
+     }
+
+     var pseudoSelectorsString = properties.selectors.join(':before,') + ':before', 
+      css = "/* Default per instance fallback */"+ selectorsString + " {overflow: hidden;vertical-align: top;"+properties.height+properties.width+"*background: url('"+properties.path+
+        ".png') no-repeat;"+bgPosition+"}/* Default per instance behaviour for pseudo-selector enabled browsers (eg. IE8+) */" + pseudoSelectorsString + 
+        "{display: inline-block;content: url('"+properties.path+".png');"+bgRelative+"}";
+
+     // optional support for svg
+     if(properties.svg){
+
+      properties.svg.width = (properties.svg.width !== "" && properties.svg.width !== undefined) ? ("width:" + properties.svg.width) + " !important;" : '';
+
+      var svgPseudoSelectorsString = '.svg ' + properties.selectors.join(':before,.svg ') + ':before',
+       svgSelectorsString = '.svg ' + properties.selectors.join(',.svg ');
+
+      // add the svg rules
+      css += "/* Per instance behaviour for SVG enabled browsers */"+ svgSelectorsString +
+        "{*background: url('"+properties.path+".svg') no-repeat;"+bgPosition+"}/* Per instance behaviour for SVG and pseudo-selector enabled browsers */"+
+        svgPseudoSelectorsString + "{content: url('"+properties.path+".svg');"+properties.svg.width+bgRelative+"}";
+     }
+
+     return css;
+   },
+   /**
+   * Injects styles in to the head to make the elements identified by given selectors high contrast static images
+   *
+   * @param properties an object containing the parameters for the css, eg selectors, path etc :
+   *  {
+   *   selectors : a csv of css style selectors,
+   *   path : the image path to be used,
+   *   svg : { (optional) include this for svg support
+   *     width : (optional) the width of the sprite used
+   *    },
+   *   x : the x coord if a sprite is being used,
+   *   y : the y coord if a sprite is being used,
+   *   width: the width of the image
+   *   height: the height of the image
+   *  }
+   */
+   _staticInjection = function(properties){
+    
+    var css = _genStaticCss(properties);
+
+    // inject the new css in to the head
+    _injectFunction(css);
+
+   };
+
+  return {
+   staticInjection : _staticInjection,
+   staticCss : _genStaticCss
+  };
+
+ }(),
+ _tabs = function(){
+  
+  // we prepare the inject function based on the style properties (cross browser support)
+  var _injectStyles = function(tabNo, platformObj){
+   
+    var baseSelector = "a.tab" + tabNo + " div.img";
+   
+    if(platformObj.desktop){
+     _highContrast.staticInjection({
+      selectors : baseSelector + '.noTablet.noMobile',
+      path : platformObj.desktop
+     });
+    }
+    if(platformObj.mobile){
+     _highContrast.staticInjection({
+      selectors : baseSelector + '.noTablet.noDesktop',
+      path : platformObj.mobile
+     });
+    }
+    if(platformObj.tablet){
+     _highContrast.staticInjection({
+      selectors : baseSelector + '.noDesktop.noMobile',
+      path: platformObj.tablet
+     }); 
+    }
+   };
+
+  return {
+   injectStyles : _injectStyles
+  };
+ }(),
+ _util = function(){
+  
+  this.focusSource;
+  /**
+  * Trap browser focus on a certain jQuery selector
+  *
+  * Limitations: 
+  *  - Only one element selection supported (one container);
+  *  - For proper tab rotation you have to know your first and last element on the overlay
+  *
+  * @param $selector selector for the container
+  * @param $firstItem first focusable item in the container
+  * @param $lastItem last focusable item in the container
+  * @param $source jQuery selector where to return the focus if focus has been released util.releaseFocus
+  *
+  * @author original: Virgo Talk, latest: Darius Hodaei (darius.hodaei)
+  */
+  var _trapFocus = function($selector, $firstItem, $lastItem, $source){
+   
+   $selector.attr('tabindex', -1);
+   
+   SKYPE.util.focusSource = $source;
+   
+   var TAB_KEY = 9,
+    forwardTab = true,
+    previouslyFocused = undefined;
+
+   // ensure we can latch on to the bookends
+   _makeBookendFocusable($firstItem).focus();
+   _makeBookendFocusable($lastItem);
+   
+   // we need to know if we are tabbing forwards or backwards
+   $('.overlay').on('keydown',function(e) {
+
+    var code = e.keyCode || e.which;
+
+    if(code === TAB_KEY){
+     forwardTab = !e.shiftKey;
+    }
+
+   });
+
+
+   $('body').children().not($selector).attr('aria-hidden', 'true');
+   
+   $(document).on('focusin.overlay', function(e){
+    
+    // if we are moving up from the first item
+    if((previouslyFocused === $firstItem[0]) && !forwardTab && $lastItem){
+
+     e.preventDefault();
+     previouslyFocused = $lastItem;
+     $lastItem.focus();
+     
+    }
+    // if we are moving down from last item
+    else if((previouslyFocused === $lastItem[0]) && forwardTab && $firstItem){
+     
+     e.preventDefault();
+     previouslyFocused = $firstItem;
+     $firstItem.focus();
+
+    }
+    else previouslyFocused = e.target;
+
+   });
+  },
+  // checks a bookend is focusable
+  _makeBookendFocusable = function($element){
+
+   if($element && $element.width() === 0){
+    // if the first item is empty we need to give it some
+    // content so it is focusable
+    $element.html('&nbsp;');
+   }
+
+   return $element;
+  },
+  /**
+   * Release focus from the trapped container
+   * 
+   */
+  _releaseFocus = function(){
+   //_trappedIn
+   $(document).off('focusin.overlay');
+   
+   $('body').children().removeAttr('aria-hidden');
+   
+   if (typeof SKYPE.util.focusSource !== 'undefined'){
+    SKYPE.util.focusSource.focus();
+   }
+  }
+
+  return {
+   trapFocus: _trapFocus,
+   releaseFocus: _releaseFocus
+  }
+ }();
+
+ return {
+  select : _select,
+  highContrast : _highContrast,
+  tabs : _tabs,
+  util: _util
+ };
+
+}();

@@ -1,0 +1,461 @@
+var Start = Class.create(App, {
+ _location: null,
+ _enableBrowsing: true,
+ onLeave: Prototype.emptyFunction,
+ initialize: function($super){
+  $super();
+  this.resize();
+
+  if(!$('icontent').visible())
+   $('icontent').appearIE({delay:1.4});
+
+  $('video_show').observe('click', this.showVideo.bind(this));
+  $('video_close').observe('click', this.hideVideo.bind(this));
+//  $('headline').setStyle('text-align:left');
+ },
+
+ showVideo: function(){
+  oParticle._enabled = false;
+  $('video_show').setOpacity(0);
+  $('video').show();
+  jwplayer().play(true);
+ },
+
+ hideVideo: function(){
+  oParticle._enabled = true;
+  jwplayer().pause();
+  jwplayer().stop();
+  $('video').hide();
+  $('video_show').appear();
+ },
+ 
+ history: function($super, req){
+  $super();
+  
+  req = req == '' ? 'logo' : req;
+  this.go2(req);
+  
+  return;
+ },
+
+ go2: function(target){
+  if(this._location == target || !this._enableBrowsing){
+   clearTimeout(this.go2Timeout);
+   this.go2Timeout = setTimeout(function(){ this.go2(target); }.bind(this), 100);
+   return;
+  }
+
+  this.resize();
+  this._enableBrowsing = false;
+
+  var wait = this.onLeave() || 0;
+  this.onLeave = Prototype.emptyFunction;
+
+  if(Object.isFunction(this[target]))
+   setTimeout(function(){
+    this[target]('init');
+   }.bind(this), wait*1000);
+ },
+
+ effect: function(event, c){
+  switch(event){
+   case 'leave':
+    this.setShadowOpacity({to:.1,duration:.5});
+    this.setShadow(30, .5);
+    c.morph('top:220px', {duration:.6}).fade({duration:.4});
+
+    return .6; // secs to wait
+   break;
+  }
+ },
+
+ logo: function(event){
+  switch(event){
+   case 'init':
+    $('c2u').setStyle('opacity:1');
+    this.setShadow(100, .4);
+    this.setSlot(30, .7, .4);
+    this.setSlot(70, .7, .5);
+
+    setTimeout(function(){
+     $('theu').morph('height:232px', {duration:1.3,afterFinish:function(){
+      $('nupload').observe('mouseover', this.hoverLogo.bind(this));
+      
+     }.bind(this)}).appear({duration:.1});
+
+     this.setShadowOpacity({to:1,duration:.3});
+
+     setTimeout(function(){
+      this.setShadow(70, 1);
+      oParticle.birth();
+      setTimeout(function(){
+       if(this._location == 'logo')
+        $('c2u').appear().morph('top:0px').fade({delay:6}).morph('top:15px', {delay:6});
+      }.bind(this), 1000);
+     }.bind(this), 500);
+
+     this.setSlot(0, 0, .7);
+     this._enableBrowsing = true;
+    }.bind(this), 200);
+
+    this.onLeave = this.logo.bind(this, 'leave');
+   break;
+
+   case 'leave':
+    oParticle._enabled = false;
+
+    if($('sHoverOut')) $('sHoverOut').remove();
+    $('particles').fade({to:.01});
+    $('nupload').stopObserving('mouseover');
+    $('c2u').fade({duration:.5}).morph('top:-50px', {duration:.5});
+
+    this.setShadowOpacity({to:.5,delay:.5,duration:.5});
+    this.setShadow(100, .5);
+    this.setShadow(50, .1);
+    this.setSlot(80, .6, .3);
+    this.setSlot(0, 0, .8);
+    $('theu').morph('height:0px', {duration:.9});
+
+    return 0.4; // secs to wait
+   break;
+  }
+ },
+
+ register: function(event, a1, a2, a3){
+  var c = $('register');
+  var vp = document.viewport.getDimensions();
+  $('c2u').setStyle('opacity:0');
+
+  switch(event){
+   case 'init':
+    c.appear({duration:2}).setStyle('top:'+(vp.height<700?vp.height*0.1:200)+'px').morph('top:'+(vp.height < 700 ? ((vp.height-500)>0?(vp.height-428):72) : 265)+'px', {duration:1.4});
+    c.down('input[name="mail"]').observe('click', function(){ this.value = ''; this.focus(); });
+    c.down('form').observe('submit', function(e){ e.stop(); this.register('send'); }.bind(this));
+
+    //this.setShadow(100, .1);
+    this.setShadowOpacity({to:1,delay:.3});
+    $('ishadow').setStyle('width:1px').morph('margin-top:255px;margin-left:-200px;height:70px;width:230%', {duration:1,delay:.3,transition:Effect.Transitions.linear});
+
+    setTimeout(function(){
+     $('headline').update('Sie sind bereits Mitglied? &nbsp; <span style="color:#aacef7;padding-right:4px">&rarr;</span> <a onclick="oStart.go2(\'login\')">Login</a>');
+
+     this.resize();
+     this.onLeave = this.register.bind(this, 'leave');
+     this._enableBrowsing = true;
+    }.bind(this), 2000);
+   break;
+
+   case 'send':
+    this._enableBrowsing = false;
+    c.down('form').request({parameters:c.down('form').serialize(),onComplete:this.register.bind(this, 'receive')});
+
+    c.down('button').blur();
+    c.down('button').setStyle('width:'+(c.down('button').getWidth())+'px').update('<img src="/img/l/but.gif" style="margin:4px 2px -1px"/>');
+    c.down('form').stopObserving().observe('submit', function(e){e.stop()});
+   break;
+
+   case 'receive':
+    if(a1.responseText == ''){
+     c.down('table').next('div').morph('opacity:0').insert({after:'<div id="regsuc" class="cG" style="display:none;font-size:15px;position:absolute;margin-top:-45px;width:92%">&#x2713; Wir haben Ihnen Ihre Zugangsdaten per eMail übermittelt.</div>'});
+     $('regsuc').appear({delay:.7});
+    }
+    else {
+     var t = a1.responseText.evalJSON();
+
+     $('regstatus').setStyle('border-radius:5px;padding:0 3px')
+      .update('&#x2717; '+(Object.isUndefined(t.err) ? 'Unbekannter Fehler' : t.err)).addClassName('cR').highlight({delay:.3,endcolor:'#ffffff',duration:2});
+     c.down('button').update('Registrieren');
+     c.down('form').stopObserving().observe('submit', function(e){ e.stop(); this.register('send'); }.bind(this));
+    }
+
+    this._enableBrowsing = true;
+   break;
+
+   case 'leave':
+    $('ishadow').morph('margin-left:-35px', {duration:.6}).setStyle('height:auto');
+    return this.effect('leave', c);
+   break;
+  }
+ },
+
+ _loginType: 'login',
+ login: function(event, a1, a2, a3){
+  var c = $('login');
+  var vp = document.viewport.getDimensions();
+  $('c2u').setStyle('opacity:0');
+
+  switch(event){
+   case 'init':
+    c.appear({duration:2}).setStyle('top:'+(vp.height<700?vp.height*0.12:210)+'px').morph('top:'+(vp.height < 700 ? ((vp.height-500)>0?(vp.height-428):72) : 305)+'px', {duration:1.4});
+    
+    c.down('input[name="id"]').observe('click', function(){ this.value = ''; this.focus(); });
+    c.down('input[name="pw"]').observe('focus', function(){ c.down('input[name="pw"]').replace('<input type="password" name="pw" value="" />');
+     setTimeout(function(){ c.down('input[type="password"]').focus(); }.bind(this), 50);
+    }.bind(this));
+    c.down('b').observe('click', this.loginSwitch2PW.bind(this));
+    c.down('form').observe('submit', function(e){ e.stop(); this.login('send'); }.bind(this));
+    
+    if($('guestid').value != '') c.down('input[name="id"]').value = $('guestid').value;
+    if($('guestpw').value != '') { c.down('input[name="pw"]').type = 'password'; c.down('input[name="pw"]').value = $('guestpw').value; }
+
+    this.setShadowOpacity({to:1,delay:.3});
+    this.setShadow(120, 1.3);
+
+    setTimeout(function(){
+     $('headline').update('Sie besitzen noch keinen Account? &nbsp; <span style="color:#aacef7;padding-right:4px">&rarr;</span> <a onclick="oStart.go2(\'register\')">Registrieren</a>');
+
+     this.resize();
+     this.onLeave = this.login.bind(this, 'leave');
+     this._enableBrowsing = true;
+    }.bind(this), 2000);
+   break;
+
+   case 'send':
+    this._enableBrowsing = false;
+    c.down('form').action = 'io/'+this._loginType;
+    c.down('form').request({parameters:c.down('form').serialize(),onComplete:this.login.bind(this, 'receive')});
+
+    c.down('button').blur();
+    c.down('button').setStyle('width:'+(c.down('button').getWidth())+'px').update('<img src="/img/l/but.gif" style="margin:2px 2px -1px"/>');
+    c.down('form').stopObserving().observe('submit', function(e){e.stop()});
+   break;
+
+   case 'receive':
+    var t = a1;
+    
+    if(!t.responseText || t.responseText=="")
+     return location.reload();
+
+    t = (t.responseText=='No connection to database') ? {err:'No connection to database'} : t.responseText.evalJSON();
+
+    this._enableBrowsing = true;
+    if(t.err)
+    {
+     t.type = parseInt(t.type);
+     switch(t.type)
+     {
+      case 3:
+      case 1:
+       c.down('input[name=id]').addClassName('error');
+       if(t.type==1) break;
+
+      case 2:
+       c.down('input[name=pw]').addClassName('error');
+
+      break;
+     }
+     c.select('div.error').invoke('remove');
+
+//     c.morph('top:285px',{duration:.26});
+     c.down('form').insert({after:'<div class="error" style="width:90%;margin:-3px auto 12px;display:none;clear:right">'+t.err+'</div>'});
+     c.down('div.error').appear({duration:.8}).blindDown({duration:.26}).highlight({delay:.8,endcolor:'#ececec',duration:2});
+     c.down('button').update((this._loginType == 'login')? 'Login': 'Anfordern');
+     c.down('form').stopObserving().observe('submit', function(e){ e.stop(); this.login('send'); }.bind(this));
+     return;
+    }else if(t.loc){
+     location.href = 'http://uploaded.net/'+t.loc;
+    }
+
+    c.down('button').update((this.type == 'login')? 'Login': 'Anfordern');
+    if(this._loginType == 'login/recover')
+     alert('Bitte prï¿½fen Sie ihr eMail-Postfach.');
+   break;
+
+   case 'leave':
+    return this.effect('leave', c);
+   break;
+  }
+
+ },
+
+ loginSwitch2PW: function()
+ {
+  var c = $('login');
+  this._loginType = 'login/recover';
+
+  this.setShadow(90, .1);
+  this.setShadow(120, .9);
+  if(c.down('.error')) c.down('.error').blindUp();
+  c.morph('top:300px');
+  c.down('b').fade({duration:.4});
+  c.down('input[name=pw]').hide();
+  c.down('div').insert({after:'<br class="cb" /><b class="info" style="display:none">Bitte geben Sie Ihre Account ID, eMail Adresse oder Alias ein, um weitere Informationen zu erhalten.</b>'});
+  c.down('b.info').blindDown({delay:.2,duration:.8});
+  c.down('button').setStyle('width:auto').update('Starten');
+ },
+
+ _uploadInited: false,
+ startUpload: function(){
+  if(!this._uploadInited)
+   $('icontent').down('h1').morph('margin-bottom:15px',{afterFinish:this.resize.bind(this)});
+
+  this._uploadInited = true;
+ },
+
+ resize: function($super){
+  $super();
+  
+  var login = $('login');
+  var register = $('register');
+  var vp = document.viewport.getDimensions();
+  
+  if(vp.height < 700){
+   $('slogo').setStyle('margin-top:'+((vp.height-500)>0?(vp.height-500):0)+'px');
+   $('particles').setStyle('top:'+((vp.height-500)>0?(vp.height-453):50)+'px');
+   login.setStyle('top:'+((vp.height-500)>0?(vp.height-428):72)+'px');
+   register.setStyle('top:'+((vp.height-500)>0?(vp.height-428):72)+'px');
+  }
+  else {
+   $('slogo').setStyle('margin-top:195px');
+   $('particles').setStyle('top:230px');
+   login.setStyle('top:305px');
+   register.setStyle('top:265px');
+  }
+ },
+
+ hoverLogo: function(e){
+  var logo = $('theu');
+
+  logo.down('img').morph('width:265px', {duration:.4});
+  logo.morph('height:256px', {duration:.4});
+  this.setShadow(100, .4);
+  $('slogo').up().insert('<div style="position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:1001" id="sHoverOut"></div>');
+  $('sHoverOut').observe('mouseover', this.outLogo.bind(this));
+ },
+
+ outLogo: function(e){
+  if($('sHoverOut')) $('sHoverOut').remove();
+
+  var logo = $('theu');
+
+  logo.morph('height:232px', {duration:.5});
+  logo.down('img').morph('width:232px', {duration:.5});
+  this.setShadow(70, .5);
+ },
+
+ setShadowOpacity: function(data){
+  var c = $('ishadow');
+
+  if(Prototype.Browser.IE){
+   if(data.to > 0)
+    c.show();
+   else
+    c.hide();
+
+   return;
+  }
+
+  if(data.to > 0)
+   c.appear(data);
+  else
+   c.fade(data);
+ },
+
+ setShadow: function(size, dur){
+  var elem = $('ishadow');
+
+  if(Object.isUndefined(size))
+   var size = 100;
+
+  if(Object.isUndefined(dur))
+   var dur = 1;
+
+  elem.morph('width:'+size+'%;margin-top:'+(((100-size)*.15).round()+268)+'px', {duration:dur,queue:{position:'end',scope:'shadow'}});
+ },
+
+ setSlot: function(size, opacity, dur){
+  var elem = $('islot');
+
+  if(Object.isUndefined(size))
+   var opacity = 1;
+
+  if(Object.isUndefined(size))
+   var size = 100;
+
+  if(Object.isUndefined(dur))
+   var dur = 1;
+
+  elem.morph('opacity:'+opacity+';width:'+size+'%;margin-left:-'+(300*((size/2)/100)+12)+'px', {duration:dur,queue:{position:'end',scope:'slot'}});
+ }
+});
+
+var Particle = Class.create({
+ _enabled: true,
+ _particle: {left:0, right:0},
+ _lastID: 0,
+ _active: 0,
+ _max: 10,
+ _type: 'file',
+
+ initialize: function(){
+  Event.observe(document.onresize ? document : window, 'resize', this.resize.bind(this));
+  this.resize();
+ },
+
+ resize: function(){
+  this._max = (document.viewport.getWidth() / 90).round();
+  $('particles').select('.spleft, .spright').invoke('setStyle', 'width:'+((document.viewport.getWidth()/2)-120)+'px');
+ },
+
+ birth: function(){
+  var side = (this._lastID % 2 ? 'left' : 'right');
+  var distance = Math.round(Math.random()*2);
+  var row = (Math.random() > .82 ? 1 : 0);//Math.round(Math.random()*1);
+  var duration = 5 + distance*2.3 + (Math.random()*2).round();
+  var top = (Math.random()*38).round();
+  var start = (Math.random()*8).round();
+
+  $('particles').down('.sp'+side).insert('<div class="particle" style="position:absolute;'
+    + 'z-index:'+((duration-100).abs()*10)+'; display:none; left:auto;'
+    + 'top:'+top+'%; '+side+':'+(($('particles').down('div').getWidth()/100)*(Math.random()*3))+'px; margin-'+side+':-50px;'
+    + 'background-position:-'+(distance*135)+'px -'+(row*120)+'px; background-image:url(img/e/start/particle_'+this._type+'.png)'
+    + '" id="particle'+(this._lastID)+'"></div>');
+  var elem = $('particle'+this._lastID);
+
+  if(Prototype.Browser.IE){
+   elem.show();
+   setTimeout(function(){ elem.hide(); }.bind(this), duration*1000);
+  }
+  else {
+   elem.appear({duration:(duration*.45)});
+   elem.fade({delay:(duration*.55),duration:(duration*.45)});
+  }
+  elem.morph(side+':'+(($('particles').down('div').getWidth()/100)*90)+'px', {duration:duration,transition:Effect.Transitions.linear,afterFinish:this.death.bind(this)});
+
+  this._lastInsert = new Date().getTime();
+  this._lastID++;
+  this._active++;
+  this.next();
+ },
+
+ death: function(e){
+  e.element.remove();
+
+  this._active--;
+  this.next();
+ },
+
+ next: function(){
+  if(!this._enabled)
+   return;
+
+  if(this._active >= this._max)
+   return;
+
+  var now = new Date();
+
+  if(this._lastInsert > (now.getTime()-380))
+   return setTimeout(this.next.bind(this), 10);
+
+  this.birth();
+ }
+});
+
+
+var oStart, oParticle;
+
+document.observe('dom:loaded', function()
+{
+ oStart = new Start();
+ oParticle = new Particle();
+}.bind(this));

@@ -1,0 +1,116 @@
+if (typeof SKYPE == 'undefined') {
+ var SKYPE = {};
+}
+
+SKYPE.accordion = function() {
+
+ var opts = {
+   collapsedClass: 'collapsed',
+   expandedClass: 'expanded',
+   toggler: '.toggler',
+   content: '.togglerContent',
+   pointer: '.selected .pointer',
+   animationSpeed: 200
+  },
+
+  _handleClick = function($el) {
+   setTimeout(function(){
+    if (_isOpen($el)) {
+     _close($el);
+    } else {
+     _open($el);
+    }
+   }, 250);
+  },
+
+  _handleFocus = function($el) {
+   setTimeout(function(){
+    if (_isOpen($el)) {
+     return;
+    } else {
+     _open($el);
+    }
+   }, 250);
+  },
+
+  _open = function($el) {
+   var $content = $el.find(opts.content),
+    $siblings = $el.siblings().find(opts.content);
+
+   $content.slideDown(opts.animationSpeed, function() {
+    $el.removeClass(opts.collapsedClass).addClass(opts.expandedClass);
+    $el.attr('aria-expanded', true);
+    setTimeout(function(){
+     $el.find(opts.pointer).addClass('show');
+    }, 250);
+   });
+
+   $siblings.each(function() {
+    var $this = $(this);
+    $this.slideUp(opts.animationSpeed, function() {
+     $this.parent().removeClass(opts.expandedClass).addClass(opts.collapsedClass);
+     $this.parent().attr('aria-expanded', false);
+     $this.parent().find(opts.pointer).removeClass('show')
+    });
+   });
+  },
+
+  _close = function($el) {
+   var $content = $el.find(opts.content);
+   
+   $content.slideUp(opts.animationSpeed, function() {
+    $el.removeClass(opts.expandedClass).addClass(opts.collapsedClass);
+    $el.attr('aria-expanded', false);
+    $content.css('display', '');
+    $el.find(opts.pointer).removeClass('show');
+   });
+  },
+
+  _isOpen = function($el) {
+   return $el.hasClass(opts.expandedClass);
+  },
+
+  _isClosed = function($el) {
+   return !this._isOpen();
+  },
+
+  _init = function($el,$allowMobile) {
+   $el.each(function() {
+    var $this = $(this),
+     $toggler = $this.find(opts.toggler);
+
+    $this.attr('aria-expanded', false).addClass(opts.collapsedClass);
+
+    $toggler.on('click', function(event) {
+     if ($allowMobile !== true) {
+      if (SKYPE.ResponsiveState.calculateCurrentState() !== 'mobile') {
+       return;
+      }
+     }
+     _handleClick($this);
+     event.preventDefault();
+    });
+
+    $toggler.on('focus', function(event) {
+     if ($allowMobile !== true) {
+      if (SKYPE.ResponsiveState.calculateCurrentState() !== 'mobile') {
+       return;
+      }
+     }
+     _handleFocus($this);
+     event.preventDefault();
+    });
+
+   });
+  };
+
+ return {
+  init : _init
+ };
+
+}();
+
+$(document).ready(function() {
+ SKYPE.accordion.init($('footer .siteLinks .linkGroup'),false);
+ SKYPE.accordion.init($('section.templateHelp .linkGroup'),true);
+});

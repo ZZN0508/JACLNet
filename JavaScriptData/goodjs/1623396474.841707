@@ -1,0 +1,652 @@
+{
+		"@context":"https://schema.org",
+		"@type":"Organization",
+		"name":"India Times",
+		"alternateName":"Indiatimes",
+		"description":"Indiatimes.com brings you the news, articles, stories and videos on entertainment, latest lifestyle, culture & new technologies emerging worldwide.",
+		"logo":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+		"url":"https://www.indiatimes.com",
+		"sameAs": [
+            "https://www.facebook.com/indiatimes",
+            "https://twitter.com/indiatimes"
+		],
+		"contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "email": "grievance.it@timesinternet.in",
+                "contactType": "customer service",
+                "url":"https://www.indiatimes.com/contactus/"
+            }
+        ],
+		"location":{
+			"@type":"Place",
+			"address":{
+				"@type":"PostalAddress",
+				"name":"Times Internet Limited, Plot Number 391, Udyog Vihar, Phase-III, Gurgaon - 122016 Haryana, India"}
+			}
+		}
+
+		var _comscore = _comscore || [];
+		_comscore.push({ c1: "2", c2: "6036484" });
+		(function() {
+		var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+		s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+		el.parentNode.insertBefore(s, el);
+		})();
+	
+
+			fbq('init', '853339751421540');
+			fbq('init', '303301150147552');
+			fbq('track', 'PageView');
+			fbq('track', 'ViewContent');
+		
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Meet Uday Mahesh, The Man Who Stole Hearts With Iconic Role Of Chellam Sir In Family Man 2",
+		"name":"Meet Uday Mahesh, The Man Who Stole Hearts With Iconic Role Of Chellam Sir In Family Man 2",
+		"datePublished":"2021-06-10T18:52:06+05:30",
+		"dateModified":"2021-06-10T18:58:26+05:30",
+		"articleSection":"Celebscoop",
+		"author":{
+			"@type":"Person",
+			"name":"Garima Satija",
+			"url": "https://www.indiatimes.com/author/garima-satija/2306"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/Chellam-Sir_60c20e1e15bfd.jpeg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/Chellam-Sir_60c20e1e15bfd.jpeg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/Chellam-Sir_60c20e1e15bfd.jpeg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"In just 15-20 minutes of screen space in a nine-episode web series, Uday Mahesh in the role of Chellam Sir stole the heart of the audiences. Uday Mahesh, for the uninitiated, is a 51-year-old writer and director in Tamil cinema. He was also a part of John Abraham starrer Madras Cafe."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"UP Priest Looking To Sell Wheat Grown On Temple Land Apparently Asked To Bring God's Aadhaar Card",
+		"name":"UP Priest Looking To Sell Wheat Grown On Temple Land Apparently Asked To Bring God's Aadhaar Card",
+		"datePublished":"2021-06-10T18:50:17+05:30",
+		"dateModified":"2021-06-10T18:56:02+05:30",
+		"articleSection":"WTF",
+		"author":{
+			"@type":"Person",
+			"name":"Aishwarya Dharni",
+			"url": "https://www.indiatimes.com/author/aishwarya-dharni/3190"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/aadhaar_60c202dee6bcd.PNG?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/aadhaar_60c202dee6bcd.PNG?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/aadhaar_60c202dee6bcd.PNG?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"In today's edition of \"Things that happen only in UP,\" a priest who went to a government procurement centre to sell wheat grown in land belonging to the temple, was asked to provide the Aadhaar card of none other than, God. "
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Asleep For 24,000 Years Under Siberian Ice, This Microbe Just Woke Up In Russia",
+		"name":"Asleep For 24,000 Years Under Siberian Ice, This Microbe Just Woke Up In Russia",
+		"datePublished":"2021-06-10T18:34:09+05:30",
+		"dateModified":"2021-06-10T18:35:12+05:30",
+		"articleSection":"Science And Future",
+		"author":{
+			"@type":"Person",
+			"name":"Monit Khanna",
+			"url": "https://www.indiatimes.com/author/monit-khanna/2531"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/AMP-75_60c20b3f7c75f.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/AMP-75_60c20b3f7c75f.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/AMP-75_60c20b3f7c75f.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"They are often found in freshwater lakes, ponds, streams and moist terrestrial habitats like tree bark, moss, and soil."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Chinese Scam That Cheated 5 Lakh Indians Of Rs 150 Crore Busted: What We Know About It",
+		"name":"Chinese Scam That Cheated 5 Lakh Indians Of Rs 150 Crore Busted: What We Know About It",
+		"datePublished":"2021-06-10T17:50:14+05:30",
+		"dateModified":"2021-06-10T17:50:14+05:30",
+		"articleSection":"India",
+		"author":{
+			"@type":"Person",
+			"name":"Indiatimes",
+			"url": "https://www.indiatimes.com/author/indiatimes/563"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/1_60c1fcfed1df1.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/1_60c1fcfed1df1.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/1_60c1fcfed1df1.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"In a major financial crackdown by Delhi Police, an elaborate money-laundering scam run by China-based entities is busted, as per TNN. Two CAs, a Tibetan woman along with 8 others have been arrested."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Hotel Hosting G7 Delegation Shut After COVID-19 Outbreak Reported In Premises",
+		"name":"Hotel Hosting G7 Delegation Shut After COVID-19 Outbreak Reported In Premises",
+		"datePublished":"2021-06-11T12:45:12+05:30",
+		"dateModified":"2021-06-11T12:45:12+05:30",
+		"articleSection":"India",
+		"author":{
+			"@type":"Person",
+			"name":"Gursharan Bhalla",
+			"url": "https://www.indiatimes.com/author/gursharan-bhalla/5091"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/hotelg7_60c3038e01f18.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/hotelg7_60c3038e01f18.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/hotelg7_60c3038e01f18.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"Security staff told Sky News that they had \"been told nothing\" about the outbreak and might have to sleep in a tent on the beach."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"MX Player’s New-Age Love Story “Indori Ishq” Is A Relatable Take On Unrequited Love, Heartbreak & Moving On",
+		"name":"MX Player’s New-Age Love Story “Indori Ishq” Is A Relatable Take On Unrequited Love, Heartbreak & Moving On",
+		"datePublished":"2021-06-10T17:44:01+05:30",
+		"dateModified":"2021-06-10T17:58:08+05:30",
+		"articleSection":"Bollywood",
+		"author":{
+			"@type":"Person",
+			"name":"Yashita Vashishth Kohli",
+			"url": "https://www.indiatimes.com/author/yashita-vashishth/3106"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/Social-image-1_60c2046260606.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/Social-image-1_60c2046260606.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/Social-image-1_60c2046260606.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":""
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Board Games To Old Albums, Here Are 5 Heartwarming Things To Do With Your Dad On Father’s Day ",
+		"name":"Board Games To Old Albums, Here Are 5 Heartwarming Things To Do With Your Dad On Father’s Day ",
+		"datePublished":"2021-06-10T13:29:58+05:30",
+		"dateModified":"2021-06-10T15:47:54+05:30",
+		"articleSection":"Who We Are",
+		"author":{
+			"@type":"Person",
+			"name":"Nupur Khanna",
+			"url": "https://www.indiatimes.com/author/nupur-khanna/1368"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/MS1100_60c1c83eb1f54.png?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/MS1100_60c1c83eb1f54.png?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/MS1100_60c1c83eb1f54.png?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":""
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Volvo Is Showing Us Why Climate Change Is The Ultimate Safety Test & We Couldn't Agree More",
+		"name":"Volvo Is Showing Us Why Climate Change Is The Ultimate Safety Test & We Couldn't Agree More",
+		"datePublished":"2021-06-05T12:19:07+05:30",
+		"dateModified":"2021-06-05T17:58:07+05:30",
+		"articleSection":"Science And Future",
+		"author":{
+			"@type":"Person",
+			"name":"Yashita Vashishth Kohli",
+			"url": "https://www.indiatimes.com/author/yashita-vashishth/3106"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/V-social-1_60ba05948acda.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/V-social-1_60ba05948acda.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/V-social-1_60ba05948acda.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":""
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"New Show Indori Ishq Is All Set To Redefine The Rules Of Love & Lust, Take A Look!",
+		"name":"New Show Indori Ishq Is All Set To Redefine The Rules Of Love & Lust, Take A Look!",
+		"datePublished":"2021-06-02T18:12:09+05:30",
+		"dateModified":"2021-06-02T18:55:10+05:30",
+		"articleSection":"Bollywood",
+		"author":{
+			"@type":"Person",
+			"name":"Yashita Vashishth Kohli",
+			"url": "https://www.indiatimes.com/author/yashita-vashishth/3106"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/I-social_60b77efe1845f.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/I-social_60b77efe1845f.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/I-social_60b77efe1845f.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":""
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"5 Characters From MX Player’s Comedy-Drama “Runaway Lugaai” That Kept Us Entertained Throughout!  ",
+		"name":"5 Characters From MX Player’s Comedy-Drama “Runaway Lugaai” That Kept Us Entertained Throughout!  ",
+		"datePublished":"2021-05-26T13:57:31+05:30",
+		"dateModified":"2021-05-26T14:06:22+05:30",
+		"articleSection":"Bollywood",
+		"author":{
+			"@type":"Person",
+			"name":"Yashita Vashishth Kohli",
+			"url": "https://www.indiatimes.com/author/yashita-vashishth/3106"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/May/L-social_60addcba47bde.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/May/L-social_60addcba47bde.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/May/L-social_60addcba47bde.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":""
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"RBI Allows Banks To Raise Charges For ATM Withdrawals: What The New Rule Means For You",
+		"name":"RBI Allows Banks To Raise Charges For ATM Withdrawals: What The New Rule Means For You",
+		"datePublished":"2021-06-11T12:40:02+05:30",
+		"dateModified":"2021-06-11T12:40:02+05:30",
+		"articleSection":"India",
+		"author":{
+			"@type":"Person",
+			"name":"Gursharan Bhalla",
+			"url": "https://www.indiatimes.com/author/gursharan-bhalla/5091"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2020/Nov/ATm-1_5fc4fdaf11247.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2020/Nov/ATm-1_5fc4fdaf11247.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2020/Nov/ATm-1_5fc4fdaf11247.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"The Reserve Bank of India (RBI) okayed a hike in the interchange fees per transaction through ATMs from the existing ₹ 15 to ₹ 17 for financial transactions. For non-financial transactions, the fees has been increased from five rupees to six rupees."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Euro 2020, Copa America Kicking Off Just In Time To Heal Pandemic Wounds",
+		"name":"Euro 2020, Copa America Kicking Off Just In Time To Heal Pandemic Wounds",
+		"datePublished":"2021-06-11T12:25:01+05:30",
+		"dateModified":"2021-06-11T12:25:42+05:30",
+		"articleSection":"EURO 2020",
+		"author":{
+			"@type":"Person",
+			"name":"Moinuddin Ahmad",
+			"url": "https://www.indiatimes.com/author/moinuddin-ahmad/1973"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/Football-copy-1_60c306a13e341.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/Football-copy-1_60c306a13e341.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/Football-copy-1_60c306a13e341.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"As the world gradually leaves behind the horrors of the second wave of the COVID-19 pandemic, we badly need activities that will help us regain our confidence in exploring the possibilities of victory and dismiss the gloomy thoughts of surrender. "
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Solar Eclipse 2021: Spectacular Images Of 'Ring Of Fire' Leave Everyone Spellbound",
+		"name":"Solar Eclipse 2021: Spectacular Images Of 'Ring Of Fire' Leave Everyone Spellbound",
+		"datePublished":"2021-06-10T19:30:00+05:30",
+		"dateModified":"2021-06-10T19:30:00+05:30",
+		"articleSection":"Environment",
+		"author":{
+			"@type":"Person",
+			"name":"Anuj Tiwari",
+			"url": "https://www.indiatimes.com/author/anuj-tiwari/1538"
+		},
+		"image":[
+			"https://im.indiatimes.in/photogallery/2021/Jun/Solar-Eclipse-2021-mackinac-bridge_60c211c510271.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/Solar-Eclipse-2021-mackinac-bridge_60c211c510271.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/Solar-Eclipse-2021-mackinac-bridge_60c211c510271.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"Today, many sky lovers witnessed a rare celestial phenomenon across the globe - the annual solar eclipse 2021 (Surya Grahan). We got you mesmerising images of it from different parts of the world. Take a look."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Sundar Pichai Birthday: Interesting Facts About Google CEO That May Surprise You",
+		"name":"Sundar Pichai Birthday: Interesting Facts About Google CEO That May Surprise You",
+		"datePublished":"2021-06-10T19:29:38+05:30",
+		"dateModified":"2021-06-10T19:29:45+05:30",
+		"articleSection":"News",
+		"author":{
+			"@type":"Person",
+			"name":"Anuj Tiwari",
+			"url": "https://www.indiatimes.com/author/anuj-tiwari/1538"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Apr/sundar-pichai-tweet_6087cc2b7fcff.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Apr/sundar-pichai-tweet_6087cc2b7fcff.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Apr/sundar-pichai-tweet_6087cc2b7fcff.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"Google’s CEO Sundar Pichai is a highly engaging personality because of his humble beginning and his startling example is an inspiration to a lot of aspiring youth. On August 10, 2015, Sundar Pichai became the CEO of Google - the world’s biggest tech company Google, and now he counted among the world’s most successful professionals. "
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"15 Most Unusual Places That Have Been Turned Into Covid Vaccination Centre To Rev Up Inoculation ",
+		"name":"15 Most Unusual Places That Have Been Turned Into Covid Vaccination Centre To Rev Up Inoculation ",
+		"datePublished":"2021-06-10T17:31:34+05:30",
+		"dateModified":"2021-06-10T19:35:28+05:30",
+		"articleSection":"Social Relevance",
+		"author":{
+			"@type":"Person",
+			"name":"Bhupinder Singh",
+			"url": "https://www.indiatimes.com/author/bhupinder-singh/1571"
+		},
+		"image":[
+			"https://im.indiatimes.in/photogallery/2021/Jun/big_60c1f2c65d2a7.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/big_60c1f2c65d2a7.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/big_60c1f2c65d2a7.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"Many countries have transformed historical, touristic and entertainment areas into mass vaccination stations to encourage people to get the Covid 19 vaccine."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Building Collapse, Waterlogging: How India's Financial Hub Is Affected By Heavy Rains, See Pics",
+		"name":"Building Collapse, Waterlogging: How India's Financial Hub Is Affected By Heavy Rains, See Pics",
+		"datePublished":"2021-06-10T10:02:44+05:30",
+		"dateModified":"2021-06-10T14:02:40+05:30",
+		"articleSection":"India",
+		"author":{
+			"@type":"Person",
+			"name":"Bhupinder Singh",
+			"url": "https://www.indiatimes.com/author/bhupinder-singh/1571"
+		},
+		"image":[
+			"https://im.indiatimes.in/photogallery/2021/Jun/collage_60c1c298d7831.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/collage_60c1c298d7831.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/collage_60c1c298d7831.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"Southwest Monsoon knocked in Mumbai and its surrounding areas on Wednesday. Heavy rains on the very first day inundated many places in the country's financial capital and its suburbs. Normal life was affected due to this and road traffic as well as local train services were disrupted."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"These Are The World's Most Livable Cities in 2021",
+		"name":"These Are The World's Most Livable Cities in 2021",
+		"datePublished":"2021-06-09T18:44:16+05:30",
+		"dateModified":"2021-06-09T18:50:16+05:30",
+		"articleSection":"Social Relevance",
+		"author":{
+			"@type":"Person",
+			"name":"Anuj Tiwari",
+			"url": "https://www.indiatimes.com/author/anuj-tiwari/1538"
+		},
+		"image":[
+			"https://im.indiatimes.in/photogallery/2021/Jun/Osaka-1_60c0a87c2deda.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/Osaka-1_60c0a87c2deda.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/photogallery/2021/Jun/Osaka-1_60c0a87c2deda.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"New Zealand’s Auckland came out on top of 140 cities around the world and all thanks to its early success in containing the covid-19 pandemic quickly."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Upset Over Struggles, Tea Vendor Reportedly Sends Rs 100 To PM Modi To Get His Beard Shaved",
+		"name":"Upset Over Struggles, Tea Vendor Reportedly Sends Rs 100 To PM Modi To Get His Beard Shaved",
+		"datePublished":"2021-06-10T11:35:30+05:30",
+		"dateModified":"2021-06-10T12:44:34+05:30",
+		"articleSection":"Social Relevance",
+		"author":{
+			"@type":"Person",
+			"name":"Basit Aijaz",
+			"url": "https://www.indiatimes.com/author/basit-aijaz/3121"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/ezgifcom-gif-maker---2021-06-10T110402147_60c1a3ff8e6c2.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/ezgifcom-gif-maker---2021-06-10T110402147_60c1a3ff8e6c2.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/ezgifcom-gif-maker---2021-06-10T110402147_60c1a3ff8e6c2.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"A tea vendor from Maharashtra's Baramati has sent a money order of Rs 100 to PM Modi asking the latter to get his beard shaved. "
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"This Man Hid His Girlfriend In A Room For 10 Years While Living With Parents, Near Lover's Home",
+		"name":"This Man Hid His Girlfriend In A Room For 10 Years While Living With Parents, Near Lover's Home",
+		"datePublished":"2021-06-10T13:50:13+05:30",
+		"dateModified":"2021-06-10T13:50:13+05:30",
+		"articleSection":"India",
+		"author":{
+			"@type":"Person",
+			"name":"Bobins Abraham",
+			"url": "https://www.indiatimes.com/author/bobins-abraham/1267"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/rahman-sajitha1623271194_60c1c3d145e1a.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/rahman-sajitha1623271194_60c1c3d145e1a.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/rahman-sajitha1623271194_60c1c3d145e1a.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"It all began in February 2010, when Sajitha, who was then 18 years old went missing after she left her parents' home in Ayilur village of Palakkad district. Sajitha had left her parents' home to visit a relative nearby, but when she did not return they filed a police complaint."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"Sonu Sood To Set Up Oxygen Plants In 16-18 States, Aims To Solve Oxygen Problem Permanently",
+		"name":"Sonu Sood To Set Up Oxygen Plants In 16-18 States, Aims To Solve Oxygen Problem Permanently",
+		"datePublished":"2021-06-10T10:51:54+05:30",
+		"dateModified":"2021-06-10T11:08:53+05:30",
+		"articleSection":"Celebscoop",
+		"author":{
+			"@type":"Person",
+			"name":"Garima Satija",
+			"url": "https://www.indiatimes.com/author/garima-satija/2306"
+		},
+		"image":[
+			"https://im.indiatimes.in/content/2021/Jun/Untitled-design---2021-06-10T104308859_60c19f89d859f.png?width=1200&height=900&cc=1","https://im.indiatimes.in/content/2021/Jun/Untitled-design---2021-06-10T104308859_60c19f89d859f.png?width=1200&height=675&cc=1","https://im.indiatimes.in/content/2021/Jun/Untitled-design---2021-06-10T104308859_60c19f89d859f.png?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"As the fear of third wave of Covid-19 looms on India, Sonu Sood is making provisions to eradicate the problem of oxygen from roots, and hence, he has set up 16-18 oxygen plants in the country."
+	}
+{
+		"@context":"https://schema.org",
+		"@type":"NewsArticle",
+		"headline":"When Mahatma Gandhi's Son Decided To Stay In Jail Just To Watch Don Bradman Bat! ",
+		"name":"When Mahatma Gandhi's Son Decided To Stay In Jail Just To Watch Don Bradman Bat! ",
+		"datePublished":"2021-06-10T10:02:27+05:30",
+		"dateModified":"2021-06-10T10:29:29+05:30",
+		"articleSection":"Sports",
+		"author":{
+			"@type":"Person",
+			"name":"Somak Adhikari",
+			"url": "https://www.indiatimes.com/author/somak-adhikari/1434"
+		},
+		"image":[
+			"https://im.indiatimes.in/facebook/2018/Jun/don_bradman_made_zero_in_his_last_test_innings_1528612449.jpg?width=1200&height=900&cc=1","https://im.indiatimes.in/facebook/2018/Jun/don_bradman_made_zero_in_his_last_test_innings_1528612449.jpg?width=1200&height=675&cc=1","https://im.indiatimes.in/facebook/2018/Jun/don_bradman_made_zero_in_his_last_test_innings_1528612449.jpg?width=1200&height=1200&cc=1"
+		],
+		"publisher":{
+			"@type":"Organization",
+			"name":"India Times",
+			"logo":{
+				"@type":"ImageObject",
+				"url":"https://im.indiatimes.in/images/indiatimes-600x60.jpg",
+				"width":600,
+				"height":60
+			},
+			"url":"https://www.indiatimes.com"
+		},
+		"description":"Now that is going some extreme lengths to watch your hero play."
+	}
+var jsArray = "/dist/runtime.8aab921bfc05f058b160.js,/dist/vendor.d12064063bff56657759.chunk.js,/dist/main.c39247c2493ce40b3b01.chunk.js,/dist/Home.237c174d2418be8b29f8.chunk.js".split(',');function isallow(){return true}function loadcommonjs(){for (var i = 0; i < jsArray.length; i++) {let clientJs = jsArray[i];var script = document.createElement("script");script.src = jsArray[i];document.body.appendChild(script);}}if ('serviceWorker' in navigator) { navigator.serviceWorker.getRegistrations().then(function(registrations) {for(let registration of registrations) {registration.unregister()}})};if(isallow()){loadcommonjs();}

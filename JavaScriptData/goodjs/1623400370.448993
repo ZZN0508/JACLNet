@@ -1,0 +1,146 @@
+
+  window.addEventListener("CookiebotOnDialogDisplay", (event) => {
+    const cookieDialog = event.srcElement.CookieConsentDialog.DOM
+    cookieDialog.dataset.turbo = false
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(() => {
+        if (!cookieDialog.style.transform.match(cookieDialog.style.top)) {
+          cookieDialog.style.setProperty("transform", `translateY(${cookieDialog.style.top})`)
+          cookieDialog.style.setProperty("opacity", "1", "important")
+        }
+      })
+    })
+
+    observer.observe(cookieDialog, { attributes: true, attributeFilter: ["style"] })
+  })
+
+window.NREUM||(NREUM={});NREUM.info={"beacon":"bam-cell.nr-data.net","errorBeacon":"bam-cell.nr-data.net","licenseKey":"NRBR-281af528f2b1e2422b5","applicationID":"435591591","transactionName":"cAwIEkEOCVoARRldWV4GSRVbDhI=","queueTime":1,"applicationTime":122,"agent":""}
+
+function canUseLocalStorage() {
+  var t = "t";
+  try {
+    localStorage.setItem(t, t);
+    localStorage.removeItem(t);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function isValidId(id) {
+  var ID_Length = 10;
+  var reg = /^[0-9]+\.[0-9]+$/g;
+  return id.split('').length > ID_Length && reg.test(id);
+}
+
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+
+if (canUseLocalStorage()) {
+  var GA_LOCAL_STORAGE_KEY = 'ga:clientId';
+  var clientId = localStorage.getItem(GA_LOCAL_STORAGE_KEY);
+  if (clientId && !isValidId(clientId)) {
+    clientId = null;
+  }
+  ga('create', 'UA-11834194-7', {storage: 'none', clientId: clientId, allowLinker: true, siteSpeedSampleRate: 40});
+  ga(function(tracker) { localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId')); });
+} else {
+  ga('create', 'UA-11834194-7', 'auto', { allowLinker: true, siteSpeedSampleRate: 40 });
+}
+ga('require', 'GTM-5VPWWP');
+ga('require', 'linker');
+ga('require', 'ec');
+ga('require', 'displayfeatures');
+ga('require', 'linkid');
+ga('set', 'dimension19', 'Market Storefront');
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "name": "ThemeForest",
+  "url": "https://themeforest.net"
+}
+
+
+  {
+  	"@context": "https://schema.org",
+  	"@type": "Organization",
+  	"name": "Envato",
+  	"alternateName": "Envato Market",
+  	"url": "https://themeforest.net",
+  	"logo": "https://assets.market-storefront.envato.com/storefront/packs/media/images/logos/envato-market-black-85bf419c7f444eab15ed9921daa741ff.svg",
+  	"contactPoint": {
+  		"@type": "ContactPoint",
+  		"telephone": "+61 3 8376 6284",
+  		"contactType": "corporate contact"
+  	},
+  	"sameAs": [
+  		"https://tutsplus.com/",
+  		"https://business.tutsplus.com/",
+  		"https://code.tutsplus.com/",
+  		"https://design.tutsplus.com/",
+  		"https://webdesign.tutsplus.com/",
+  		"https://photography.tutsplus.com/",
+  		"https://music.tutsplus.com/",
+  		"https://cgi.tutsplus.com/",
+  		"https://gamedevelopment.tutsplus.com/",
+  		"https://computers.tutsplus.com/",
+  		"https://elements.envato.com/",
+  		"https://themeforest.net/",
+  		"https://codecanyon.net/",
+  		"https://audiojungle.net/",
+  		"https://videohive.net/",
+  		"https://graphicriver.net/",
+  		"https://photodune.net/",
+  		"https://3docean.net/",
+  		"https://placeit.net/",
+  		"https://www.twenty20.com/",
+  		"https://mixkit.co/",
+  		"https://www.reshot.com/",
+  		"https://milkshake.app/",
+  		"https://twitter.com/envato",
+  		"https://www.facebook.com/envato",
+  		"https://www.youtube.com/user/Envato",
+  		"https://www.instagram.com/envato/",
+  		"https://www.pinterest.com/envato/"
+  	],
+  	"subOrganization": [{
+  			"@type": "Organization",
+  			"name": "Envato.com",
+  			"url": "https://envato.com/"
+  		},
+  		{
+  			"@type": "Organization",
+  			"name": "Envato Elements",
+  			"url": "https://elements.envato.com"
+  		},
+  		{
+  			"@type": "Organization",
+  			"name": "Envato Market",
+  			"url": "https://market.envato.com"
+  		},
+  		{
+  			"@type": "Organization",
+  			"name": "Placeit by Envato",
+  			"url": "https://placeit.net/"
+  		},
+  		{
+  			"@type": "Organization",
+  			"name": "Envato Tuts+",
+  			"url": "https://tutsplus.com"
+  		},
+  		{
+  			"@type": "Organization",
+  			"name": "Milkshake",
+  			"url": "https://milkshake.app/"
+  		}
+  	]
+  }
+
+
+//<![CDATA[
+  var rollbarClientToken = "e6c264cc25ec400db6f65d7475515fda"
+  var rollbarEnvironment = "production"
+
+//]]>

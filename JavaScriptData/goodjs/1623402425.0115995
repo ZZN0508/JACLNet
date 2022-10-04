@@ -1,0 +1,134 @@
+
+        window.UD = window.UD || {};
+        window.UD.Config = {"marketplace_country":{"title":"Taiwan","currency":"twd","_class":"country","id":"TW","iso_code":"TWN"},"price_country":{"currency_symbol":"NT$","id":"TW","currency_charm_amount":0.0,"currency_formatter":{"pattern":"!#,##0.00","group":",","symbol":"NT$","scale":0,"locale":"zh_CN","decimal":".","currency":"twd"},"_class":"country","currency_decimal_places":0,"usd_currency_formatter":{"pattern":"!#,##0.00","group":",","symbol":"US$","scale":2,"locale":"zh_CN","decimal":".","currency":"usd"},"currency":"twd"},"third_party":{"intercom":{"app_id":"sehj53dd"},"raven_dsn":"https://369c830fbf534485a068ab919d71b80d@sentry.io/38617","storage_static_asset_base_url":"https://s.udemycdn.com/","google_tag_manager_id":"GTM-7BF3X","s3":{"image_asset":{"key":"AKIAIOTLFW3HMG563JEA","bucket_url":"https://udemy-image-web-upload.s3.amazonaws.com"},"asset":{"key":"AKIAIOTLFW3HMG563JEA","bucket_url":"https://udemy-web-upload-transitional.s3.amazonaws.com"}},"google_analytics_id_for_ufb_only":"UA-12366301-47","uft_stripe_publishable_key":"pk_live_dCyHJcZsk8NaNwx1PiRSpqqq","stripe_publishable_key":"pk_live_xOuIgZiF7hb3wSwFSAOz3dRm","google_analytics_id":"UA-12366301-1","sift_account":"78b4b13f0a","zendesk":{"refund_form_id":406368},"branch_metrics":{"android_ufb_download_url":"http://ude.my/android-ufb","ios_ufb_download_url":"http://ude.my/ios-ufb","ios_download_url":"http://ude.my/ios","android_download_url":"http://ude.my/android"},"google_analytics_id_for_course_taking":"UA-12366301-45","pusher":{"key":"825910825f8199bd5b21","coding_exercise_event":"coding-exercise-evaluated"},"filestack":{"key":"A0EHlHYkEQbCTpDvxEwAYz"},"user_stripe_publishable_key":"pk_live_xOuIgZiF7hb3wSwFSAOz3dRm","paypal":{"authend":"live","returnurl":"https://www.udemy.com/user/paypal-login-return","appid":"ASRJrkbBfTwvxWNTn-QRakeimIbsjmBuK5hWj4zq3QJL46CKIYNb-RiKjrTSe-2iZ-EFrCCuXGZTxHjY"},"facebook_app_id":"313137469260"},"brand":{"link_bar_nav_list_id":"ud-link-bar","is_import_courses_enabled":true,"is_external_sources_enabled":true,"identifier":"udemy","has_organization":false,"is_add_reviews_enabled":true,"is_teaching_enabled":true,"title":"Udemy","is_team":false,"is_user_profiles_public":true,"product_name":"Udemy","is_third_party_marketing_enabled":true,"organization":false,"product_logo":"https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg","is_feed_commenting_enabled":true,"_class":"brand","is_discussions_enabled":true,"is_messaging_enabled":true,"product_logo_aspect_ratio":3.4491017964071857,"is_profile_functions_enabled":true,"is_sso_enabled":false,"is_social_sharing_enabled":true,"is_government":false,"is_share_on_slack_enabled":false,"product_logo_light":"https://www.udemy.com/staticx/udemy/images/v6/logo-coral-light.svg","is_autoshow_cc_enabled":true,"logo_url_2x":"https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg","is_share_to_workplace_enabled":false},"drm_license_server_url_template":"{base_url}media-license-server/validate-auth-token?drm_type={drm_type}\u0026auth_token={auth_token}","url":{"to_root":"https://www.udemy.com/","to_images":"https://www.udemy.com/staticx/udemy/images/","to_page_events":"https://page-events-ustats.udemy.com/","to_app":"https://www.udemy.com/","to_js":"https://www.udemy.com/staticx/udemy/js/"},"js_bundle":"modern","version":"7166aa1384a4396326701f9b2b55c9ce4e70878c","supported_languages":[{"lang":"en","locale":"en_US","name":"English"},{"lang":"de","locale":"de_DE","name":"Deutsch"},{"lang":"es","locale":"es_ES","name":"Espa\u00f1ol"},{"lang":"fr","locale":"fr_FR","name":"Fran\u00e7ais"},{"lang":"id","locale":"id_ID","name":"Bahasa Indonesia"},{"lang":"it","locale":"it_IT","name":"Italiano"},{"lang":"ja","locale":"ja_JP","name":"\u65e5\u672c\u8a9e"},{"lang":"ko","locale":"ko_KR","name":"\ud55c\uad6d\uc5b4"},{"lang":"nl","locale":"nl_NL","name":"Nederlands"},{"lang":"pl","locale":"pl_PL","name":"Polski"},{"lang":"pt","locale":"pt_BR","name":"Portugu\u00eas"},{"lang":"ro","locale":"ro_RO","name":"Rom\u00e2n\u0103"},{"lang":"ru","locale":"ru_RU","name":"\u0420\u0443\u0441\u0441\u043a\u0438\u0439"},{"lang":"th","locale":"th_TH","name":"\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22"},{"lang":"tr","locale":"tr_TR","name":"T\u00fcrk\u00e7e"},{"lang":"zh-cn","locale":"zh_CN","name":"\u4e2d\u6587(\u7b80\u4f53)"},{"lang":"zh-tw","locale":"zh_TW","name":"\u4e2d\u6587(\u7e41\u9ad4)"}],"graphql_federation_endpoint":"https://www.udemy.com/graphql/","features":{"report_abuse":true,"one_trust":false,"ufb_notices":false,"invite":{"alert":true},"shopping_cart":true,"reviews":{"show_user_avatar":true},"wishlist":true,"organization":{"user_account_separation_enabled":false,"enterprise":{"onboarding_enabled":true},"learning_path":{"copy_learning_path_item":false,"pro_path":false,"enabled":false},"assignment_improvement_all_users":true,"modular_labs":{"enabled":false},"manage_satisfaction":{"satisfaction":false},"measure_competence":{"enabled":false},"course_taking":{"student_assignment_submissions_enabled":true},"aws_labs_enabled":false,"manage_insights":{"path_insights_v2":false},"auth":{"scim_api_enabled":false},"is_enabling_managers_beta_enabled":false,"allow_only_plain_text_messaging":false},"logged_in_home":{"linkbar_level_2":true,"ufb_ad":false},"home":{"my_courses":{"privacy":true,"free_label":true,"revenue":true},"signup_cta":true},"notice":{"ufb_smart_bar":false,"smart_bar":true,"instructor_bar":false},"bundle":{"instructor_bio":{"social_links":true}},"referral_program_enabled":false,"notifications":true,"course_review":{"leave_feedback":true,"clp_review_search":true},"collect_performance_rum":true,"course_landing_page":{"money_back_guarantee":true,"deal_badge":true,"instructor_bio":{"social_links":true,"image":true,"stats":true},"incentives":{"access_tv":true,"lifetime_access":true}},"ufb_notices_footer":{"top_com":false},"intercom_chat":false,"discount":{"change_alerts":true},"zendesk_chat":false,"course_badge":true,"course":{"announcements":{"comments":{"view":true}},"students":{"unenroll":false},"discussions":{"view":true},"refundable":true},"hello_bar":{"pricing":true,"instructor":false,"terms":true},"social_share":{"email":true}},"env":"PROD","app_name":"home"};
+        window.UD.experiment = {"rbd":{"3304":{"variant":8226,"values":{"rebrand_headline_font_variant":"0"},"state":"recorded"}}};
+        window.UD.request = {"termsBarType":"","isTablet":false,"isMobile":false,"rebrandHeadlineVariant":"0","finalRebrandVariant":null,"language":"zh","isPC":true,"language_simple_english_title":"Simplified Chinese","third_party_location":"https://www.udemy.com/","locale":"zh_CN","termsBarUrls":"","navigation_locale":"en_US","serverTimestamp":"2021-06-11T09:07:01.722554+00:00"};
+        window.UD.request.clientTimestamp = new Date().toISOString();
+        window.UD.site_stats = {"organizations":{"num_enterprise_customers":7000,"num_instructors":1500,"num_courses":5500},"default":{"num_students":40,"num_course_languages":65,"num_courses":155000,"num_countries_taught":180,"num_instructors":57000,"num_topics":2000,"num_course_enrollments":480}};
+        window.UD.me = {"is_authenticated":false,"isLoading":true};
+        window.UD.meProperties = ["_class","id","email","display_name","job_title","initials","title","time_zone","country","created","locale","language","learning_languages","name","surname","image_50x50","image_100x100","settings","qualaroo_survey_ids","encrypted_affiliate_uid","encrypted_affiliate_email","encrypted_id","has_made_paid_purchase","number_of_courses_purchased","organization"];
+        window.UD.visitingProperties = ["visitor_uuid","is_first_time_visitor","first_visit_time"];
+        window.UD.userSpecificTrackingProperties = ["tracking_enabled"];
+        window.UD.userAgnosticTrackingParams = {"page_key":"discovery_logged_out_home","collector_url":"https://www.udemy.com/api-2.0/ecl"};
+
+        
+    
+
+        window.udPerformanceEnabled = true;
+    
+
+    if (window.performance && typeof window.performance.mark === 'function'
+            && typeof window.performance.measure === 'function') {
+        UD.performance = {
+            _trackedResources: [], // Accessed by utils/performance/create-performance-observers.js
+            _eventNamePrefix: 'UD-',
+            trackResourceTiming: function (resourceName, resourceUrl) {
+                this._trackedResources.push({ name: this._eventNamePrefix + 'resource-' + resourceName, url: resourceUrl });
+            },
+            mark: function (name) {
+                window.performance.mark(this._eventNamePrefix + name);
+            },
+            start: function (name) {
+                window.performance.mark(this._eventNamePrefix + '_' + name + '-start');
+            },
+            end: function (name) {
+                var endMark = this._eventNamePrefix + '_' + name + '-end';
+                var startMark = this._eventNamePrefix + '_' + name + '-start';
+                window.performance.mark(endMark);
+                
+                if (window.performance.getEntriesByName(startMark).length > 0) {
+                    window.performance.measure(this._eventNamePrefix + name, startMark, endMark);
+                }
+            },
+            isPageCached: false
+        };
+    } else {
+        UD.performance = {
+            trackResourceTiming: Function.prototype,
+            mark: Function.prototype,
+            start: Function.prototype,
+            end: Function.prototype
+        };
+    }
+
+
+    
+    window.GoogleAnalyticsObject = 'ga';
+    window.ga = function () {
+        (window.ga.q = window.ga.q || []).push(arguments);
+    };
+    window.ga.l = 1 * new Date();
+
+    UD.GoogleAnalytics = UD.GoogleAnalytics || {};
+    UD.GoogleAnalytics.createAccount = function (accountId, propertyName, domainName) {
+        if (accountId) {
+            if (propertyName) {
+                // Required for multiple trackers
+                window.ga('create', accountId, 'auto', {'name': propertyName, 'cookieDomain': domainName || 'none',
+                    'siteSpeedSampleRate': 10});
+            } else {
+                window.ga('create', accountId, 'auto', {'siteSpeedSampleRate': 10});
+                window.ga('require', 'displayfeatures'); // Enables retargeting
+            }
+            window.ga('set', {
+                'anonymizeIp': true,
+                'location' : ""
+            });
+        }
+    };
+    UD.GoogleAnalytics.createAccount(UD.Config.third_party.google_analytics_id);
+
+
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://www.udemy.com",
+    "potentialAction": [{
+        "@type": "SearchAction",
+        "target": "https://www.udemy.com/courses/search/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },{
+        "@type": "SearchAction",
+        "target": "android-app://com.udemy.android/https/www.udemy.com/deeplink?query={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }]
+}
+
+
+    (function () {
+        var today = new Date();
+        if (today.getMonth() + 1 === 6) {
+            document.querySelector('.js-pride-month-gradient').style.height = '0.8rem';
+        }
+    })()
+
+
+    
+    
+
+    window.handleCSSToggleButtonClick = function (event) {
+        var target = event.currentTarget;
+        var cssToggleId = target && target.dataset && target.dataset.cssToggleId;
+        var input = cssToggleId && document.getElementById(cssToggleId);
+        if (input) {
+            if (input.dataset.type === 'checkbox') {
+                input.dataset.checked = input.dataset.checked ? '' : 'checked';
+            } else {
+                input.dataset.checked = input.dataset.allowToggle && input.dataset.checked ? '' : 'checked';
+                var radios = document.querySelectorAll('[name="' + input.dataset.name + '"]');
+                for (var i = 0; i < radios.length; i++) {
+                    if (radios[i] !== input) {
+                        radios[i].dataset.checked = '';
+                    }
+                }
+            }
+        }
+    };
+    (function () {
+        var cssToggleButtons = document.querySelectorAll('[data-css-toggle-id');
+        for (var i = 0; i < cssToggleButtons.length; i++) {
+            cssToggleButtons[i].addEventListener('click', window.handleCSSToggleButtonClick);
+        }
+    })();
+
+(function(){window['__CF$cv$params']={r:'65d9afc6ac08f0ad',m:'2f61c0e73409f563465db6a581063f80369d2d5e-1623402421-1800-AXxb8l6/HnSm/6h9xQf9sZtlcc6OX8gsFar/U0NsOCEuUom17yoGh/t0YRUxqnFjHVAua+sUbUQkUB3YOxvQHVM4I1iL0RdwKwE2J8UDqKkIaEJW/oSD+blU/L+eOCSU5Q==',s:[0x1d45622ef6,0x1dbdad4bdb],}})();

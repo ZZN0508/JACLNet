@@ -1,0 +1,5 @@
+window.byted_acrawler.init({aid:3436,dfp:!0,boe:!1,intercept:!0,enablePathList:['^/api'],urlRewriteRules:[]})
+!function(n,t){if(n.TeaAnalyticsObject=t,!n[t]){function c(){c.q.push(arguments)}c.q=c.q||[],n[t]=c}n[t].l=+new Date}(window,'collectEvent')
+var DATA = {
+        data: {}
+    }

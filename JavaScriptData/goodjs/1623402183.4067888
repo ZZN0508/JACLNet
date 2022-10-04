@@ -1,0 +1,81 @@
+var USER=JSON.parse(atob('eyJpZCI6IiIsImlkZW50aXR5IjoiNzhkODk5ZGIwODZhNzUwMGJkOGI5ODI0NTAzYzRjNTIiLCJpZDM2IjoiIiwiZW1haWwiOiIiLCJlbWFpbDI1NiI6IiIsIm5hbWUiOiIiLCJ1c2VybmFtZSI6IiIsImF2YXRhclVSTCI6IiIsImdlbmRlciI6IiIsInBob25lIjoiIiwiY29uZmlybWVkUGhvbmUiOiIiLCJhZ2VudCI6eyJpc1lhQnJvd3NlciI6ZmFsc2UsImlzQXV0aG9yaXRhdGl2ZSI6dHJ1ZSwiaXNNb2JpbGUiOmZhbHNlLCJpc1RhYmxldCI6ZmFsc2UsImlzaVBhZCI6ZmFsc2UsImlzaVBvZCI6ZmFsc2UsImlzaVBob25lIjpmYWxzZSwiaXNBbmRyb2lkIjpmYWxzZSwiaXNCbGFja2JlcnJ5IjpmYWxzZSwiaXNPcGVyYSI6ZmFsc2UsImlzSUUiOmZhbHNlLCJpc0VkZ2UiOmZhbHNlLCJpc0lFQ29tcGF0aWJpbGl0eU1vZGUiOmZhbHNlLCJpc1NhZmFyaSI6ZmFsc2UsImlzRmlyZWZveCI6ZmFsc2UsImlzV2Via2l0IjpmYWxzZSwiaXNDaHJvbWUiOnRydWUsImlzS29ucXVlcm9yIjpmYWxzZSwiaXNPbW5pV2ViIjpmYWxzZSwiaXNTZWFNb25rZXkiOmZhbHNlLCJpc0Zsb2NrIjpmYWxzZSwiaXNBbWF5YSI6ZmFsc2UsImlzUGhhbnRvbUpTIjpmYWxzZSwiaXNFcGlwaGFueSI6ZmFsc2UsImlzRGVza3RvcCI6dHJ1ZSwiaXNXaW5kb3dzIjp0cnVlLCJpc0xpbnV4IjpmYWxzZSwiaXNMaW51eDY0IjpmYWxzZSwiaXNNYWMiOmZhbHNlLCJpc0Nocm9tZU9TIjpmYWxzZSwiaXNCYWRhIjpmYWxzZSwiaXNTYW1zdW5nIjpmYWxzZSwiaXNSYXNwYmVycnkiOmZhbHNlLCJpc0JvdCI6ZmFsc2UsImlzQ3VybCI6ZmFsc2UsImlzQW5kcm9pZFRhYmxldCI6ZmFsc2UsImlzV2luSnMiOmZhbHNlLCJpc0tpbmRsZUZpcmUiOmZhbHNlLCJpc1NpbGsiOmZhbHNlLCJpc0NhcHRpdmUiOmZhbHNlLCJpc1NtYXJ0VFYiOmZhbHNlLCJpc1VDIjpmYWxzZSwiaXNGYWNlYm9vayI6ZmFsc2UsImlzQWxhbW9GaXJlIjpmYWxzZSwiaXNFbGVjdHJvbiI6ZmFsc2UsInNpbGtBY2NlbGVyYXRlZCI6ZmFsc2UsImJyb3dzZXIiOiJDaHJvbWUiLCJ2ZXJzaW9uIjoiNzEuMC4zNTc4Ljk4Iiwib3MiOiJXaW5kb3dzIDEwLjAiLCJwbGF0Zm9ybSI6Ik1pY3Jvc29mdCBXaW5kb3dzIiwiZ2VvSXAiOnt9LCJzb3VyY2UiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXT1c2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzcxLjAuMzU3OC45OCBTYWZhcmkvNTM3LjM2IiwiaXNXZWJ2aWV3IjpmYWxzZX0sImJpcnRoX2RhdGUiOiIiLCJvMm9fYWdlbnQiOiIiLCJpc1ByaXZpbGVnZWRVc2VyIjpmYWxzZX0='))
+var IDENTITY = '78d899db086a7500bd8b9824503c4c52'
+var BROWSER_ID = 'e7182943745066972593c5719eda4849'
+localStorage.setItem('bl_token', '{"access_token":"lQ_CLHKfR6ejGnGtpEzqTLtJbGi8jhOKpEXA987MA22uIw","created_at":1623400124,"expires_in":10620,"expires_at":1623410744000,"refresh_token":null,"scope":"public","token_type":"bearer","user_id":null}');
+var APP_SHELL = 'westeros'
+var APP = {
+  env: 'production',
+  isDevelopment: false,
+  isProduction: true,
+  apiURL: 'https://api.bukalapak.com',
+  fragmentURL: 'https://fragment.bukalapak.com/',
+  apiAuthEndpoint: '/westeros_auth_proxies',
+  apiAuthToken: '',
+  internalTrackerUrl: 'https://t.bukalapak.com/e',
+  wwwHost: 'https://www.bukalapak.com',
+  mHost: 'https://m.bukalapak.com',
+  summonerWhitelist: ['https://fragment.bukainvestasi.com/'],
+  viewport: function () {
+    return window.innerWidth + 'x' + window.innerHeight
+  },
+  gtm: {
+    dataLayerName: 'WESTEROS_GTM_DATA_LAYER',
+    getDataLayer () {
+      if (!window[window.APP.gtm.dataLayerName]) {
+        window[window.APP.gtm.dataLayerName] = []
+      }
+      return window[window.APP.gtm.dataLayerName]
+    },
+    push (data) {
+      return window.APP.gtm.getDataLayer().push(data)
+    }
+  }
+};
+{"@context":"http://schema.org","@type":"Organization","name":"Bukalapak","url":"https://www.bukalapak.com","sameAs":["https://www.facebook.com/bukalapak","https://twitter.com/bukalapak","https://instagram.com/bukalapak","https://www.youtube.com/user/bukalapak","https://www.pinterest.com/bukalapakdotcom"],"logo":"https://www.bukalapak.com/images/logo-google-graph.png"}
+
+      {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.bukalapak.com/",
+      "potentialAction": [{
+      "@type": "SearchAction",
+      "target": "https://www.bukalapak.com/products?search[keywords]={search_term_string}",
+      "query-input": "required name=search_term_string"
+      },{
+      "@type": "SearchAction",
+      "target": "android-app://com.bukalapak.android/https/www.bukalapak.com/products?search[keywords]={search_term_string}",
+      "query-input": "required name=search_term_string"
+      }]
+      }
+      
+//- Check that service workers are registered
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/bl-sw.js');
+  });
+}
+
+_atrk_opts = { atrk_acct: "4Fkbi1aoZM00Ua", domain: "bukalapak.com", dynamic: true };
+(function () {
+  var as = document.createElement('script');
+  as.type = 'text/javascript';
+  as.async = true;
+  as.src = "https://certify-js.alexametrics.com/atrk.js";
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(as, s);
+})();
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "name": "Bukalapak",
+  "alternateName": "BL",
+  "url": "https://www.bukalapak.com"
+}
+
+(function(){var a;(a=(a=/[?&]gclid=([^&]*)/.exec(window.location.search))&&decodeURIComponent(a[1].replace(/\+/g," ")))&&localStorage.setItem("marco-gclid",a)})();
+!function(e){function c(a){if(f[a])return f[a].exports;var b=f[a]={i:a,l:!1,exports:{}};return e[a].call(b.exports,b,b.exports,c),b.l=!0,b.exports}var f={};c.m=e;c.c=f;c.d=function(a,b,d){c.o(a,b)||Object.defineProperty(a,b,{enumerable:!0,get:d})};c.r=function(a){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(a,Symbol.toStringTag,{value:"Module"});Object.defineProperty(a,"__esModule",{value:!0})};c.t=function(a,b){if((1&b&&(a=c(a)),8&b)||4&b&&"object"==typeof a&&a&&a.__esModule)return a;
+var d=Object.create(null);if(c.r(d),Object.defineProperty(d,"default",{enumerable:!0,value:a}),2&b&&"string"!=typeof a)for(var g in a)c.d(d,g,function(h){return a[h]}.bind(null,g));return d};c.n=function(a){var b=a&&a.__esModule?function(){return a["default"]}:function(){return a};return c.d(b,"a",b),b};c.o=function(a,b){return Object.prototype.hasOwnProperty.call(a,b)};c.p="";c(c.s=11)}({11:function(e,c,f){f.r(c);f.d(c,"VidioPersonalizationHandler",function(){return a});var a={isReady:function(){return void 0!==
+window.VidioPersonalization},ready:function(b){var d=this;this.isReady()?b():setTimeout(function(){return d.ready(b)},500)}};window.VidioPersonalizationHandler=a}});VidioPersonalizationHandler.ready(function(){var e=window.USER?window.USER.id36:"";e={userid_bukalapak:e};window.VidioPersonalization.sendData(google_tag_manager["GTM-THDD63"].macro(4),e)});
+(function(a){var b=a.pushState;a.pushState=function(c){if("function"==typeof a.onpushstate)a.onpushstate({state:c});pushState_nexturl=arguments[2];setTimeout(function(){dataLayer.push({event:"pushState",pushState_args:pushState_nexturl});delete pushState_nexturl},1E3);return b.apply(a,arguments)}})(window.history);

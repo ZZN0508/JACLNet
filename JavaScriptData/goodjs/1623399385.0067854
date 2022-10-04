@@ -1,0 +1,73 @@
+/**
+ * 检查用户登录用户名称
+ */
+function getName(ctx){
+ $.ajax({
+  url : ctx + '/user/getUserName.html',
+  type : 'POST',
+  data : {},
+  dataType : 'json',
+  timeout : 500000,
+  error : function(XMLHttpRequest, textStatus, errorThrown) {
+  },
+  success : function(data) {
+   if (data.rescode != null || data.rescode != '') {
+    $("#login_txt").html(data.rescode);
+    //document.write(data.rescode);
+   }
+  }
+ });
+}
+
+/**
+ * 异步退出
+ */
+function logout(ctx) {
+ var return_url = window.location.pathname;
+ 
+ $.ajax({
+  url : ctx + '/logout/ajaxlogout.html',
+  type : 'POST',
+  data : {
+   return_url : return_url
+  },
+  dataType : 'json',
+  timeout : 500000,
+  error : function(XMLHttpRequest, textStatus, errorThrown) {
+  },
+  success : function(data) {
+   if (data.rescode == 1) {
+    var backUrl = data.disc;
+    var currentPath = window.location.href;
+    
+    if(currentPath.indexOf('coreCustomer')!=-1 || currentPath.indexOf('validate')!=-1 || currentPath.indexOf('receipt'!=-1)){
+     window.top.location.href = backUrl;
+//     window.top.location.href='https://skype.gmw.cn';
+     //window.top.location.href=data.disc+'&return_url='+'https://skype.gmw.cn';
+    }else{
+     window.top.location.href = window.location.pathname;
+     //window.top.location.href = data.disc+'&return_url='+window.location.pathname;
+    }
+   }
+  }
+ });
+}
+/**
+ * 登陆 && 注册
+ */
+function login_btn_click(login_forward) {
+ ga('send', 'event', 'home-login-btn', 'clicked');
+ var href = login_forward + '?lang=' + $("#lang").val()
+ + '&return_url=' + window.location.href;
+ window.location.href = href;
+}
+function regist_btn_click(regist_forward) {
+ ga('send', 'event', 'home-login-reg', 'clicked');
+ window.location.href = regist_forward + '?lang=' + $("#lang").val()
+   + '&return_url=' + window.location.href;
+}
+function login_btn_click_ano(login_forward) {
+ ga('send', 'event', 'home-login-btn', 'clicked');
+ window.location.href = login_forward + '?lang=' + $("#lang").val()
+   + '&return_url=' + window.location.protocol.replace(":", "")+"://"+window.location.host+'/coreCustomer/index.html';
+}

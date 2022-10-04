@@ -1,0 +1,60 @@
+(function(){var r={isLoggedIn:function(e){if("boolean"==typeof e)return e;var a=r.readCookie("amexsessioncookie"),_=r.readCookie("blueboxvalues"),l=r.readCookie("SMSESSION"),o=!1;if(null!==a&&""!==a){e=(new Date).getTime(),a=/uts=([^|]+)/.exec(a);if(!a)return!1;(e-parseInt(a[1],10))/6e4<5&&(o=!0)}else(null!==_&&""!==_||null!==l&&"LOGGEDOFF"!==l)&&(o=!0);return o},readCookie:function(e){for(var a=document.cookie.split(";"),_="".concat(e,"="),l=null,o=0;o<a.length;o+=1){var r=a[o].trim();if(0===r.indexOf(_)){l=r.substring(_.length,r.length);break}}return l},appendQueriesToUrl:function(e){var o=e.url,e=e.queries,r=o;return e.forEach(function(e){var a=e.key,_=e.value;if(-1<r.indexOf("".concat(a,"="))){var e=new RegExp("[\\?&]".concat(a,"=([^&#]*)")),l=e.exec(o)[0].charAt(0),l=o.replace(e,"".concat(l).concat(a,"=").concat(_));return"undefined"===_&&(l=l.replace(new RegExp("[\\?&]".concat(a,"=").concat(_)),"")),void(r=l)}"undefined"!==_&&(l=-1<r.indexOf("?")?"&":"?",r="".concat(r).concat(l).concat(a,"=").concat(_))}),r},appendDestPageQuery:function(e,a){return r.appendQueriesToUrl({url:e,queries:[{key:"DestPage",value:encodeURIComponent(a)}]})},updateAuthView:function(e){try{var a=document.getElementById("gnav_logout"),_=document.getElementById("gnav_login");r.isLoggedIn(e)?(a.style.display="inline-block",_.style.display="none"):(a.style.display="none",_.style.display="inline-block")}catch(e){}},setLoginDestPage:function(e){try{var a=document.getElementById("gnav_login");a.href=r.appendDestPageQuery(a.href,e)}catch(e){}},setLogoutDestPage:function(e){try{var a=document.getElementById("gnav_logout");a.href=r.appendDestPageQuery(a.href,e)}catch(e){}}};return r.updateAuthView(),window.AmexNavigation={updateAuthView:r.updateAuthView,setLoginDestPage:r.setLoginDestPage,setLogoutDestPage:r.setLogoutDestPage},r})();
+
+    var browserType = navigator.userAgent;
+    if(browserType.indexOf("MSIE")>=0){
+        function getParentWithClass(ele, parentClass){
+            var e = ele;
+            while(e.className.indexOf(parentClass)<0){
+                e = e.parentElement;
+            }
+            return e;
+        }
+
+        function showMessageHideAll() {
+            document.querySelector('#amex-header').style.display='none';
+            document.querySelector('#amex-footer').style.display='none';
+
+            var condContainerElement = document.querySelector('.conditional-container');
+            var containingParentGrid = getParentWithClass(condContainerElement, 'aem-GridColumn');
+            if(!containingParentGrid) { return; }
+            var absParentNode = containingParentGrid.parentNode;
+            if(!containingParentGrid) { return; }
+            var childElements = absParentNode.children;
+            for (i = 0; i < childElements.length; i++) {
+                if (!childElements[i]) { continue;}
+                if (childElements[i].querySelectorAll(".conditional-container").length > 0) {
+                    document.querySelector('.legacy-browser').style.display = "block";
+                } else {
+                    childElements[i].style.display = "none";
+                }
+            }
+        };
+        document.onreadystatechange = function () {
+            console.debug("onreadystatechange");
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                showMessageHideAll();
+            }
+        }
+    }
+
+
+
+    var digitalData = {"page":{"pageInfo":{"pageName":"Homepage","country":"TW","language":"zh","currency":"","pageID":"TW|AMEX|Home|Homepage","reportSuite":""},"category":{"businessUnit":"AMEX","primaryCategory":"","subCategory1":"Home","subCategory2":"","subCategory3":""}},"event":[]};
+
+ var excludeOmniture = true;
+ if(!!window._satellite) { window._satellite.pageBottom(); } 
+
+//initialize events array if not already done
+if (typeof(digitalData) == "undefined"){window.digitalData=new Object();}
+if (typeof(digitalData.event) == "undefined") window.digitalData.event=[];
+//pushes event and calls satellite track
+window.digitalData.eventDataReady = function(dataPush) {
+  if(typeof(s) != "undefined"){s.clearVars();}
+  if(digitalData.event[digitalData.event.length - 1].eventInfo){
+    if (digitalData.event[digitalData.event.length - 1].eventInfo.type){
+      _satellite.track(digitalData.event[digitalData.event.length - 1].eventInfo.type);
+    } else if (digitalData.event[digitalData.event.length - 1].eventInfo.eventType){
+      _satellite.track(digitalData.event[digitalData.event.length - 1].eventInfo.eventType);
+    }
+  }
+}

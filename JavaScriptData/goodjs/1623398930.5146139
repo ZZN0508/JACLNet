@@ -1,0 +1,1653 @@
+// 20210609
+
+(function () {
+  // set load timestamp
+  window.gooad.hblog = window.gooad.hblog || {};
+  window.gooad.hblog.map_dfp_load = !!Date.now ? Date.now() : new Date().getTime();
+  // TD settings
+  !function(t,e){if(void 0===e[t]){e[t]=function(){e[t].clients.push(this),this._init=[Array.prototype.slice.call(arguments)]},e[t].clients=[];for(var r=function(t){return function(){return this["_"+t]=this["_"+t]||[],this["_"+t].push(Array.prototype.slice.call(arguments)),this}},s=["blockEvents","unblockEvents","setSignedMode","setAnonymousMode","resetUUID","addRecord","fetchGlobalID","set","trackEvent","trackPageview","trackClicks","ready","fetchUserSegments",],n=0;n<s.length;n++){var c=s[n];e[t].prototype[c]=r(c)}var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.treasuredata.com/sdk/2.1/td.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)}}("Treasure",this);
+
+  // only verification
+  window.gooad.urlParam = window.gooad.urlParam || [];
+
+  var googletag, slotMap, abTestSlotMap, ua, deviceType, loc, cookieLimit, cookieDomain, hbMap,
+    frameMap, isHb, urlPattern, urlRegex, matchedUrl, framesOfCurrentPage, def, lv3Domain, lv4Domain,
+    urlPatternsOfCurrentDomain, i, definition, dequeuedFunc, screenWidth, btaCookieAge, cookies, btaCookieGender,
+    adATA, ataCookies, valAta1, segmentCode, loggingConfig, td;
+
+  function randomAdGroupFiller() {
+    var rand = Math.random();
+
+    if (rand < 0.02) {
+      return 'B';
+    } else if (rand < 0.04) {
+      return 'C';
+    } else if (rand < 0.06) {
+      return 'D';
+    } else if (rand < 0.08) {
+      return 'E';
+    } else if (rand < 0.1) {
+      return 'F';
+    } else {
+      return 'A';
+    }
+  }
+
+  function randomAdGroupAdxBrand() {
+    var rand = Math.random();
+
+    if (rand < 0.02) {
+      return 'b2';
+    } else if (rand < 0.04) {
+      return 'b3';
+    } else if (rand < 0.06) {
+      return 'b4';
+    } else if (rand < 0.08) {
+      return 'b5';
+    } else if (rand < 0.1) {
+      return 'b6';
+    } else {
+      return 'b1';
+    }
+  }
+
+  //get BTA cookie value for send DFP server
+  btaCookieAge = '';
+  btaCookieGender = '';
+  cookies = document.cookie.split(';');
+
+  for (var cookieIndex in cookies) if (cookies.hasOwnProperty(cookieIndex)) {
+    if (cookies[cookieIndex].match(/BTA=.*/)) {
+      btaCookieAge = cookies[cookieIndex].substr(cookies[cookieIndex].lastIndexOf('A'), 3);
+      btaCookieGender = cookies[cookieIndex].substr(cookies[cookieIndex].lastIndexOf('G'), 3);
+      break;
+    }
+  }
+
+  // gooad.Utility.message()
+  window.gooad.Utility = window.gooad.Utility || {};
+  if (!window.gooad.Utility.message) {
+    window.gooad.Utility.message = function(message) {
+      if(window.top.location.href.indexOf('gooad_debug')> -1){
+        console.log(message);
+      }
+    };
+  }
+
+  // GAM timeout setting
+  var gamTimeout;
+  if ( window.top.location.href.indexOf('tvtopic.goo.ne.jp') > -1 ) {
+    gamTimeout = 2000;
+  } else {
+    gamTimeout = 3000;
+  }
+  // only verification (to changed GAM timeout)
+  if (typeof window.gooad.urlParam.gooad_dfp_timeout !== 'undefined') {
+    gamTimeout = window.gooad.urlParam.gooad_dfp_timeout;
+  }
+  window.gooad.Utility.message('gam timeout: ' + gamTimeout);
+
+  // logging configration
+  loggingConfig = {
+    loggingOff: false, //flag to stop logging processing
+    sendDataOn: true, //flag to send data to TD
+    samplingRate: 0.1, //range: 0 - 1
+    timeToGetImpLog: gamTimeout,
+    tdConfig: {
+      host: 'in.treasuredata.com',
+      writeKey: '5804/0fd688a193891878ce028acfa729df9c9e620ac5',
+      database: 'resonant',
+      startInSignedMode: true
+    },
+    tdTables: {
+      hbLogTable: 'goo_hb_log',
+      prebidImpTable: 'goo_prebid_imp'
+    }
+  };
+  td = new Treasure(loggingConfig.tdConfig);
+
+  // initialize googletag
+  window.googletag = window.googletag || {};
+  window.googletag.cmd = window.googletag.cmd || [];
+
+  // slot邂｡逅�
+  window.processedSlotIds = window.processedSlotIds || [];
+
+  // function for execute googletag refresh()
+  window.gooadDfpRefresh = window.gooadDfpRefresh || function () {
+    if (window.gooadDfpRefreshed) return;
+
+      window.gooadDfpRefreshed = true;
+      window.gooad.hblog.dfp_refresh = !!Date.now ? Date.now() : new Date().getTime();
+      window.googletag.cmd.push(function () {
+          if (window.gooad.isLazyLoading) {
+              var gamDivId, i;
+              if (window.processedSlotIds) {
+                  for(i = 0; i < window.gamSlots.length; i++) {
+                      gamDivId = window.gamSlots[i].getSlotElementId();
+                      window.googletag.display(gamDivId);
+                      //window.gooad.Utility.message('refresh(dfp lazy) ' + gamDivId + ' displayed again.');
+                  }
+              }
+              window.googletag.pubads().refresh();
+              window.gooad.Utility.message('refresh(dfp lazy)');
+          } else {
+              window.googletag.pubads().refresh();
+              window.gooad.Utility.message('refresh(dfp)');
+          }
+      });
+
+  };
+
+  // function for count up Hbvendor callback and execute gooadDfpRefresh()
+  if ( window.top.location.href.indexOf('www.ocn.ne.jp') > -1 ) {
+    window.gooadHbVendors = window.gooadHbVendors || 1;
+  } else {
+    window.gooadHbVendors = window.gooadHbVendors || 2;
+  }
+  window.gooadHbCount = window.gooadHbCount || 0;
+  window.gooadHbCounter = window.gooadHbCounter || function () {
+    ++window.gooadHbCount;
+
+    if (window.gooadHbCount == window.gooadHbVendors) {
+        window.gooadDfpRefresh();
+    }
+  };
+
+  def = [];
+  isHb = true;
+  googletag = window.googletag;
+  window.top.ptdAd = false;
+
+  hbMap = {
+    'pc': {
+      'goo': {
+        'mobile': false
+      },
+      'ocn': {
+      },
+      'ptd': {
+        'repiiii_test': false
+      }
+    },
+    'sp': {
+      'goo': {
+        'mobile': false,
+        'repiiii': false
+      },
+      'ocn': {
+      },
+      'ptd': {
+        'repiiii_test': false
+      }
+    }
+  };
+
+  frameMap = {
+    'pc': {
+      'goo': {
+        'cf001_gootop': {
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/green\\/\\?NE=.+': ['jx_goo', '300_2', '320_1', '970_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/green\\/.+': ['300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/fortune': ['long_fortune', '300_1_fortune', '300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/uranai': ['long_fortune', '300_1_fortune', '300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp': ['jx_goo', '300_2', '320_1', '970_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/green\\/\\?NE=.+': ['jx_goo', '300_2', '320_1', '970_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/green\\/.+': ['300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/fortune': ['long_fortune', '300_1_fortune', '300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/uranai': ['long_fortune', '300_1_fortune', '300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp': ['jx_goo', '300_2', '320_1', '970_1']
+        },
+        'cf001_ocntop': {
+          '^https?:\\/\\/([^.]+\\.){0,3}.*ocntop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '970_1_ocn'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*ocntop.*\\.pf\\.goo\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '970_1_ocn']
+        },
+        'cf001': {
+          '^https?:\\/\\/([^.]+\\.){0,3}cf001\\.goo\\.ne\\.jp': ['long', '300_1']
+        },
+        'owb901': {
+          '^https?:\\/\\/([^.]+\\.){0,3}owb901\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', '970_1', 'jx_goo', 'long_news', '300_1_news', 'long_oshiete', '300_1_oshiete']
+        },
+        'autos': {
+          '^https?:\\/\\/([^.]+\\.){0,3}autos\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2', 'm300_2_2'],
+          '^https?:\\/\\/([^.]+\\.){0,3}motorshow\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2', 'm300_2_2']
+        },
+        'blog': {
+          '^https?:\\/\\/([^.]+\\.){0,3}blog\\.goo\\.ne\\.jp': ['pc_ol', '300_3', 'm300_3', '300_4']
+        },
+        'dictionary': {
+          '^https?:\\/\\/([^.]+\\.){0,3}dictionary\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2', 'pc_ol'],
+          '^https?:\\/\\/(.*)-dict-30\\.cfb\\.rc1\\.pf\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2', 'pc_ol']
+        },
+        'ima': {
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp(\\/?$|\\/column\\/)': ['300_1', '300_2', '300_3', '300_4', '300_5', '300_6', 'pc_ol'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp': ['300_1', '300_2', '300_3', '300_4', '300_5', '300_6', '300_7', '300_8', 'pc_ol']
+        },
+        'map': {
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/($|\\?)': ['pc_ol', 'long', '300_1', '300_2', '300_3', '300_5', 'long_2', 'long_13'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/map\\/': [],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/place\\/[0-9A-Z]+\\/($|\\?)': ['pc_ol', 'long', '300_1', '300_2', '300_3', '300_5', 'long_2', 'long_3', 'm300_1', 'm300_2', 'm300_3', 'm300_4', 'm300_5', 'm300_6'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/place\\/[0-9A-Z]+\\/(coupon|map|menu|photo)\\/': ['pc_ol', 'long', '300_1', '300_2', '300_3', '300_5', 'm300_1', 'm300_2', 'm300_3', 'm300_4', 'm300_5', 'm300_6', 'long_2', 'long_3', 'long_4', 'long_5', 'long_6', 'long_7', 'long_13'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/search\\/': ['pc_ol', 'long', '300_4', 'long_2', 'm300_1', 'm300_2', 'm300_3', 'm300_4', 'm300_5', 'm300_6'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp': ['pc_ol', 'long', '300_1', '300_2', 'm300_1', 'm300_2']
+        },
+        'mobile': {
+          '^https?:\\/\\/([^.]+\\.){0,3}mobile\\.goo\\.ne\\.jp': ['long', '300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}mobile\\.g00\\.red': ['long', '300_1']
+        },
+        'news': {
+          '^https?:\\/\\/([^.]+\\.){0,3}news\\.goo\\.ne\\.jp\\/(article|topstories\\/[^\\/]+\\/[^\\/]+\\/.+)': ['long', '300_1', '300_2', '300_3', '300_4', '300_5', '300_6', 'm300_1', 'm300_2', '640_1', 'pc_ol'],
+          '^https?:\\/\\/([^.]+\\.){0,3}news\\.goo\\.ne\\.jp(\\/?$|\\/topstories)': ['long', '300_1', '300_2', '300_5', '300_6', 'pc_ol'],
+          '^https?:\\/\\/([^.]+\\.){0,3}news\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', '300_5', '300_6', 'm300_1', 'm300_2', 'pc_ol'],
+          '^https?:\\/\\/([^.]+\\.){0,3}owb901\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', '300_3', '300_4', '300_5', '300_6', 'm300_1', 'm300_2', '640_1', 'pc_ol']
+        },
+        'oshiete': {
+          '^https?:\\/\\/([^.]+\\.){0,3}oshiete\\.goo\\.ne\\.jp\\/articles\\/qa': ['long', '300_1', '300_2'],
+          //'^https?:\\/\\/([^.]+\\.){0,3}oshiete\\.goo\\.ne\\.jp\\/qa': ['long', 'long_1', 'long_2', 'long_3', '300_1', '300_2', '300_3', '300_4', '300_5', '300_6', 'pc_ol'],
+          '^https?:\\/\\/([^.]+\\.){0,3}oshiete\\.goo\\.ne\\.jp\\/qa': ['long', '300_1', '300_2', '300_3', '300_4', '300_5', '300_6', 'pc_ol', 'm300_1_1', 'm300_1_2', 'm300_2_1', 'm300_2_2', 'm300_3_1', 'm300_3_2'],
+          '^https?:\\/\\/([^.]+\\.){0,3}oshiete\\.goo\\.ne\\.jp\\/search_goo': ['long', '300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}oshiete\\.goo\\.ne\\.jp': ['300_1']
+        },
+        'ranking': {
+          '^https?:\\/\\/([^.]+\\.){0,3}ranking\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2', 'pc_ol']
+        },
+        'sports': {
+          '^https?:\\/\\/([^.]+\\.){0,3}(live|flash)?\\.sports\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', '300_3', '300_4', '300_5', 'm300_1', 'm300_2']
+        },
+        'townpage': {
+          '^https?:\\/\\/([^.]+\\.){0,3}townpage\\.goo\\.ne\\.jp': ['300_1', '300_2', 'm300_1', 'm300_2', 'pc_ol']
+        },
+        'transit': {
+          '^https?:\\/\\/([^.]+\\.){0,3}transit\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2']
+        },
+        'travel': {
+          '^https?:\\/\\/([^.]+\\.){0,3}travel\\.goo\\.ne\\.jp': ['long', '300_1']
+        },
+        'tvtopic': {
+          '^https?:\\/\\/([^.]+\\.){0,3}tvtopic\\.goo\\.ne\\.jp': ['long', '300_1'],
+          '^https?:\\/\\/(.*)-tvsrch-30\\.cfb\\.rc1\\.pf\\.goo\\.ne\\.jp': ['long', '300_1']
+        },
+        'weather': {
+          '^https?:\\/\\/([^.]+\\.){0,3}weather\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2'],
+          '^https?:\\/\\/(.*)-weather([^.]*)\\.cfb\\.rc1\\.pf\\.goo\\.ne\\.jp': ['long', '300_1', '300_2', 'm300_1', 'm300_2']
+        },
+        'wpedia': {
+          '^https?:\\/\\/([^.]+\\.){0,3}wpedia\\.goo\\.ne\\.jp': ['long', '300_1'],
+          '^https?:\\/\\/(.*)-wiki-30\\.cfb\\.rc1\\.pf\\.goo\\.ne\\.jp': ['long', '300_1']
+        },
+        'www': {
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/green\\/\\?NE=.+': ['jx_goo', '300_2', '320_1', '970_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/green\\/.+': ['300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/fortune': ['long_fortune', '300_1_fortune', '300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/uranai': ['long_fortune', '300_1_fortune', '300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp': ['jx_goo', '300_2', '320_1', '970_1']
+        }
+      },
+      'ocn': {
+        'testwww': {
+          '^https?:\\/\\/([^.]+\\.){0,3}testwww\\.ocn\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '320_1', '970_1_ocn']
+        },
+        'www': {
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.ocn\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '320_1', '970_1_ocn']
+        }
+      },
+      'ptd': {
+        'repiiii_test': {
+          '^https?:\\/\\/([^.]+\\.){0,3}stg-repiiii\\.s3-website-ap-northeast-1\\.amazonaws\\.com': ['sp300_1', 'sp300_2']
+        }
+      }
+    },
+    'sp': {
+      'goo': {
+        'cf001_gootop': {
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/fortune\\/($|\\?)': ['sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/fortune': ['sp300_1_fortune', 'sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/uranai\\/($|\\?)': ['sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp\\/uranai': ['sp300_1_fortune', 'sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp': ['jx_goo', '300_2', '970_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/fortune\\/($|\\?)': ['sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/fortune': ['sp300_1_fortune', 'sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/uranai\\/($|\\?)': ['sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp\\/uranai': ['sp300_1_fortune', 'sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*gootop.*\\.pf\\.goo\\.ne\\.jp': ['jx_goo', '300_2', '970_1']
+        },
+        'cf001_ocntop': {
+          '^https?:\\/\\/([^.]+\\.){0,3}.*ocntop.*\\.ms10\\.cf001\\.goo\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '970_1_ocn'],
+          '^https?:\\/\\/([^.]+\\.){0,3}.*ocntop.*\\.pf\\.goo\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '970_1_ocn']
+        },
+        'cf001': {
+          '^https?:\\/\\/([^.]+\\.){0,3}cf001\\.goo\\.ne\\.jp': ['sp320_1', 'sp300_1']
+        },
+        'owb901': {
+          '^https?:\\/\\/([^.]+\\.){0,3}owb901\\.goo\\.ne\\.jp': ['sp300_2', 'sp300_4', 'sp300_5', 'spinfeed_3_2', 'spinfeed_4_2', 'sp320_1_tv', 'sp300_1_tv', 'sp320_1_oshiete', 'sp300_1_oshiete', 'sp320_3']
+        },
+        'autos': {
+          '^https?:\\/\\/([^.]+\\.){0,3}autos\\.goo\\.ne\\.jp': ['sp300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}motorshow\\.goo\\.ne\\.jp': ['sp300_1']
+        },
+        'blog': {
+          '^https?:\\/\\/([^.]+\\.){0,3}blog\\.goo\\.ne\\.jp/[A-Za-z0-9-_]+\/([0-9]|images)':["sp300_1", "sp300_2", "sp320_2", "sp320_2_2"],
+          '^https?:\\/\\/([^.]+\\.){0,3}blog\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2_2', 'sp320_2', 'sp300_1', 'sp300_2', 'sp300_3']
+        },
+        'dictionary': {
+          '^https?:\\/\\/([^.]+\\.){0,3}dictionary\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_5', 'sp300_6', 'sp300_7', 'sp320_3'],
+          '^https?:\\/\\/(.*)-dict-30\\.cfb\\.rc1\\.pf\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_5', 'sp300_6', 'sp300_7', 'sp320_3']
+        },
+        'ima': {
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/word\\/list_topics.*\\?from=dmenu': ['sp300_1_dmenu', 'sp300_2_dmenu', 'sp300_3_dmenu', 'sp300_4_dmenu', 'sp300_6_dmenu', 'sp300_7_dmenu', 'sp_ol_dmenu', 'spinfeed_2_dmenu', 'spinfeed_3_dmenu', 'spinfeed_4_dmenu', 'spinfeed_5_dmenu', 'spinfeed_6_dmenu', 'spinfeed_7_dmenu'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/life\\/list_topics.*\\?from=dmenu': ['sp300_1_dmenu', 'sp300_2_dmenu', 'sp300_4_dmenu', 'sp300_5_dmenu', 'sp300_6_dmenu', 'sp300_7_dmenu', 'sp_ol_dmenu', 'spinfeed_3_2_dmenu', 'spinfeed_4_2_dmenu'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/word(?!\\/list_topics).*\\?from=dmenu': ['sp300_1_dmenu', 'sp300_2_dmenu', 'sp300_3_dmenu', 'sp300_4_dmenu', 'sp300_5_dmenu', 'sp300_6_dmenu', 'sp300_7_dmenu', 'sp_ol_dmenu', 'spinfeed_2_dmenu', 'spinfeed_3_dmenu', 'spinfeed_4_dmenu', 'spinfeed_5_dmenu', 'spinfeed_6_dmenu', 'spinfeed_7_dmenu'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/life(?!\\/list_topics).*\\?from=dmenu': ['sp300_1_dmenu', 'sp300_2_dmenu', 'sp300_3_dmenu', 'sp300_4_dmenu', 'sp300_5_dmenu', 'sp300_6_dmenu', 'sp300_7_dmenu', 'sp_ol_dmenu', 'spinfeed_3_2_dmenu', 'spinfeed_4_2_dmenu'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/word\\/list_topics': ['sp300_1', 'sp300_2', 'sp300_3', 'sp300_5', 'sp300_6', 'sp300_7', 'sp_ol', 'spinfeed_2', 'spinfeed_3', 'spinfeed_4', 'spinfeed_5', 'spinfeed_6', 'spinfeed_7'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/life\\/list_topics': ['sp300_1', 'sp300_2', 'sp300_4', 'sp300_5', 'sp300_6', 'sp300_7', 'sp_ol', 'spinfeed_3_2', 'spinfeed_4_2'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/word(?!\\/list_topics)': ['sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_5', 'sp300_6', 'sp300_7', 'sp_ol', 'spinfeed_2', 'spinfeed_3', 'spinfeed_4', 'spinfeed_5', 'spinfeed_6', 'spinfeed_7'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/life(?!\\/list_topics)': ['sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_5', 'sp300_6', 'sp300_7', 'sp_ol', 'spinfeed_3_2', 'spinfeed_4_2'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/mama\\/articlelist\\/.+': ['sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_6', 'sp300_7', 'sp_ol', 'spinfeed_2_3', 'spinfeed_3_3', 'spinfeed_4_3'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/mama\\/articlelist': ['sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_6', 'sp300_7', 'sp_ol'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp\\/mama\\/': ['sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_6', 'sp_ol'],
+          '^https?:\\/\\/([^.]+\\.){0,3}ima\\.goo\\.ne\\.jp': ['sp300_1', 'sp300_2', 'sp300_6', 'sp_ol']
+        },
+        'map': {
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/($|\\?)': ['sp320_1_2', 'sp320_12', 'sp320_2', 'sp320_3', 'sp320_4', 'sp320_5', 'sp320_6', 'sp320_7', 'sp300_2', 'sp300_3'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/map\\/route\\/from-latlon\\/your-location\\/': [],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/map\\/': ['sp320_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/place\\/[0-9A-Z]+\\/($|\\?)': ['sp320_1_2', 'sp320_12', 'sp320_2', 'sp320_3', 'sp300_1', 'sp300_2', 'sp300_3'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/place\\/[0-9A-Z]+\\/(coupon|map|menu|photo)\\/': ['sp320_1_2', 'sp320_12', 'sp320_2', 'sp320_3', 'sp320_4', 'sp320_5', 'sp300_2', 'sp300_3'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/search\\/': ['sp320_12', 'sp300_1', 'sp300_2', 'sp300_3'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/postcode\\/': ['sp320_1_2', 'sp320_12', 'sp300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp\\/(event\\/search|address)\\/': ['sp320_1_2', 'sp320_12', 'sp320_2', 'sp320_3', 'sp320_4', 'sp300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}map\\.goo\\.ne\\.jp': ['sp320_12', 'sp300_1']
+        },
+        'mobile': {
+          '^https?:\\/\\/([^.]+\\.){0,3}mobile\\.goo\\.ne\\.jp': ['long', '300_1'],
+          '^https?:\\/\\/([^.]+\\.){0,3}mobile\\.g00\\.red': ['long', '300_1']
+        },
+        'news': {
+          '^https?:\\/\\/([^.]+\\.){0,3}news\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp300_1', 'sp300_2'],
+          '^https?:\\/\\/([^.]+\\.){0,3}owb901\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp300_1', 'sp300_2']
+        },
+        'oshiete': {
+          '^https?:\\/\\/([^.]+\\.){0,3}oshiete\\.goo\\.ne\\.jp\\/qa': ['sp320_1', 'sp320_2', 'sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_5', 'sp300_6', 'sp300_7', 'sp300_8', 'spinfeed_4', 'spinfeed_5']
+        },
+        'ranking': {
+          '^https?:\\/\\/([^.]+\\.){0,3}ranking\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp320_3', 'sp300_1', 'sp300_2', 'sp300_3', 'sp300_4', 'sp300_5']
+        },
+        'search': {
+          '^https?:\\/\\/([^.]+\\.){0,3}search\\.goo\\.ne\\.jp': ['sp300_1']
+        },
+        'sports': {
+          '^https?:\\/\\/([^.]+\\.){0,3}(live|flash)?\\.sports\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp320_2_2', 'sp300_1', 'sp300_2']
+        },
+        'townpage': {
+          '^https?:\\/\\/([^.]+\\.){0,3}townpage\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_1_2', 'sp320_2', 'sp300_1', 'sp300_2', 'sp_ol']
+        },
+        'transit': {
+          '^https?:\\/\\/([^.]+\\.){0,3}transit\\.goo\\.ne\\.jp': ['sp320_1', 'sp300_1']
+        },
+        'tvtopic': {
+          '^https?:\\/\\/([^.]+\\.){0,3}tvtopic\\.goo\\.ne\\.jp': ['sp320_1', 'sp300_1'],
+          '^https?:\\/\\/(.*)-tvsrch-30\\.cfb\\.rc1\\.pf\\.goo\\.ne\\.jp': ['sp320_1', 'sp300_1']
+        },
+        'weather': {
+          '^https?:\\/\\/([^.]+\\.){0,3}weather\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp320_2_2', 'sp320_3', 'sp320_4', 'sp320_5', 'sp300_1'],
+          '^https?:\\/\\/(.*)-weather([^.]*)\\.cfb\\.rc1\\.pf\\.goo\\.ne\\.jp': ['sp320_1', 'sp320_2', 'sp320_2_2', 'sp320_3', 'sp320_4', 'sp320_5', 'sp300_1']
+        },
+        'www': {
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/fortune\\/($|\\?)': ['sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/fortune': ['sp300_1_fortune', 'sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/uranai\\/($|\\?)': ['sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/uranai': ['sp300_1_fortune', 'sp300_2_fortune'],
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp': ['jx_goo', '300_2', '970_1']
+        },
+        'repiiii': {
+          '^https?:\\/\\/([^.]+\\.){0,3}repiiii\\.goo\\.ne\\.jp': ['sp300_1', 'sp300_2']
+        }
+      },
+      'ocn': {
+        'testwww': {
+          '^https?:\\/\\/([^.]+\\.){0,3}testwww\\.ocn\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '970_1_ocn']
+        },
+        'www': {
+          '^https?:\\/\\/([^.]+\\.){0,3}www\\.ocn\\.ne\\.jp': ['jx_ocn', '300_2_ocn', '970_1_ocn']
+        }
+      },
+      'ptd': {
+        'repiiii_test': {
+          '^https?:\\/\\/([^.]+\\.){0,3}stg-repiiii\\.s3-website-ap-northeast-1\\.amazonaws\\.com': ['sp300_1', 'sp300_2']
+        }
+
+      }
+    }
+  };
+
+  slotMap = {
+    'goo': {
+      'cf001': {
+        'long': ['/116038490/tvtopic_pc/long', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1517391580934-0'],
+        '300_1': ['/116038490/tvtopic_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517391490807-0'],
+        'sp320_1': ['/116038490/tvtopic_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1534233533073-0'],
+        'sp300_1': ['/116038490/tvtopic_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1534233638672-0']
+      },
+      'cf001_gootop': {
+        'jx_goo': ['/116038490/gootop_pc/jx_badge350_1', [[300, 250], [350, 240], [1, 1]], 'div-gpt-ad-1512970398278-0'],
+        '300_2': ['/116038490/gootop_pc/badge300_2', [[300, 250], [300, 600], [1, 1]], 'div-gpt-ad-1512970539733-0'],
+        '320_1': ['/116038490/gootop_pc/badge320_1', [[320, 180], [320, 100], [320, 50], 'fluid'], 'div-gpt-ad-gootop_badge320_1-0'],
+        '970_1': ['/116038490/gootop_pc/badge970_1', [[970, 250], [1, 1]], 'div-gpt-ad-1531903089538-0'],
+        '300_1': ['/116038490/eco_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517468380689-0'],    // green
+        'long_fortune': ['/116038490/fortune_pc/long', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1550125497399-0'],
+        '300_1_fortune': ['/116038490/fortune_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1550125600231-0'],
+        '300_2_fortune': ['/116038490/fortune_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1550125629490-0'],
+        'sp300_1_fortune': ['/116038490/fortune_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125759791-0'],
+        'sp300_2_fortune': ['/116038490/fortune_sp/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125789654-0'],
+        'long_2_fortune': ['/116038490/fortune_pc/long_2', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1550125662049-0'],
+        '300_1_2_fortune': ['/116038490/fortune_pc/badge300_1_2', [[1, 1], [300, 250]], 'div-gpt-ad-1550125690839-0'],
+        '300_2_2_fortune': ['/116038490/fortune_pc/badge300_2_2', [[1, 1], [300, 250]], 'div-gpt-ad-1550125719120-0'],
+        'sp300_1_2_fortune': ['/116038490/fortune_sp/spbadge300_1_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125836887-0'],
+        'sp300_2_2_fortune': ['/116038490/fortune_sp/spbadge300_2_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125867843-0']
+      },
+      'cf001_ocntop': {
+        'jx_ocn': ['/116038490/ocntop_pc/jx_badge350_1', [[300, 250], [1, 1]], 'div-gpt-ad-1512970595243-0'],
+        '300_2_ocn': ['/116038490/ocntop_pc/badge300_2', [[300, 250], [1, 1]], 'div-gpt-ad-1512970761694-0'],
+        '320_1': ['/116038490/ocntop_pc/badge320_1', [[320, 180], [320, 100], [320, 50], 'fluid'], 'div-gpt-ad-ocntop_badge320_1-0'],
+        '970_1_ocn': ['/116038490/ocntop_pc/badge970_1', [[970, 250], [1, 1]], 'div-gpt-ad-1545279601272-0']
+      },
+      'owb901': {
+        //sp_dic
+        'sp320_3': ['/116038490/dic_sp/spbadge320_3', [[320, 50], [1, 1]], 'div-gpt-ad-1598486253098-0'],
+        //sp_oshiete
+        'sp320_1_oshiete': ['/116038490/oshiete_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513240304907-0'],
+        'sp300_1_oshiete': ['/116038490/oshiete_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511764586093-0'],
+        //pc_oshiete
+        'long_oshiete': ['/116038490/oshiete_pc/long', [[970, 90], [1, 1], [728, 90]], 'div-gpt-ad-1516695336793-0'],
+        '300_1_oshiete': ['/116038490/oshiete_pc/badge300_1', [[300, 600], [1, 1], [300, 250]], 'div-gpt-ad-1511764737871-0'],
+        //pc_news
+        'long_news': ['/116038490/news_pc/long', [[970, 250], [970, 90], [1, 1], [728, 90]], 'div-gpt-ad-1516693522873-0'],
+        '300_1_news': ['/116038490/news_pc/badge300_1', [[300, 250], [300, 600], [1, 1]], 'div-gpt-ad-1511763742602-0'],
+        //pc_green
+        '970_1': ['/116038490/gootop_pc/badge970_1', [[970, 250], [1, 1]], 'div-gpt-ad-1531903089538-0'],
+        'jx_goo': ['/116038490/gootop_pc/jx_badge350_1', [[300, 250], [350, 240], [1, 1]], 'div-gpt-ad-1512970398278-0'],
+        //sp_tvtopic
+        'sp320_1_tv': ['/116038490/tvtopic_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1534233533073-0'],
+        'sp300_1_tv': ['/116038490/tvtopic_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1534233638672-0'],
+        '300_1': ['/116038490/ima_pc_test/badge300_1_test', [[1, 1], [300, 250], [300, 600]], 'div-gpt-ad-1507252427200-0'],
+        '300_2': ['/116038490/ima_pc_test/badge300_2', [[1, 1], [300, 600], [300, 250]], 'div-gpt-ad-1513241043613-0'],
+        '300_3': ['/116038490/ima_pc_test/badge300_3', [[1, 1], [300, 250]], 'div-gpt-ad-1513240474036-0'],
+        '300_4': ['/116038490/ima_pc_test/badge300_4', [[1, 1], [300, 250]], 'div-gpt-ad-1513240549032-0'],
+        '300_5': ['/116038490/ima_pc_test/badge300_5', [[1, 1], [300, 250]], 'div-gpt-ad-1513240636864-0'],
+        '300_6': ['/116038490/ima_pc_test/badge300_6', [[1, 1], [300, 250]], 'div-gpt-ad-1513240715896-0'],
+        '300_7': ['/116038490/ima_pc_test/badge300_7', [[1, 1], [300, 250]], 'div-gpt-ad-1513240796795-0'],
+        '300_8': ['/116038490/ima_pc_test/badge300_8', [[1, 1], [300, 250]], 'div-gpt-ad-1513240878145-0'],
+        //'sp300_1': ['/116038490/ima_sp_test/spbadge300_1_test', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511779323714-0'],
+        'sp300_2': ['/116038490/ima_sp_test/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511828153992-0'],
+        'sp300_3': ['/116038490/ima_sp_test/spbadge300_3', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513237179326-0'],
+        'sp300_4': ['/116038490/ima_sp_test/spbadge300_4', [[336, 280], [300, 250], [1, 1]], 'div-gpt-ad-1513237298352-0'],
+        'sp300_5': ['/116038490/ima_sp_test/spbadge300_5', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513237385182-0'],
+        'spinfeed_2': ['/116038490/ima_sp_test/spinfeed_2', ['fluid', [1, 1]], 'div-gpt-ad-1545799801515-0'],
+        'spinfeed_3': ['/116038490/ima_sp_test/spinfeed_3', ['fluid', [1, 1]], 'div-gpt-ad-1545799846438-0'],
+        'spinfeed_4': ['/116038490/ima_sp_test/spinfeed_4', ['fluid', [1, 1]], 'div-gpt-ad-1545799885110-0'],
+        'spinfeed_3_2': ['/116038490/ima_sp_test/spinfeed_3_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237673496-0'],
+        'spinfeed_4_2': ['/116038490/ima_sp_test/spinfeed_4_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237318964-0'],
+        'sp300_1_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_1_test', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1508370768166-0'],
+        'sp300_2_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511828316106-0'],
+        'sp300_3_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_3', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1513236532634-0'],
+        'sp300_4_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_4', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513236647493-0'],
+        'sp300_5_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_5', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1513237059403-0'],
+        'spinfeed_2_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_2', ['fluid', [1, 1]], 'div-gpt-ad-1545799932229-0'],
+        'spinfeed_3_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_3', ['fluid', [1, 1]], 'div-gpt-ad-1545799971625-0'],
+        'spinfeed_4_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_4', ['fluid', [1, 1]], 'div-gpt-ad-1545800006680-0'],
+        'spinfeed_3_2_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_3_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237942059-0'],
+        'spinfeed_4_2_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_4_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237881467-0']
+      },
+      'autos': {
+        'long': ['/116038490/car_pc/long', [[970, 90], [728, 90], [1, 1]], 'div-gpt-ad-1517468716805-0'],
+        '300_1': ['/116038490/car_pc/badge300_1', [[300, 250], [1, 1]], 'div-gpt-ad-1517468858435-0'],
+        '300_2': ['/116038490/car_pc/badge300_2', [[300, 250], [1, 1]], 'div-gpt-ad-1513306541128-0'],
+        'm300_1': ['/116038490/car_pc/mbadge300_1', [[300, 250], [1, 1]], 'div-gpt-ad-1543449221206-0'],
+        'm300_2': ['/116038490/car_pc/mbadge300_2', [[300, 250], [1, 1]], 'div-gpt-ad-1543449301048-0'],
+        'm300_2_2': ['/116038490/car_pc/mbadge300_2_2', [[300, 250], [1, 1]], 'div-gpt-ad-1543449339989-0'],
+        'sp300_1': ['/116038490/car_sp/spbadge300_1', [[300, 250], [336, 280], [1, 1]], 'div-gpt-ad-1513306626753-0']
+      },
+      'blog': {
+        // 'long': ['/116038490/blog_pc/long', [[970, 90], [1, 1], [728, 90]], 'div-gpt-ad-1517392473550-0'],    // blogtop
+        // 'pc_ol'   : ['/116038490/blog_pc/pc_overlay', [[728, 90]], 'div-gpt-ad-blog_pc_overlay-0'],
+        '300_3': ['/22282329737/blog_pc/badge300_3', [[300, 250]], 'div-gpt-ad-1511765179189-0'],
+        '300_4': ['/22282329737/blog_pc/badge300_4', [[300, 250]], 'div-gpt-ad-1511765091748-0'],
+        'm300_3': ['/22282329737/blog_pc/mbadge300_3', [[300, 250]], 'div-gpt-ad-1534231615796-0'],
+        // '425_1': ['/116038490/blog_pc/square425_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1534238776782-0'],
+        'sp300_1': ['/22282329737/blog_sp/spbadge300_1', [[336, 280], [300, 250]], 'div-gpt-ad-1511766114067-0'],
+        'sp300_2': ['/22282329737/blog_sp/spbadge300_2', [[336, 280], [300, 250]], 'div-gpt-ad-1511827966916-0'],
+        'sp300_3': ['/22282329737/blog_sp/spbadge300_3', [[336, 280], [300, 250]], 'div-gpt-ad-blog_spbadge300_3-0'],
+        'sp320_1': ['/22282329737/blog_sp/spbadge320_1', [[320, 50]], 'div-gpt-ad-1513240165581-0'],
+        'sp320_2': ['/22282329737/blog_sp/spbadge320_2', [[320, 50]], 'div-gpt-ad-1611633219601-0'],
+        'sp320_2_2': ['/22282329737/blog_sp/spbadge320_2_2', [[320, 100]], 'div-gpt-ad-1563238455824-0']
+        // 'spinfeed_1': ['/116038490/blog_sp/spinfeed_1', ['fluid', [1, 1]], 'div-gpt-ad-1564473483628-0'],
+        // 'spinfeed_2': ['/116038490/blog_sp/spinfeed_2', ['fluid', [1, 1]], 'div-gpt-ad-1564473524420-0']
+      },
+      'dictionary': {
+        'long': ['/116038490/dic_pc/long', [[728, 90], [1, 1], [970, 90]], 'div-gpt-ad-1517390595602-0'],
+        '300_1': ['/116038490/dic_pc/badge300_1', [[1, 1], [300, 250], [300, 600]], 'div-gpt-ad-1517390678382-0'],
+        '300_2': ['/116038490/dic_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1511764364748-0'],
+        'm300_1': ['/116038490/dic_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517392131956-0'],
+        'm300_2': ['/116038490/dic_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1517392209775-0'],
+        'pc_ol': ['/116038490/dic_pc/pc_overlay', [[1, 1], [728, 90]], 'div-gpt-ad-dic_pc_overlay-0'],
+        'sp320_1': ['/116038490/dic_sp/spbadge320_1', [[320, 100]], 'div-gpt-ad-1516928347940-0'], //201217 320x50謚�
+        'sp320_2': ['/116038490/dic_sp/spbadge320_2', [[1, 1], [320, 100], [320, 50]], 'div-gpt-ad-1534233032667-0'],
+        'sp300_1': ['/116038490/dic_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1516928623309-0'],
+        'sp300_2': ['/116038490/dic_sp/spbadge300_2', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1516858812837-0'],
+        'sp300_3': ['/116038490/dic_sp/spbadge300_3', [[336, 280], [300, 250], [1, 1]], 'div-gpt-ad-1516858943528-0'],
+        'sp300_4': ['/116038490/dic_sp/spbadge300_4', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1517388866383-0'],
+        'sp300_5': ['/116038490/dic_sp/spbadge300_5', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1516859121549-0'],
+        'sp300_6': ['/116038490/dic_sp/spbadge300_6', [[336, 280], [300, 250], [1, 1]], 'div-gpt-ad-1516859232336-0'],
+        'sp300_7': ['/116038490/dic_sp/spbadge300_7', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1516859293921-0'],
+        'sp320_3': ['/116038490/dic_sp/spbadge320_3', [[320, 50], [1, 1]], 'div-gpt-ad-1598486253098-0']
+        // 'sp300_8' : ['/116038490/dic_sp/spbadge300_8', [[300, 250], [336, 280], [1, 1]], 'div-gpt-ad-1516859354551-0']
+      },
+      'ima': {
+        '300_1': ['/116038490/ima_pc_test/badge300_1_test', [[1, 1], [300, 250], [300, 600]], 'div-gpt-ad-1507252427200-0'],
+        '300_2': ['/116038490/ima_pc_test/badge300_2', [[1, 1], [300, 600], [300, 250]], 'div-gpt-ad-1513241043613-0'],
+        '300_3': ['/116038490/ima_pc_test/badge300_3', [[1, 1], [300, 250]], 'div-gpt-ad-1513240474036-0'],
+        '300_4': ['/116038490/ima_pc_test/badge300_4', [[1, 1], [300, 250]], 'div-gpt-ad-1513240549032-0'],
+        '300_5': ['/116038490/ima_pc_test/badge300_5', [[1, 1], [300, 250]], 'div-gpt-ad-1513240636864-0'],
+        '300_6': ['/116038490/ima_pc_test/badge300_6', [[1, 1], [300, 250]], 'div-gpt-ad-1513240715896-0'],
+        '300_7': ['/116038490/ima_pc_test/badge300_7', [[1, 1], [300, 250]], 'div-gpt-ad-1513240796795-0'],
+        '300_8': ['/116038490/ima_pc_test/badge300_8', [[1, 1], [300, 250]], 'div-gpt-ad-1513240878145-0'],
+        'pc_ol': ['/116038490/ima_pc_test/pc_overlay', [[1, 1], [728, 90]], 'div-gpt-ad-ima_pc_overlay-0'],
+        'sp300_1': ['/116038490/ima_sp_test/spbadge300_1_test', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511779323714-0'],
+        'sp300_2': ['/116038490/ima_sp_test/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511828153992-0'],
+        'sp300_3': ['/116038490/ima_sp_test/spbadge300_3', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513237179326-0'],
+        'sp300_4': ['/116038490/ima_sp_test/spbadge300_4', [[336, 280], [300, 250], [1, 1]], 'div-gpt-ad-1513237298352-0'],
+        'sp300_5': ['/116038490/ima_sp_test/spbadge300_5', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513237385182-0'],
+        'sp300_6': ['/116038490/ima_sp_test/spbadge300_6', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1571124685333-0'],
+        'sp300_7': ['/116038490/ima_sp_test/spbadge300_7', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1601519599867-0'],
+        'sp_ol': ['/116038490/ima_sp_test/sp_overlay', [[320, 50], [320, 100]], 'div-gpt-ad-ima_sp_overlay-0'],
+        'spinfeed_2': ['/116038490/ima_sp_test/spinfeed_2', ['fluid', [1, 1]], 'div-gpt-ad-1545799801515-0'],
+        'spinfeed_3': ['/116038490/ima_sp_test/spinfeed_3', ['fluid', [1, 1]], 'div-gpt-ad-1545799846438-0'],
+        'spinfeed_4': ['/116038490/ima_sp_test/spinfeed_4', ['fluid', [1, 1]], 'div-gpt-ad-1545799885110-0'],
+        'spinfeed_5': ['/116038490/ima_sp_test/spinfeed_5', ['fluid', [1, 1]], 'div-gpt-ad-1597111851829-0'],
+        'spinfeed_6': ['/116038490/ima_sp_test/spinfeed_6', ['fluid', [1, 1]], 'div-gpt-ad-1597111917089-0'],
+        'spinfeed_7': ['/116038490/ima_sp_test/spinfeed_7', ['fluid', [1, 1]], 'div-gpt-ad-1597111962964-0'],
+        'spinfeed_3_2': ['/116038490/ima_sp_test/spinfeed_3_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237673496-0'], //life
+        'spinfeed_4_2': ['/116038490/ima_sp_test/spinfeed_4_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237318964-0'], //life
+        'spinfeed_2_3': ['/116038490/ima_sp_test/spinfeed_2_3', ['fluid', [1, 1]], 'div-gpt-ad-1567402902769-0'], //mama
+        'spinfeed_3_3': ['/116038490/ima_sp_test/spinfeed_3_3', ['fluid', [1, 1]], 'div-gpt-ad-1567402838209-0'], //mama
+        'spinfeed_4_3': ['/116038490/ima_sp_test/spinfeed_4_3', ['fluid', [1, 1]], 'div-gpt-ad-1567402791228-0'], //mama
+        'sp300_1_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_1_test', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1508370768166-0'],
+        'sp300_2_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511828316106-0'],
+        'sp300_3_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_3', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1513236532634-0'],
+        'sp300_4_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_4', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513236647493-0'],
+        'sp300_5_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_5', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1513237059403-0'],
+        'sp300_6_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_6', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1571125055218-0'],
+        'sp300_7_dmenu': ['/116038490/ima_sp_dmenu_test/spbadge300_7', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1601519641224-0'],
+        'sp_ol_dmenu': ['/116038490/ima_sp_dmenu_test/sp_overlay', [[320, 50], [320, 100]], 'div-gpt-ad-ima_sp_overlay_dmenu-0'],
+        'spinfeed_2_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_2', ['fluid', [1, 1]], 'div-gpt-ad-1545799932229-0'],
+        'spinfeed_3_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_3', ['fluid', [1, 1]], 'div-gpt-ad-1545799971625-0'],
+        'spinfeed_4_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_4', ['fluid', [1, 1]], 'div-gpt-ad-1545800006680-0'],
+        'spinfeed_5_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_5', ['fluid', [1, 1]], 'div-gpt-ad-1597112064885-0'],
+        'spinfeed_6_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_6', ['fluid', [1, 1]], 'div-gpt-ad-1597112097975-0'],
+        'spinfeed_7_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_7', ['fluid', [1, 1]], 'div-gpt-ad-1597112128498-0'],
+        'spinfeed_3_2_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_3_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237942059-0'],
+        'spinfeed_4_2_dmenu': ['/116038490/ima_sp_dmenu_test/spinfeed_4_2', ['fluid', [1, 1]], 'div-gpt-ad-1553237881467-0']
+      },
+      'map': {
+        'long': ['/116038490/map_pc/long', [[728, 90], [1, 1]], 'div-gpt-ad-1517391171935-0'],
+        'long_2': ['/116038490/map_pc/long_2', [[728, 90], [1, 1]], 'div-gpt-ad-1571892559616-0'],
+        'long_3': ['/116038490/map_pc/long_3', [[728, 90], [1, 1]], 'div-gpt-ad-1571892589171-0'],
+        'long_4': ['/116038490/map_pc/long_4', [[728, 90], [1, 1]], 'div-gpt-ad-1571892610007-0'],
+        'long_5': ['/116038490/map_pc/long_5', [[728, 90], [1, 1]], 'div-gpt-ad-1571892630961-0'],
+        'long_6': ['/116038490/map_pc/long_6', [[728, 90], [1, 1]], 'div-gpt-ad-1571892649723-0'],
+        'long_7': ['/116038490/map_pc/long_7', [[728, 90], [1, 1]], 'div-gpt-ad-1571892684689-0'],
+        'long_8': ['/116038490/map_pc/long_8', [[728, 90], [1, 1]], 'div-gpt-ad-1571892704471-0'],
+        'long_9': ['/116038490/map_pc/long_9', [[728, 90], [1, 1]], 'div-gpt-ad-1571892727854-0'],
+        'long_10': ['/116038490/map_pc/long_10', [[728, 90], [1, 1]], 'div-gpt-ad-1571892753190-0'],
+        'long_11': ['/116038490/map_pc/long_11', [[728, 90], [1, 1]], 'div-gpt-ad-1571892770663-0'],
+        'long_12': ['/116038490/map_pc/long_12', [[728, 90], [1, 1]], 'div-gpt-ad-1571892790124-0'],
+        'long_13': ['/116038490/map_pc/long_13', [[728, 90], [1, 1]], 'div-gpt-ad-1571892815235-0'],
+        '300_1': ['/116038490/map_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517391081207-0'],
+        '300_2': ['/116038490/map_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1511764248471-0'],
+        '300_3': ['/116038490/map_pc/badge300_3', [[1, 1], [300, 250]], 'div-gpt-ad-1571892451058-0'],
+        '300_4': ['/116038490/map_pc/badge300_4', [[1, 1], [300, 250]], 'div-gpt-ad-1571892525128-0'],
+        '300_5': ['/116038490/map_pc/badge300_5', [[1, 1], [300, 250], [300, 600]], 'div-gpt-ad-1571892849040-0'],
+        'm300_1': ['/116038490/map_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517391292929-0'],
+        'm300_2': ['/116038490/map_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1517391372778-0'],
+        'm300_3': ['/116038490/map_pc/mbadge300_3', [[1, 1], [300, 250]], 'div-gpt-ad-map_mbadge300_3-0'], //middle 1st rec left
+        'm300_4': ['/116038490/map_pc/mbadge300_4', [[1, 1], [300, 250]], 'div-gpt-ad-map_mbadge300_4-0'], //middle 1st rec right
+        'm300_5': ['/116038490/map_pc/mbadge300_5', [[1, 1], [300, 250]], 'div-gpt-ad-map_mbadge300_5-0'], //middle 2nd rec left
+        'm300_6': ['/116038490/map_pc/mbadge300_6', [[1, 1], [300, 250]], 'div-gpt-ad-map_mbadge300_6-0'], //middle 2nd rec right
+        'pc_ol': ['/116038490/map_pc/pc_overlay', [[1, 1], [728, 90]], 'div-gpt-ad-map_pc_overlay-0'],
+        'sp320_1': ['/116038490/map_sp/spbadge320_1', [[320, 100], [320, 50]], 'div-gpt-ad-1513835313062-0'],
+        'sp320_1_2': ['/116038490/map_sp/spbadge320_1_2', [[320, 100], [320, 50]], 'div-gpt-ad-1517389529251-0'],
+        'sp320_2': ['/116038490/map_sp/spbadge320_2', [[320, 50], [320, 100]], 'div-gpt-ad-1513836056085-0'],
+        'sp320_3': ['/116038490/map_sp/spbadge320_3', [[320, 50], [320, 100]], 'div-gpt-ad-1513836104831-0'],
+        'sp320_4': ['/116038490/map_sp/spbadge320_4', [[320, 50], [320, 100]], 'div-gpt-ad-1513836137081-0'],
+        'sp320_5': ['/116038490/map_sp/spbadge320_5', [[320, 50], [320, 100]], 'div-gpt-ad-1513836171371-0'],
+        'sp320_6': ['/116038490/map_sp/spbadge320_6', [[320, 100]], 'div-gpt-ad-1571892881488-0'],
+        'sp320_7': ['/116038490/map_sp/spbadge320_7', [[320, 100]], 'div-gpt-ad-1571892899730-0'],
+        'sp320_8': ['/116038490/map_sp/spbadge320_8', [[320, 100]], 'div-gpt-ad-1571892928593-0'],
+        'sp320_9': ['/116038490/map_sp/spbadge320_9', [[320, 100]], 'div-gpt-ad-1571892950245-0'],
+        'sp320_10': ['/116038490/map_sp/spbadge320_10', [[320, 100]], 'div-gpt-ad-1571892974850-0'],
+        'sp320_11': ['/116038490/map_sp/spbadge320_11', [[320, 100]], 'div-gpt-ad-1571892997386-0'],
+        'sp320_12': ['/116038490/map_sp/spbadge320_12', [[1, 1], [320, 100], [320, 50]], 'div-gpt-ad-map_spbadge320_12-0'],
+        'sp300_1': ['/116038490/map_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513249723402-0'],
+        'sp300_2': ['/116038490/map_sp/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-map_spbadge300_2-0'],
+        'sp300_3': ['/116038490/map_sp/spbadge300_3', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-map_spbadge300_3-0'] //,
+        //'sp_ol': ['/116038490/map_sp/sp_overlay', [[320, 50], [320, 100]], 'div-gpt-ad-map_sp_overlay-0']
+      },
+      'mobile': {
+        'long': ['/116038490/mobile/long', [[970, 90], [728, 90], [1, 1]], 'div-gpt-ad-1583367824659-0'],
+        '300_1': ['/116038490/mobile/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1583367922007-0']
+      },
+      'news': {
+        'long': ['/116038490/news_pc/long', [[728, 90], [970, 250], [970, 90]], 'div-gpt-ad-1516693522873-0'],
+        '300_1': ['/116038490/news_pc/badge300_1', [[300, 250], [300, 600]], 'div-gpt-ad-1511763742602-0'],
+        '300_2': ['/116038490/news_pc/badge300_2', [[300, 250]], 'div-gpt-ad-1511764026719-0'],
+        '300_3': ['/116038490/news_pc/badge300_3', [[300, 250]], 'div-gpt-ad-1511763893491-0'],
+        '300_4': ['/116038490/news_pc/badge300_4', [[300, 250]], 'div-gpt-ad-1511828701947-0'],
+        '300_5': ['/116038490/news_pc/badge300_5', [[300, 250], [300, 600]], 'div-gpt-ad-1513306711184-0'],
+        '300_6': ['/116038490/news_pc/badge300_6', [[300, 250], [300, 600]], 'div-gpt-ad-1603787606251-0'],
+        '640_1': ['/116038490/news_pc/badge640_1', [[1, 1]], 'div-gpt-ad-1555575532823-0'],
+        'm300_1': ['/116038490/news_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517392354653-0'],
+        'm300_2': ['/116038490/news_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1513329616554-0'],
+        'pc_ol': ['/116038490/news_pc/pc_overlay', [[728, 90], [1, 1]], 'div-gpt-ad-1602033075458-0'],
+        'sp320_1': ['/116038490/news_sp/spbadge320_1', [[320, 100], [320, 180], [1, 1], 'fluid', [320, 50]], 'div-gpt-ad-1529290322012-0'],
+        'sp320_2': ['/116038490/news_sp/spbadge320_2', [[1, 1], [320, 50]], 'div-gpt-ad-1601535657268-0'],
+        'sp300_1': ['/116038490/news_sp/spbadge300_1', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1513241193161-0'],
+        'sp300_2': ['/116038490/news_sp/spbadge300_2', [[336, 280], [300, 250], [1, 1]], 'div-gpt-ad-1513249501329-0']
+        // 'spinfeed_1': ['/116038490/news_sp/spinfeed_1', ['fluid', [1, 1]], 'div-gpt-ad-1544670206969-0'],
+        // 'spinfeed_2': ['/116038490/news_sp/spinfeed_2', ['fluid', [1, 1]], 'div-gpt-ad-1544505825444-0'],
+        // 'spinfeed_3': ['/116038490/news_sp/spinfeed_3', ['fluid', [1, 1]], 'div-gpt-ad-1544670171566-0'],
+        // 'spinfeed_4': ['/116038490/news_sp/spinfeed_4', ['fluid', [1, 1]], 'div-gpt-ad-1543210611446-0']
+      },
+      'oshiete': {
+        'long': ['/116038490/oshiete_pc/long', [[970, 90], [1, 1], [728, 90]], 'div-gpt-ad-1516695336793-0'],
+        //'long_1': ['/116038490/oshiete_pc/long_1', [[1, 1], [728, 90]], 'div-gpt-ad-1575878852332-0'], //1012蟒�ｭ｢莠亥ｮ�
+        //'long_2': ['/116038490/oshiete_pc/long_2', [[1, 1], [728, 90]], 'div-gpt-ad-1575878918496-0'], //1012蟒�ｭ｢莠亥ｮ�
+        //'long_3': ['/116038490/oshiete_pc/long_3', [[1, 1], [728, 90]], 'div-gpt-ad-1575879004828-0'], //1012蟒�ｭ｢莠亥ｮ�
+        '300_1': ['/116038490/oshiete_pc/badge300_1', [[300, 600], [1, 1], [300, 250]], 'div-gpt-ad-1511764737871-0'],
+        '300_2': ['/116038490/oshiete_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1513326898600-0'],
+        '300_3': ['/116038490/oshiete_pc/badge300_3', [[1, 1], [300, 250]], 'div-gpt-ad-1511827044833-0'],
+        '300_4': ['/116038490/oshiete_pc/badge300_4', [[1, 1], [300, 250]], 'div-gpt-ad-1511827207808-0'],
+        '300_5': ['/116038490/oshiete_pc/badge300_5', [[1, 1], [300, 250]], 'div-gpt-ad-1511827386632-0'],
+        '300_6': ['/116038490/oshiete_pc/badge300_6', [[1, 1], [300, 250]], 'div-gpt-ad-1511827471495-0'],
+        'm300_1_1': ['/116038490/oshiete_pc/mbadge300_1_1', [[1, 1], [300, 250]], 'div-gpt-ad-1600311180128-0'],
+        'm300_1_2': ['/116038490/oshiete_pc/mbadge300_1_2', [[1, 1], [300, 250]], 'div-gpt-ad-1600311425265-0'],
+        'm300_2_1': ['/116038490/oshiete_pc/mbadge300_2_1', [[1, 1], [300, 250]], 'div-gpt-ad-1600311464632-0'],
+        'm300_2_2': ['/116038490/oshiete_pc/mbadge300_2_2', [[1, 1], [300, 250]], 'div-gpt-ad-1600311511300-0'],
+        'm300_3_1': ['/116038490/oshiete_pc/mbadge300_3_1', [[1, 1], [300, 250]], 'div-gpt-ad-1600311550857-0'],
+        'm300_3_2': ['/116038490/oshiete_pc/mbadge300_3_2', [[1, 1], [300, 250]], 'div-gpt-ad-1600311577082-0'],
+        'pc_ol': ['/116038490/oshiete_pc/pc_overlay', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1580361071522-0'],
+        'sp320_1': ['/116038490/oshiete_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513240304907-0'],
+        'sp320_2': ['/116038490/oshiete_sp/spbadge320_2', [[320, 100], [1, 1]], 'div-gpt-ad-1569916803271-0'],
+        'sp300_1': ['/116038490/oshiete_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511764586093-0'],
+        'sp300_2': ['/116038490/oshiete_sp/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511827823859-0'],
+        'sp300_3': ['/116038490/oshiete_sp/spbadge300_3', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511827701191-0'],
+        'sp300_4': ['/116038490/oshiete_sp/spbadge300_4', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1575879084257-0'],
+        'sp300_5': ['/116038490/oshiete_sp/spbadge300_5', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1575879117775-0'],
+        'sp300_6': ['/116038490/oshiete_sp/spbadge300_6', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-oshiete_spbadge300_6-0'],
+        'sp300_7': ['/116038490/oshiete_sp/spbadge300_7', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-oshiete_spbadge300_7-0'],
+        'sp300_8': ['/116038490/oshiete_sp/spbadge300_8', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-oshiete_spbadge300_8-0'],
+        'spinfeed_4': ['/116038490/oshiete_sp/spinfeed_4', ['fluid', [1, 1]], 'div-gpt-ad-1551421032230-0'],
+        'spinfeed_5': ['/116038490/oshiete_sp/spinfeed_5', ['fluid', [1, 1]], 'div-gpt-ad-1551421077082-0'],
+        //'spinfeed_6': ['/116038490/oshiete_sp/spinfeed_6', ['fluid', [1, 1]], 'div-gpt-ad-1551421165095-0'],
+        //'spinfeed_7': ['/116038490/oshiete_sp/spinfeed_7', ['fluid', [1, 1]], 'div-gpt-ad-1551421211732-0'],
+        //'spinfeed_8': ['/116038490/oshiete_sp/spinfeed_8', ['fluid', [1, 1]], 'div-gpt-ad-1551421283268-0'],
+        //'spinfeed_9': ['/116038490/oshiete_sp/spinfeed_9', ['fluid', [1, 1]], 'div-gpt-ad-1551422536793-0']
+      },
+      'ranking': {
+        'long': ['/116038490/rank_pc/long', [[970, 90], [1, 1], [728, 90]], 'div-gpt-ad-1517393070116-0'],
+        '300_1': ['/116038490/rank_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517392959395-0'],
+        '300_2': ['/116038490/rank_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1534231718895-0'],
+        'm300_1': ['/116038490/rank_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1516858565450-0'],
+        'm300_2': ['/116038490/rank_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1516854649699-0'],
+        'pc_ol': ['/116038490/rank_pc/pc_overlay', [[1, 1], [728, 90]], 'div-gpt-ad-rank_pc_overlay-0'],
+        'sp320_1': ['/116038490/rank_sp/spbadge320_1', [[320, 50], [320, 100]], 'div-gpt-ad-1516854458456-0'],
+        'sp320_2': ['/116038490/rank_sp/spbadge320_2', [[320, 50], [1, 1], [320, 100]], 'div-gpt-ad-1516854555258-0'],
+        'sp320_3': ['/116038490/rank_sp/spbadge320_3', [[320, 50], [1, 1]], 'div-gpt-ad-1594964674620-0'],
+        'sp300_1': ['/116038490/rank_sp/spbadge300_1', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1516854279838-0'],
+        'sp300_2': ['/116038490/rank_sp/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513309231638-0'],
+        'sp300_3': ['/116038490/rank_sp/spbadge300_3', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1534410805052-0'],
+        'sp300_4': ['/116038490/rank_sp/spbadge300_4', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1534410895339-0'],
+        'sp300_5': ['/116038490/rank_sp/spbadge300_5', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1601523207168-0']
+      },
+      'search': {
+        'sp300_1': ['/116038490/search_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1603871886621-0']
+      },
+      'sports': {
+        'long': ['/116038490/sports_pc/long', [[1, 1], [728, 90]], 'div-gpt-ad-1601950917632-0'],
+        '300_1': ['/116038490/sports_pc/badge300_1', [[300, 250], [1, 1]], 'div-gpt-ad-1516859426517-0'],
+        '300_2': ['/116038490/sports_pc/badge300_2', [[300, 250], [1, 1]], 'div-gpt-ad-1516859517790-0'],
+        '300_3': ['/116038490/sports_pc/badge300_3', [[300, 250], [1, 1]], 'div-gpt-ad-1534231083424-0'],
+        '300_4': ['/116038490/sports_pc/badge300_4', [[300, 250], [1, 1]], 'div-gpt-ad-1534231350513-0'],
+        '300_5': ['/116038490/sports_pc/badge300_5', [[300, 250], [1, 1]], 'div-gpt-ad-1534231432323-0'],
+        'm300_1': ['/116038490/sports_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1516859575984-0'],
+        'm300_2': ['/116038490/sports_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1516859686251-0'],
+        'sp320_1': ['/116038490/sports_sp/spbadge320_1', [[320, 100]], 'div-gpt-ad-1534232717537-0'],
+        'sp320_2': ['/116038490/sports_sp/spbadge320_2', [[320, 50], [1, 1], [320, 100]], 'div-gpt-ad-1534232838099-0'],
+        'sp320_2_2': ['/116038490/sports_sp/spbadge320_2_2', [[320, 50], [1, 1]], 'div-gpt-ad-1601951166428-0'],
+        'sp300_1': ['/116038490/sports_sp/spbadge300_1', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1516929728585-0'],
+        'sp300_2': ['/116038490/sports_sp/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1516929845159-0']
+      },
+      'townpage': {
+        '300_1': ['/116038490/townpage_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517390789435-0'],
+        '300_2': ['/116038490/townpage_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1534230947537-0'],
+        'm300_1': ['/116038490/townpage_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517390874093-0'],
+        'm300_2': ['/116038490/townpage_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1517390956242-0'],
+        'pc_ol': ['/116038490/townpage_pc/pc_overlay', [[1, 1], [728, 90]], 'div-gpt-ad-townpage_pc_overlay-0'],
+        'sp320_1': ['/116038490/townpage_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513307739612-0'],
+        'sp320_1_2': ['/116038490/townpage_sp/spbadge320_1_2', [[320, 50], [1, 1]], 'div-gpt-ad-1513307992761-0'],
+        'sp320_2': ['/116038490/townpage_sp/spbadge320_2', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513308748202-0'],
+        'sp300_1': ['/116038490/townpage_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511826736832-0'],
+        'sp300_2': ['/116038490/townpage_sp/spbadge300_2', [[336, 280], [1, 1], [300, 250]], 'div-gpt-ad-1513308947243-0'],
+        'sp_ol': ['/116038490/townpage_sp/sp_overlay', [[320, 50], [320, 100]], 'div-gpt-ad-townpage_sp_overlay-0']
+      },
+      'transit': {
+        'long': ['/116038490/transit_pc/long', [[970, 90], [728, 90], [1, 1]], 'div-gpt-ad-1517467791025-0'],
+        '300_1': ['/116038490/transit_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517467906815-0'],
+        '300_2': ['/116038490/transit_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1534231885487-0'],
+        'm300_1': ['/116038490/transit_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517468031882-0'],
+        'm300_2': ['/116038490/transit_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1517468099643-0'],
+        'sp320_1': ['/116038490/transit_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513305709144-0'],
+        'sp300_1': ['/116038490/transit_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513305595868-0']
+      },
+      'travel': {
+        'long': ['/116038490/travel_pc/long', [[970, 90], [728, 90], [1, 1]], 'div-gpt-ad-1517467317224-0'],
+        '300_1': ['/116038490/travel_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517467678016-0']
+      },
+      'tvtopic': {
+        'long': ['/116038490/tvtopic_pc/long', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1517391580934-0'],
+        '300_1': ['/116038490/tvtopic_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517391490807-0'],
+        'sp320_1': ['/116038490/tvtopic_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1534233533073-0'],
+        'sp300_1': ['/116038490/tvtopic_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1534233638672-0']
+      },
+      'weather': {
+        'long': ['/116038490/weather_pc/long', [[970, 90], [1, 1], [728, 90]], 'div-gpt-ad-1517391789884-0'],
+        '300_1': ['/116038490/weather_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517391704665-0'],
+        '300_2': ['/116038490/weather_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1511780057341-0'],
+        'm300_1': ['/116038490/weather_pc/mbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517391917462-0'],
+        'm300_2': ['/116038490/weather_pc/mbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1517391997384-0'],
+        'sp320_1': ['/116038490/weather_sp/spbadge320_1', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513305454285-0'],
+        'sp320_2': ['/116038490/weather_sp/spbadge320_2', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513305518711-0'],
+        'sp320_2_2': ['/116038490/weather_sp/spbadge320_2_2', [[320, 100], [1, 1]], 'div-gpt-ad-1602211171461-0'],
+        'sp320_3': ['/116038490/weather_sp/spbadge320_3', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1534233129197-0'],
+        'sp320_4': ['/116038490/weather_sp/spbadge320_4', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1534233186660-0'],
+        'sp320_5': ['/116038490/weather_sp/spbadge320_5', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1534233291743-0'],
+        'sp300_1': ['/116038490/weather_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1513305359424-0']
+      },
+      'wpedia': {
+        'long': ['/116038490/wiki_pc/long', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1517390108857-0'],
+        '300_1': ['/116038490/wiki_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517390252691-0']
+      },
+      'www': {
+        'jx_goo': ['/116038490/gootop_pc/jx_badge350_1', [[300, 250], [350, 240], [1, 1]], 'div-gpt-ad-1512970398278-0'],
+        '300_2': ['/116038490/gootop_pc/badge300_2', [[300, 250], [300, 600], [1, 1]], 'div-gpt-ad-1512970539733-0'],
+        //'300_2': ['/116038490/gootop_pc/badge300_2', [[320, 50], [320, 100], [320, 180]], 'div-gpt-ad-1512970539733-0'],
+        '320_1': ['/116038490/gootop_pc/badge320_1', [[320, 180], [320, 100], [320, 50], 'fluid'], 'div-gpt-ad-gootop_badge320_1-0'],
+        '970_1': ['/116038490/gootop_pc/badge970_1', [[970, 250], [1, 1]], 'div-gpt-ad-1531903089538-0'],
+        '300_1': ['/116038490/eco_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1517468380689-0'],    // green
+        'long_fortune': ['/116038490/fortune_pc/long', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1550125497399-0'],
+        '300_1_fortune': ['/116038490/fortune_pc/badge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1550125600231-0'],
+        '300_2_fortune': ['/116038490/fortune_pc/badge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1550125629490-0'],
+        'sp300_1_fortune': ['/116038490/fortune_sp/spbadge300_1', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125759791-0'],
+        'sp300_2_fortune': ['/116038490/fortune_sp/spbadge300_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125789654-0'],
+        'long_2_fortune': ['/116038490/fortune_pc/long_2', [[728, 90], [970, 90], [1, 1]], 'div-gpt-ad-1550125662049-0'],
+        '300_1_2_fortune': ['/116038490/fortune_pc/badge300_1_2', [[1, 1], [300, 250]], 'div-gpt-ad-1550125690839-0'],
+        '300_2_2_fortune': ['/116038490/fortune_pc/badge300_2_2', [[1, 1], [300, 250]], 'div-gpt-ad-1550125719120-0'],
+        'sp300_1_2_fortune': ['/116038490/fortune_sp/spbadge300_1_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125836887-0'],
+        'sp300_2_2_fortune': ['/116038490/fortune_sp/spbadge300_2_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1550125867843-0']
+      },
+      'repiiii': {
+        'sp300_1': ['/116038490/repiiii_sp/spbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1576556980444-0'],
+        'sp300_2': ['/116038490/repiiii_sp/spbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1577147560145-0']
+      }
+    },
+    'ocn': {
+      'testwww': {
+        'jx_ocn': ['/116038490/ocntop_pc/jx_badge350_1', [[300, 250], [1, 1]], 'div-gpt-ad-1512970595243-0'],
+        '300_2_ocn': ['/116038490/ocntop_pc/badge300_2', [[300, 250], [1, 1]], 'div-gpt-ad-1512970761694-0'],
+        '320_1': ['/116038490/ocntop_pc/badge320_1', [[320, 180], [320, 100], [320, 50], 'fluid'], 'div-gpt-ad-ocntop_badge320_1-0'],
+        '970_1_ocn': ['/116038490/ocntop_pc/badge970_1', [[970, 250], [1, 1]], 'div-gpt-ad-1545279601272-0']
+      },
+      'www': {
+        'jx_ocn': ['/116038490/ocntop_pc/jx_badge350_1', [[300, 250], [1, 1]], 'div-gpt-ad-1512970595243-0'],
+        '300_2_ocn': ['/116038490/ocntop_pc/badge300_2', [[300, 250], [1, 1]], 'div-gpt-ad-1512970761694-0'],
+        //'300_2_ocn': ['/116038490/ocntop_pc/badge300_2', [[320, 50], [320, 100], [320, 180]], 'div-gpt-ad-1512970761694-0'],
+        '320_1': ['/116038490/ocntop_pc/badge320_1', [[320, 180], [320, 100], [320, 50], 'fluid'], 'div-gpt-ad-ocntop_badge320_1-0'],
+        '970_1_ocn': ['/116038490/ocntop_pc/badge970_1', [[970, 250], [1, 1]], 'div-gpt-ad-1545279601272-0']
+      }
+    },
+    'ptd': {
+      'repiiii_test': {
+        'sp300_1': ['/116038490/repiiii_sp/spbadge300_1', [[1, 1], [300, 250]], 'div-gpt-ad-1576556980444-0'],
+        'sp300_2': ['/116038490/repiiii_sp/spbadge300_2', [[1, 1], [300, 250]], 'div-gpt-ad-1577147560145-0']
+      }
+    }
+  };
+  //Describe the frame to be ABtested
+  abTestSlotMap = {
+    'goo': {
+      'owb901': {
+      },
+      'oshiete': {
+        'sp320_1': ['/116038490/oshiete_sp/spbadge320_1_2', [[320, 50], [320, 100], [1, 1]], 'div-gpt-ad-1513240304907-0'],
+        'sp320_2': ['/116038490/oshiete_sp/spbadge320_2_2', [[320, 100], [1, 1]], 'div-gpt-ad-1569916803271-0'],
+        'sp300_1': ['/116038490/oshiete_sp/spbadge300_1_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511764586093-0'],
+        'sp300_2': ['/116038490/oshiete_sp/spbadge300_2_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511827823859-0'],
+        'sp300_3': ['/116038490/oshiete_sp/spbadge300_3_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1511827701191-0'],
+        'sp300_4': ['/116038490/oshiete_sp/spbadge300_4_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1575879084257-0'],
+        'sp300_5': ['/116038490/oshiete_sp/spbadge300_5_2', [[1, 1], [300, 250], [336, 280]], 'div-gpt-ad-1575879117775-0'],
+        'spinfeed_4': ['/116038490/oshiete_sp/spinfeed_4_2', ['fluid', [1, 1]], 'div-gpt-ad-1551421032230-0'],
+        'spinfeed_5': ['/116038490/oshiete_sp/spinfeed_5_2', ['fluid', [1, 1]], 'div-gpt-ad-1551421077082-0']
+      }
+    }
+  };
+
+  ua = navigator.userAgent;
+
+  // _goo_display_type螟画焚縺ｧ蛻､螳壹∫┌縺代ｌ縺ｰUA縺ｧ蛻､螳�
+  function getChoiceDeviceJudgmentResult() {
+    if (typeof dataLayer === 'undefined' || typeof dataLayer[0] === 'undefined' || typeof dataLayer[0].template === 'undefined') {
+      
+      if (typeof _goo_display_type === 'undefined') {
+        // iPad縺ｯpc
+        if (/iPhone|Android.*Mobile|GooDictApp/.test(ua)) {
+          return 'sp';
+        } else {
+          return 'pc';
+        }
+  
+      } else {
+    
+        if (typeof _goo_display_type === 'string') {
+          return _goo_display_type.toLowerCase();
+        } else {
+          return 'sp'; // CONSTANT.DEFAULT.DEVICE_TYPE縺ｫ蜷医ｏ縺帙ｋ縺薙→
+        }
+      }
+
+    } else {
+
+      if (window.dataLayer[0].template === 'pc') {
+        return 'pc';
+      } else {
+        return 'sp';
+      }
+    }
+
+  }
+  deviceType = getChoiceDeviceJudgmentResult();
+
+
+  loc = location.href.match(/^https?:\/\/(.+\.)?(.+)\.(goo|ocn)\.ne\.jp/);
+
+  if (loc) {
+    lv3Domain = loc[3];
+    lv4Domain = loc[2];
+
+    if(lv3Domain === 'goo' && lv4Domain === 'motorshow') {
+      lv4Domain = 'autos';
+    }
+    
+    adATA = '';
+    ataCookies = [];
+    valAta1 = '';
+    segmentCode = 'ALL4';
+
+    if (window.gooad.optimizerData) {
+      adATA = window.gooad.optimizerData.ATA;
+    } else {
+      ataCookies = (document.cookie.match(/ATA=[^;]+/) || [''])[0].replace("ATA=", "").split("|");
+      for (var item in ataCookies) if (ataCookies.hasOwnProperty(item)) {
+        adATA += ataCookies[item].substring(0, 4);
+      }
+    }
+
+    if (Array.isArray(adATA)) {
+      // optimizer Ver2
+      for (i = 0; i < adATA.length; i++) {
+        if (adATA[i] === segmentCode) {
+          valAta1 = segmentCode;
+          break;
+        }
+      }
+    } else {
+      // optimizer Ver1
+      for (i = 0; i < adATA.length / 4; i++) {
+        if (adATA.substring(i * 4, i * 4 + 4) === segmentCode) {
+          valAta1 = segmentCode;
+          break;
+        }
+      }
+    }
+  } else {
+    //goo,ocn繝峨Γ繧､繝ｳ莉･螟�
+    lv3Domain = 'ptd';
+    lv4Domain = window.gooad.pageSettingID;
+
+    //繝｢繝舌う繝ｫgoo繝�せ繝�
+    loc = location.href.match(/^https?:\/\/(.+\.)?mobile\.g00\.red/);
+    if (loc) {
+        lv3Domain = 'goo';
+        lv4Domain = 'mobile';
+    }
+  }
+
+  // 縺ｧ縺阪ｋ縺�縺第掠縺重isableInitialLoad
+  if (hbMap[deviceType][lv3Domain][lv4Domain] === false ||
+    location.href.match(/^https?:\/\/(.+\.)?(.+)\.goo\.ne\.jp\/fortune/) || 
+    location.href.match(/^https?:\/\/(.+\.)?(.+)\.goo\.ne\.jp\/uranai/)) {
+    isHb = false;
+  }
+
+  // only verification
+  if (typeof window.gooad.urlParam.gooad_stop_prebid !== 'undefined') {
+    isHb = false;
+  }
+  
+  if (isHb) {
+    window.gooad.Utility.message('disableInitialLoad');
+    googletag.cmd.push(function() {
+      googletag.pubads().disableInitialLoad();
+    });
+  }
+
+  // only verification
+  var selectSlotlist;
+  if (typeof window.gooad.urlParam.gooad_units !== 'undefined') {
+      selectSlotlist = window.gooad.urlParam.gooad_units.split('|');
+      selectSlotlist = selectSlotlist.filter(function(item) { return item !== "";});
+      window.gooad.Utility.message('gooad_units: ' + selectSlotlist);
+  }
+
+  // owb901
+  if (lv3Domain === 'goo' && (lv4Domain === 'owb901')) {
+    var pathStr = location.href.match(/^https?:\/\/owb901\.goo\.ne\.jp(\/smarttag)?\/(t|ta)\/(\w+)\//);
+    if (pathStr !== null) {
+      lv4Domain = pathStr[3];
+    }
+    execDefineSlot();
+
+    // goo繝医ャ繝励∝頃縺ГF迺ｰ蠅�
+  } else if (lv3Domain === 'goo' && (lv4Domain === 'pf' || lv4Domain === 'cf001') && loc[1].indexOf('gootop') > -1) {
+    lv4Domain = 'cf001_gootop';
+    execDefineSlot();
+
+  //dictionary CF迺ｰ蠅�
+  } else if (lv3Domain === 'goo' && lv4Domain === 'pf' && loc[1].indexOf('dict') > -1) {
+    lv4Domain = 'dictionary';
+    execDefineSlot();
+
+  //tvtopic CF迺ｰ蠅�
+  } else if (lv3Domain === 'goo' && lv4Domain === 'pf' && loc[1].indexOf('tvsrch') > -1) {
+    lv4Domain = 'tvtopic';
+    execDefineSlot();  
+
+  //weather CF迺ｰ蠅�
+  } else if (lv3Domain === 'goo' && lv4Domain === 'pf' && loc[1].indexOf('weather') > -1) {
+    lv4Domain = 'weather';
+    execDefineSlot();
+
+  //wpedia CF迺ｰ蠅�
+  } else if (lv3Domain === 'goo' && lv4Domain === 'pf' && loc[1].indexOf('wiki') > -1) {
+    lv4Domain = 'wpedia';
+    execDefineSlot();
+
+  // OCN繝医ャ繝佑F迺ｰ蠅�
+  } else if (lv3Domain === 'goo' && (lv4Domain === 'pf' || lv4Domain === 'cf001') && loc[1].indexOf('ocntop') > -1) {
+    lv4Domain = 'cf001_ocntop';
+    execDefineSlot();
+
+  } else if (lv3Domain === 'goo' && lv4Domain === 'www' && location.href.match(/^https?:\/\/(.+\.)?(.+)\.goo\.ne\.jp\/uranai/)) {
+
+    window.gooad.isLazyLoading = Math.random() > 0.5 ? true : false;
+
+    if (window.gooad.isLazyLoading) {
+      if (deviceType === 'pc') {
+        frameMap.pc.goo.www['^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/uranai'] = ['long_2_fortune', '300_1_2_fortune', '300_2_2_fortune'];
+      } else {
+        frameMap.sp.goo.www['^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/uranai\\/($|\\?)'] = ['sp300_2_2_fortune'];
+        frameMap.sp.goo.www['^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/uranai'] = ['sp300_1_2_fortune', 'sp300_2_2_fortune'];
+      }
+    }
+    execDefineSlot();
+
+  } else if (lv3Domain === 'goo' && lv4Domain === 'www' && location.href.match(/^https?:\/\/(.+\.)?(.+)\.goo\.ne\.jp\/fortune/)) {
+
+    window.gooad.isLazyLoading = Math.random() > 0.5 ? true : false;
+
+    if (window.gooad.isLazyLoading) {
+      if (deviceType === 'pc') {
+        frameMap.pc.goo.www['^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/fortune'] = ['long_2_fortune', '300_1_2_fortune', '300_2_2_fortune'];
+      } else {
+        frameMap.sp.goo.www['^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/fortune\\/($|\\?)'] = ['sp300_2_2_fortune'];
+        frameMap.sp.goo.www['^https?:\\/\\/([^.]+\\.){0,3}www\\.goo\\.ne\\.jp\\/fortune'] = ['sp300_1_2_fortune', 'sp300_2_2_fortune'];
+      }
+    }
+    execDefineSlot();
+
+  } else if (lv3Domain === 'goo' && lv4Domain === 'townpage') {
+
+    //window.gooad.isLazyLoading = true; //Math.random() > 0.5 ? true : false;
+    execDefineSlot();
+
+  // uranai繧医ｊ荳九↓譖ｸ縺上％縺ｨ
+  } else if ((lv3Domain === 'goo' && lv4Domain === 'www') ||
+             (lv3Domain === 'ocn' && lv4Domain === 'www')) {
+
+    //window.gooad.isLazyLoading = true;
+    execDefineSlot();
+
+  } else if (lv3Domain === 'goo' && lv4Domain === 'news' && deviceType === 'pc') {
+
+    //window.gooad.isLazyLoading = true;
+    execDefineSlot();
+
+  } else if (lv3Domain === 'goo' && lv4Domain === 'oshiete' && deviceType === 'sp') {
+
+    // window.gooad.isLazyLoading = true;
+    execDefineSlot();
+
+  } else if ((lv3Domain === 'goo' && lv4Domain === 'ima' && 
+              location.href.match(/^https?:\/\/(.+\.)?ima\.goo\.ne\.jp\/.*\?from=dmenu/) )) {
+
+    // window.gooad.isLazyLoading = true;
+    execDefineSlot();
+
+  } else {
+    execDefineSlot();
+  }
+
+  function execDefineSlot() {
+
+    var gooad_dfpinfo = window.gooad_dfp_domain_and_frame_info;
+    var abFrameKey;
+    if (typeof gooad_dfpinfo === 'undefined') {
+
+      urlPatternsOfCurrentDomain = frameMap[deviceType][lv3Domain][lv4Domain];
+
+      for (urlPattern in urlPatternsOfCurrentDomain) {
+
+        if (urlPatternsOfCurrentDomain.hasOwnProperty(urlPattern)) {
+          urlRegex = new RegExp(urlPattern);
+          matchedUrl = location.href.match(urlRegex);
+
+          if (matchedUrl) {
+            framesOfCurrentPage = urlPatternsOfCurrentDomain[urlPattern];
+            // only verification
+            if (selectSlotlist && selectSlotlist.length > 0) {
+              framesOfCurrentPage = selectSlotlist;
+            }
+
+            for (i = 0; i < framesOfCurrentPage.length; i++) {
+              definition = slotMap[lv3Domain][lv4Domain][framesOfCurrentPage[i]];
+
+              //Overwrite the information in the ABtest target frame
+              if (window.gooad_abflag && deviceType === 'sp') {
+                  for (abFrameKey in abTestSlotMap[lv3Domain][lv4Domain]) {
+                      if (framesOfCurrentPage[i] === abFrameKey) {
+                          definition = abTestSlotMap[lv3Domain][lv4Domain][abFrameKey];  
+                      }
+                  }
+              }
+
+              if (definition) def.push(definition);
+            }
+            break;
+          }
+        }
+      }
+    } else {
+
+      framesOfCurrentPage = gooad_dfpinfo.pageFrames;
+      // only verification
+      if (selectSlotlist && selectSlotlist.length > 0) {
+        framesOfCurrentPage = selectSlotlist;
+      }
+
+      for (i = 0; i < framesOfCurrentPage.length; i++) {
+        definition = slotMap[lv3Domain][lv4Domain][framesOfCurrentPage[i]];
+
+        //Overwrite the information in the ABtest target frame
+        if (window.gooad_abflag && deviceType === 'sp') {
+            for (abFrameKey in abTestSlotMap[lv3Domain][lv4Domain]) {
+                if (framesOfCurrentPage[i] === abFrameKey) {
+                    definition = abTestSlotMap[lv3Domain][lv4Domain][abFrameKey];  
+                }
+            }
+        }
+
+        if (definition) def.push(definition);
+      }
+    }
+    window.gooad.Utility.message('adSlot');
+    window.gooad.Utility.message(def);
+    window.gooad.hblog.dfp_adslot_defined = !!Date.now ? Date.now() : new Date().getTime();
+
+    window.gooad.dfp_domain_and_frame_info = {
+      'lv3Domain': lv3Domain,
+      'lv4Domain': lv4Domain,
+      'pageFrames': framesOfCurrentPage
+    };
+
+    if (window.gooad.dfp_define_cue) {
+
+      for (i = 0; i < window.gooad.dfp_define_cue.length; i++) {
+        dequeuedFunc = window.gooad.dfp_define_cue[i];
+        dequeuedFunc(lv3Domain, lv4Domain, framesOfCurrentPage);
+      }
+    }
+
+    if (!def || def.length === 0) return;
+
+    //譌ｩ縺丞ｮ溯｡後＆繧後ｋ繧医≧縲∽ｸ頑婿縺ｸ遘ｻ蜍�
+    // if (hbMap[deviceType][lv3Domain][lv4Domain] === false ||
+    //   location.href.match(/^https?:\/\/(.+\.)?(.+)\.goo\.ne\.jp\/fortune/) || 
+    //   location.href.match(/^https?:\/\/(.+\.)?(.+)\.goo\.ne\.jp\/uranai/)) {
+    //   isHb = false;
+    // }
+
+    //slots菫晄戟
+    window.gamSlots = window.gamSlots || [];
+    var slot;
+
+    googletag.cmd.push(function () {
+
+      screenWidth = document.documentElement.clientWidth;
+
+      // Page-level targeting.
+      googletag.pubads().setTargeting('gooad_bta_a', btaCookieAge)
+      .setTargeting('gooad_bta_g', btaCookieGender).setTargeting('gooad_fp', randomAdGroupFiller()).setTargeting('gooad_fp_adx_b', randomAdGroupAdxBrand())
+      .setTargeting('gooad_ata1', valAta1);
+
+      if (window.top.location.href.toLowerCase().indexOf('gooad_test=true') != -1) {
+        googletag.pubads().setTargeting('gooad_test', 'true');
+      }
+
+      for (i = 0; i < def.length; i++) {
+
+        if (screenWidth < 340) {
+          for (var defIndex in def[i][1]) if (def[i][1].hasOwnProperty(defIndex)) {
+            if (def[i][1][defIndex][0] === 336) {
+              def[i][1].splice(defIndex, 1);
+            }
+          }
+        }
+
+        // Slot-level targeting.
+        try {
+          window.gooad.Utility.message('defineSlot');
+          if (window.gooad.isLazyLoading) {
+            slot = googletag.defineSlot(def[i][0], def[i][1], def[i][2])
+            .addService(googletag.pubads())
+            .setCollapseEmptyDiv(true).setTargeting('gooad_lazyload', 'true');
+          } else {
+            slot = googletag.defineSlot(def[i][0], def[i][1], def[i][2])
+            .addService(googletag.pubads())
+            .setCollapseEmptyDiv(true, true);
+          }
+          window.gamSlots.push(slot);
+
+          window.gooad.Utility.message('dfp');
+          window.gooad.Utility.message(def[i][0]);
+          window.gooad.Utility.message(def[i][1]);
+          window.gooad.Utility.message(def[i][2]);
+        } catch (e) { }
+      }
+
+      //custom event
+      googletag.pubads().addEventListener('slotRequested', function(event) {
+        var slot = event.slot;
+        window.gooad.Utility.message('Ad request for slot div: ' + slot.getSlotElementId() + ', unit: ' + slot.getAdUnitPath());
+
+        // 蜃ｦ逅�ｸ医∩slot繧堤匳骭ｲ
+        window.processedSlotIds.push(slot.getSlotElementId());
+      });
+      googletag.pubads().addEventListener('slotResponseReceived', function(event) {
+        var slot = event.slot;
+        window.gooad.Utility.message('Ad response for slot div: ' + slot.getSlotElementId() + ', unit: ' + slot.getAdUnitPath());
+      });
+
+      googletag.pubads().addEventListener('slotOnload', function(event) {
+        const CHECK_DEFAULT = 0;  //news
+        const CHECK_UPPER = 1;    //dic, news
+        const CHECK_UPPER_AND_1X1 = 2;  //ima
+        const CHECK_LOWER_AND_1X1 = 3;  //map
+        const CHECK_LOWER_AND_1X1_TOP = 4; //goo, ocn
+        var slot = event.slot;
+        var adDiv, adDivId, gptDiv, gptDivId, gptIframe, gptDivHeight, gptIframeHeight;
+        var heightBase, heightAfter;
+        var checkHeightMode = CHECK_DEFAULT;
+        gptDivId = slot.getSlotElementId();
+
+        switch(gptDivId) {
+        case 'div-gpt-ad-1511779323714-0':    //SP ima sp300_1
+          adDivId = 'gooad-spbadge300_1';
+          heightBase = parseInt(window.top.innerWidth) / 300 * 250 + 1;
+          checkHeightMode = CHECK_UPPER_AND_1X1;
+          break;
+        case 'div-gpt-ad-1516928347940-0':     //SP dic sp320_1
+          adDivId = 'gooad-spbadge320_1';
+          heightBase = 100;
+          heightAfter = 200; //limit
+          checkHeightMode = CHECK_UPPER;
+          break;
+        case 'div-gpt-ad-1516693522873-0':     //PC news long
+          adDivId = 'gooad-long';
+          heightBase = 90;
+          heightAfter = 250; //limit
+          checkHeightMode = CHECK_UPPER;
+          break;
+        case 'div-gpt-ad-1511763742602-0':     //PC news 300_1
+          adDivId = 'gooad-badge300_1';
+          heightBase = 250;
+          heightAfter = 'auto';
+          break;
+        case 'div-gpt-ad-1513306711184-0':     //PC news 300_5
+          adDivId = 'gooad-badge300_5';
+          heightBase = 250;
+          heightAfter = 'auto';
+          break;
+        case 'div-gpt-ad-1603787606251-0':     //PC news 300_6
+          adDivId = 'gooad-spbadge300_6';
+          heightBase = 250;
+          heightAfter = 'auto';
+          break;
+        case 'div-gpt-ad-1517389529251-0':     //SP map 320_1_2
+          adDivId = 'gooad-spbadge320_1_2';
+          heightBase = 100;
+          heightAfter = 'auto';
+          checkHeightMode = CHECK_LOWER_AND_1X1;
+          break;
+        case 'div-gpt-ad-gootop_badge320_1-0':    //PC goo 320_1
+          adDivId = 'gooad-badge320_1';
+          heightBase = 180;
+          heightAfter = 'auto';
+          checkHeightMode = CHECK_LOWER_AND_1X1_TOP;
+          break;
+        case 'div-gpt-ad-ocntop_badge320_1-0':    //PC ocn 320_1
+          adDivId = 'gooad-badge320_1';
+          heightBase = 180;
+          heightAfter = 'auto';
+          checkHeightMode = CHECK_LOWER_AND_1X1_TOP;
+          break;
+        default:
+          return; //no change
+        }
+
+        window.gooad.Utility.message('Creative iframe for slot div: ' + gptDivId + ', unit: ' + slot.getAdUnitPath() + ' has loaded.');
+        // adjust height
+        adDiv = window.top.document.getElementById(adDivId);
+        gptDiv = window.top.document.getElementById(gptDivId);
+        gptIframe = gptDiv.getElementsByTagName('iframe')[0];
+        if (adDiv && gptIframe) {
+          gptIframeHeight = parseInt(gptIframe.clientHeight, 10); 
+          gptDivHeight = parseInt(gptDiv.clientHeight, 10);
+          if (checkHeightMode === CHECK_UPPER_AND_1X1 ) {
+            if (gptIframeHeight <= 1 || gptDivHeight <= 1 || heightBase < gptIframeHeight || heightBase < gptDivHeight) {
+                adDiv.style.overflow = 'hidden';
+                window.gooad.Utility.message(adDivId + 'height not change & overflow:hidden');
+            }
+            return;
+
+          } else if (checkHeightMode === CHECK_LOWER_AND_1X1 ) {
+            if ((1 < gptIframeHeight && gptIframeHeight < heightBase) || (1 < gptDivHeight && gptDivHeight < heightBase)) {
+                window.gooad.Utility.message(adDivId + ' ' + gptDiv.id + ' min-height before: ' + gptDiv.style.minHeight);
+                adDiv.style.minHeight = '0';
+                gptDiv.style.minHeight = '0';
+                window.gooad.Utility.message(adDivId + ' ' + gptDiv.id + ' min-height after: ' + gptDiv.style.minHeight);
+            }
+            return;
+
+          } else if (checkHeightMode === CHECK_LOWER_AND_1X1_TOP) {
+            if ((1 < gptIframeHeight && gptIframeHeight < heightBase) || (1 < gptDivHeight && gptDivHeight < heightBase)) {
+                window.gooad.Utility.message(adDivId + ' ' + gptDiv.id + ' height before: ' + adDiv.style.height);
+                adDiv.style.height = '';
+                gptDiv.style.hinHeight = '';
+                window.gooad.Utility.message(adDivId + ' ' + gptDiv.id + ' height after: ' + adDiv.style.height);
+            }
+            return;
+
+          } else if (gptIframeHeight > heightBase) {
+            window.gooad.Utility.message(adDivId + ' height before: ' + adDiv.style.height);
+            switch(checkHeightMode) {
+            case CHECK_DEFAULT:
+              adDiv.style.height = heightAfter; //auto
+              break;
+            case CHECK_UPPER:
+              adDiv.style.height = Math.min(heightAfter, gptIframeHeight) +'px';
+              break;
+            }
+            window.gooad.Utility.message(adDivId + ' height after: ' + adDiv.style.height);
+            return;
+          }
+        }
+        return;
+      });
+
+      googletag.pubads().addEventListener('impressionViewable', function(event) {
+        var slot = event.slot;
+        window.gooad.Utility.message('Impression for slot div: ' + slot.getSlotElementId() + ', unit: ' + slot.getAdUnitPath() + ' became viewable.');
+      });
+
+      if (!window.gooad.isLazyLoading) { //not use at lazyLoading
+        window.gooad.Utility.message('enableSingleRequest');
+        googletag.pubads().enableSingleRequest();
+      }
+
+      //譌ｩ縺丞ｮ溯｡後＆繧後ｋ繧医≧縲∽ｸ頑婿縺ｸ遘ｻ蜍�
+      // if (isHb) {
+      //   window.gooad.Utility.message('disableInitialLoad');
+      //   googletag.pubads().disableInitialLoad();
+      // }
+
+      if (window.gooad.isLazyLoading) {
+        window.gooad.Utility.message('LazyLoading on');
+        //googletag.pubads().enableLazyLoad({
+        //  fetchMarginPercent: 100,
+        //  renderMarginPercent: 100,
+        //  mobileScaling: 2.0
+        //});
+
+        if (lv3Domain === 'goo' && lv4Domain === 'townpage') {
+          googletag.pubads().enableLazyLoad({
+            fetchMarginPercent: 100,
+            renderMarginPercent: 100,
+            mobileScaling: 1.0
+          });
+
+        } else if (lv3Domain === 'goo' && lv4Domain === 'www' && location.href.match(/^https?:\/\/(.+\.)?(.+)\.goo\.ne\.jp\/uranai/)) {
+          googletag.pubads().enableLazyLoad({
+            fetchMarginPercent: 100,
+            renderMarginPercent: 100,
+            mobileScaling: 1.0
+          });
+        
+        } else if (lv3Domain === 'goo' && lv4Domain === 'news' && deviceType === 'pc') {  
+          googletag.pubads().enableLazyLoad({
+            fetchMarginPercent: 40, //150,
+            renderMarginPercent: 30, //100,
+            mobileScaling: 1.0
+          });
+
+        } else if (lv3Domain === 'goo' && lv4Domain === 'oshiete' && deviceType === 'sp') {  
+          googletag.pubads().enableLazyLoad({
+            fetchMarginPercent: 150,
+            renderMarginPercent: 100,
+            mobileScaling: 1.0
+          });
+
+        } else if ((lv3Domain === 'goo' && lv4Domain === 'www') ||
+                   (lv3Domain === 'ocn' && lv4Domain === 'www') ||
+                   (lv3Domain === 'goo' && lv4Domain === 'ima' && 
+                    location.href.match(/^https?:\/\/(.+\.)?ima\.goo\.ne\.jp\/.*\?from=dmenu/) )) {
+          googletag.pubads().enableLazyLoad({
+            fetchMarginPercent: 100,
+            renderMarginPercent: 100,
+            mobileScaling: 1.0
+          });
+
+        //default
+        } else {
+          googletag.pubads().enableLazyLoad({
+            fetchMarginPercent: 0,
+            renderMarginPercent: 0,
+            mobileScaling: 2.0
+          });
+
+        }
+      }
+
+      googletag.pubads().collapseEmptyDivs();
+      window.gooad.Utility.message('enableServices');
+      googletag.enableServices();
+
+      // ptd逕ｨflag
+      if (lv3Domain === 'ptd') {
+        window.top.ptdAd = true;
+      }
+
+    });
+
+    // force dfp refresh
+    if (isHb) {
+        setTimeout(function () {
+          window.gooad.Utility.message('force refresh');
+          if (!window.gooadDfpRefreshed) {
+            window.gooad.hblog.force_refresh = true;
+          }
+          window.gooadDfpRefresh();
+          // send HBLog
+          if(loggingConfig.loggingOff){
+            window.gooad.Utility.message("logging Off");
+          } else {
+            if (!_sampled(loggingConfig.samplingRate)) {
+              loggingConfig.sendDataOn = false;
+            }
+            sendLogData();
+          }
+        }, gamTimeout);
+    }
+
+    // for AT_L2
+    if (lv3Domain === 'goo') {
+      cookieLimit = (!!Date.now ? Date.now() : new Date().getTime()) + 60 * 1e3;
+      cookieDomain = '.goo.ne.jp';
+      document.cookie = 'ATA_URL=' + encodeURIComponent(location.href) + ';expires=' +
+        new Date(cookieLimit).toUTCString() + ';domain=' + cookieDomain + ';path=/';
+    }
+
+  }
+
+  // logging functions
+  function _sampled(rate) {
+    if (gooad.hblog.map_dfp_load%100 < rate * 100) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function _getCookie(t) {
+    var i, e, s, n = document.cookie.split(";");
+    for (i = 0; i < n.length; i++)
+      if (e = n[i].substr(0, n[i].indexOf("=")), s = n[i].substr(n[i].indexOf("=") + 1), (e = e.replace(/^\s+|\s+$/g, "")) === t) return decodeURIComponent(s);
+    return "";
+  }
+
+  function _sendToTD(tdTableName, tdSendData) {
+    td.set(tdTableName, tdSendData);
+    td.set('$global', 'td_global_id', 'td_global_id');
+    td.trackPageview(tdTableName, function(){} );
+    return;
+  }
+
+  function getPrebidAuctionLog() {
+    var auctionLog, events, auctionEnd, i, j, k;
+    auctionLog = {};
+    events = gooad.hblog.pbjsReady ? pbjs.getEvents() : [];
+    auctionEnd = false;
+
+    // extract "auctionEnd" event and create auctionLog object
+    for (i = 0; i < events.length; i++) {
+      var e = events[i];
+      if (e.eventType !== "auctionEnd") {
+        continue;
+      }
+
+      auctionEnd = true;
+      var args = e.args;
+      auctionLog = {
+        "auctionId": args.auctionId,
+        "auctionStartTimeStamp": args.timestamp,
+        "auctionEndTimeStamp": args.auctionEnd,
+        "auctionEndElapsedTime": e.elapsedTime,
+        "timeout": args.timeout,
+        "bidLog": {}
+      };
+
+      // create bidLog from bidderRequests
+      for (j = 0; j < args.bidderRequests.length; j++) {
+        var bidder = args.bidderRequests[j];
+        var bidderCode = bidder.bidderCode;
+        for (k = 0; k < bidder.bids.length; k++) {
+          var b = bidder.bids[k];
+          if (!auctionLog["bidLog"][b.adUnitCode]) {
+            auctionLog["bidLog"][b.adUnitCode] = {};
+          }
+          auctionLog["bidLog"][b.adUnitCode][b.bidId] = {
+            auctionId: b.auctionId,
+            adUnitCode: b.adUnitCode,
+            bidderCode: bidderCode,
+            mediaTypes: Object.keys(b.mediaTypes)[0],
+            sizes: (function(){
+              var sizes = [];
+              for (var l = 0; l < b.sizes.length; l++) {
+                sizes.push(b.sizes[l].join("x"));
+              }
+              return sizes;
+            })(),
+            adId: "",
+            cpm: 0,
+            requestTimeStamp: undefined,
+            timeToRespond: undefined,
+            status: ""
+          };
+        }
+      }
+
+      // add bidResponse to bidLog
+      for (j = 0; j < args.bidsReceived.length; j++) {
+        var response = args.bidsReceived[j];
+        if (!auctionLog["bidLog"][response.adUnitCode] || !auctionLog["bidLog"][response.adUnitCode][response.requestId]) {
+          window.gooad.Utility.message(
+            "No bid request. adUnitCode:"+response.adUnitCode+" requestId:"+response.requestId);
+          continue;
+        }
+        auctionLog["bidLog"][response.adUnitCode][response.requestId]["adId"] = response.adId;
+        auctionLog["bidLog"][response.adUnitCode][response.requestId]["cpm"] = response.cpm;
+        auctionLog["bidLog"][response.adUnitCode][response.requestId]["requestTimeStamp"] = response.requestTimestamp;
+        auctionLog["bidLog"][response.adUnitCode][response.requestId]["timeToRespond"] = response.timeToRespond;
+        auctionLog["bidLog"][response.adUnitCode][response.requestId]["status"] = response.statusMessage;
+      }
+
+      // add noBid to bidLog
+      for (j = 0; j < args.noBids.length; j++) {
+        var nb = args.noBids[j];
+        if (!auctionLog["bidLog"][nb.adUnitCode] || !auctionLog["bidLog"][nb.adUnitCode][nb.bidId]) {
+          window.gooad.Utility.message(
+            "No bid request. adUnitCode:"+nb.adUnitCode+" bidId:"+nb.bidId);
+          continue;
+        }
+        auctionLog["bidLog"][nb.adUnitCode][nb.bidId]["status"] = "noBid";
+      }
+      break;
+    }
+    if (!auctionEnd) {
+      window.gooad.Utility.message('auction is not end yet.');
+    }
+
+    return auctionLog;
+  }
+
+  function getPrebidImpLog () {
+    var winners = gooad.hblog.pbjsReady ? pbjs.getAllWinningBids() : [];
+    var impLog =[];
+    var i;
+    for (i = 0; i < winners.length; i++) {
+      var w = winners[i];
+      impLog.push({
+        auction_id: w.auctionId,
+        request_id: w.requestId,
+        adunit_code: w.adUnitCode
+      });
+    }
+    return impLog;
+  }
+  
+  function _outputTable(outputArray, exceptionMessage) {
+    if (outputArray.length) {
+      if (console.table) {
+        console.table(outputArray);
+      } else {
+        for (var i = 0; i < outputArray.length; i++) {
+          console.log(outputArray[i]);
+        }
+      }
+    } else {
+    console.log(exceptionMessage);
+    }  
+  }
+
+  function sendLogData() {
+    // initialize
+    var hbLog, prebidAuctionLog, prebidImpLog, debugOutput, i, key, k;
+    hbLog = {
+      logging_ver: "1.0.1",
+      page_setting_id: window.gooad.pageSettingID,
+      nguserid: _getCookie('NGUserID'),
+      device: deviceType,
+      map_dfp_load: window.gooad.hblog.map_dfp_load || undefined,
+      map_aps_load: window.gooad.hblog.map_aps_load || undefined,
+      map_prebid_load: window.gooad.hblog.map_prebid_load || undefined,
+      dfp_adslot_defined: window.gooad.hblog.dfp_adslot_defined || undefined,
+      aps_bid_request: window.gooad.hblog.aps_bid_request || undefined,
+      aps_bid_response: window.gooad.hblog.aps_bid_response || undefined,
+      prebid_add_adunits: window.gooad.hblog.prebid_add_adunits || undefined,
+      prebid_bid_request: window.gooad.hblog.prebid_bid_request || undefined,
+      prebid_bid_response: window.gooad.hblog.prebid_bid_response || undefined,
+      dfp_refresh: window.gooad.hblog.dfp_refresh || undefined,
+      force_refresh: window.gooad.hblog.force_refresh || false,
+      pbjs_ready: window.gooad.hblog.pbjsReady || false,
+      pbjs_ready_time: window.gooad.hblog.pbjsReadyTime || undefined,
+      apstag_ready: window.gooad.hblog.apstagReady || false,
+      apstag_ready_time: window.gooad.hblog.apstagReadyTime || undefined,
+      prebid_auction_id: undefined,
+      prebid_log: {}
+    };
+    prebidAuctionLog = {};
+    prebidImpLog = [];
+    debugOutput = [];
+
+    // send hbLog to TD
+    prebidAuctionLog = getPrebidAuctionLog();
+    hbLog.prebid_auction_id = prebidAuctionLog.auctionId;
+    hbLog.prebid_log = JSON.stringify(prebidAuctionLog);
+    window.gooad.Utility.message("prebidAuctionLog");
+    window.gooad.Utility.message(prebidAuctionLog);
+    window.gooad.Utility.message("hbLog");
+    window.gooad.Utility.message(hbLog);
+    if(loggingConfig.sendDataOn){
+      _sendToTD(loggingConfig.tdTables.hbLogTable, hbLog);
+    }
+    // send impLog to TD
+    setTimeout(function () {
+        prebidImpLog = getPrebidImpLog();
+        window.gooad.Utility.message("prebidImpLog");
+        window.gooad.Utility.message(prebidImpLog);
+        for (i = 0; i < prebidImpLog.length; i++) {
+          if(loggingConfig.sendDataOn){
+            _sendToTD(loggingConfig.tdTables.prebidImpTable, prebidImpLog[i]);
+          }
+        }
+        // debug output for prebidImpLog
+        if(window.top.location.href.indexOf('gooad_debug')> -1){
+          _outputTable(prebidImpLog, 'NO prebid Winner');
+        }
+      }, loggingConfig.timeToGetImpLog);
+    // debug output for prebidAuctionLog
+    if(window.top.location.href.indexOf('gooad_debug')> -1){
+      if (prebidAuctionLog.bidLog) {
+        for (key in prebidAuctionLog.bidLog) {
+          if (prebidAuctionLog.bidLog.hasOwnProperty(key)) {
+            for (k in prebidAuctionLog["bidLog"][key]) {
+              if (prebidAuctionLog["bidLog"][key].hasOwnProperty(k)) {
+                prebidAuctionLog["bidLog"][key][k]["sizeString"] = prebidAuctionLog["bidLog"][key][k]["sizes"].join(",");
+                debugOutput.push(prebidAuctionLog["bidLog"][key][k]);
+              }
+            }
+          }
+        }
+      }
+      _outputTable(debugOutput, 'NO prebid responses');
+    }
+  }
+
+}());

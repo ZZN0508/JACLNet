@@ -1,0 +1,103 @@
+;(function(){
+
+var window = this;
+var w = this;
+var doc = document;
+var k = window.document.currentScript;
+
+w.eadt = w.eadt || {};
+w.eadt.cmd = w.eadt.cmd || [];
+
+if (!w.eadt.hasOwnProperty("_")) {
+
+    var zp = {},
+        zi = {},
+        nid = 0,
+        did = 0,
+        c = '',
+        zpx = function (z) {
+            if (typeof zi[z] === "undefined") zi[z] = -1;
+            zi[z] += 1;
+            return zi[z];
+        },
+        zp = function (z, i) {
+            return z + "." + i;
+        },
+        rzp = function (p, z, i) {
+            zp[p] = [z, i];
+        },
+        ts = function () {
+            return (new Date()).getTime();
+        },
+        bu = function (a, z, p) {
+            var cw = w.screen.availWidth || w.innerWidth || doc.documentElement.clientWidth || doc.body.clientWidth,
+            ch = w.screen.availHeight || w.innerHeight || doc.documentElement.clientHeight || doc.body.clientHeight,
+            useSSL = 'https:' == doc.location.protocol,
+            url = (useSSL? 'https:' : 'http:') + '//eas-fe.eskimi.com/delivery/s?id='+z+'&t=1' + (a? '&async=1' : '&sync=1') +'&cw='+cw+'&ch='+ch+'&url='+encodeURIComponent(w.location.href)+'&ref='+encodeURIComponent(doc.referrer)+(nid? '&nid=' + nid : '')+(did? '&did=' + did : '')+'&p='+encodeURIComponent(p)+(c? '&c=' + encodeURIComponent(c) : '')+'&_='+ts();
+            return url;
+        }, ls = function (u, a, t) {
+            var s = doc.createElement('script');
+            if (t) u += '?=_'+ ts();
+            s.src = u ;
+            s.type = 'text/javascript';
+            s.async = !!a;
+            (doc.head || doc.body || doc.documentElement).appendChild(s);
+        };
+
+    w.eadt.setNetwork = function (a) {
+        if (!isNaN(a)) nid = parseInt(a, 10);
+    };
+
+    w.eadt.setDomain = function (a) {
+        if (!isNaN(a)) did = parseInt(a, 10);
+    };
+
+    w.eadt.setMacros = function (a) {
+        c = a;
+    };
+
+    w.eadt.render = function (z, i) {
+        var z, i;
+        z = parseInt(z, 10), el = doc.getElementById(i);
+        if (z < 1 || !el) return;
+
+        var p = zp(z, zpx(z)), l = !1, u;
+
+        if (!l) {
+            u = bu(!0, z, i);
+            ls(u, 1);
+            l = !0;
+        }
+
+        if (l) {
+            rzp(p, z, i);
+        }
+    };
+
+};
+
+var runCmdOrRetry = function(r, d) {
+    var r, d;
+    if (w.eadt.cmd.length > 0) {
+        runCmd();
+    } else if (r > 0) {
+        d *= 2;
+        r -= 1;
+        setTimeout(function(){ runCmdOrRetry(r, d) }, d);
+    }
+},
+runCmd = function() {
+    if (w.eadt.cmd.length > 0) {
+        for (var c in w.eadt.cmd) {
+            var cmd = w.eadt.cmd[c];
+            delete w.eadt.cmd[c];
+            if (typeof cmd === "function") {
+                cmd();
+            }
+        }
+    }
+};
+
+runCmdOrRetry(15, 1);
+
+}).call(this)

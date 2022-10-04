@@ -1,0 +1,51 @@
+/**
+ * form.js init file to trigger default PF functionality
+ **/
+
+$(document).ready(function() {
+
+ SKYPE.Form.Input.init();
+
+ var _parentValidation = function($form){
+  if (typeof $form == 'undefined') return;
+
+  SKYPE.Form.formWasSubmitted = true;
+  /**
+   * Counter that holds the number of erronous elements
+   * that is used on deciding whether to submit the form or not.
+   **/
+  SKYPE.Form.invalidElementCount = 0;
+
+  var $required = $form.find('.required input, .required select').not(':disabled');
+
+  $required.each(function(){
+   SKYPE.Form.ValidateFormElements.validate($(this));
+  });
+
+  if (SKYPE.Form.invalidElementCount === 0) {
+   SKYPE.frameApi.parent.parentFormValidated(true);
+  } else {
+   SKYPE.frameApi.parent.parentFormValidated(false);
+            $('.fieldRow.error:first').addClass('active');
+  }
+
+        SKYPE.frameApi.parent.validateFrame();
+ };
+
+ $('.parentValidation').each(function(){
+  var $form = $(this);
+
+  $form.find('.submit').on('click.validation', function(event){
+   event.preventDefault();
+
+   _parentValidation($form);
+  });
+
+  $form.find('input, select').on('keyup.validation',function(event){
+   if (event.keyCode == 13) {
+    event.preventDefault();
+    _parentValidation($form);
+   }
+  });
+ });
+});

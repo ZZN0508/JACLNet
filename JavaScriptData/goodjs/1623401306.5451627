@@ -1,0 +1,46 @@
+if(!window.URLEdit){
+   
+ window.URLEdit = function(url){
+  
+  if(!url) url = location.href;
+  
+  var getUrlParams = function(url) {
+       var vars = {};
+       var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+           vars[unescape(key)] = unescape(value);
+       });
+       return vars;
+  }
+  
+  
+  var parser = document.createElement('a');
+  parser.href = url;
+  
+  this.protocol = parser.protocol.substring(0, parser.protocol.length -1);
+  this.hostname = parser.hostname;
+  this.port = parser.port;
+  this.pathname = parser.pathname;
+  this.hash = parser.hash.substring(1);
+  this.params = getUrlParams(parser.search);
+  
+  var me = this;
+  
+  this.param = function(name, val){
+   if(!val) return me.params[name];
+   else me.params[name] = val;
+  }
+  
+  this.toString = function(){
+   var ret = me.protocol + "://" + me.hostname;
+   if(me.port) ret += ":" + me.port;
+   ret += me.pathname;
+   if(me.params){
+    var params1 = jQuery.param(me.params);
+    if(params1.length > 0) ret += "?" + params1;
+   }
+   if(me.hash) ret += "#" + me.hash;
+   return ret;
+  }
+  
+ }
+}

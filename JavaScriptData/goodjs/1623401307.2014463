@@ -1,0 +1,234 @@
+(function(){
+ var siteUser = null;
+ var appId    = null;
+ var origin   = null;
+
+ var SSOConf = window.SSOConf;
+ if(!SSOConf || !SSOConf.cookieName || !SSOConf.targetDomain || !SSOConf.enableP2S) {console.error("parametri attivazione non sufficienti!!");return;}
+
+ var cookieName      = SSOConf.cookieName;
+ var cookieP2S       = SSOConf.cookieP2S;
+ var enableP2S       = SSOConf.enableP2S;
+ var enableLogs      = SSOConf.enableLogs;
+ var targetDomain    = SSOConf.targetDomain;
+ var timeout         = null;
+ var TPCBlocked      = document.cookie.length == 0;
+
+ var cookie_samesite = "; samesite=none; secure";  
+     if (window.location.protocol == "http:" ) cookie_samesite = "";
+ var host            = window.location.protocol+ "//" + window.location.host;
+ var url_p2sService  = "https://scripts.kataweb.it/ws/pts/index.php?&tipo=ws&hash="
+     if (host != "https://login.kataweb.it") url_p2sService  ="https://scripts.kataweb.it/ws/pts/index_test.php?&tipo=ws&hash="
+
+ var printLog= function(message) {
+  if (enableLogs)   {
+   console.log(message);
+  }
+ }
+
+ printLog("sso-frame - INIT - SSOConf: "+JSON.stringify(SSOConf) + " - cookie_samesite:" +  cookie_samesite);
+ document.cookie="kwsso-3pc=1; path=/; expires="+new Date(new Date().getTime()+3600*24*265*200*1000) + cookie_samesite;
+ 
+
+ var readCookie = function (name){var nameEQ=name+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ')c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);}
+return null;} 
+
+ var readJson = function(){
+  var cookieValue = readCookie(cookieName);
+  try { return JSON.parse(unescape(cookieValue.replace(/\\"/g,"\"").replace(/(^"|"$)/g,""))); }
+  catch(e){return null;};
+ }
+
+ var sendMessage = function(message){
+  message = JSON.stringify(message);
+  window.parent.postMessage(message, targetDomain);
+ }
+
+ var userDetected = function(msg1){
+  var msg = {"op": "statusChange"}
+  msg.data = msg1;
+  sendMessage(msg);
+  timeout = setTimeout(function(){detectUser()}, 5000);
+ }
+
+ var userLogged = function(msg1){
+  var msg = {"op": "forceLogin"}
+  msg.data = msg1;
+  sendMessage(msg);
+ }
+
+ var callJSLogin = function(op, msg, appId, cb){
+  var origin = undefined;
+  var jwt    = undefined;
+  
+  var checkAutologin = "/login/SSO?op=" + op + "&service=" + escape(appId.appId);
+  if(appId.origin) checkAutologin+="&origin="+encodeURIComponent(appId.origin);
+  if(appId.jwt)    checkAutologin+="&id_token="+encodeURIComponent(appId.jwt);
+  
+  var complete = function(){
+   var hasSSID  = window.sso_status && sso_status == 'logged';
+       hasSSID &= window.sso_is_registered && sso_is_registered == "Y";
+       hasSSID &= window.sso_SSID !== undefined;
+
+   if (hasSSID) {
+    msg.SSID = window.sso_SSID;
+                if(appId.jwt) msg.op="login";
+   }
+   else if(appId.jwt) {
+                 if (window.sso_status && sso_status == 'no_logged')            msg.op="logout";
+                 else if(window.sso_is_registered && sso_is_registered == "N")  msg.op="login_manual";
+   }
+   cb(msg);
+  }
+
+  $.ajax({
+   url: checkAutologin
+   ,dataType: 'script'
+   ,cache: true
+   ,success: complete
+   ,error: complete
+  });
+ }
+
+ var callJSp2s = function(appId){
+  var cookieSSOValue = readCookie(cookieName);
+  var cookieP2SValue = readCookie(cookieP2S);
+  //-- printLog("callJSp2s - cookieval - cookieSSOValue:" + cookieSSOValue + " - cookieP2SValue:" + cookieP2SValue);
+
+  if (cookieSSOValue && (!cookieP2SValue)) {
+   var host = location.host;
+
+   var d = new Date();
+   d.setTime(d.getTime() + (5*60*1000));
+   var expires = "expires="+ d.toUTCString();
+
+   var host = location.hostname;
+   if (host.split('.').length === 1)   {
+    document.cookie = cookieP2S  + '={\"swgt\": [\"NA\"]};' + expires + '; path=/' + cookie_samesite;
+   }
+   else {
+    domainParts = host.split('.');
+    domainParts.shift();
+    var domain = domainParts.join('.');
+    document.cookie = cookieP2S  + '={\"swgt\": [\"NA\"]};' + expires + '; path=/; domain=' + domain + cookie_samesite;
+   }
+
+   // la stringa che rappresenta il cookieSSOValue ha delle anomalie che sono riuscito a risolvere facendo un doppio parse della stringa. 
+   var strCookieSSO = $.parseJSON(cookieSSOValue);
+   var objCookieSSO = $.parseJSON(strCookieSSO);
+   var checkP2S = url_p2sService + objCookieSSO.hashId;
+
+   $.getJSON( checkP2S, {})
+    .done(function( data ) {
+     //-- printLog("callJSp2s - data:" + data);
+     var d = new Date();
+     d.setTime(d.getTime() + (24*60*60*1000));
+     var expires = "expires="+ d.toUTCString();
+     domainParts = host.split('.');
+     domainParts.shift();
+     var domain = domainParts.join('.');
+     var strJson = JSON.stringify(data);
+     //--printLog("callJSp2s - cookie:" + cookieP2S + '=' + strJson + ';' + expires + ';path=/;domain=' + domain);
+     document.cookie = cookieP2S + '=' + strJson + ';' + expires + '; path=/; domain=' + domain + cookie_samesite;
+    });
+  }
+ }
+
+ var lastJsonHash = undefined;
+ var detectUser = function(){
+  clearTimeout(timeout);
+  var json     = readJson();
+  var jsonHash = json && json.hashId ? json.hashId : null;
+
+  printLog("detectUser - start - jsonjson.hashId:" + jsonHash + " -  siteUser:" + siteUser + " - lastJsonHash:" + lastJsonHash);
+  if ( ('Y' == enableP2S.toUpperCase()) || ('N.MC' == enableP2S.toUpperCase()) ) {
+   callJSp2s(appId);
+  }
+
+  var op = "sameuser";
+  if(!jsonHash){
+   if(siteUser && !TPCBlocked)   op = "logout";
+ 
+  } else {
+   if(!siteUser)                 op = "login";
+   else if(siteUser != jsonHash) op = "changeuser";
+  }
+
+  printLog("detectUser - op: "+op);
+  var msg = {"op": op, "hashId": jsonHash};
+  if(TPCBlocked) msg.TPCBlocked = true; // blocco cookie 3° parti
+
+  if(op == "logout" || op == "sameuser"){
+   printLog("detectUser - logout - same user - op:" + op);
+   userDetected(msg);
+
+  } else {
+   if(jsonHash == lastJsonHash){ // questo vuol dire solamente login_manual
+    printLog("detectUser - login_manual");
+    msg.op = "login_manual";
+    userDetected(msg);
+
+   } else {
+                printLog("detectUser - altro");    
+    callJSLogin("app.jslogin", msg, {appId: appId, origin: origin}, function(msg){
+     if(!msg.SSID) msg.op = "login_manual";
+     printLog("detectUser - altro - " + msg.op);
+     userDetected(msg);
+    });
+   }
+  }
+
+  lastJsonHash = jsonHash;
+ }
+
+ var getSSID = function(params){
+  var msg = {"op": "getSSID"};
+  if(siteUser){
+   callJSLogin("app.jslogin", {}, params, function(msg1){
+    msg.data = msg1;
+    sendMessage(msg);
+   });
+
+  } else {
+   msg.data = {};
+   sendMessage(msg);
+
+  }
+ }
+
+ var onMessage = function(e){
+  if(e.originalEvent.origin != targetDomain) return;
+
+  var data = null;
+  try{ data = JSON.parse(e.originalEvent.data); } catch(e){}
+  if(data){
+   if(data.op == "setSiteUser"){
+    appId = data.appId;
+    if(!origin) origin = data.origin;
+    if(siteUser != data.siteUser){
+     lastJsonHash = undefined;
+    }
+    siteUser = data.siteUser;
+    detectUser();
+
+   } else if(data.op == "getSSID"){
+    var appId1 = data.appId;
+    if(!appId1) appId1 = appId;
+    getSSID({appId: appId1, origin: data.origin});
+
+   } else if (data.op == "setJwtUser") {
+                    var msg = {};
+     callJSLogin("app.jsforcelogin", msg, {appId: data.appId, jwt: data.jwt}, function(msg){
+           printLog("jsforcelogin - uscita con op: " + msg.op);
+                    userLogged(msg);
+    });
+   }
+  }
+ }
+
+ $(window).bind("message", onMessage);
+
+ var message = {"op": "init"};
+ sendMessage(message);
+
+})();

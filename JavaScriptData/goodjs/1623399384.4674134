@@ -1,0 +1,131 @@
+
+	if (typeof SKYPE === 'undefined') {
+		var SKYPE = {};
+	}
+	SKYPE.settings = {};
+	SKYPE.settings.api = {
+		sessionApiUrl : ""
+	}
+
+	SKYPE.settings.l10s = {};
+	SKYPE.settings.l10s.overlay = {
+		closeButton : "关闭",
+		instructions : "Overlay now in focus: explore or press escape to close"
+	}
+
+	$(document).ready(function() {
+		initCarousel();
+	});
+
+	function initCarousel() {
+		setCarousel();
+		setCarouselHeight();
+	}
+
+	function setCarousel() {
+
+		var owl = $("#carousel");
+
+		owl.owlCarousel({
+
+			items : 2,
+			slideSpeed : 200,
+			paginationSpeed : 1400,
+			rewindSpeed : 1400,
+			itemsDesktop : [ 1000, 2 ], //2 items between 1000px and 901px
+			itemsDesktopSmall : [ 900, 2 ], //2 items betweem 900px and 601px
+			itemsTablet : [ 600, 1 ], //1 items between 600 and 0;
+			itemsMobile : false, //itemsMobile disabled - inherit from itemsTablet option
+			autoHeight : false,
+			autoPlay : true,
+			startDragging : stopCarousel,
+			afterUpdate : setCarouselHeight
+
+		});
+
+		owl.click(function() {
+			stopCarousel();
+		})
+	}
+
+	function playCarousel() {
+		var owl = $("#carousel");
+		owl.trigger('owl.play');
+	}
+
+	function stopCarousel() {
+		var owl = $("#carousel");
+		owl.trigger('owl.stop');
+	}
+
+	function setCarouselHeight() {
+
+		var owl = $("#carousel"), maxHeight = 0;
+
+		if (window.matchMedia('only screen and (max-width: 600px)').matches) {
+			owl.data('owlCarousel').reinit({
+				autoHeight : true
+			});
+			$("#carousel .slide").css('min-height', '180px')
+			$("#carousel .owl-wrapper-outer").css('height', '180px');
+		} else {
+			owl.data('owlCarousel').reinit({
+				autoHeight : true
+			});
+			$("#carousel .slide").css('min-height', '');
+			var thisHeight = $("#carousel .owl-wrapper").height();
+			$("#carousel .slide").css('min-height', (thisHeight) + 'px');
+			$("#carousel .owl-wrapper-outer")
+					.css('height', (thisHeight) + 'px');
+
+			var isiPad = navigator.userAgent.toLowerCase().indexOf("ipad");
+			if (isiPad > -1) {
+				$("#carousel .background img").css('height', 'auto');
+				setTimeout(function() {
+					$("#carousel .background img").css('height', '');
+				}, 1);
+			}
+
+		}
+	}
+
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bfde3a9e48a64ccf417913895fbe8818";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+
+
+								var isie6 = window.XMLHttpRequest?false:true;
+								
+								var targ = document.getElementById("QR");
+								if(isie6){
+									targ.style.position='absolute'; 
+								}else{
+									targ.style.position = 'fixed';	
+								}
+								targ.style.right = '40'+'px';
+								targ.style.bottom = '30'+'px'; 
+								
+								function myonmouseover(){
+									$(targ).show();
+								}
+	
+								function myonmouseout(){
+									$(targ).hide();
+								}
+							
+
+		$("#june-desktop,#june-mobile,#mothers-pc,#mothers-mobile,#college1,#college2,#cj-desktop,#cj-mobile").bind("click", function(event) {
+
+					//event为事件对象  
+
+					//.........  
+
+					event.stopPropagation(); //停止事件冒泡  
+
+				});
+	

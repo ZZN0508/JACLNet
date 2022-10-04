@@ -1,0 +1,339 @@
+/******/ (() => { // webpackBootstrap
+/******/  var __webpack_modules__ = ({
+
+/***/ 141:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}function _defineProperties(target,props){for(var descriptor,i=0;i<props.length;i++)descriptor=props[i],descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}function _createClass(Constructor,protoProps,staticProps){return protoProps&&_defineProperties(Constructor.prototype,protoProps),staticProps&&_defineProperties(Constructor,staticProps),Constructor}var Control=/*#__PURE__*/function(){function Control(video){_classCallCheck(this,Control),this.video=video,this.unbinds=[],this.reactMounts={}}return _createClass(Control,[{key:"mount",value:function mount(rootElem){this.rootElem=rootElem}}]),Control}();/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Control);
+
+/***/ }),
+
+/***/ 431:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}function _defineProperties(target,props){for(var descriptor,i=0;i<props.length;i++)descriptor=props[i],descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}function _createClass(Constructor,protoProps,staticProps){return protoProps&&_defineProperties(Constructor.prototype,protoProps),staticProps&&_defineProperties(Constructor,staticProps),Constructor}function _inherits(subClass,superClass){if("function"!=typeof superClass&&null!==superClass)throw new TypeError("Super expression must either be null or a function");subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,writable:!0,configurable:!0}}),superClass&&_setPrototypeOf(subClass,superClass)}function _setPrototypeOf(o,p){return _setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){return o.__proto__=p,o},_setPrototypeOf(o,p)}function _createSuper(Derived){var hasNativeReflectConstruct=_isNativeReflectConstruct();return function _createSuperInternal(){var result,Super=_getPrototypeOf(Derived);if(hasNativeReflectConstruct){var NewTarget=_getPrototypeOf(this).constructor;result=Reflect.construct(Super,arguments,NewTarget)}else result=Super.apply(this,arguments);return _possibleConstructorReturn(this,result)}}function _possibleConstructorReturn(self,call){return call&&("object"==typeof call||"function"==typeof call)?call:_assertThisInitialized(self)}function _assertThisInitialized(self){if(void 0===self)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return self}function _isNativeReflectConstruct(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){})),!0}catch(e){return!1}}function _getPrototypeOf(o){return _getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf:function _getPrototypeOf(o){return o.__proto__||Object.getPrototypeOf(o)},_getPrototypeOf(o)}function _defineProperty(obj,key,value){return key in obj?Object.defineProperty(obj,key,{value:value,enumerable:!0,configurable:!0,writable:!0}):obj[key]=value,obj}var _W$lib=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/detect"),cachedDetect=_W$lib.cachedDetect,_W$lib2=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/obj"),clone=_W$lib2.clone,_W$lib3=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/seqid"),seqId=_W$lib3.seqId,detect=cachedDetect(),FADE_UP_TIME=600,CircleOverlayButton=/*#__PURE__*/function(_Component){function CircleOverlayButton(){var _this;_classCallCheck(this,CircleOverlayButton);for(var _len=arguments.length,args=Array(_len),_key=0;_key<_len;_key++)args[_key]=arguments[_key];return _this=_super.call.apply(_super,[this].concat(args)),_defineProperty(_assertThisInitialized(_this),"state",{buttons:[{key:seqId(),isFadingUp:!1,isFirstRender:!1}],isDisplayNone:!0,isMouseDown:!1,isOpaque:!1}),_defineProperty(_assertThisInitialized(_this),"onClick",function(e){var fadeUpOnClick=_this.props.fadeUpOnClick;// Modify the buttons array so that the one that was just active now has
+// isFadingUp: true. Then we add another one at the end of the array to be
+// the new "active" button.
+if(fadeUpOnClick){var buttons=_this.state.buttons,newButtons=clone(buttons),fadingButton=newButtons[newButtons.length-1];fadingButton.isFadingUp=!0;var fadingKey=fadingButton.key;newButtons.push({key:seqId(),isFadingUp:!1,isFirstRender:!0}),_this.setState({buttons:newButtons}),setTimeout(function(){_this.setState({buttons:_this.state.buttons.filter(function(b){return b.key!==fadingKey})})},700)}var onClick=_this.props.onClick;onClick&&onClick(e)}),_defineProperty(_assertThisInitialized(_this),"onMouseDown",function(){_this.setState({isMouseDown:!0})}),_defineProperty(_assertThisInitialized(_this),"onMouseUp",function(){_this.setState({isMouseDown:!1})}),_defineProperty(_assertThisInitialized(_this),"onTouchEnd",function(){_this.setState({isMouseDown:!1})}),_defineProperty(_assertThisInitialized(_this),"onTouchStart",function(){_this.setState({isMouseDown:!0})}),_this}_inherits(CircleOverlayButton,_Component);var _super=_createSuper(CircleOverlayButton);return _createClass(CircleOverlayButton,[{key:"buttonStyle",value:function buttonStyle(button){var _this$props=this.props,bottom=_this$props.bottom,left=_this$props.left,right=_this$props.right,scale=_this$props.scale,top=_this$props.top,isFadingUp=button.isFadingUp,isFirstRender=button.isFirstRender,_this$state=this.state,isDisplayNone=_this$state.isDisplayNone,isMouseDown=_this$state.isMouseDown,isOpaque=_this$state.isOpaque,circleHeight=140*scale,circleWidth=140*scale,rootTranslateY=-50,rootScale=.8;return isFadingUp?rootTranslateY=-120:isFirstRender&&(rootTranslateY=20),isFadingUp?rootScale=1:isFirstRender?rootScale=.4:isMouseDown&&(rootScale=.9),{background:"rgba(0,0,0,.6)",border:0,borderRadius:"50%",bottom:bottom,cursor:"pointer",display:isDisplayNone?"none":"block",height:"".concat(circleHeight,"px"),left:left,margin:0,padding:0,pointerEvents:"auto",position:"absolute",opacity:!isOpaque||isFadingUp||isFirstRender?0:1,outline:"none",right:right,top:top,transform:"translate(-50%, ".concat(rootTranslateY,"%) scale(").concat(rootScale,")"),transition:"opacity ".concat(isFadingUp?FADE_UP_TIME:200,"ms, transform ").concat(isMouseDown?200:FADE_UP_TIME,"ms"),webkitTapHighlightColor:"rgba(0,0,0,0)",width:"".concat(circleWidth,"px")}}},{key:"componentDidMount",value:function componentDidMount(){this.handleVisibilityChange(this.props,this.state)}},{key:"componentDidUpdate",value:function componentDidUpdate(){var _this2=this,isVisible=this.props.isVisible,buttons=this.state.buttons;if(isVisible&&buttons[buttons.length-1].isFirstRender){var newButtons=clone(buttons);newButtons[newButtons.length-1].isFirstRender=!1,setTimeout(function(){_this2.setState({buttons:newButtons})},10)}}},{key:"componentWillReceiveProps",value:function componentWillReceiveProps(nextProps){var isVisible=nextProps.isVisible,wasVisible=this.props.isVisible;isVisible!==wasVisible&&this.handleVisibilityChange(nextProps,this.state)}},{key:"handleVisibilityChange",value:function handleVisibilityChange(props,state){var _this3=this,isVisible=props.isVisible,isDisplayNone=state.isDisplayNone,isOpaque=state.isOpaque;isVisible&&isDisplayNone?(this.setState({isDisplayNone:!1}),setTimeout(function(){_this3.setState({isOpaque:!0})},10)):!isVisible&&isOpaque&&(this.setState({isOpaque:!1}),setTimeout(function(){_this3.setState({isDisplayNone:!0})},100))}},{key:"rootStyle",value:function rootStyle(){return{height:"100%",left:0,pointerEvents:"none",position:"absolute",top:0,width:"100%"}}},{key:"render",value:function render(){var _this4=this,_this$props2=this.props,ariaLabel=_this$props2.ariaLabel,children=_this$props2.children,buttons=this.state.buttons;return (0,preact__WEBPACK_IMPORTED_MODULE_1__.h)("div",{class:"w-css-reset w-css-reset-tree",style:this.rootStyle()},buttons.map(function(button,index){return (0,preact__WEBPACK_IMPORTED_MODULE_1__.h)("button",{"aria-label":ariaLabel,class:"w-vulcan-v2-button",key:button.key,onClick:index===buttons.length-1&&_this4.onClick,onMouseDown:!detect.touchScreen&&_this4.onMouseDown,onMouseUp:!detect.touchScreen&&_this4.onMouseUp,onTouchEnd:detect.touchScreen&&_this4.onTouchEnd,onTouchStart:detect.touchScreen&&_this4.onTouchStart,style:_this4.buttonStyle(button)},children)}))}}]),CircleOverlayButton}(preact__WEBPACK_IMPORTED_MODULE_1__.Component);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CircleOverlayButton);
+
+/***/ }),
+
+/***/ 272:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _svg_boilerplate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+function _extends(){return _extends=Object.assign||function(target){for(var source,i=1;i<arguments.length;i++)for(var key in source=arguments[i],source)Object.prototype.hasOwnProperty.call(source,key)&&(target[key]=source[key]);return target},_extends.apply(this,arguments)}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}function _defineProperties(target,props){for(var descriptor,i=0;i<props.length;i++)descriptor=props[i],descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}function _createClass(Constructor,protoProps,staticProps){return protoProps&&_defineProperties(Constructor.prototype,protoProps),staticProps&&_defineProperties(Constructor,staticProps),Constructor}function _inherits(subClass,superClass){if("function"!=typeof superClass&&null!==superClass)throw new TypeError("Super expression must either be null or a function");subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,writable:!0,configurable:!0}}),superClass&&_setPrototypeOf(subClass,superClass)}function _setPrototypeOf(o,p){return _setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){return o.__proto__=p,o},_setPrototypeOf(o,p)}function _createSuper(Derived){var hasNativeReflectConstruct=_isNativeReflectConstruct();return function _createSuperInternal(){var result,Super=_getPrototypeOf(Derived);if(hasNativeReflectConstruct){var NewTarget=_getPrototypeOf(this).constructor;result=Reflect.construct(Super,arguments,NewTarget)}else result=Super.apply(this,arguments);return _possibleConstructorReturn(this,result)}}function _possibleConstructorReturn(self,call){return call&&("object"==typeof call||"function"==typeof call)?call:_assertThisInitialized(self)}function _assertThisInitialized(self){if(void 0===self)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return self}function _isNativeReflectConstruct(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){})),!0}catch(e){return!1}}function _getPrototypeOf(o){return _getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf:function _getPrototypeOf(o){return o.__proto__||Object.getPrototypeOf(o)},_getPrototypeOf(o)}var _W$lib=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/obj"),merge=_W$lib.merge,SmallPlayButton=/*#__PURE__*/function(_Component){function SmallPlayButton(){return _classCallCheck(this,SmallPlayButton),_super.apply(this,arguments)}_inherits(SmallPlayButton,_Component);var _super=_createSuper(SmallPlayButton);return _createClass(SmallPlayButton,[{key:"shouldComponentUpdate",value:function shouldComponentUpdate(nextProps){return this.props.isPlaying!==nextProps.isPlaying}},{key:"render",value:function render(){return (0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("div",{style:this.rootStyle()},(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("div",{style:{display:this.props.isPlaying?"block":"none",height:"100%",width:"100%"}},this.renderPauseIcon()),(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("div",{style:{display:this.props.isPlaying?"none":"block",height:"100%",width:"100%"}},this.renderPlayIcon()))}},{key:"renderPlayIcon",value:function renderPlayIcon(){var noPadding=this.props.noPadding,xPad=noPadding?0:20,yPad=noPadding?0:9,width=11.556,height=15,points="".concat(xPad+width,",").concat(yPad+15/2," ").concat(xPad,",").concat(yPad+15," ").concat(xPad,",").concat(yPad);return (0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("svg",_extends({},this.svgAttrs(width+2*xPad,15+2*yPad),{class:"w-css-reset w-css-reset-tree"}),(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("polygon",{points:points}))}},{key:"renderPauseIcon",value:function renderPauseIcon(){var noPadding=this.props.noPadding,xPad=noPadding?0:20,yPad=noPadding?0:11.3,width=10,height=12;return (0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("svg",_extends({},this.svgAttrs(10+2*xPad,12+2*yPad),{class:"w-css-reset w-css-reset-tree"}),(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("g",null,(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("rect",{x:xPad,y:yPad,width:"3.5",height:12}),(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("rect",{x:xPad+6.5,y:yPad,width:"3.5",height:12})))}},{key:"rootStyle",value:function rootStyle(){return{height:"100%",width:"100%"}}},{key:"svgAttrs",value:function svgAttrs(){var noPadding=this.props.noPadding,isPlaying=this.props.isPlaying,xPad=noPadding?0:20,yPad=noPadding?0:isPlaying?11.3:9,height=isPlaying?12:16,width=isPlaying?10:11.556,result=(0,_svg_boilerplate_js__WEBPACK_IMPORTED_MODULE_1__.standardSvgAttrs)(width+2*xPad,height+2*yPad);return merge(result.style,this.props.svgStyle),result}}]),SmallPlayButton}(preact__WEBPACK_IMPORTED_MODULE_2__.Component);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SmallPlayButton);
+
+/***/ }),
+
+/***/ 5:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "standardSvgAttrs": () => (/* binding */ standardSvgAttrs)
+/* harmony export */ });
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+function ownKeys(object,enumerableOnly){var keys=Object.keys(object);if(Object.getOwnPropertySymbols){var symbols=Object.getOwnPropertySymbols(object);enumerableOnly&&(symbols=symbols.filter(function(sym){return Object.getOwnPropertyDescriptor(object,sym).enumerable})),keys.push.apply(keys,symbols)}return keys}function _objectSpread(target){for(var source,i=1;i<arguments.length;i++)source=null==arguments[i]?{}:arguments[i],i%2?ownKeys(Object(source),!0).forEach(function(key){_defineProperty(target,key,source[key])}):Object.getOwnPropertyDescriptors?Object.defineProperties(target,Object.getOwnPropertyDescriptors(source)):ownKeys(Object(source)).forEach(function(key){Object.defineProperty(target,key,Object.getOwnPropertyDescriptor(source,key))});return target}function _defineProperty(obj,key,value){return key in obj?Object.defineProperty(obj,key,{value:value,enumerable:!0,configurable:!0,writable:!0}):obj[key]=value,obj}var standardSvgAttrs=function standardSvgAttrs(width,height){var styleOverride=2<arguments.length&&arguments[2]!==void 0?arguments[2]:{};return{x:"0px",y:"0px",viewBox:"0 0 ".concat(width," ").concat(height),"enable-background":"new 0 0 ".concat(width," ").concat(height),style:_objectSpread({fill:"#ffffff",height:"100%",left:0,strokeWidth:0,top:0,width:"100%"},styleOverride),// specifically for IE11, we add the focusable attribute to svgs
+// to prevent them from being focusable since tabindex on svgs is
+// not supported in IE
+focusable:"false"}};wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.define("vulcanV2Player/shared/ui_components/svg_boilerplate.js",{standardSvgAttrs:standardSvgAttrs});
+
+/***/ }),
+
+/***/ 432:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var external_vulcanV2Player_shared_ui_components_svg_boilerplate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+function _extends(){return _extends=Object.assign||function(target){for(var source,i=1;i<arguments.length;i++)for(var key in source=arguments[i],source)Object.prototype.hasOwnProperty.call(source,key)&&(target[key]=source[key]);return target},_extends.apply(this,arguments)}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}function _defineProperties(target,props){for(var descriptor,i=0;i<props.length;i++)descriptor=props[i],descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}function _createClass(Constructor,protoProps,staticProps){return protoProps&&_defineProperties(Constructor.prototype,protoProps),staticProps&&_defineProperties(Constructor,staticProps),Constructor}function _inherits(subClass,superClass){if("function"!=typeof superClass&&null!==superClass)throw new TypeError("Super expression must either be null or a function");subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,writable:!0,configurable:!0}}),superClass&&_setPrototypeOf(subClass,superClass)}function _setPrototypeOf(o,p){return _setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){return o.__proto__=p,o},_setPrototypeOf(o,p)}function _createSuper(Derived){var hasNativeReflectConstruct=_isNativeReflectConstruct();return function _createSuperInternal(){var result,Super=_getPrototypeOf(Derived);if(hasNativeReflectConstruct){var NewTarget=_getPrototypeOf(this).constructor;result=Reflect.construct(Super,arguments,NewTarget)}else result=Super.apply(this,arguments);return _possibleConstructorReturn(this,result)}}function _possibleConstructorReturn(self,call){return call&&("object"==typeof call||"function"==typeof call)?call:_assertThisInitialized(self)}function _assertThisInitialized(self){if(void 0===self)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return self}function _isNativeReflectConstruct(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){})),!0}catch(e){return!1}}function _getPrototypeOf(o){return _getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf:function _getPrototypeOf(o){return o.__proto__||Object.getPrototypeOf(o)},_getPrototypeOf(o)}var _W$lib=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("player/lib/elem"),addInlineCss=_W$lib.addInlineCss;var _W$lib2=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/seqid"),seqId=_W$lib2.seqId,LoadingSwoop=/*#__PURE__*/function(_Component){function LoadingSwoop(props){var _this;return _classCallCheck(this,LoadingSwoop),_this=_super.call(this,props),_this.svgId=seqId("w-loading-swoop-"),_this.gradientId=seqId("w-loading-swoop-grad-"),_this.animName=seqId("w-loading-swoop-"),_this}_inherits(LoadingSwoop,_Component);var _super=_createSuper(LoadingSwoop);return _createClass(LoadingSwoop,[{key:"componentDidMount",value:function componentDidMount(){addInlineCss(this.svgEl,"\n@keyframes ".concat(this.animName," {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n#").concat(this.svgId," path {\n  animation: ").concat(this.animName," 1s cubic-bezier(0.495, 0.155, 0.580, 0.845) infinite;\n  transform-origin: center;\n}\n    "))}},{key:"shouldComponentUpdate",value:function shouldComponentUpdate(){return!1}},{key:"render",value:function render(){var _this2=this;return (0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("svg",_extends({},(0,external_vulcanV2Player_shared_ui_components_svg_boilerplate_js__WEBPACK_IMPORTED_MODULE_1__.standardSvgAttrs)(120,120,{position:"absolute"}),{id:this.svgId}),(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("linearGradient",{gradientUnits:"userSpaceOnUse",id:this.gradientId,ref:function ref(el){_this2.svgEl=el},x1:"31.5",x2:"31.5",y1:"0",y2:"120"},(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("stop",{offset:"0",style:{stopColor:"#FFFFFF"}}),(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("stop",{offset:"0.7279",style:{stopColor:"#FFFFFF",stopOpacity:0}})),(0,preact__WEBPACK_IMPORTED_MODULE_2__.h)("path",{d:"M60,0C26.9,0,0,26.9,0,60s26.9,60,60,60v-6C30.2,114,6,89.8,6,60S30.2,6,60,6c1.7,0,3-1.3,3-3S61.7,0,60,0z",style:{fill:"url(#".concat(this.gradientId,")"),opacity:.8}}))}}]),LoadingSwoop}(preact__WEBPACK_IMPORTED_MODULE_2__.Component);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingSwoop);
+
+/***/ }),
+
+/***/ 430:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _shared_controls_Control_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(141);
+/* harmony import */ var _shared_ui_components_CircleOverlayButton_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(431);
+/* harmony import */ var _LoadingSwoop_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(432);
+/* harmony import */ var _shared_ui_components_SmallPlayButton_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(272);
+/* harmony import */ var player_lib_control_lifecycle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(60);
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6);
+function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}function _defineProperties(target,props){for(var descriptor,i=0;i<props.length;i++)descriptor=props[i],descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}function _createClass(Constructor,protoProps,staticProps){return protoProps&&_defineProperties(Constructor.prototype,protoProps),staticProps&&_defineProperties(Constructor,staticProps),Constructor}function _inherits(subClass,superClass){if("function"!=typeof superClass&&null!==superClass)throw new TypeError("Super expression must either be null or a function");subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,writable:!0,configurable:!0}}),superClass&&_setPrototypeOf(subClass,superClass)}function _setPrototypeOf(o,p){return _setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){return o.__proto__=p,o},_setPrototypeOf(o,p)}function _createSuper(Derived){var hasNativeReflectConstruct=_isNativeReflectConstruct();return function _createSuperInternal(){var result,Super=_getPrototypeOf(Derived);if(hasNativeReflectConstruct){var NewTarget=_getPrototypeOf(this).constructor;result=Reflect.construct(Super,arguments,NewTarget)}else result=Super.apply(this,arguments);return _possibleConstructorReturn(this,result)}}function _possibleConstructorReturn(self,call){return call&&("object"==typeof call||"function"==typeof call)?call:_assertThisInitialized(self)}function _assertThisInitialized(self){if(void 0===self)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return self}function _isNativeReflectConstruct(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){})),!0}catch(e){return!1}}function _getPrototypeOf(o){return _getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf:function _getPrototypeOf(o){return o.__proto__||Object.getPrototypeOf(o)},_getPrototypeOf(o)}function _defineProperty(obj,key,value){return key in obj?Object.defineProperty(obj,key,{value:value,enumerable:!0,configurable:!0,writable:!0}):obj[key]=value,obj}var _W$lib=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("player/lib/fit-control"),controlMultiplierBasedOnVideo=_W$lib.controlMultiplierBasedOnVideo,_W$lib2=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("player/translations"),getTranslation=_W$lib2.getTranslation,_W$lib3=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/detect"),cachedDetect=_W$lib3.cachedDetect,detect=cachedDetect(),PlayPauseLoadingCircleControl=/*#__PURE__*/function(_Control){function PlayPauseLoadingCircleControl(video){var _this;_classCallCheck(this,PlayPauseLoadingCircleControl),_this=_super.call(this,video),_defineProperty(_assertThisInitialized(_this),"onClick",function(){"playing"===_this.video.state()?_this.video.pause():_this.video.play()}),_defineProperty(_assertThisInitialized(_this),"renderButton",function(){var isPlaying="playing"===_this.video.state(),scale=_this.scale(),iconMult=1.05,spbWrapperStyle={boxSizing:"border-box",height:"100%",paddingBottom:"".concat(45*scale*iconMult,"px"),paddingLeft:"".concat((isPlaying?51:55)*scale*iconMult,"px"),paddingRight:"".concat((isPlaying?51:45)*scale*iconMult,"px"),paddingTop:"".concat(45*scale*iconMult,"px")};(0,preact__WEBPACK_IMPORTED_MODULE_6__.render)((0,preact__WEBPACK_IMPORTED_MODULE_6__.h)(_shared_ui_components_CircleOverlayButton_jsx__WEBPACK_IMPORTED_MODULE_2__.default,{ariaLabel:isPlaying?_this.translate("TITLE_WHEN_PLAYING"):_this.translate("TITLE_WHEN_NOT_PLAYING"),isVisible:_this.isVisible(),left:"50%",onClick:_this.onClick,scale:scale,top:"50%"},(0,preact__WEBPACK_IMPORTED_MODULE_6__.h)("div",{"aria-live":"polite"},_this.isLoading&&(0,preact__WEBPACK_IMPORTED_MODULE_6__.h)(preact__WEBPACK_IMPORTED_MODULE_6__.Fragment,null,(0,preact__WEBPACK_IMPORTED_MODULE_6__.h)("p",{style:_this.accessibilityTextStyle()},"The video is loading"),(0,preact__WEBPACK_IMPORTED_MODULE_6__.h)(_LoadingSwoop_jsx__WEBPACK_IMPORTED_MODULE_3__.default,null))),(0,preact__WEBPACK_IMPORTED_MODULE_6__.h)("div",{style:spbWrapperStyle},(0,preact__WEBPACK_IMPORTED_MODULE_6__.h)(_shared_ui_components_SmallPlayButton_jsx__WEBPACK_IMPORTED_MODULE_4__.default,{isPlaying:isPlaying,noPadding:!0}))),_this.rootElem),_this.reactMounts=[_this.rootElem]});var prevDuration=-1;return _this.isLoading=!1,_this.unbinds.push(video.on("play",_this.renderButton),video.on("pause",_this.renderButton),video.on("end",_this.renderButton),video.on("waiting",function(duration){!_this.isLoading&&2>prevDuration&&2<=duration&&(_this.isLoading=!0,_this.renderButton()),prevDuration=duration}),video.on("done-waiting",function(){_this.isLoading=!1,_this.renderButton(),prevDuration=-1}),// failsafe, in case we somehow miss the done-waiting event, let's remove
+// the indicator on timechange.
+video.on("timechange",function(){_this.isLoading=!1,_this.renderButton(),prevDuration=-1})),_this}_inherits(PlayPauseLoadingCircleControl,_Control);var _super=_createSuper(PlayPauseLoadingCircleControl);return _createClass(PlayPauseLoadingCircleControl,[{key:"accessibilityTextStyle",value:function accessibilityTextStyle(){return{position:"absolute",left:"-99999em"}}},{key:"destroy",value:function destroy(){(0,player_lib_control_lifecycle_js__WEBPACK_IMPORTED_MODULE_5__.destroyControl)(this)}},{key:"isVisible",value:function isVisible(){var controlsAreVisible=this.props.controlsAreVisible,video=this.video,vidState=video.state(),isVideoBeforePlay="beforeplay"===vidState,isVideoResetToThumbnail="ended"===vidState&&"reset"===video.embedOptions().endVideoBehavior,anyDialogOpen=video._impl.ui.anyDialogOpen();return this.isLoading||detect.touchScreen&&controlsAreVisible&&!anyDialogOpen&&!isVideoBeforePlay&&!isVideoResetToThumbnail}},{key:"mount",value:function mount(rootElem){this.rootElem=rootElem,this.renderButton()}},{key:"onControlPropsUpdated",value:function onControlPropsUpdated(prevProps){var _this2=this,changeProps=["anyDialogOpen","controlsAreVisible","videoWidth"],anyChanges=changeProps.some(function(n){return _this2.props[n]!==prevProps[n]});anyChanges&&this.renderButton()}},{key:"scale",value:function scale(){return Math.min(1.3,Math.max(.3,controlMultiplierBasedOnVideo(this.video,[640,960])))}},{key:"translate",value:function translate(key){return getTranslation(this.props.playerLanguage.code,"PLAY_BUTTON_".concat(key))}}]),PlayPauseLoadingCircleControl}(_shared_controls_Control_js__WEBPACK_IMPORTED_MODULE_1__.default);PlayPauseLoadingCircleControl.shouldMount=function(){return!0},PlayPauseLoadingCircleControl.handle="playPauseLoading",PlayPauseLoadingCircleControl.type="above-control-bar",wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.defineControl(PlayPauseLoadingCircleControl);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlayPauseLoadingCircleControl);
+
+/***/ }),
+
+/***/ 61:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "defineControl": () => (/* binding */ defineControl),
+/* harmony export */   "getControlDefinitions": () => (/* binding */ getControlDefinitions)
+/* harmony export */ });
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+null==wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default._controlDefinitions&&(wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default._controlDefinitions={});var defineControl=function defineControl(klass){if(null==klass.handle)return void console.error("Please specify a handle property for control",klass);var existingClass=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default._controlDefinitions[klass.handle];null!=existingClass||(wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default._controlDefinitions[klass.handle]=klass,wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.trigger&&wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.trigger("controldefined",klass))};var getControlDefinitions=function getControlDefinitions(){return wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default._controlDefinitions||{}};wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.defineControl=defineControl;
+
+/***/ }),
+
+/***/ 60:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "callUnbinds": () => (/* binding */ callUnbinds),
+/* harmony export */   "destroyControl": () => (/* binding */ destroyControl),
+/* harmony export */   "maybeDestroyControls": () => (/* binding */ maybeDestroyControls),
+/* harmony export */   "maybeInitializeControls": () => (/* binding */ maybeInitializeControls),
+/* harmony export */   "mountControls": () => (/* binding */ mountControls),
+/* harmony export */   "setControlProps": () => (/* binding */ setControlProps),
+/* harmony export */   "removeRootElem": () => (/* binding */ removeRootElem),
+/* harmony export */   "runOnControlPropsUpdated": () => (/* binding */ runOnControlPropsUpdated),
+/* harmony export */   "getSortedControlsByType": () => (/* binding */ getSortedControlsByType),
+/* harmony export */   "pickControlDefinitionsWithTypes": () => (/* binding */ pickControlDefinitionsWithTypes),
+/* harmony export */   "unmountReactMounts": () => (/* binding */ unmountReactMounts),
+/* harmony export */   "unsetObjectProperties": () => (/* binding */ unsetObjectProperties)
+/* harmony export */ });
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var promiscuous__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27);
+/* harmony import */ var promiscuous__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(promiscuous__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var utilities_assign_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19);
+/* harmony import */ var player_control_definitions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(61);
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
+var _W$lib=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/detect"),cachedDetect=_W$lib.cachedDetect,_W$lib2=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("player/lib/timeout-utils"),doTimeout=_W$lib2.doTimeout,clearTimeouts=_W$lib2.clearTimeouts,_W$lib3=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("player/lib/elem"),elemBind=_W$lib3.elemBind,elemRemove=_W$lib3.elemRemove,elemUnbind=_W$lib3.elemUnbind;var _W$lib4=wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.lib("utilities/seqid"),seqId=_W$lib4.seqId,detect=cachedDetect();// Call functions that we've pushed into control.unbinds.
+var callUnbinds=function callUnbinds(control){control.unbinds instanceof Array&&(control.unbinds.map(function(unbind){try{"function"==typeof unbind&&unbind()}catch(e){setTimeout(function(){throw e},1)}}),control.unbinds=null)};var destroyControl=function destroyControl(control){control._destroyed=!0,callUnbinds(control),removeRootElem(control),unmountReactMounts(control),unsetObjectProperties(control)};var maybeDestroyControls=function maybeDestroyControls(_ref){var controls=_ref.controls,isControlDisabled=_ref.isControlDisabled,shouldMount=_ref.shouldMount,destroyedControls=[];for(var handle in controls){var control=controls[handle];if(isControlDisabled(handle)||!shouldMount(control.constructor)){if(control.destroy)try{control.destroy()}catch(e){setTimeout(function(){throw e},1)}control.__destroyed=!0,delete controls[control.constructor.handle],destroyedControls.push(control)}}return destroyedControls};var maybeInitializeControls=function maybeInitializeControls(_ref2){var controlDefinitions=_ref2.controlDefinitions,controls=_ref2.controls,isControlDisabled=_ref2.isControlDisabled,initControl=_ref2.initControl,onMount=_ref2.onMount,shouldMount=_ref2.shouldMount,reevaluateShouldMount=_ref2.reevaluateShouldMount,newControls=[],existingControls=[],_loop=function _loop(handle){var ControlClass=controlDefinitions[handle],hasBeenInitialized=null!=controls[handle],shouldDoMount=!isControlDisabled(handle)&&shouldMount(ControlClass);if(reevaluateShouldMount(ControlClass),shouldDoMount&&hasBeenInitialized)return existingControls.push(controls[handle]),"continue";if(!hasBeenInitialized&&shouldDoMount)try{var control=controls[handle]=initControl(ControlClass);control.mounted=new (promiscuous__WEBPACK_IMPORTED_MODULE_1___default())(function(resolve){control.__didMount=function(){control.mounted.isResolved=!0,onMount(handle),resolve()}}),newControls.push(control)}catch(e){setTimeout(function(){throw e},1)}};for(var handle in controlDefinitions){var _ret=_loop(handle);"continue"===_ret}return[newControls,existingControls]};var mountControl=function mountControl(control,mountFn){try{var handle=control.constructor.handle,mountResult=mountFn();return mountResult&&mountResult.then&&mountResult.catch?(mountResult.handle=handle,mountResult.then(function(){control.__didMount()})):control.__didMount(),promiscuous__WEBPACK_IMPORTED_MODULE_1___default().resolve(mountResult)}catch(e){return setTimeout(function(){throw e},0),promiscuous__WEBPACK_IMPORTED_MODULE_1___default().resolve()}},renderHourglassLoader=function renderHourglassLoader(control,promise,options){return new (promiscuous__WEBPACK_IMPORTED_MODULE_1___default())(function(resolve){// we wanna wait 300ms before showing the loading indication
+var timeoutKey="".concat(control.video.uuid,".loading_indicator.").concat(seqId());doTimeout(timeoutKey,function(){control.video.controls.loadingHourglass.show(options),detect.touchScreen?elemBind(document,"touchstart",function(){try{control.video.controls.loadingHourglass.hide()}catch(e){setTimeout(function(){throw e},0)}return resolve(),elemUnbind}):elemBind(document,"mousedown",function(){try{control.video.controls.loadingHourglass.hide()}catch(e){setTimeout(function(){throw e},0)}return resolve(),elemUnbind})},300),promise.then(function(){clearTimeouts(timeoutKey),control.video.controls.loadingHourglass.hide(),resolve()})})};var mountControls=function mountControls(controls,mountRefs){return promiscuous__WEBPACK_IMPORTED_MODULE_1___default().all(controls.map(function(control){var handle=control.constructor.handle;control.loading||(control.loading=function(promise){var options=1<arguments.length&&arguments[1]!==void 0?arguments[1]:{};return renderHourglassLoader(control,promise,options)});var mountPoint=mountRefs[handle];return mountControl(control,function(){return control.mount(mountPoint)})}))};var setControlProps=function setControlProps(controls,propsByType){for(var handle in controls){var control=controls[handle];control.__prevProps=control.props||{},control.props=(0,utilities_assign_js__WEBPACK_IMPORTED_MODULE_2__.default)({},propsByType[control.constructor.type])}};var removeRootElem=function removeRootElem(control){control.rootElem&&elemRemove(Array.prototype.slice.call(control.rootElem.childNodes))};var renderNothingForReactMount=function renderNothingForReactMount(reactMount){var containerElem=reactMount[0],renderedElem=reactMount[1];containerElem&&renderedElem&&(0,preact__WEBPACK_IMPORTED_MODULE_4__.render)((0,preact__WEBPACK_IMPORTED_MODULE_4__.h)("nothing",null),containerElem)};var runOnControlPropsUpdated=function runOnControlPropsUpdated(controls){controls.forEach(function(control){if("function"==typeof control.onControlPropsUpdated)try{control.onControlPropsUpdated(control.__prevProps||{})}catch(e){setTimeout(function(){throw e},0)}control.__prevProps=null})};var startsWithDoubleUnderscore=function startsWithDoubleUnderscore(str){return"_"===str[0]&&"_"===str[1]};var getSortedControlsByType=function getSortedControlsByType(controls){var result={};// bucket
+for(var handle in controls){var control=controls[handle],type=control.constructor.type;null==result[type]&&(result[type]=[]),result[type].push(control)}// sort each bucket
+for(var _type in result)result[_type].sort(function(control1,control2){return(control1.constructor.sortValue||0)-(control2.constructor.sortValue||0)});return result};var pickControlDefinitionsWithTypes=function pickControlDefinitionsWithTypes(types){var globalControlDefinitions=(0,player_control_definitions_js__WEBPACK_IMPORTED_MODULE_3__.getControlDefinitions)(),result={};for(var k in globalControlDefinitions){var controlDef=globalControlDefinitions[k];0<=types.indexOf(controlDef.type)&&(result[k]=controlDef)}return result};var unmountReactMounts=function unmountReactMounts(control){// Controls that render to react can save the relevant mount points like:
+//
+// control.reactMounts = [control.rootElem, control.thumbnailElem]
+//
+// or in the case where there are multiple mounts (like button and dialog)
+//
+// control.reactMounts.button = [control.buttonRoot, control.buttonElem]
+// control.reactMounts.dialog = [control.dialogRoot, control.dialogElem]
+//
+// And control code will automatically unmount on destroy to clean up any
+// dangling react DOM nodes.
+var reactMounts=control.reactMounts;if(reactMounts)if(reactMounts instanceof Array)renderNothingForReactMount(reactMounts);else for(var mountName in reactMounts)reactMounts.hasOwnProperty(mountName)&&reactMounts[mountName]&&renderNothingForReactMount(reactMounts[mountName])};var unsetObjectProperties=function unsetObjectProperties(control){// Null out any object properties that may cause a reference.
+for(var k in control)control.hasOwnProperty(k)&&!startsWithDoubleUnderscore(k)&&"mounted"!==k&&(control[k]=null);// Set control again because we would've just unset it above.
+control.__prevProps=null,control._destroyed=!0};
+
+/***/ }),
+
+/***/ 19:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// You wouldn't believe it, but IE11 does not support Object.assign(), so this
+// is our non-polyfill replacement.
+var assign=function assign(obj1){for(var _len=arguments.length,objs=Array(1<_len?_len-1:0),_key=1;_key<_len;_key++)objs[_key-1]=arguments[_key];if(Object.assign)return Object.assign.apply(Object,[obj1].concat(objs));for(var i=0;i<objs.length;i++)assignOne(obj1,objs[i]);return obj1},assignOne=function assignOne(obj1,obj2){for(var k in obj2)obj2.hasOwnProperty(k)&&(obj1[k]=obj2[k]);return obj1};/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (assign);
+
+/***/ }),
+
+/***/ 2:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* global globalThis */var root;try{root=self,root.self!==root&&typeof root.self!==void 0&&"undefined"!=typeof window&&(root=window)}catch(err){root="undefined"==typeof globalThis?window:globalThis}/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (root);
+
+/***/ }),
+
+/***/ 1:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var utilities_root__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+null==utilities_root__WEBPACK_IMPORTED_MODULE_0__.default.Wistia&&(utilities_root__WEBPACK_IMPORTED_MODULE_0__.default.Wistia={});var W=utilities_root__WEBPACK_IMPORTED_MODULE_0__.default.Wistia;null==W._initializers&&(W._initializers={}),null==W._destructors&&(W._destructors={}),null==W.mixin&&(W.mixin=function(klass,obj){for(var k in obj)obj.hasOwnProperty(k)&&(klass[k]=obj[k])});/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (utilities_root__WEBPACK_IMPORTED_MODULE_0__.default.Wistia);
+
+/***/ }),
+
+/***/ 6:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ N),
+/* harmony export */   "hydrate": () => (/* binding */ O),
+/* harmony export */   "createElement": () => (/* binding */ a),
+/* harmony export */   "h": () => (/* binding */ a),
+/* harmony export */   "Fragment": () => (/* binding */ y),
+/* harmony export */   "createRef": () => (/* binding */ h),
+/* harmony export */   "isValidElement": () => (/* binding */ l),
+/* harmony export */   "Component": () => (/* binding */ p),
+/* harmony export */   "cloneElement": () => (/* binding */ S),
+/* harmony export */   "createContext": () => (/* binding */ q),
+/* harmony export */   "toChildArray": () => (/* binding */ w),
+/* harmony export */   "options": () => (/* binding */ n)
+/* harmony export */ });
+/*** IMPORTS FROM imports-loader ***/var n,l,u,i,t,o,define=void 0,r={},f=[],e=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function c(n,l){for(var u in l)n[u]=l[u];return n}function s(n){var l=n.parentNode;l&&l.removeChild(n)}function a(n,l,u){var i,t,o,r=arguments,f={};for(o in l)"key"==o?i=l[o]:"ref"==o?t=l[o]:f[o]=l[o];if(3<arguments.length)for(u=[u],o=3;o<arguments.length;o++)u.push(r[o]);if(null!=u&&(f.children=u),"function"==typeof n&&null!=n.defaultProps)for(o in n.defaultProps)void 0===f[o]&&(f[o]=n.defaultProps[o]);return v(n,f,i,t,null)}function v(l,u,i,t,o){var r={type:l,props:u,key:i,ref:t,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++n.__v:o};return null!=n.vnode&&n.vnode(r),r}function h(){return{current:null}}function y(n){return n.children}function p(n,l){this.props=n,this.context=l}function d(n,l){if(null==l)return n.__?d(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return"function"==typeof n.type?d(n):null}function _(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return _(n)}}function k(l){(!l.__d&&(l.__d=!0)&&u.push(l)&&!b.__r++||t!==n.debounceRendering)&&((t=n.debounceRendering)||i)(b)}function b(){for(var n;b.__r=u.length;)n=u.sort(function(n,l){return n.__v.__b-l.__v.__b}),u=[],n.some(function(n){var l,u,i,t,o,r;n.__d&&(o=(t=(l=n).__v).__e,(r=l.__P)&&(u=[],(i=c({},t)).__v=t.__v+1,I(r,t,i,l.__n,void 0!==r.ownerSVGElement,null==t.__h?null:[o],u,null==o?d(t):o,t.__h),T(u,t),t.__e!=o&&_(t)))})}function m(n,l,u,i,t,o,e,c,s,a){var h,p,_,k,b,m,w,A=i&&i.__k||f,P=A.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(k=u.__k[h]=null==(k=l[h])||"boolean"==typeof k?null:"string"==typeof k||"number"==typeof k||"bigint"==typeof k?v(null,k,null,null,k):Array.isArray(k)?v(y,{children:k},null,null,null):0<k.__b?v(k.type,k.props,k.key,null,k.__v):k)){if(k.__=u,k.__b=u.__b+1,null===(_=A[h])||_&&k.key==_.key&&k.type===_.type)A[h]=void 0;else for(p=0;p<P;p++){if((_=A[p])&&k.key==_.key&&k.type===_.type){A[p]=void 0;break}_=null}I(n,k,_=_||r,t,o,e,c,s,a),b=k.__e,(p=k.ref)&&_.ref!=p&&(w||(w=[]),_.ref&&w.push(_.ref,null,k),w.push(p,k.__c||b,k)),null==b?s&&_.__e==s&&s.parentNode!=n&&(s=d(_)):(null==m&&(m=b),"function"==typeof k.type&&null!=k.__k&&k.__k===_.__k?k.__d=s=g(k,s,n):s=x(n,k,_,A,b,s),a||"option"!==u.type?"function"==typeof u.type&&(u.__d=s):n.value="")}for(u.__e=m,h=P;h--;)null!=A[h]&&("function"==typeof u.type&&null!=A[h].__e&&A[h].__e==u.__d&&(u.__d=d(i,h+1)),L(A[h],A[h]));if(w)for(h=0;h<w.length;h++)z(w[h],w[++h],w[++h])}function g(n,l,u){var i,t;for(i=0;i<n.__k.length;i++)(t=n.__k[i])&&(t.__=n,l="function"==typeof t.type?g(t,l,u):x(u,t,t,n.__k,t.__e,l));return l}function w(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){w(n,l)}):l.push(n)),l}function x(n,l,u,i,t,o){var r,f,e;if(void 0!==l.__d)r=l.__d,l.__d=void 0;else if(null==u||t!=o||null==t.parentNode)n:if(null==o||o.parentNode!==n)n.appendChild(t),r=null;else{for(f=o,e=0;(f=f.nextSibling)&&e<i.length;e+=2)if(f==t)break n;n.insertBefore(t,o),r=o}return void 0===r?t.nextSibling:r}function A(n,l,u,i,t){var o;for(o in u)"children"===o||"key"===o||o in l||C(n,o,null,u[o],i);for(o in l)t&&"function"!=typeof l[o]||"children"===o||"key"===o||"value"===o||"checked"===o||u[o]===l[o]||C(n,o,l[o],u[o],i)}function P(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]=null==u?"":"number"!=typeof u||e.test(l)?u:u+"px"}function C(n,l,u,i,t){var o;n:if("style"===l){if("string"==typeof u)n.style.cssText=u;else{if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||P(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||P(n.style,l,u[l])}}else if("o"===l[0]&&"n"===l[1])o=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+o]=u,u?i||n.addEventListener(l,o?H:$,o):n.removeEventListener(l,o?H:$,o);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink[H:h]/,"h").replace(/sName$/,"s");else if("href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null!=u&&(!1!==u||"a"===l[0]&&"r"===l[1])?n.setAttribute(l,u):n.removeAttribute(l))}}function $(l){this.l[l.type+!1](n.event?n.event(l):l)}function H(l){this.l[l.type+!0](n.event?n.event(l):l)}function I(l,u,i,t,o,r,f,e,s){var a,v,h,d,_,k,b,g,w,x,A,P=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(s=i.__h,e=u.__e=i.__e,u.__h=null,r=[e]),(a=n.__b)&&a(u);try{n:if("function"==typeof P){if(g=u.props,w=(a=P.contextType)&&t[a.__c],x=a?w?w.props.value:a.__:t,i.__c?b=(v=u.__c=i.__c).__=v.__E:("prototype"in P&&P.prototype.render?u.__c=v=new P(g,x):(u.__c=v=new p(g,x),v.constructor=P,v.render=M),w&&w.sub(v),v.props=g,v.state||(v.state={}),v.context=x,v.__n=t,h=v.__d=!0,v.__h=[]),null==v.__s&&(v.__s=v.state),null!=P.getDerivedStateFromProps&&(v.__s==v.state&&(v.__s=c({},v.__s)),c(v.__s,P.getDerivedStateFromProps(g,v.__s))),d=v.props,_=v.state,h)null==P.getDerivedStateFromProps&&null!=v.componentWillMount&&v.componentWillMount(),null!=v.componentDidMount&&v.__h.push(v.componentDidMount);else{if(null==P.getDerivedStateFromProps&&g!==d&&null!=v.componentWillReceiveProps&&v.componentWillReceiveProps(g,x),!v.__e&&null!=v.shouldComponentUpdate&&!1===v.shouldComponentUpdate(g,v.__s,x)||u.__v===i.__v){v.props=g,v.state=v.__s,u.__v!==i.__v&&(v.__d=!1),v.__v=u,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u)}),v.__h.length&&f.push(v);break n}null!=v.componentWillUpdate&&v.componentWillUpdate(g,v.__s,x),null!=v.componentDidUpdate&&v.__h.push(function(){v.componentDidUpdate(d,_,k)})}v.context=x,v.props=g,v.state=v.__s,(a=n.__r)&&a(u),v.__d=!1,v.__v=u,v.__P=l,a=v.render(v.props,v.state,v.context),v.state=v.__s,null!=v.getChildContext&&(t=c(c({},t),v.getChildContext())),h||null==v.getSnapshotBeforeUpdate||(k=v.getSnapshotBeforeUpdate(d,_)),A=null!=a&&a.type===y&&null==a.key?a.props.children:a,m(l,Array.isArray(A)?A:[A],u,i,t,o,r,f,e,s),v.base=u.__e,u.__h=null,v.__h.length&&f.push(v),b&&(v.__E=v.__=null),v.__e=!1}else null==r&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=j(i.__e,u,i,t,o,r,f,s);(a=n.diffed)&&a(u)}catch(l){u.__v=null,(s||null!=r)&&(u.__e=e,u.__h=!!s,r[r.indexOf(e)]=null),n.__e(l,u,i)}}function T(l,u){n.__c&&n.__c(u,l),l.some(function(u){try{l=u.__h,u.__h=[],l.some(function(n){n.call(u)})}catch(l){n.__e(l,u.__v)}})}function j(n,l,u,i,t,o,e,c){var a,v,h,y,p=u.props,d=l.props,_=l.type,k=0;if("svg"===_&&(t=!0),null!=o)for(;k<o.length;k++)if((a=o[k])&&(a===n||(_?a.localName==_:3==a.nodeType))){n=a,o[k]=null;break}if(null==n){if(null===_)return document.createTextNode(d);n=t?document.createElementNS("http://www.w3.org/2000/svg",_):document.createElement(_,d.is&&d),o=null,c=!1}if(null===_)p===d||c&&n.data===d||(n.data=d);else{if(o=o&&f.slice.call(n.childNodes),v=(p=u.props||r).dangerouslySetInnerHTML,h=d.dangerouslySetInnerHTML,!c){if(null!=o)for(p={},y=0;y<n.attributes.length;y++)p[n.attributes[y].name]=n.attributes[y].value;(h||v)&&(h&&(v&&h.__html==v.__html||h.__html===n.innerHTML)||(n.innerHTML=h&&h.__html||""))}if(A(n,d,p,t,c),h)l.__k=[];else if(k=l.props.children,m(n,Array.isArray(k)?k:[k],l,u,i,t&&"foreignObject"!==_,o,e,n.firstChild,c),null!=o)for(k=o.length;k--;)null!=o[k]&&s(o[k]);c||("value"in d&&void 0!==(k=d.value)&&(k!==n.value||"progress"===_&&!k)&&C(n,"value",k,p.value,!1),"checked"in d&&void 0!==(k=d.checked)&&k!==n.checked&&C(n,"checked",k,p.checked,!1))}return n}function z(l,u,i){try{"function"==typeof l?l(u):l.current=u}catch(l){n.__e(l,i)}}function L(l,u,i){var t,o,r;if(n.unmount&&n.unmount(l),(t=l.ref)&&(t.current&&t.current!==l.__e||z(t,null,u)),i||"function"==typeof l.type||(i=null!=(o=l.__e)),l.__e=l.__d=void 0,null!=(t=l.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount()}catch(l){n.__e(l,u)}t.base=t.__P=null}if(t=l.__k)for(r=0;r<t.length;r++)t[r]&&L(t[r],u,i);null!=o&&s(o)}function M(n,l,u){return this.constructor(n,u)}function N(l,u,i){var t,o,e;n.__&&n.__(l,u),o=(t="function"==typeof i)?null:i&&i.__k||u.__k,e=[],I(u,l=(!t&&i||u).__k=a(y,null,[l]),o||r,r,void 0!==u.ownerSVGElement,!t&&i?[i]:o?null:u.firstChild?f.slice.call(u.childNodes):null,e,!t&&i?i:o?o.__e:u.firstChild,t),T(e,l)}function O(n,l){N(n,l,O)}function S(n,l,u){var i,t,o,r=arguments,f=c({},n.props);for(o in l)"key"==o?i=l[o]:"ref"==o?t=l[o]:f[o]=l[o];if(3<arguments.length)for(u=[u],o=3;o<arguments.length;o++)u.push(r[o]);return null!=u&&(f.children=u),v(n.type,f,i||n.key,t||n.ref,null)}function q(n,l){var u={__c:l="__cC"+o++,__:n,Consumer:function Consumer(n,l){return n.children(l)},Provider:function Provider(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(k)},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n)}}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n={__e:function __e(n,l){for(var u,i,t;l=l.__;)if((u=l.__c)&&!u.__)try{if((i=u.constructor)&&null!=i.getDerivedStateFromError&&(u.setState(i.getDerivedStateFromError(n)),t=u.__d),null!=u.componentDidCatch&&(u.componentDidCatch(n),t=u.__d),t)return u.__E=u}catch(l){n=l}throw n},__v:0},l=function l(n){return null!=n&&void 0===n.constructor},p.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=c({},this.state),"function"==typeof n&&(n=n(c({},u),this.props)),n&&c(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),k(this))},p.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),k(this))},p.prototype.render=y,u=[],i="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,b.__r=0,o=0;
+
+/***/ }),
+
+/***/ 27:
+/***/ ((module) => {
+
+/**@license MIT-promiscuous-Â©Ruben Verborgh*/(function(func,obj){// Type checking utility function
+function is(type,item){return(typeof item)[0]==type}// Creates a promise, calling callback(resolve, reject), ignoring other parameters.
+function Promise(callback,handler){return handler=function pendingHandler(resolved,rejected,value,queue,then,i){// Case 1) handle a .then(resolved, rejected) call
+if(queue=pendingHandler.q,resolved!=is)return Promise(function(resolve,reject){queue.push({p:this,r:resolve,j:reject,1:resolved,0:rejected})});// Case 2) handle a resolve or reject call
+// (`resolved` === `is` acts as a sentinel)
+// The actual function signature is
+// .re[ject|solve](<is>, success, value)
+// Check if the value is a promise and try to obtain its `then` method
+if(value&&is(func,value)|is(obj,value))try{then=value.then}catch(reason){rejected=0,value=reason}// If the value is a promise, take over its state
+if(is(func,then)){var valueHandler=function valueHandler(resolved){return function(value){then&&(then=0,pendingHandler(is,resolved,value))}};try{then.call(value,valueHandler(1),rejected=valueHandler(0))}catch(reason){rejected(reason)}}// The value is not a promise; handle resolve/reject
+else for(handler=function handler(Resolved,Rejected){// If the Resolved or Rejected parameter is not a function,
+// return the original promise (now stored in the `callback` variable)
+return is(func,Resolved=rejected?Resolved:Rejected)?Promise(function(resolve,reject){finalize(this,resolve,reject,value,Resolved)}):callback;// Otherwise, return a finalized promise, transforming the value with the function
+},i=0;i<queue.length;)then=queue[i++],is(func,resolved=then[rejected])?// Otherwise, resolve/reject the promise with the result of the callback
+finalize(then.p,then.r,then.j,value,resolved):(rejected?then.r:then.j)(value)},handler.q=[],callback.call(callback={then:function then(resolved,rejected){return handler(resolved,rejected)},catch:function _catch(rejected){return handler(0,rejected)}},function(value){handler(is,1,value)},function(reason){handler(is,0,reason)}),callback}// Finalizes the promise by resolving/rejecting it with the transformed value
+function finalize(promise,resolve,reject,value,transform){var fn=function fn(){try{// Transform the value through and check whether it's a promise
+value=transform(value),transform=value&&is(obj,value)|is(func,value)&&value.then,is(func,transform)?value==promise?reject(TypeError()):// Take over the promise's state
+transform.call(value,resolve,reject):resolve(value)}catch(error){reject(error)}};// Don't polyfill setImmediate, but use it if it's available.
+window.setImmediate?window.setImmediate(fn):setTimeout(fn,0)}// Export the main module
+function ResolvedPromise(value){return Promise(function(resolve){resolve(value)})}// Creates a rejected promise
+// If Promise is defined globally when this runs, just use that.
+return window.Promise?void(module.exports=window.Promise):void(// Creates a resolved promise
+// Transforms an array of promises into a promise for an array
+// Returns a promise that resolves or rejects as soon as one promise in the array does
+module.exports=Promise,Promise.resolve=ResolvedPromise,Promise.reject=function(reason){return Promise(function(resolve,reject){reject(reason)})},Promise.all=function(promises){return Promise(function(resolve,reject,count,values){// Array of collected values
+// Resolve immediately if there are no promises
+// Transform all elements (`map` is shorter than `forEach`)
+values=[],count=promises.length||resolve(values),promises.map(function(promise,index){ResolvedPromise(promise).then(// Store the value and resolve if it was the last
+function(value){values[index]=value,--count||resolve(values)},// Reject if one element fails
+reject)})})},Promise.race=function(promises){return Promise(function(resolve,reject){// Register to all promises in the array
+promises.map(function(promise){ResolvedPromise(promise).then(resolve,reject)})})})})("f","o");
+
+/***/ })
+
+/******/  });
+/************************************************************************/
+/******/  // The module cache
+/******/  var __webpack_module_cache__ = {};
+/******/  
+/******/  // The require function
+/******/  function __webpack_require__(moduleId) {
+/******/   // Check if module is in cache
+/******/   var cachedModule = __webpack_module_cache__[moduleId];
+/******/   if (cachedModule !== undefined) {
+/******/    return cachedModule.exports;
+/******/   }
+/******/   // Create a new module (and put it into the cache)
+/******/   var module = __webpack_module_cache__[moduleId] = {
+/******/    // no module.id needed
+/******/    // no module.loaded needed
+/******/    exports: {}
+/******/   };
+/******/  
+/******/   // Execute the module function
+/******/   __webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/  
+/******/   // Return the exports of the module
+/******/   return module.exports;
+/******/  }
+/******/  
+/************************************************************************/
+/******/  /* webpack/runtime/compat get default export */
+/******/  (() => {
+/******/   // getDefaultExport function for compatibility with non-harmony modules
+/******/   __webpack_require__.n = (module) => {
+/******/    var getter = module && module.__esModule ?
+/******/     () => (module['default']) :
+/******/     () => (module);
+/******/    __webpack_require__.d(getter, { a: getter });
+/******/    return getter;
+/******/   };
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/define property getters */
+/******/  (() => {
+/******/   // define getter functions for harmony exports
+/******/   __webpack_require__.d = (exports, definition) => {
+/******/    for(var key in definition) {
+/******/     if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/      Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/     }
+/******/    }
+/******/   };
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/hasOwnProperty shorthand */
+/******/  (() => {
+/******/   __webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/make namespace object */
+/******/  (() => {
+/******/   // define __esModule on exports
+/******/   __webpack_require__.r = (exports) => {
+/******/    if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/     Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/    }
+/******/    Object.defineProperty(exports, '__esModule', { value: true });
+/******/   };
+/******/  })();
+/******/  
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var external_vulcanV2Player_video_controls_PlayPauseLoadingCircleControl_PlayPauseLoadingCircleControl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(430);
+wistia_namespace_js__WEBPACK_IMPORTED_MODULE_0__.default.define("playPauseLoadingControl.js",{PlayPauseLoadingCircleControl:external_vulcanV2Player_video_controls_PlayPauseLoadingCircleControl_PlayPauseLoadingCircleControl_js__WEBPACK_IMPORTED_MODULE_1__.default});
+})();
+
+/******/ })()
+;

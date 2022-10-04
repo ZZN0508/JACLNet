@@ -1,0 +1,142 @@
+
+   facet="False";
+  
+
+  window.kwait = window.kwait || [] ;
+  window.kwait.deps = window.kwait.deps || [] ;
+
+
+  window.kwait.deps["social_js"] = ["jquery_js"];
+
+window.kwait.deps["video_js"] = ["jquery_js"];
+
+   var pageHref='https://www.repubblica.it/';
+	var pageType='homepage';
+	
+	var term='/repubblica';
+  
+var wt_map_tree='/repubblica/homepage';var webtrekkConfig={trackId:"253822047730481",trackDomain:"a.gedidigital.it",
+  domain : "REGEXP:^(([^/.]+\\.)+)?((webtrekk\\.net)|(3nz|capital|deejay|entietribunali|gedispa|gelestatic|gelocal|gruppoespresso|huff(ingtonpost|post-italia)|jobpricing|kataweb|lescienze|m2o|mymovies|nationalgeographic|repstatic|repubblica|storiebrevi|trovacinema|sportellocuore|lastampa|ilsecoloxix|film|sport|stile|televisione|turismo|consigli|xixeventi|memorie)\\.it|((huffpost|limesonline|it\\.businessinsider|tuttoaffari)\\.com)|(specchiodeitempi\\.org))$",	
+  cookie:"3",contentId:"",tabBrowsing:false,ignorePrerendering:true};
+
+
+	try {
+    window.kwasyncsetup = true;
+    var kw_alt_tlh_regex_3 = /^https?:\/\/(test|pre|www)\.lanuovasardegna\.it/;
+    if (location.href.match(kw_alt_tlh_regex_3)) {
+		window.kwasyncsetup = false;
+    }
+} catch(e) {
+    console.log('%c[head.js] %c ERROR SETTING kwasyncsetup value => setting false as fallback', 'padding: 2px; background: yellow; color: #000', 'padding: 2px; color: #00F'); 
+    window.kwasyncsetup = false;
+}
+function MNZ_RICH() {}
+function MNZ_moreContent() {}
+function asr_error() {
+    window.kw_tlh_adSetupAvailable = false;
+    console.log("%c[head.js] %cLoading TLH Library Manually", 'padding: 2px; background: yellow; color: #000', 'padding: 2px; color: #00F');
+    var script = document.createElement('script');
+    script.async = false;
+    script.onload = function (e, elem) {
+		window.kw_tlh_ready();
+		console.log('%c[head.js] %cDETECTED MISSING ADSETUP LOADING -> loading single js tlh configuration', 'padding: 2px; background: yellow; color: #000', 'padding: 2px; color: #00F'); 
+	};
+	script.onerror = function (e) {
+		console.log(e);
+	};
+	script.src = "https://www.repstatic.it/cless/common/esi/tlh/alternative_tlh_config_56.js";
+	document.head.appendChild(script);
+}
+function kw_tlh_ready() {
+    console.log('%c[head.js] %cTLH READY EVENT RECEIVED', 'padding: 2px; background: yellow; color: #000', 'padding: 2px; color: #00F'); 
+}
+
+
+	{
+  		"@context": "http://schema.org",
+  		"@type": "NewsMediaOrganization",
+  		"name": "La Repubblica",
+  		"logo":   {
+    		"@type": "ImageObject",
+    		"url": "https://www.repstatic.it/cless/main/nazionale/2016-v1/img/home/larepubblica.png",
+    		"width": 400,
+    		"height": 80
+  		},
+  		"sameAs":   [
+    		"https://www.facebook.com/Repubblica/",
+    		"https://twitter.com/repubblica"
+  		],
+  		"masthead": "https://www.repubblica.it/static/trust/ethics/#gerenza",
+  		"foundingDate": "1976-01-14",
+  		"correctionsPolicy": "https://www.repubblica.it/static/trust/ethics/#correzioni",
+  		"publishingPrinciples": "https://www.repubblica.it/static/trust/ethics/",
+  		"url": "http://www.repubblica.it",
+  		"ethicsPolicy": "https://www.repubblica.it/static/trust/ethics/#codice-etico",
+  		"missionCoveragePrioritiesPolicy": "https://www.repubblica.it/static/trust/ethics/#missione",
+  		"diversityPolicy": "",
+  		"verificationFactCheckingPolicy": "https://www.repubblica.it/static/trust/ethics/#fcfonti",
+  		"unnamedSourcesPolicy": "https://www.repubblica.it/static/trust/ethics/#fonti-anonime",
+  		"actionableFeedbackPolicy": "https://www.repubblica.it/static/trust/ethics/#scrivi",
+  		"ownershipFundingInfo": "https://www.repubblica.it/static/trust/ethics/#gerenza",
+  		"diversityStaffingReport": "",
+  		"contactPoint":   [
+							{
+								"@type": "ContactPoint",
+      							"contactType": "Newsroom Contact",
+      							"email": "repubblicawww@repubblica.it ",
+      							"url": "https://www.repubblica.it/static/trust/ethics/#scrivi"
+    						},
+        					{
+      							"@type": "ContactPoint",
+      							"contactType": "Public Engagement",
+      							"email": "desk_repubblica.it@repubblica.it",
+      							"url": "https://www.repubblica.it/static/trust/ethics/#scrivi"
+    						}
+  						]
+	}
+
+
+           kwait.push([["video_js"], function(){
+                VideoEmbed.main(".gd-row");
+                VideoEmbed.addIframe("player_ex_305381996", "https://video.repubblica.it/embed/mondo/la-citta-perfetta-auckland-ecco-la-top-ten-delle-piu-vivibili-ma-l-italia-non-c-e/388998/389718?adref=https://www.repubblica.it&generation=pageload&responsive=true&autostart=false&width=482&height=272&gd-facet-webview=false&pm=true&pl_listen=true&el=player_ex_305381996&kwdebug=true&mode=embed", 316, 178, true, false);
+            }
+            ]);
+          
+
+           function videoSetup() {
+                viewability_handler.desnapWhenEnded = false;
+                viewability_handler.snappedPlayerWidth =  533;
+                viewability_handler.snappedPlayerHeight = 300;
+                viewability_handler.storePlayerIdSnapTimeout = true;
+                viewability_handler.setNotActivePlayerId("305465685");
+            }
+            kwait.push([["video_js"], "videoSetup"]);
+          
+
+           kwait.push(["video_js", function(){
+            VideoEmbed.main(".gd-row");
+            VideoEmbed.addIframe("player_ex_305465685", "https://video.repubblica.it/embed/rubriche/parole-in-corso/stefano-massini-parole-in-corso-branco/386913/387638?adref=https://www.repubblica.it&generation=pageload&responsive=true&autostart=true&width=233&height=132&pm=true&pl_listen=true&gd-facet-webview=false&el=player_ex_305465685&kwdebug=true&mode=embed&wpm&dp", 996, 560, true, true);
+            }])
+          
+
+           kwait.push([["video_js"], function(){
+                VideoEmbed.main(".gd-row");
+                VideoEmbed.addIframe("player_ex_305384232", "https://video.repubblica.it/embed/dossier/euro2020/euro-2020-le-avversarie-dell-italia-la-turchia/388833/389553?adref=https://www.repubblica.it&generation=pageload&responsive=true&autostart=false&width=482&height=272&gd-facet-webview=false&pm=true&pl_listen=true&el=player_ex_305384232&kwdebug=true&mode=embed", 316, 178, true, false);
+            }
+            ]);
+          
+
+           kwait.push([["video_js"], function(){
+                VideoEmbed.main(".gd-row");
+                VideoEmbed.addIframe("player_ex_305304138", "https://video.repubblica.it/embed/dossier/meet-the-future/meet-the-future-dalmazzoni-cisco-come-una-profonda-digitalizzazione-puo-essere-inclusiva/388527/389247?adref=https://www.repubblica.it&generation=pageload&responsive=true&autostart=false&width=482&height=272&gd-facet-webview=false&pm=true&pl_listen=true&el=player_ex_305304138&kwdebug=true&mode=embed", 316, 178, true, false);
+            }
+            ]);
+          
+
+           kwait.push([["video_js"], function(){
+                VideoEmbed.main(".gd-row");
+                VideoEmbed.addIframe("player_ex_303585140", "https://video.repubblica.it/embed/dossier/capital-vision-economy-talk/capital-vision-alfieri-jp-morgan-am-la-conflittualita-tra-cina-e-usa-destinata-a-continuare/387889/388612?adref=https://www.repubblica.it&generation=pageload&responsive=true&autostart=false&width=482&height=272&gd-facet-webview=false&pm=true&pl_listen=true&el=player_ex_303585140&kwdebug=true&mode=embed", 316, 178, true, false);
+            }
+            ]);
+          
+kwait.push(["home_js", "home"]);

@@ -1,0 +1,40 @@
+$(document).ready(function() {
+
+    var targetNodes         = $("#particle iframe");
+    var MutationObserver    = window.MutationObserver || window.WebKitMutationObserver;
+    var myObserver          = new MutationObserver (mutationHandler);
+    var obsConfig           = { childList: true, characterData: true, attributes: true, subtree: true };
+    var throttle = function (fn, threshhold, scope) {
+        threshhold || (threshhold = 250);
+        var last,
+            deferTimer;
+        return function () {
+            var context = scope || this;
+
+            var now = +new Date,
+                args = arguments;
+            if (last && now < last + threshhold) {
+                // hold on to it
+                clearTimeout(deferTimer);
+                deferTimer = setTimeout(function () {
+                    last = now;
+                    fn.apply(context, args);
+                }, threshhold);
+            } else {
+                last = now;
+                fn.apply(context, args);
+            }
+        };
+    }
+
+    var resize = throttle(function() { window.dispatchEvent(new Event('resize')); }, 1000);
+
+    targetNodes.each(function() {
+        myObserver.observe (this, obsConfig);
+    });
+
+    function mutationHandler() {
+        resize();
+    }
+
+});

@@ -1,0 +1,202 @@
+
+    var zgifJalons = { start: { t: new Date() } }; 
+    window.app_mode = 'prod'; 
+    try {
+    o_idzone = {"ACCESS_NETWORK":"","ACCOUNT_COST_CENTER":null,"ACCOUNT_MULTIBAL":false,"ACCOUNT_NETWORK":"","ACCOUNT_OPTION_MCS":false,"ACCOUNT_OPTION_QUAD":false,"ACCOUNT_PRO":false,"BACKEND_ENV":"prod","BROWSER_FAMILY":"Chrome","BROWSER_MAJOR":"71","CADAP_VERSION":"22.00.00","CLIENT_ID":"E-s4Ch2NBGBNBHq2co4AEXPM","CLIENT_ID_EXPIRATION_DATE":1638955982,"COMMON_ZIP_CODE":"","COMPANY_SIREN":"","COMPANY_SIRET":"","COMPANY_TRADINGNAME":"","DEVICE_IS_ROBOT":"0","DEVICE_POLARIS":"1","DEVICE_TYPE":"desktop","HPIZ_VERSION":"3.8.1","IDENT_FORM_URL":"https://r.orange.fr/r/Oid_identification","MOBILE_BRAND":"","MOBILE_COMMERCIAL_SEGMENT":"","MOBILE_MODEL":"","MOBILE_NETWORK_TYPE":"","MOBILE_OFFER_TYPE":"","NETWORK_COUNTRY_CODE":"RU","NETWORK_ISP_NAME":"","NETWORK_POOL":"","NETWORK_TYPE":"","OS_FAMILY":"Windows","OS_MAJOR":"10","PUBPERSO_VAR1":null,"PUBPERSO_VAR2":null,"PUBPERSO_VAR3":"","PUBPERSO_VAR4":"","PUBPERSO_VAR5":false,"PUBPERSO_VAR6":"","REQUEST_ID":"E-s4Ch2NBGBNBHq2co4AEXPM","STB_LAST_CNX_AGE":null,"TECH_CACHE_INDICS":"FETCHED,SAVED","TECH_CONTRAH_INDICS":"FETCHED","TECH_CONTRAH_REQDUR":0,"TECH_CONTRAH_REQSTS":0,"TECH_CONTRAH_STATUS":1,"TECH_NET_INDICS":"","TECH_NET_STATUS":0,"TECH_PNS_INDICS":"FETCHED,PNS,CACHED","TECH_PNS_REQDUR":9253,"TECH_PNS_REQSTS":0,"TECH_PNS_STATUS":161,"TECH_SIG_SIGTTL":30,"TECH_SIG_SIGVER":4,"TECH_SIG_STATUS":0,"TECH_SIU_INDICS":"","TECH_SIU_REQDUR":0,"TECH_SIU_REQSTS":412,"TECH_SIU_STATUS":0,"TECH_TCFC_INDICS":"","TECH_TCFC_REQDUR":0,"TECH_TCFC_REQSTS":0,"TECH_TCFC_STATUS":0,"TECH_TCFI_INDICS":"","TECH_TCFI_REQDUR":0,"TECH_TCFI_REQSTS":0,"TECH_TCFI_STATUS":0,"TECH_WSP_INDICS":"FETCHED","TECH_WSP_REQDUR":0,"TECH_WSP_REQSTS":412,"TECH_WSP_STATUS":1,"UAF_VERSION":"0.3.0","USER_AVATAR_TINY_PICTURE_URL":"https://proxymedia.woopic.com/api/v1/images/1211%2Favatars%2F0.png","USER_BIMOBILE_TAGPRO":null,"USER_CITY_NAME":"","USER_CONSENT_CMP":{"c1":1,"c2":1,"c3":1,"c4":1,"c5":1,"c6":1,"c7":1,"c8":1,"c9":1,"c10":1,"c11":1,"c12":1,"c13":1,"c14":1,"c15":1,"c16":1,"c17":1,"c18":1,"c19":1,"c20":1,"c21":1,"c22":1,"c23":1,"c24":1,"c25":1,"c26":1,"c27":1,"c28":1,"c29":1,"c30":1,"c31":1,"c32":1},"USER_COOKIE_CONSENT":null,"USER_DEFINED_MSISDN":"","USER_EXTERNAL_ID_HASH":"","USER_FIRST_NAME":"","USER_FIRST_NAME2":"","USER_FULL_NAME":"","USER_GENDER":null,"USER_HOMELIVE_STATUS":null,"USER_IDENT_CONTEXT":0,"USER_IDENT_LEVEL":"NONE","USER_IDENT_METHOD":0,"USER_IDENT_PROVIDER":"","USER_IDENT_TYPE":"","USER_IN8_ALT_SITE":false,"USER_IN8_SWITCHED":false,"USER_IS_FUT":1,"USER_IS_IUS":false,"USER_IS_MUS":false,"USER_IUR":null,"USER_LAST_NAME":"","USER_LAST_NAME2":"","USER_M6":false,"USER_MAIL_ADDRESS":"","USER_MAIL_NB":0,"USER_MAIL_STATUS":0,"USER_MMS_NB":0,"USER_MSISDN":"","USER_MSISDN_HASH":"","USER_MUR":null,"USER_OPEN":0,"USER_OPTION_TV_FIBRE":false,"USER_OPTION_TV_SAT":false,"USER_OPTION_TV_SAT_DOM":false,"USER_OPTION_TV_XDSL":false,"USER_OPTION_TV_ZNE":false,"USER_OPTION_TV_ZNE_DUO":false,"USER_OPUS_IRD":null,"USER_ORANGE_CARAIBE_CONVERGENT":false,"USER_ORANGE_CARAIBE_MOBILE":false,"USER_ORANGE_CARAIBE_SOSH":false,"USER_OSDAT_EXTRA":"","USER_OSDAT_VAR1":null,"USER_OSDAT_VAR2":null,"USER_OSDAT_VAR3":null,"USER_OSDAT_VAR4":null,"USER_OSDAT_VAR5":null,"USER_OSDAT_VAR6":"","USER_PPERSO_STATUS":null,"USER_PRINCIPAL":false,"USER_PRO":false,"USER_PROPME":null,"USER_QMSISDN":"","USER_QUAD":0,"USER_SEGMENT":null,"USER_SEGMENT_JSON":null,"USER_SMS_NB":0,"USER_SOSH":false,"USER_ST_B":null,"USER_TV_ADS_PROFILE":[],"USER_ZIP_CODE":"","REAL_DEVICE_TYPE":"desktop","UA_FILTER_MATCH":"0"};
+} catch (e) {
+  o_idzone = {};
+}
+
+    var dataStoreHP = {
+        "bandes":{},
+        "featureFlags":[],
+        "isLogged":false,
+        "mobileContractNumber": 0,
+        "pageId": "hp-prospect",
+        "device":"desktop"
+        , "recoNewsToken":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ4eHgiOiJ4eHgiLCJleHAiOjE2MjM0MDQxMDJ9.3__1RiGAShBhu6oF_V_0XuAFxcutB1cbrn7z84GF3fs"    };
+
+    var segmentationRefZ = 'prospect-nl';
+
+    var o_data = {
+      segment: "RES",
+      canal: "Web",
+      domaine: "Portail",
+      sous_univers: "global",
+      titre_page: "hp_prospect_non_logue",
+      type_page: "hp",
+      univers_affichage: "global"
+    };
+
+          window.IZClientID = 'E-s4Ch2NBGBNBHq2co4AEXPM';
+      window.adviseMulticontrat = false;
+      window.adviseUrl = 'https://sso.orange.fr/pushms/advise/1.1/proposal?targets=GP[carrousel:3,reseau:1]&canal=0a7&canalPhysique=web&data[pageId]=ACC-DIGITAL_PROSPECT-NL';
+      window.isMocked = false;
+      window.isCookieConsent = false;
+    
+              var o_confCommon = {
+      infoCookieZone: false,
+      oneIMode: true,
+      typeEnv: "prod",
+      display: {
+        persist: 2
+      },
+      switchMobileToDesktop: {
+        activate: true
+      },
+      test: {
+        activateTestUrls: false
+      },
+            genericHeaderZone: false,
+            navStickyZone: true,
+      noBtnSearch: true,
+            unifiedSearchEngine: {
+        label: "Rechercher sur le Web",        toptrend118712: true,        toptrend: true,
+        toptrendCategory: "orange.actu",
+        tracking: {
+          category: "top_search",
+          action: "search"
+        }
+      },
+            tracking: {
+        refz: {
+          service: "acc-digital",
+          page: "prospect-nl"
+        },
+        Tealium : {
+                  }
+      },
+      footer: {
+        id: "footer-wrapper",
+        syndicationZone: true,
+        sitemapZone: true
+      },
+      callbackAccessibility: function(){
+              if (o_idzone['DEVICE_TYPE'].toUpperCase() === 'DESKTOP' && o_idzone['BROWSER_FAMILY'].toUpperCase() !== 'SAFARI' && o_idzone['BROWSER_FAMILY'].toUpperCase() !== 'OPERA') {
+                      if (typeof displayOrangeInside === 'function') {
+              displayOrangeInside()
+            }
+                            }
+            }
+    };
+  
+
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Orange France",
+      "alternateName": "Orange",
+      "logo": "https://c.orange.fr/logo-orange.png",
+      "url": "https://www.orange.fr",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "(+33) 3900",
+          "contactType": "customer support",
+          "areaServed": "FR",
+          "availableLanguage": "French"
+        }
+      ],
+      "sameAs": [
+        "https://plus.google.com/u/0/+OrangeFrance",
+        "https://twitter.com/orange_france",
+        "https://fr-fr.facebook.com/Orange.France",
+        "https://www.instagram.com/orange_france/?hl=fr",
+        "https://www.linkedin.com/company/orange-france",
+        "https://www.youtube.com/user/OrangeFr",
+        "https://fr.pinterest.com/orangefrance/",
+        "https://twitter.com/orange_conseil"
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://lemoteur.orange.fr/?kw={search_term}&bhv=web_fr&module=orange&target=orange",
+        "query-input": "required name=search_term"
+      }
+    }
+  
+
+var newsFeedNumberOfNews = 20
+
+zgifJalons.timehtml = {t: new Date(), cid: 'start'}
+
+    function fullCss(u, m) {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.type = 'text/css';
+      l.href = 'https://cdn.woopic.com/18d8339538654b1dbf96a30e92745731/css/hp-prospect.c47a6f28b444e70374be.css';
+      l.media = 'all';
+      document.getElementsByTagName('head')[0].appendChild(l);
+    }
+    if (window.addEventListener) {
+      window.addEventListener('DOMContentLoaded', fullCss, false);
+    } else {
+      window.onload = fullCss;
+    }
+  
+
+    var searchContainer = document.querySelector('#searchForm');
+
+    var togglePlaceholder = function() {
+      var searchInputHp = document.querySelector('#o-search-input-hp');
+      var searchLabelHp = document.querySelector('.o-search-label');
+      if (searchInputHp.value !== '') {
+        searchLabelHp.style.opacity = 0;
+        searchLabelHp.style.cssText = 'display:none !important';
+      } else {
+        searchLabelHp.style.opacity = 1;
+        searchLabelHp.style.cssText = 'display:block !important';
+      }
+    }
+
+    var callback = function() {
+      var searchInputHp = document.querySelector('#o-search-input-hp');
+      searchInputHp.addEventListener('input', togglePlaceholder, false);
+      searchInputHp.addEventListener('change', togglePlaceholder, false);
+      searchInputHp.addEventListener('keydown', togglePlaceholder, false);
+      searchInputHp.addEventListener('focus', togglePlaceholder, false);
+      searchInputHp.focus();
+      observer.disconnect();
+    }
+
+    var observer = new MutationObserver(callback);
+    var options = {subtree: true, childList: true};
+
+    if (searchContainer !== null) {
+      observer.observe(searchContainer, options);
+    }
+  
+
+    if (typeof(head) !== 'undefined') {
+      head.ready(function() {
+
+                          if ('o_pdb' in window && o_pdb.init) {
+            o_pdb.init({
+              prefix: "adv",
+              watchedAttributes: ["canal", "cappingdata"],
+              pixelURL: "https://sso.orange.fr/pushms/advise/1.1/log",
+              method: "POST",
+              plugin: "adviseCapping"
+            });
+          }
+        
+        var seoFooter = (document.querySelector('.prefooter') !== null) ? document.querySelector('.prefooter').outerHTML : false;
+
+        o_footer();
+
+        if (seoFooter) {
+          var seoFooterTarget = document.getElementById('o-footer-sitemap');
+          var seoFooterTargetMobile = document.getElementById('o-footer-accesDirect');
+
+          if (seoFooterTarget !== null) {
+            seoFooterTarget.insertAdjacentHTML('afterend', seoFooter);
+          } else if (seoFooterTargetMobile !== null) {
+            seoFooterTargetMobile.insertAdjacentHTML('beforebegin', seoFooter);
+          }
+        }
+
+        o_initCompletion();
+        o_generateSearchZone('searchForm','hp');
+        zgif(zgifJalons, 'HPONE', 'prospect').run();
+      });
+    }
+  

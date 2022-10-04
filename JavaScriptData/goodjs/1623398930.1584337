@@ -1,0 +1,1499 @@
+var MegApp = {
+    doms: {
+        wrapper : $('.js-gamewindowWrap'),
+        gamewindow : $('.js-gamewindow'),
+        gamewindowtitle : $('.js-gamewindowtitle'),
+        gamewindowlead : $('.js-gamewindowlead'),
+        gamecanvaswrap : $('.js-gameCanvasWrap'),
+        gamewindowshare : $('.js-gamewindowshare'),
+        windowBtn : $('.js-gamewindowBtn'),
+        accordionBtn : $('.js-accordionBtn'),
+        closeBtn : $('.js-gameCloseBtn'),
+        canvas : $('#myCanvas')
+    },
+    config: {
+        osanpo : {
+            title: "縺ｽ縺ｦ縺ｽ縺ｦ�√♀縺輔ｓ縺ｽ繝｡繧ｰ縺溘ｓ",
+            assetsPath: "/games/osanpo/assets/",
+            leadText: "<b>鬟帙ｓ縺ｧ縺上ｋ謔ｪ縺�ワ繝√＆繧薙ｒ</b>繝溘Ν繧ｯ繝懊�繝ｫ縺ｧ謾ｻ謦�＠縺溘ｊ縲√ず繝｣繝ｳ繝励〒驕ｿ縺代◆繧翫＠縺ｪ縺後ｉ繝｡繧ｰ縺溘ｓ縺ｫ縺翫＆繧薙⊃縺励※繧ゅｉ縺翫≧��ｫ伜ｾ礼せ繧呈嫌縺偵ｌ縺ｰ繝｡繧ｰ縺溘ｓ縺ｮ縺雁暑驕斐′縺頑焔莨昴＞縺ｫ譚･縺ｦ縺上ｌ繧九°繧やｦ��ｼ�<br><b>縺ゅ♀繧縺励＆繧難ｼ壻ｸ蠎ｦ縺�縺代Γ繧ｰ縺溘ｓ繧偵ワ繝√＆繧薙°繧牙ｮ医▲縺ｦ縺上ｌ繧九ｈ</b><br>縲先桃菴懈婿豕輔醍ｧｻ蜍包ｼ喙竊�(蜊∝ｭ励く繝ｼ蟾ｦ)][竊�(蜊∝ｭ励く繝ｼ蜿ｳ)]繧ｸ繝｣繝ｳ繝暦ｼ喙竊�(蜊∝ｭ励く繝ｼ荳�)]謾ｻ謦�ｼ喙space]<br><span>窶ｻ譛ｬ繝悶Λ繧ｦ繧ｶ繧ｲ繝ｼ繝�縺ｯ縺贋ｽｿ縺��遶ｯ譛ｫ縺ｮ莉墓ｧ倥√∪縺溘�謗･邯壽凾縺ｮ騾壻ｿ｡迺ｰ蠅�↓繧医ｊ蜍穂ｽ懊′驕�￥縺ｪ繧九％縺ｨ縺後≠繧翫∪縺吶�</span>"
+,
+            tweetText: "goo繝医ャ繝励�繝ｼ繧ｸ縺ｧ繝｡繧ｰ縺溘ｓ縺ｨ縺翫＆繧薙⊃縺励※繧ｹ繧ｳ繧｢繧偵ご繝�ヨ縺吶ｋ縲後⊃縺ｦ縺ｽ縺ｦ�√♀縺輔ｓ縺ｽ繝｡繧ｰ縺溘ｓ縲阪′驕翫∋繧九ｈ�√∩繧薙↑縺ｧ驕翫ｓ縺ｧ鬮伜ｾ礼せ繧堤岼謖�◎縺�ｼ�"
+        },
+        star : {
+            title: "縺阪ｉ縺阪ｉ�∵弌繧偵▽縺九�繝｡繧ｰ縺溘ｓ",
+            assetsPath: "/games/star/assets/",
+            leadText: "<b>繝｡繧ｰ縺溘ｓ繧呈桃菴懊＠縺ｦ縺頑弌縺輔∪繧帝寔繧√ｈ縺�ｼ∝宛髯先凾髢謎ｻ･蜀�〒縲√←繧後□縺鯛�繧帝寔繧√ｉ繧後ｋ縺九↑��</b><br>縲先桃菴懈婿豕輔� 繧ｯ繝ｪ繝�け or 繧ｿ繝���壹ず繝｣繝ｳ繝�<br><span>窶ｻ譛ｬ繝悶Λ繧ｦ繧ｶ繧ｲ繝ｼ繝�縺ｯ縺贋ｽｿ縺��遶ｯ譛ｫ縺ｮ莉墓ｧ倥√∪縺溘�謗･邯壽凾縺ｮ騾壻ｿ｡迺ｰ蠅�↓繧医ｊ蜍穂ｽ懊′驕�￥縺ｪ繧九％縺ｨ縺後≠繧翫∪縺吶�</span>"
+,
+            tweetText: "goo繝医ャ繝励�繝ｼ繧ｸ縺ｧ繝｡繧ｰ縺溘ｓ縺悟､懃ｩｺ繧帝｣帙ｓ縺ｧ繧ｹ繧ｳ繧｢繧偵ご繝�ヨ縺吶ｋ縲後″繧峨″繧会ｼ∵弌繧偵▽縺九�繝｡繧ｰ縺溘ｓ縲阪′驕翫∋繧九ｈ�√∩繧薙↑縺ｧ驕翫ｓ縺ｧ鬮伜ｾ礼せ繧堤岼謖�◎縺�ｼ�"
+        },
+        handleKeyDown: '',
+        handleKeyUp: '',
+        isSmartphone: '',
+        scrollVal: '',
+    },
+    init: {
+        gameInit: {
+            osanpo: function() {
+                init();
+                // setting
+                var canvas, canvasWidth, canvasHeight, groundHeight, groundPosition, megutanSize, stage, loader, itemContainer, treeContainer, grass, charaContainer, effectContainer;
+                var treeImg, heartImg, aomushiImg, beeImg;
+                var gravityNum = 0.15;
+                function init() {
+
+                    // setting
+                    canvas = document.getElementById("myCanvas");
+                    const searchForm = document.activeElement;
+                    searchForm.blur();
+                    canvasWidth = canvas.width;
+                    canvasHeight = canvas.height;
+                    groundHeight = 50;
+                    groundPosition = canvasHeight - groundHeight;
+                    megutanSize = 150;
+
+                    // stage
+                    stage = new createjs.StageGL(canvas);
+                    stage.updateViewport(canvasWidth,canvasHeight);
+
+                    // loader
+                    manifest = [
+                        {src: "intro.png", id: "intro"},
+                        {src: "btnstart.png", id: "btnstart"},
+                        {src: "over.png", id: "over"},
+                        {src: "btnover.png", id: "btnover"},
+                        {src: "megtan.png", id: "megutan"},
+                        {src: "tree.png", id: "tree"},
+                        {src: "grass.png", id: "grass"},
+                        {src: "heart.png", id: "heart"},
+                        {src: "cloud.png", id: "cloud"},
+                        {src: "aomushi.png", id: "aomushi"},
+                        {src: "maimai.png", id: "maimai"},
+                        {src: "bee.png", id: "bee"},
+                        {src: "twitter.png", id: "twitter"}
+                    ];
+
+                    loader = new createjs.LoadQueue(false);
+                    loader.setMaxConnections(6);
+                    loader.addEventListener("complete", handleComplete);
+                    loader.loadManifest(manifest, true, MegApp.config.osanpo.assetsPath);
+                };
+                function handleComplete() {
+
+                    // images
+                    treeImg = loader.getResult("tree");
+                    grassImg = loader.getResult("grass");
+                    heartImg = loader.getResult("heart");
+                    cloudImg = loader.getResult("cloud");
+                    aomushiImg = loader.getResult("aomushi");
+                    maimaiImg = loader.getResult("maimai");
+                    beeImg = loader.getResult("bee");
+
+                    // Opeing
+                    var openingContainer = new createjs.Container();
+                    stage.addChild(openingContainer);
+
+                    // introBg
+                    var introBg = new createjs.Shape();
+                    introBg.graphics.beginFill("rgba(0,0,0,.75)").drawRect(0,0,canvasWidth, canvasHeight);
+                    introBg.cache(0,0,canvasWidth, canvasHeight);
+                    openingContainer.addChild(introBg);
+
+                    var introImg = loader.getResult("intro");
+                    var intro = new createjs.Bitmap(introImg);
+                    intro.regX = introImg.width / 2;
+                    intro.regY = introImg.height / 2;
+                    intro.x = canvasWidth / 2;
+                    intro.y = introImg.height / 2 + 50;
+                    openingContainer.addChild(intro);
+
+                    var introBtnImg = loader.getResult("btnstart");
+                    var introBtn = new createjs.Bitmap(introBtnImg);
+                    introBtn.regX = introBtnImg.width / 2;
+                    introBtn.regY = introBtnImg.height / 2;
+                    introBtn.x = canvasWidth / 2;
+                    introBtn.y = canvasHeight - introBtnImg.height / 2 - 25;
+                    openingContainer.addChild(introBtn);
+
+                    openingContainer.cache(0,0,canvasWidth,canvasHeight);
+
+                    stage.addEventListener("mousedown", introEnd);
+
+                    function introEnd(e) {
+                        e.preventDefault();
+                        stage.removeEventListener("mousedown", introEnd);
+                        stage.removeChild(openingContainer);
+                        gameInit();
+                    };
+
+                    stage.update();
+                };
+                function gameInit() {
+
+                    // bg
+                    var bgGraphics = new createjs.Graphics();
+                    bgGraphics.beginLinearGradientFill(["#8cf0fc", "#bff5fc"], [0, 1], 0, 0, 0, canvasHeight).drawRect(0,0,canvasWidth,canvasHeight);
+                    bg = new createjs.Shape(bgGraphics);
+                    bg.cache(0, 0, canvasWidth, canvasHeight);
+                    stage.addChild(bg);
+
+                    // cloud
+                    var cloud = new createjs.Shape();
+                    cloud.graphics.beginBitmapFill(cloudImg).drawRect(-cloudImg.width, 0, canvasWidth + cloudImg.width, cloudImg.height);
+                    cloud.cache(-cloudImg.width, 0, canvasWidth + cloudImg.width, cloudImg.height);
+                    cloud.y = 0;
+                    stage.addChild(cloud);
+
+                    // tree
+                    treeContainer = new createjs.Container();
+                    stage.addChild(treeContainer);
+
+                    var tree = new createjs.Shape();
+                    tree.graphics.beginBitmapFill(treeImg).drawRect(-treeImg.width, 0, canvasWidth + treeImg.width, treeImg.height);
+                    tree.cache(-treeImg.width, 0, canvasWidth + treeImg.width, treeImg.height);
+                    tree.y = canvasHeight - treeImg.height - groundHeight;
+                    treeContainer.addChild(tree);
+
+                    // itemContainer;
+                    itemContainer = new createjs.Container();
+                    stage.addChild(itemContainer);
+
+                    // effectContainer;
+                    effectContainer = new createjs.Container();
+                    stage.addChild(effectContainer);
+
+                    // megutan
+                    charaContainer = new createjs.Container();
+                    stage.addChild(charaContainer);
+
+                    var spriteSheet = new createjs.SpriteSheet({
+                        framerate: 60,
+                        "images": [loader.getResult("megutan")],
+                        "frames": {"regX": megutanSize/2, "height": megutanSize, "count": 32, "regY": megutanSize, "width": megutanSize},
+                        "animations": {
+                            "stop": [0, 0, "stop", 1],
+                            "run": [0, 31, "run", .2]
+                        }
+                    });
+                    megutan = new createjs.Sprite(spriteSheet, "stop");
+                    megutan.run = false;
+                    megutan.x = canvasWidth - megutanSize/2;
+                    megutan.y = groundPosition + 8;
+                    megutan.speedx = 5;
+                    megutan.speedy = 8.5;
+                    megutan.jumpCount = 0;
+                    charaContainer.addChild(megutan);
+
+                    // Ground
+                    var ground = new createjs.Shape();
+                    ground.graphics.beginLinearGradientFill(["#80ae30", "#80ae30"], [0, 1], 0, 0, 0, canvasHeight).drawRect(0,groundPosition,canvasWidth, groundHeight);
+                    ground.cache(0,groundPosition,canvasWidth, groundHeight);
+                    stage.addChild(ground);
+
+                    grass = new createjs.Shape();
+                    grass.graphics.beginBitmapFill(grassImg).drawRect(-grassImg.width, 0, canvasWidth + grassImg.width, grassImg.height);
+                    grass.cache(-grassImg.width, 0, canvasWidth + grassImg.width, grassImg.height);
+                    grass.y = canvasHeight - grassImg.height - groundHeight;
+                    stage.addChild(grass);
+
+                    // megutan speed
+                    var vx = 0;
+                    var vy = 0;
+
+                    // keyboard
+                    var isPressLeft = false,
+                        isPressRight = false,
+                        isPressUp = false,
+                        isPressDown = false,
+                        isSetRight = false,
+                        isPressSpace = false;
+
+                    // keyboard event
+                    MegApp.config.handleKeyDown = function(event) {
+                        var keyCode = event.keyCode;
+                        if (keyCode == 39) { // right
+                            isPressRight = true;
+                            isSetRight = true;
+                        } else if (keyCode == 37) { // left
+                            isPressLeft = true;
+                            isSetRight = false;
+                        } else if (keyCode == 38) { // up
+                            isPressUp = true;
+                        } else if (keyCode == 32) { // Space
+                            isPressSpace = true;
+                        } else if (keyCode == 40 && maimaiEquip == true) { // down
+                            maimaiStart();
+                        // } else if (keyCode == 27) { // Esc
+                        }
+                        if(megutan.run == false) {
+                            if (isPressRight == true || isPressLeft == true) { // left & right
+                                megutan.run = true;
+                                megutan.gotoAndPlay("run");
+                            }
+                        }
+                    };
+                    MegApp.config.handleKeyUp = function(event) {
+                        var keyCode = event.keyCode;
+                        if (keyCode == 39) { // right
+                            isPressRight = false;
+                        } else if (keyCode == 37) { // left
+                            isPressLeft = false;
+                        } else if (keyCode == 38) { // up
+                            isPressUp = false;
+                        } else if (keyCode == 32) { // Space
+                            isPressSpace = false;
+                        }
+                    };
+                    window.addEventListener("keydown", MegApp.config.handleKeyDown);
+                    window.addEventListener("keyup", MegApp.config.handleKeyUp);
+
+                    // megutan milk
+                    var milkList = [];
+                    var milkInterval = false;
+                    var milkLifeCount = 0;
+                    var milkPower = 1;
+
+                    // area
+                    var areaNum = 0;
+
+                    // enemy
+                    var enemyList = [];
+                    var enemyType = ['bee','horizon'];
+                    var enemySpeedXTypeBee = 3,
+                        enemySpeedYTypeBee = 0.07,
+                        enemySpeedXTypeMissile = 0.005,
+                        enemySpeedYTypeMissile = 0.05;
+                    var count = 0; // frame count
+
+                    // score
+                    var scoreNum = 0; // score
+                    var score = new createjs.Text("SCORE:0轤ｹ", "24px sans-serif", "white");
+                    score.x = 10;
+                    score.y = 5;
+                    score.cache(0, 0, canvasWidth, 24);
+                    itemContainer.addChild(score);
+
+                    // heart
+                    var heartNum = 3;
+                    var heartTxt = new createjs.Text("LIFE:"+heartNum, "24px sans-serif", "#cf5a4c");
+                    heartTxt.x = canvasWidth - 80;
+                    heartTxt.y = 5;
+                    heartTxt.cache(0, 0, 80, 24);
+                    itemContainer.addChild(heartTxt);
+
+                    // difficulty
+                    var difficultyNum = 0;
+                    var difficultyTxt = new createjs.Text("繧縺壹°縺励＆:1", "24px sans-serif", "white");
+                    difficultyTxt.textAlign = 'right';
+                    difficultyTxt.x = canvasWidth - 95;
+                    difficultyTxt.y = 5;
+                    difficultyTxt.cache(-160, 0, 160, 24);
+                    itemContainer.addChild(difficultyTxt);
+
+                    var heartFlag = true;
+                    var heartList = [];
+
+                    // aomushi
+                    var aomushiFlag = true;
+                    var aomushiList = [];
+
+                    var aomushiBarrierFlag = false;
+                    var aomushiBarrierVisible = false;
+                    var aomushiBarrier;
+
+                    // aomushiBulletList
+                    var aomushiBulletList = [];
+                    var aomushiBulletInterval = false;
+                    var aomushiBulletLifeCount = 0;
+
+                    // muteki
+                    var muteki = false;
+                    var mutekiStartNum = 0;
+
+                    // maimai
+                    var maimaiFlag = false;
+                    var maimaiEquip = false;
+                    var maimaiList = [];
+                    var maimaiOn = false;
+
+                    // ticker
+                    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+                    createjs.Ticker.addEventListener("tick", handleTick);
+
+                    function handleTick(event){
+
+                        // megutan move
+                        if (isPressRight == true) { // right
+                            vx = megutan.speedx;
+                        } else if (isPressLeft == true) { // left
+                            vx = -megutan.speedx;
+                        }
+
+                        if (isSetRight == true) { // right
+                            megutan.scaleX = -1;
+                        } else {
+                            megutan.scaleX = 1;
+                        }
+                        if (isPressUp == true) { // up
+                            if (megutan.y == groundPosition + 8) {
+                                vy = -megutan.speedy;
+                            }
+                        }
+
+                        // megutan action
+                        // jump
+                        vy += 0.25;
+                        vy *= 0.99;
+                        megutan.y += vy;
+                        if (megutan.y > groundPosition + 8) {
+                            megutan.y = groundPosition + 8;
+                            vy = 0;
+                        }
+
+                        // left & right
+                        vx *= 0.96;
+                        megutan.x += vx;
+                        if (megutan.x > canvasWidth - megutanSize / 2) {
+                            megutan.x = canvasWidth - megutanSize / 2;
+                        } else if (megutan.x < canvasWidth / 2){
+                            megutan.x = canvasWidth / 2;
+                            // cloud.x -= vx * 0.2;
+                            treeContainer.x -= vx * 0.9;
+                            grass.x -= vx * 1;
+                        } else if (megutan.x < 0 + megutanSize / 2){
+                            megutan.x = 0 + megutanSize / 2;
+                        }
+
+                        // tree roop
+                        if(treeContainer.x >= treeImg.width) {
+                            treeContainer.x = 0;
+                            areaNum += 1;
+                            scoreUpdate();
+                            // difficulty
+                            if (areaNum % 5 == 0) {
+                                heartFlag = true;
+                                // Max difficultyNum 20
+                                if (difficultyNum < 20) {
+                                    difficultyNum += 1;
+                                    difficultyTxt.text = String('繧縺壹°縺励＆:' + (difficultyNum + 1));
+                                    createjs.Tween.get(difficultyTxt, {loop: 3}).to({alpha: 0.1}, 500).to({alpha: 1.0}, 300);
+                                    difficultyTxt.cache(-160, 0, 160, 24);
+                                }
+                            }
+                            if (difficultyNum == 5 && enemyType.length == 2) {
+                                enemyType.push('missile');
+                            }
+                        }
+
+                        // grass roop
+                        if(grass.x >= grassImg.width) {
+                            grass.x = 0;
+                        }
+
+                        // megutan stop
+                        if(vx < 0.5 && vx > -0.5) {
+                            megutan.gotoAndPlay("stop");
+                            megutan.run = false;
+                        }
+
+                        // frame count
+                        count = count + 1;
+                        countPop = Math.floor(count % (300 / (1 + difficultyNum * 0.5)));
+
+                        // enemy pop
+                        if (countPop == 0 && enemyList.length <= difficultyNum && enemyList.length < 4) {
+                            var enemy = new createjs.Bitmap(beeImg);
+                            var enemyTypeSet = enemyType[Math.floor(Math.random() * enemyType.length)];
+                                if (enemyTypeSet == 'bee'){
+                                enemy.x = 0;
+                                enemy.maxY = groundPosition - (megutanSize * 0.5);
+                                enemy.minY = groundPosition - megutanSize;
+                                enemy.y = Math.floor(Math.random()*(enemy.maxY - enemy.minY) + enemy.minY);
+                                enemy.speedx = Math.floor(Math.random() * enemySpeedXTypeBee) + difficultyNum * 0.2;
+                                enemy.speedy = enemySpeedYTypeBee;
+                                enemy.cenrery = enemy.y;
+                                enemy.angley = 0;
+                                enemy.range = 100 + Math.floor(Math.random() * difficultyNum);
+                                enemy.type = 'bee';
+                            } else if (enemyTypeSet == 'horizon'){
+                                enemy.maxY = groundPosition - (megutanSize * 0.5);
+                                enemy.minY = groundPosition - (megutanSize * 0.9);
+                                enemy.x = 0;
+                                enemy.y = groundPosition - (megutanSize * 0.9);
+                                enemy.speedx = Math.floor(Math.random() * enemySpeedXTypeBee) + difficultyNum * 0.2;
+                                enemy.type = 'horizon';
+                            } else if (enemyTypeSet == 'missile'){
+                                // enemy.graphics.beginFill("#654425").drawPolyStar(0, 0, 28, 20, 0.4, -90);
+                                // createjs.Tween.get(enemy, {loop: true}).to({rotation:360}, 150);
+                                enemy.x = canvasWidth;
+                                enemy.y = 0;
+                                enemy.speedx = enemySpeedXTypeMissile;
+                                enemy.speedy = enemySpeedYTypeMissile;
+                                enemy.type = 'missile';
+                            }
+
+                            // enemy.r = 27;
+                            // enemy.cache(-28,-28,56,56);
+                            itemContainer.addChild(enemy);
+                            enemyList.push(enemy);
+                        }
+
+                        // enemy move
+                        for (var i = 0; i < enemyList.length; i++) {
+
+                            if (maimaiOn == false) {
+
+                                if(enemyList[i].type == 'bee') {
+                                    enemyList[i].y = enemyList[i].cenrery + Math.sin(enemyList[i].angley) * enemyList[i].range;
+                                    enemyList[i].angley += enemyList[i].speedy;
+                                    // enemy scroll
+                                    if (megutan.x == canvasWidth / 2) {
+                                        enemyList[i].x += enemyList[i].speedx - vx;
+                                    } else {
+                                        enemyList[i].x += enemyList[i].speedx;
+                                    }
+                                }
+
+                                if(enemyList[i].type == 'horizon') {
+                                    if (megutan.x == canvasWidth / 2) {
+                                        enemyList[i].x += enemyList[i].speedx - vx;
+                                    } else {
+                                        enemyList[i].x += enemyList[i].speedx;
+                                    }
+                                }
+
+                                if(enemyList[i].type == 'missile') {
+                                    enemyList[i].x += (megutan.x - enemyList[i].x) * enemyList[i].speedx;
+                                    enemyList[i].y += (megutan.y - megutanSize / 2 - enemyList[i].y) * enemyList[i].speedy;
+                                }
+
+                                // enemy end
+                                if (enemyList[i].x > canvasWidth) {
+                                    itemContainer.removeChild(enemyList[i]);
+                                    enemyList.splice(i,1);
+                                }
+                            } else if (maimaiOn == true) {
+                                if (megutan.x == canvasWidth / 2) {
+                                    enemyList[i].x -= vx;
+                                }
+                            }
+
+                        }
+
+                        // player hit damage
+                        for (var i = 0; i < enemyList.length; i++) {
+                            var enemy = enemyList[i];
+                            var playerHit = megutan;
+
+                            // megutan縺九ｉ隕九◆enemy縺ｮ繝ｭ繝ｼ繧ｫ繝ｫ蠎ｧ讓吶ｒ蜿門ｾ�
+                            var pt = enemy.localToLocal(0,0,playerHit);
+
+                            // hitted
+                            if (playerHit.hitTest(pt.x, pt.y) == true && muteki == false) {
+                                if (!aomushiBarrierVisible == true) {
+                                    heartNum -= 1;
+                                    heartTxt.text = String('LIFE:' + heartNum);
+                                    heartTxt.cache(0, 0, 80, 24);
+                                } else if (aomushiBarrierVisible == true) {
+                                    aomushiBarrierVisible = false;
+                                    aomushiBarrierFlag = false;
+                                    aomushiFlag = true;
+                                    charaContainer.removeChild(aomushiBarrier);
+                                }
+                                muteki = true;
+                                mutekiStartNum = count;
+                                megutan.alpha = 0.45;
+                                itemContainer.removeChild(enemyList[i]);
+                                enemyList.splice(i,1);
+                                if (heartNum == 0 ) {
+                                    showGameOver();
+                                }
+                            }
+                        }
+
+                        // heart pop
+                        if (difficultyNum > 0 && difficultyNum % 3 == 0 && heartFlag == true) {
+                            var heart = new createjs.Bitmap(heartImg);
+                            itemContainer.addChild(heart);
+                            heart.x = -canvasWidth / 2;
+                            heart.y = groundPosition - heartImg.height * 1.5 - 10;
+                            heartFlag = false;
+                            heartList.push(heart);
+                        }
+
+                        // heart move
+                        for (var i = 0; i < heartList.length; i++) {
+                            if (megutan.x == canvasWidth / 2) {
+                                heartList[i].x -= vx;
+                            }
+
+                            // heartList[i] end
+                            if (heartList[i].x > canvasWidth) {
+                                itemContainer.removeChild(heartList[i]);
+                                heartList.splice(i,1);
+                            }
+                        }
+
+                        // heart hit
+                        for (var i = 0; i < heartList.length; i++) {
+                            var heartPt = heartList[i].localToLocal(0,0,megutan);
+                            if (megutan.hitTest(heartPt.x, heartPt.y) == true) {
+                                if(heartNum < 3) {
+                                    heartNum += 1;
+                                    heartTxt.text = String('LIFE:' + heartNum);
+                                    heartTxt.cache(0, 0, 80, 24);
+                                } else {
+                                    // score update
+                                    scoreUpdate();
+                                }
+                                itemContainer.removeChild(heartList[i]);
+                                heartList.splice(i,1);
+                            }
+                        }
+
+                        // muteki count
+                        if(muteki == true && count >= mutekiStartNum + 180) {
+                            muteki = false;
+                            megutan.alpha = 1;
+                        }
+
+                        // megutan milk
+                        if (isPressSpace == true && milkInterval == false) {
+                            // milk pop
+                            var milk = new createjs.Shape();
+                            milk.graphics.beginFill("#fff").drawCircle(0, 0, 15);
+                            createjs.Tween.get(milk).to({alpha:0}, 3000);
+                            if (isSetRight == true) {
+                                milk.x = megutan.x + megutanSize / 2 - 12;
+                                milk.speedx = 8;
+                            } else {
+                                milk.x = megutan.x - megutanSize / 2 + 12;
+                                milk.speedx = 8 * -1;
+                            }
+                            milk.y = megutan.y - megutanSize / 2 + 17;
+                            milk.speedy = -5;
+                            milk.r = 15;
+                            milkInterval = true;
+                            milkLifeCount = count;
+                            milk.cache(-15,-15,30,30);
+                            stage.addChild(milk);
+                            milkList.push(milk);
+                        }
+
+                        // megutan milk move
+                        for (var i = 0; i < milkList.length; i++) {
+
+                            if (megutan.x == canvasWidth / 2) {
+                                milkList[i].x += milkList[i].speedx - vx;
+                            } else {
+                                milkList[i].x += milkList[i].speedx;
+                            }
+
+                            milkList[i].speedy += 0.5;
+                            milkList[i].speedy *= 0.99;
+                            milkList[i].y += milkList[i].speedy;
+
+                            // enemy bounce
+                            if (milkList[i].y > groundPosition - milkList[i].r) {
+                                milkList[i].y = groundPosition - milkList[i].r;
+                                milkList[i].speedy *= -1;
+                            }
+
+                            // milk dray
+                            if (milkList[i].x < 0 || milkList[i].x > canvasWidth) {
+                                stage.removeChild(milkList[i]);
+                                milkList.splice(i,1);
+                            }
+
+                        }
+
+                        // milkInterval
+                        if (count == milkLifeCount + 70 / milkPower && !aomushiBarrierFlag == true) {
+                            milkInterval = false;
+                        }
+
+                        // milk hit
+                        for (var j = 0; j < enemyList.length; j++) {
+                            for (var i = 0; i < milkList.length; i++) {
+                                var enemyHit = enemyList[j];
+                                var milkHit = milkList[i];
+
+                                // 謨ｵ縺九ｉ隕九◆逋ｺ蟆�ｼｾ縺ｮ繝ｭ繝ｼ繧ｫ繝ｫ蠎ｧ讓吶ｒ蜿門ｾ�
+                                var milkPt = milkHit.localToLocal(0,0,enemyHit);
+
+                                // hitted
+                                if (enemyHit.hitTest(milkPt.x, milkPt.y) == true) {
+                                    // milkHit delete
+                                    stage.removeChild(milkHit);
+                                    milkList.splice(i, 1);
+
+                                    // enemy delete
+                                    itemContainer.removeChild(enemyList[j]);
+                                    enemyList.splice(j,1)
+
+                                    // score update
+                                    // scoreUpdate();
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        // aomushi pop
+                        if (scoreNum > 0 && scoreNum % 1000 == 0 && aomushiFlag == true && !aomushiBarrierVisible == true) {
+                            var aomushi = new createjs.Bitmap(aomushiImg);
+                            charaContainer.addChild(aomushi);
+                            aomushi.x = - aomushiImg.width;
+                            aomushi.y = groundPosition - (aomushiImg.height * 2);
+                            aomushi.scaleX = -1;
+                            aomushi.speedx = 0.5;
+                            aomushi.speedy = 1;
+                            aomushiFlag = false;
+                            aomushiList.push(aomushi);
+                        }
+
+                        // aomushi move
+                        for (var i = 0; i < aomushiList.length; i++) {
+                            if (megutan.x == canvasWidth / 2) {
+                                aomushiList[i].x += aomushiList[i].speedx - vx;
+                            } else {
+                                aomushiList[i].x += aomushiList[i].speedx;
+                            }
+
+                            // enemy gravity
+                            aomushiList[i].speedy += gravityNum;
+                            aomushiList[i].y += aomushiList[i].speedy;
+
+                            // enemy bounce
+                            if (aomushiList[i].y > groundPosition - aomushiImg.height) {
+                                aomushiList[i].y = groundPosition - aomushiImg.height;
+                                aomushiList[i].speedy *= -1;
+                            }
+
+                            // aomushiList[i] end
+                            if (aomushiList[i].x > canvasWidth) {
+                                charaContainer.removeChild(aomushiList[i]);
+                                aomushiList.splice(i,1);
+                                aomushiFlag = true;
+                            }
+                        }
+
+                        // aomushi hit
+                        for (var i = 0; i < aomushiList.length; i++) {
+                            var aomushiPt = aomushiList[i].localToLocal(0,0,megutan);
+                            if (megutan.hitTest(aomushiPt.x, aomushiPt.y) == true) {
+
+                                // aomushiBarrierFlag ON
+                                aomushiBarrierFlag = true;
+
+                                // score update
+                                scoreUpdate();
+
+                                charaContainer.removeChild(aomushiList[i]);
+                                aomushiList.splice(i,1);
+                            }
+                        }
+
+                        // aomushiBarrierFlag
+                        if(aomushiBarrierFlag == true) {
+                            aomushiBarrier = new createjs.Bitmap(aomushiImg);
+                            charaContainer.addChild(aomushiBarrier);
+                            aomushiBarrier.regY = aomushiImg.height;
+                            aomushiBarrier.x = megutan.x - megutanSize + aomushiImg.width;
+                            aomushiBarrier.y = megutan.y - 8;
+                            aomushiBarrierFlag = false;
+                            aomushiBarrierVisible = true;
+                        }
+
+                        if(aomushiBarrierVisible == true) {
+                            // aomushiBarrier move
+                            aomushiBarrier.x += ((megutan.x + megutanSize - aomushiImg.width) - aomushiBarrier.x) * 0.1;
+                            aomushiBarrier.y += ((megutan.y - 8) - aomushiBarrier.y) * 0.1;
+
+                            // aomushi bullet
+                            if (isPressSpace == true && aomushiBulletInterval == false) {
+                                // aomushi bullet pop
+                                var aomushiBullet = new createjs.Shape();
+                                aomushiBullet.graphics.beginFill("#00ACA7").drawCircle(0, 0, 10);
+                                if (isSetRight == true) {
+                                    aomushiBullet.speedx = 8;
+                                } else {
+                                    aomushiBullet.speedx = 8 * -1;
+                                }
+                                aomushiBullet.x = aomushiBarrier.x;
+                                aomushiBullet.y = aomushiBarrier.y;
+                                aomushiBullet.speedy = -2 * Math.random();
+                                aomushiBullet.r = 10;
+                                aomushiBulletInterval = true;
+                                aomushiBulletLifeCount = count;
+                                aomushiBullet.cache(-10,-10,20,20);
+                                stage.addChild(aomushiBullet);
+                                aomushiBulletList.push(aomushiBullet);
+                            }
+                        }
+
+                        // aomushiBullet move
+                        for (var i = 0; i < aomushiBulletList.length; i++) {
+
+                            if (megutan.x == canvasWidth / 2) {
+                                aomushiBulletList[i].x += aomushiBulletList[i].speedx - vx;
+                            } else {
+                                aomushiBulletList[i].x += aomushiBulletList[i].speedx;
+                            }
+
+                            aomushiBulletList[i].y += aomushiBulletList[i].speedy;
+
+                            // aomushiBullet dray
+                            if (aomushiBulletList[i].x < 0 || aomushiBulletList[i].x > canvasWidth) {
+                                stage.removeChild(aomushiBulletList[i]);
+                                aomushiBulletList.splice(i,1);
+                            }
+
+                        }
+
+                        // aomushiBulletInterval
+                        if (count == aomushiBulletLifeCount + 100) {
+                            aomushiBulletInterval = false;
+                        }
+
+                        // aomushiBulletInterval hit
+                        for (var j = 0; j < enemyList.length; j++) {
+                            for (var i = 0; i < aomushiBulletList.length; i++) {
+                                var enemyHit = enemyList[j];
+                                var aomushiBulletHit = aomushiBulletList[i];
+
+                                // 謨ｵ縺九ｉ隕九◆逋ｺ蟆�ｼｾ縺ｮ繝ｭ繝ｼ繧ｫ繝ｫ蠎ｧ讓吶ｒ蜿門ｾ�
+                                var aomushiBulletPt = aomushiBulletHit.localToLocal(0,0,enemyHit);
+
+                                // hitted
+                                if (enemyHit.hitTest(aomushiBulletPt.x, aomushiBulletPt.y) == true) {
+                                    // aomushiBulletHit delete
+                                    stage.removeChild(aomushiBulletHit);
+                                    aomushiBulletList.splice(i, 1);
+
+                                    // enemy delete
+                                    itemContainer.removeChild(enemyList[j]);
+                                    enemyList.splice(j,1);
+
+                                    // score update
+                                    // scoreUpdate();
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        // maimai pop
+                        if (scoreNum > 0 && scoreNum % 100 == 0 && maimaiFlag == true) {
+                            var maimai = new createjs.Bitmap(maimaiImg);
+                            charaContainer.addChild(maimai);
+                            maimai.x = - maimaiImg.width;
+                            maimai.y = groundPosition - maimaiImg.height;
+                            maimai.speedx = 0.5;
+                            maimaiFlag = false;
+                            maimaiList.push(maimai);
+                        }
+
+                        // maimai hit
+                        for (var i = 0; i < maimaiList.length; i++) {
+                            var maimaiPt = maimaiList[i].localToLocal(0,0,megutan);
+                            if (megutan.hitTest(maimaiPt.x, maimaiPt.y) == true && maimaiEquip == false) {
+                                maimaiEquip = true;
+                                maimaiList[i].scaleX = -1;
+                                scoreUpdate();
+                            }
+                        }
+
+                        // maimai move
+                        for (var i = 0; i < maimaiList.length; i++) {
+
+                            if (maimaiEquip == true) {
+                                // maimai Equiped move
+                                maimaiList[i].x += ((megutan.x + megutanSize - maimaiImg.width) - maimaiList[i].x) * 0.08;
+                                maimaiList[i].y += ((megutan.y - 8) - maimaiList[i].y - maimaiImg.height) * 0.08;
+                            } else {
+                                if (megutan.x == canvasWidth / 2) {
+                                    maimaiList[i].x += maimaiList[i].speedx - vx;
+                                } else {
+                                    maimaiList[i].x += maimaiList[i].speedx;
+                                }
+                                // maimaiList[i] end
+                                if (maimaiList[i].x > canvasWidth) {
+                                    maimaiFlag = true;
+                                    charaContainer.removeChild(maimaiList[i]);
+                                    maimaiList.splice(i,1);
+                                }
+                            }
+
+                        }
+
+                        if(maimaiOn && count >= maimaiCount + 300) {
+                            for (var i = 0; i < maimaiList.length ; i++) {
+                                createjs.Tween.get(maimaiList[i]).to({alpha: 0}, 500).call(maimaiReset); // 髢｢謨ｰ繧貞他縺ｳ蜃ｺ縺�
+                            }
+                        }
+
+                        // update
+                        stage.update(event);
+                    };
+
+                    // game over
+                    function showGameOver() {
+                        // event delete
+                        createjs.Ticker.removeAllEventListeners();
+                        stage.removeAllEventListeners();
+
+                        // Ending
+                        var endingContainer = new createjs.Container();
+                        stage.addChild(endingContainer);
+
+                        // overBg
+                        var overBg = new createjs.Shape();
+                        overBg.graphics.beginFill("rgba(0,0,0,.75)").drawRect(0,0,canvasWidth, canvasHeight);
+                        overBg.cache(0,0,canvasWidth, canvasHeight);
+                        endingContainer.addChild(overBg);
+
+                        var overImg = loader.getResult("over");
+                        var over = new createjs.Bitmap(overImg);
+                        over.regX = overImg.width / 2;
+                        over.regY = overImg.height / 2;
+                        over.x = canvasWidth / 2;
+                        over.y = overImg.height / 2 + 50;
+                        endingContainer.addChild(over);
+
+                        var overBtnImg = loader.getResult("btnover");
+                        var overBtn = new createjs.Bitmap(overBtnImg);
+                        overBtn.regX = overBtnImg.width / 2;
+                        overBtn.regY = overBtnImg.height / 2;
+                        overBtn.x = canvasWidth / 2;
+                        overBtn.y = canvasHeight - overBtnImg.height / 2 - 25;
+                        endingContainer.addChild(overBtn);
+
+                        var twitterImg = loader.getResult("twitter");
+                        var twitterBtn = new createjs.Bitmap(twitterImg);
+                        twitterBtn.regX = twitterImg.width / 2;
+                        twitterBtn.regY = twitterImg.height / 2;
+                        twitterBtn.x = canvasWidth / 2;
+                        twitterBtn.y = canvasHeight / 2 + 40;
+                        endingContainer.addChild(twitterBtn);
+
+                        var overScore = new createjs.Text(scoreNum + '轤ｹ', "70px Arial", "#000");
+                        overScore.textAlign = "center";
+                        overScore.textBaseline = "bottom";
+                        overScore.x = canvasWidth / 2;
+                        overScore.y = overImg.height / 2 + 55;
+                        endingContainer.addChild(overScore);
+
+                        var overScoreLabel = new createjs.Text('GET!!!', "44px Arial", "#000");
+                        overScoreLabel.textAlign = "center";
+                        overScoreLabel.textBaseline = "top";
+                        overScoreLabel.x = canvasWidth / 2;
+                        overScoreLabel.y = overImg.height / 2 + 55;
+                        endingContainer.addChild(overScoreLabel);
+
+                        endingContainer.cache(0,0,canvasWidth,canvasHeight);
+
+                        overBtn.addEventListener("mousedown", overEnd);
+                        function overEnd(e) {
+                            e.preventDefault();
+                            stage.removeEventListener("mousedown", overEnd);
+                            stage.removeAllChildren();
+                            gameInit();
+                        };
+
+                        var tweetText = 'goo繝医ャ繝励�繝ｼ繧ｸ縺ｮ縲後⊃縺ｦ縺ｽ縺ｦ�√♀縺輔ｓ縺ｽ繝｡繧ｰ縺溘ｓ縲阪〒繧ｹ繧ｳ繧｢縲�'+ scoreNum +'轤ｹGET!!!縲�';
+                        var tweetHash = 'goo繝医ャ繝励�繝ｼ繧ｸ,繝｡繧ｰ縺溘ｓ,繝｡繧ｰ縺溘ｓ繧ｲ繝ｼ繝�';
+                        var tweetURL = 'https://www.goo.ne.jp/';
+                        twitterBtn.addEventListener("mousedown", {text: tweetText, hashtags: tweetHash, url: tweetURL, handleEvent: tweetAction});
+
+                        function tweetAction(e) {
+                            let uri = 'https://twitter.com/share';
+                            uri += '?text=' + this.text;
+                            uri += '&hashtags=' + this.hashtags;
+                            uri += '&url=' + this.url;
+                            window.open(uri);
+                        }
+
+                        MegApp.init.gameResultManager(MegApp.config.osanpo.title, scoreNum);
+
+                    };
+
+                    // score update
+                    function scoreUpdate() {
+                        // score update
+                        scoreNum += 100;
+                        score.text = String('SCORE:' + scoreNum + '轤ｹ');
+                        score.cache(0, 0, canvasWidth, 24);
+                    };
+
+                    // maimai
+                    function maimaiStart(){
+                        if (maimaiOn == false){
+                            var effectGraphics = new createjs.Graphics();
+                            effectGraphics.beginLinearGradientFill(["rgba(0,0,0,.5)", "rgba(0,0,0,.35)"], [0, 1], 0, 0, 0, canvasHeight * 2).drawRect(0,0,canvasWidth,canvasHeight + 100);
+                            effect = new createjs.Shape(effectGraphics);
+                            effect.cache(0, 0, canvasWidth, canvasHeight + 100);
+                            effect.alpha = effect.Y = 0;
+                            createjs.Tween.get(effect).to({alpha: .6}, 500);
+                            createjs.Tween.get(effect).to({y: - 100}, 500);
+                            effectContainer.addChild(effect);
+                            maimaiCount = count;
+                            maimaiOn = true;
+                        }
+                    };
+
+                    function maimaiReset(){
+                        stage.removeChild(maimaiList[0]);
+                        maimaiList.splice(0,1);
+                        effectContainer.removeChild(effect);
+                        maimaiEquip = false;
+                        maimaiOn = false;
+                        maimaiFlag = true;
+                    };
+                };
+            },
+            star: function() {
+
+                var CanvasDetector = {
+                    canWebGL: function () {
+                        try {
+                            return !!window.WebGLRenderingContext && !!document.createElement( 'canvas' ).getContext( 'experimental-webgl' );
+                        } catch( e ) {
+                            return false;
+                        }
+                    }
+                };
+                init();
+                // setting
+                var canvas, canvasWidth, canvasHeight, stage, loader, count, scoreNum, levelNum, gameStatus, clockNum, clockNumDefault, enemyList, enemyContainer;
+
+                function init() {
+
+                    // setting
+                    canvas = document.getElementById("myCanvas");
+                    canvasWidth = canvas.width;
+                    canvasHeight = canvas.height;
+                    count = 0;
+                    levelNum = 1;
+                    gameStatus = true;
+                    clockNumDefault = 30;
+
+                    // stage
+                    if (!CanvasDetector.canWebGL()) {
+                        stage = new createjs.Stage(canvas);
+                    } else {
+                        stage = new createjs.StageGL(canvas);
+                    }
+                    stage.updateViewport(canvasWidth,canvasHeight);
+                    // handleResize();
+
+                    // controll
+                    if(createjs.Touch.isSupported() == true){
+                        createjs.Touch.enable(stage);
+                    }
+
+                    // loader images
+                    manifest = [
+                        {src: "meg_star_intro.jpg", id: "intro"},
+                        {src: "meg_star_intro_sp.png", id: "introSp"},
+                        {src: "meg_fly.png", id: "megutan"},
+                        {src: "meg_hourglass.png", id: "glass"},
+                        {src: "meg_night.png", id: "night"},
+                        {src: "meg_nightBg.png", id: "nightBg"},
+                        {src: "intro.png", id: "intro"},
+                        {src: "btnstart.png", id: "btnstart"},
+                        {src: "over.png", id: "over"},
+                        {src: "btnover.png", id: "btnover"},
+                        {src: "btnfs.png", id: "btnfs"},
+                        {src: "twitter.png", id: "twitter"}
+                    ];
+
+                    loader = new createjs.LoadQueue(false);
+                    loader.setMaxConnections(1);
+                    loader.installPlugin(createjs.Sound);
+                    loader.addEventListener("complete", handleComplete);
+                    loader.loadManifest(manifest, true, MegApp.config.star.assetsPath);
+
+                };
+
+                function handleComplete() {
+
+                    // Opeing
+                    var openingContainer = new createjs.Container();
+                    stage.addChild(openingContainer);
+
+                    // introBg
+                    var introBg = new createjs.Shape();
+                    introBg.graphics.beginFill("rgba(0,0,0,.75)").drawRect(0,0,canvasWidth, canvasHeight);
+                    introBg.cache(0,0,canvasWidth, canvasHeight);
+                    openingContainer.addChild(introBg);
+
+                    if(MegApp.config.isSmartphone) {
+                        var introImg = loader.getResult("introSp");
+                    } else {
+                        var introImg = loader.getResult("intro");
+                    }
+                    var intro = new createjs.Bitmap(introImg);
+                    intro.regX = introImg.width / 2;
+                    intro.regY = 0;
+                    intro.x = canvasWidth / 2;
+                    intro.y = MegApp.config.isSmartphone ? 40 : 50;
+                    intro.scaleX = intro.scaleY = MegApp.config.isSmartphone ? 0.65 : 1;
+                    openingContainer.addChild(intro);
+
+                    var introBtnImg = loader.getResult("btnstart");
+                    var introBtn = new createjs.Bitmap(introBtnImg);
+                    introBtn.regX = introBtnImg.width / 2;
+                    introBtn.regY = introBtnImg.height / 2;
+                    introBtn.x = canvasWidth / 2;
+                    introBtn.y = MegApp.config.isSmartphone ? canvasHeight - introBtnImg.height * 2 - 10 : canvasHeight - introBtnImg.height / 2 - 25;
+                    openingContainer.addChild(introBtn);
+
+                    introBtn.addEventListener("mousedown", introEnd);
+
+                    // fullscreen mode
+                    if(MegApp.config.isSmartphone) {
+                        var fsBtnImg = loader.getResult("btnfs");
+                        var fsBtn = new createjs.Bitmap(fsBtnImg);
+                        fsBtn.regX = MegApp.config.isSmartphone ? fsBtnImg.width / 2 : 0;
+                        fsBtn.regY = fsBtnImg.height / 2;
+                        fsBtn.x = MegApp.config.isSmartphone ? canvasWidth / 2 : canvasWidth / 2 + 10;
+                        fsBtn.y = MegApp.config.isSmartphone ? canvasHeight - fsBtnImg.height : canvasHeight - fsBtnImg.height / 2 - 25;
+                        openingContainer.addChild(fsBtn);
+
+                        fsBtn.addEventListener("mousedown", function(){
+                            MegApp.init.fullScreenMode();
+                        });
+                    }
+
+                    openingContainer.cache(0,0,canvasWidth,canvasHeight);
+
+                    function introEnd(e) {
+                        e.preventDefault();
+                        introBtn.removeEventListener("mousedown", introEnd);
+                        stage.removeChild(openingContainer);
+                        gameInit();
+                    };
+
+                    stage.update();
+                }
+
+                function gameInit() {
+
+                    // images
+                    var glassImg = loader.getResult("glass"),
+                        nightImg = loader.getResult("night"),
+                        nightBgImg = loader.getResult("nightBg");
+
+                    // map container
+                    var mapContainer = new createjs.Container();
+                    stage.addChild(mapContainer);
+
+                    var mapBg = new createjs.Shape();
+                    mapBg.graphics.beginFill("#222").drawRect(0,0,canvasWidth,canvasHeight);
+                    mapBg.cache(0,0,canvasWidth,canvasHeight);
+                    mapContainer.addChild(mapBg);
+
+                    var nightBg = new createjs.Shape();
+                    nightBg.graphics.beginBitmapFill(nightBgImg).drawRect(0,0,canvasWidth + nightBgImg.width,canvasHeight);
+                    nightBg.cache(0,0,canvasWidth + nightBgImg.width,nightBgImg.height);
+                    nightBg.x = -nightBgImg.width;
+                    mapContainer.addChild(nightBg);
+
+                    var night = new createjs.Shape();
+                    night.graphics.beginBitmapFill(nightImg).drawRect(0,0,canvasWidth + nightImg.width,nightImg.height);
+                    night.cache(0,0,canvasWidth + nightImg.width,nightImg.height);
+                    night.x = -nightImg.width;
+                    night.y = canvasHeight - nightImg.height;
+                    mapContainer.addChild(night);
+
+                    // chara container
+                    var charaContainer = new createjs.Container();
+                    stage.addChild(charaContainer);
+
+                    // megutan
+                    var megutan = new createjs.Shape();
+                    megutanImg = loader.getResult("megutan");
+                    megutan.graphics.beginBitmapFill(megutanImg).drawRect(0,0,megutanImg.width,megutanImg.height);
+                    megutan.cache(0,0,megutanImg.width,megutanImg.height);
+                    megutan.x = canvasWidth - megutanImg.width - 10;
+                    megutan.y = 0 + megutanImg.width;
+                    megutan.scaleX = megutan.scaleY = .75;
+                    charaContainer.addChild(megutan);
+
+                    // megutan speed
+                    var vy = 0;
+
+                    // controll
+                    stage.addEventListener("mousedown", handleDown);
+
+                    function handleDown(e) {
+                        e.preventDefault();
+                        vy = -8.5;
+                    };
+
+                    // score
+                    scoreNum = 0;
+                    score = new createjs.Text("SCORE:0轤ｹ", "24px sans-serif", "white");
+                    score.cache(0, 0, canvasWidth, 24);
+                    score.x = 10;
+                    score.y = 5;
+                    charaContainer.addChild(score);
+
+                    // TIME
+                    clockNum = clockNumDefault;
+                    clock = new createjs.Text("TIME:" + clockNum, "24px sans-serif", "white");
+                    clock.textAlign = "right";
+                    clock.cache(-canvasWidth, 0, canvasWidth, 24);
+                    clock.x = canvasWidth - 10;
+                    clock.y = 5;
+                    charaContainer.addChild(clock);
+
+                    // enemy
+                    enemyContainer = new createjs.Container();
+                    stage.addChild(enemyContainer);
+                    enemyList = [];
+
+                    // Ticker
+                    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+                    createjs.Ticker.setFPS(60);
+                    createjs.Ticker.addEventListener("tick", handleTick);
+
+                    function handleTick(event){
+
+                        // gravity
+                        vy += 0.25;
+                        vy *= 0.99;
+                        megutan.y += vy;
+
+                        // gameover
+                        if (megutan.y > canvasHeight - (megutanImg.height / 2)) {
+                            megutan.y = canvasHeight - (megutanImg.height / 2);
+                            vy *= -1;
+                        }
+
+                        if(gameStatus) {
+                            // frame count
+                            count = count + 1;
+
+                            // count down
+                            if (count % 60 == 0) {
+                                clockNum -= 1;
+                                clock.text = String('TIME:' + clockNum);
+                                clock.cache(-canvasWidth, 0, canvasWidth, 24);
+                                if(clockNum == 0) {
+                                    showGameOver();
+                                }
+                            }
+
+                            // level count
+                            if (count % 1200 == 0) {
+                                levelNum += 1;
+                            }
+
+
+                            // glass pop
+                            if (count % 1200 == 0) {
+                                var enemy = new createjs.Bitmap(glassImg);
+                                enemy.regX = glassImg.width / 2;
+                                enemy.regY = glassImg.height / 2;
+                                enemy.x = -glassImg.width;
+                                enemy.y = Math.random() * canvasHeight;
+                                enemy.scaleX = enemy.scaleY = .75;
+                                enemy.speedx = 3;
+                                enemy.type = 'glass';
+                                enemyList.push(enemy);
+                                enemyContainer.addChild(enemy);
+                            }
+
+                            // enemy pop
+                            if (count % 60 == 0) {
+                                var enemy = new createjs.Shape();
+                                enemy.graphics.beginFill("yellow").drawPolyStar(0,0,20,5,0.4,0);
+                                createjs.Tween.get(enemy, {loop: true}).to({rotation:360}, 3000);
+                                enemy.cache(-20,-20,40,40);
+                                enemy.x = -20;
+                                enemy.y = Math.random() * canvasHeight;
+                                enemy.scaleX = .5;
+                                enemy.scaleY = .5;
+                                enemy.speedx = 1.5 + Math.random() * 5;
+                                enemy.type = 'star';
+                                enemyList.push(enemy);
+                                enemyContainer.addChild(enemy);
+                            }
+
+                            // enemy hit
+                            for (var i = 0; i < enemyList.length; i++) {
+
+                                var enemy = enemyList[i];
+                                var pt = enemy.localToLocal(0,0,megutan);
+
+                                // hitted
+                                if (megutan.hitTest(pt.x, pt.y) == true) {
+                                    if(enemyList[i].type == 'star') {
+                                        scoreNum += 100;
+                                        score.text = String('SCORE:' + scoreNum + '轤ｹ');
+                                        score.cache(0, 0, canvasWidth, 24);
+                                    } else if(enemyList[i].type == 'glass') {
+                                        clockNum += 10;
+                                        clock.text = String('TIME:' + clockNum);
+                                        clock.cache(-canvasWidth, 0, canvasWidth, 24);
+                                    }
+                                    enemyContainer.removeChild(enemyList[i]);
+                                    enemyList.splice(i,1);
+                                }
+                            }
+                        }
+
+                        // enemy move
+                        for (var i = 0; i < enemyList.length; i++) {
+                            enemyList[i].x += enemyList[i].speedx;
+
+                            // enemy end
+                            if (enemyList[i].x > canvasWidth) {
+                                enemyContainer.removeChild(enemyList[i]);
+                                enemyList.splice(i,1);
+                            }
+
+                        }
+
+                        // night
+                        nightBg.x += .5;
+                        if(nightBg.x == 0) {
+                            nightBg.x = -nightBgImg.width;
+                        }
+                        night.x += 1;
+                        if(night.x == 0) {
+                            night.x = -nightImg.width;
+                        }
+
+                        stage.update();
+                    }
+
+                };
+
+                // game over
+                function showGameOver() {
+
+                    gameStatus = false;
+
+                    // Ending
+                    var endingContainer = new createjs.Container();
+                    stage.addChild(endingContainer);
+
+                    // overBg
+                    var overBg = new createjs.Shape();
+                    overBg.graphics.beginFill("rgba(0,0,0,.75)").drawRect(0,0,canvasWidth, canvasHeight);
+                    overBg.cache(0,0,canvasWidth, canvasHeight);
+                    endingContainer.addChild(overBg);
+
+                    var overImg = loader.getResult("over");
+                    var over = new createjs.Bitmap(overImg);
+                    over.regX = overImg.width / 2;
+                    over.regY = 0;
+                    over.x = canvasWidth / 2;
+                    over.y = MegApp.config.isSmartphone ? 110 : 50;
+                    over.scaleX = over.scaleY = MegApp.config.isSmartphone ? 0.4 : 1;
+                    endingContainer.addChild(over);
+
+                    var overBtnImg = loader.getResult("btnover");
+                    var overBtn = new createjs.Bitmap(overBtnImg);
+                    overBtn.regX = overBtnImg.width / 2;
+                    overBtn.regY = overBtnImg.height / 2;
+                    overBtn.x = canvasWidth / 2;
+                    overBtn.y = MegApp.config.isSmartphone ? canvasHeight - overBtnImg.height * 2 - 10 : canvasHeight - overBtnImg.height / 2 - 25;
+                    endingContainer.addChild(overBtn);
+                    overBtn.addEventListener("mousedown", overEnd);
+
+                    var twitterImg = loader.getResult("twitter");
+                    var twitterBtn = new createjs.Bitmap(twitterImg);
+                    twitterBtn.regX = twitterImg.width / 2;
+                    twitterBtn.regY = twitterImg.height / 2;
+                    twitterBtn.x = canvasWidth / 2;
+                    twitterBtn.y = canvasHeight / 2 + 40;
+                    endingContainer.addChild(twitterBtn);
+
+                    var overScore = new createjs.Text(scoreNum + '轤ｹ', "70px Arial", "#000");
+                    overScore.textAlign = "center";
+                    overScore.textBaseline = "bottom";
+                    overScore.x = canvasWidth / 2;
+                    overScore.y = MegApp.config.isSmartphone ? 200 : 257;
+                    overScore.scaleX = overScore.scaleY = MegApp.config.isSmartphone ? 0.7 : 1;
+                    endingContainer.addChild(overScore);
+
+                    var overScoreLabel = new createjs.Text('GET!!!', "44px Arial", "#000");
+                    overScoreLabel.textAlign = "center";
+                    overScoreLabel.textBaseline = "top";
+                    overScoreLabel.x = canvasWidth / 2;
+                    overScoreLabel.y = MegApp.config.isSmartphone ? 200 : 257;
+                    overScoreLabel.scaleX = overScoreLabel.scaleY = MegApp.config.isSmartphone ? 0.7 : 1;
+                    endingContainer.addChild(overScoreLabel);
+
+                    // fullscreen mode
+                    if(MegApp.config.isSmartphone){
+                        var fsBtnImg = loader.getResult("btnfs");
+                        var fsBtn = new createjs.Bitmap(fsBtnImg);
+                        fsBtn.regX = MegApp.config.isSmartphone ? fsBtnImg.width / 2 : 0;
+                        fsBtn.regY = fsBtnImg.height / 2;
+                        fsBtn.x = MegApp.config.isSmartphone ? canvasWidth / 2 : canvasWidth / 2 + 10;
+                        fsBtn.y = MegApp.config.isSmartphone ? canvasHeight - fsBtnImg.height : canvasHeight - fsBtnImg.height / 2 - 25;
+                        endingContainer.addChild(fsBtn);
+
+                        fsBtn.addEventListener("mousedown", function(){
+                            MegApp.init.fullScreenMode();
+                        });
+                    }
+
+                    endingContainer.cache(0,0,canvasWidth,canvasHeight);
+
+                    function overEnd(e) {
+                        e.preventDefault();
+                        overBtn.removeEventListener("mousedown", overEnd);
+                        stage.removeChild(endingContainer);
+                        gameStatus = true;
+                        count = 0;
+                        levelNum = 1;
+                        scoreNum = 0;
+                        clockNum = clockNumDefault;
+                        score.text = String('SCORE:' + scoreNum + '轤ｹ');
+                        score.cache(0, 0, canvasWidth, 24);
+                        clock.text = String('TIME:' + clockNum);
+                        clock.cache(-canvasWidth, 0, canvasWidth, 24);
+                        enemyContainer.removeAllChildren();
+                        enemyList = [];
+                    }
+
+                    var tweetText = 'goo繝医ャ繝励�繝ｼ繧ｸ縺ｮ縲後″繧峨″繧会ｼ∵弌繧偵▽縺九�繝｡繧ｰ縺溘ｓ縲阪〒繧ｹ繧ｳ繧｢縲�'+ scoreNum +'轤ｹGET!!!縲�';
+                    var tweetHash = 'goo繝医ャ繝励�繝ｼ繧ｸ,繝｡繧ｰ縺溘ｓ,繝｡繧ｰ縺溘ｓ繧ｲ繝ｼ繝�';
+                    var tweetURL = 'https://www.goo.ne.jp/';
+                    twitterBtn.addEventListener("mousedown", {text: tweetText, hashtags: tweetHash, url: tweetURL, handleEvent: tweetAction});
+
+                    function tweetAction(e) {
+                        let uri = 'https://twitter.com/share';
+                        uri += '?text=' + this.text;
+                        uri += '&hashtags=' + this.hashtags;
+                        uri += '&url=' + this.url;
+                        if(MegApp.config.isSmartphone) {
+                            location.href = uri;
+                        } else {
+                            window.open(uri);
+                        }
+                    }
+
+                    MegApp.init.gameResultManager(MegApp.config.star.title, scoreNum);
+
+                }
+            },
+        },
+        gameWindowInit: function() {            
+             if($.cookie("meggame")){
+                var MegGameCookie = JSON.parse($.cookie("meggame"));
+             }else{
+                var MegGameCookie = {"title":"","score":"","MGT":"1"};
+             }
+            if(MegGameCookie["MGT"]== '0'){$('#gameAccordion').hide();MegApp.doms.accordionBtn.addClass('closed');}else{$('#gameAccordion').show();}
+            MegApp.doms.windowBtn.on('click', function(e){
+                e.preventDefault();
+                var gameTitle = $(this).data('game-title');
+                MegApp.config.scrollVal = $(window).scrollTop();
+                $('#NR-page').css({'transform':'translateY('+ -MegApp.config.scrollVal +'px)'});
+                $('html').addClass('gameplay');
+                MegApp.doms.wrapper.addClass('active');
+                MegApp.init.gameLoader(gameTitle);
+              var cid;
+              if(gameTitle=='osanpo'){
+              cid = "meggame-sanpo-3";
+              }else{
+              cid = "meggame-hoshi-3"
+              }
+              $('#myCanvas').attr('data-cid',cid);
+            });
+            MegApp.doms.accordionBtn.on('click', function(e){
+                e.preventDefault();
+                var targetID = $(this).attr('href');
+                if($(this).hasClass('closed')) {
+                    $(this).removeClass('closed');
+                    $.cookie("meggame",'{"title":"' + MegGameCookie['title'] + '","score":"' + MegGameCookie['score'] + '","MGT":"1"}', {expires: 3, path:'/'});
+                } else {
+                    $(this).addClass('closed');
+                    $.cookie("meggame",'{"title":"' + MegGameCookie['title'] + '","score":"' + MegGameCookie['score'] + '","MGT":"0"}', {expires: 3, path:'/'});
+                }
+                $(targetID).stop().slideToggle();
+            });
+            MegApp.doms.wrapper.on('click', function(){
+                gameWindowClose();
+            });
+            MegApp.doms.closeBtn.on('click', function(){
+                gameWindowClose();
+            });
+            function gameWindowClose() {
+                $('html').removeClass('gameplay');
+                MegApp.doms.wrapper.removeClass('active');
+                MegApp.doms.gamecanvaswrap.css({'height':''});
+                $('#NR-page').css({'transform':''});
+                $(window).scrollTop(MegApp.config.scrollVal);
+                createjs.Ticker.removeAllEventListeners();
+                if(MegApp.config.handleKeyDown){
+                    window.removeEventListener("keydown", MegApp.config.handleKeyDown);
+                    window.removeEventListener("keydown", MegApp.config.handleKeyUp);
+                }
+                MegApp.doms.canvas.remove();
+            }
+            MegApp.doms.gamewindow.on('click', function(e){
+                e.stopPropagation();
+            });
+        },
+        gameLoader: function(gameTitle) {
+            if (navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('Android') > 0 && navigator.userAgent.indexOf('Mobile') > 0 || navigator.userAgent.indexOf('iPad') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+                MegApp.config.isSmartphone = true;
+            } else {
+                MegApp.config.isSmartphone = false;
+            }
+            var canvasWidth = MegApp.config.isSmartphone ? 375 : 1024,
+                canvasHeight = MegApp.config.isSmartphone ? 568 : 576;
+            MegApp.doms.gamecanvaswrap.html('<canvas id="myCanvas" width="'+ canvasWidth +'" height="'+ canvasHeight +'"></canvas>');
+            MegApp.doms.canvas = $('#myCanvas');
+            switch (gameTitle) {
+              case 'osanpo':
+                MegApp.doms.gamewindowtitle.html(MegApp.config.osanpo.title);
+                MegApp.doms.gamewindowlead.html(MegApp.config.osanpo.leadText);
+                MegApp.doms.gamewindowshare.attr('href', 'https://twitter.com/share?text=' + MegApp.config.osanpo.tweetText + '&hashtags=goo繝医ャ繝励�繝ｼ繧ｸ,繝｡繧ｰ縺溘ｓ,繝｡繧ｰ縺溘ｓ繧ｲ繝ｼ繝�&url=https://www.goo.ne.jp/');
+                $('img',MegApp.doms.gamewindowshare).attr('data-cid','meggame-sanpo-2')
+                MegApp.init.gameInit.osanpo();
+                break;
+              case 'star':
+                MegApp.doms.gamewindowtitle.html(MegApp.config.star.title);
+                MegApp.doms.gamewindowlead.html(MegApp.config.star.leadText);
+                MegApp.doms.gamewindowshare.attr('href', 'https://twitter.com/share?text=' + MegApp.config.star.tweetText + '&hashtags=goo繝医ャ繝励�繝ｼ繧ｸ,繝｡繧ｰ縺溘ｓ,繝｡繧ｰ縺溘ｓ繧ｲ繝ｼ繝�&url=https://www.goo.ne.jp/');
+                $('img',MegApp.doms.gamewindowshare).attr('data-cid','meggame-hoshi-2');
+                MegApp.init.gameInit.star();
+                break;
+            };
+            MegApp.init.sizeSet();
+        },
+        sizeSet: function() {
+            var sumHeight = 0;
+            var gameSiblings = MegApp.doms.gamecanvaswrap.siblings();
+            var gameWindowHeight = MegApp.doms.gamewindow.height();
+            gameSiblings.each(function() {
+                sumHeight += $(this).outerHeight(true);
+            });
+            MegApp.doms.gamecanvaswrap.css('height',gameWindowHeight-sumHeight);
+        },
+        fullScreenMode: function() {
+            if(MegApp.doms.gamewindow.hasClass('fullScreen')) {
+                MegApp.doms.gamewindow.removeClass('fullScreen');
+                document.exitFullscreen();
+                return false;
+            } else {
+                MegApp.doms.gamewindow.addClass('fullScreen');
+                document.documentElement.requestFullscreen();
+                return false;
+            }
+        },
+        gameResultManager: function(title,score) {
+            $.cookie("meggame",'{"title":"' + title + '","score":"' + score + '","MGT":"1"}', {expires: 3, path:'/'});
+        }
+
+    }
+}; // App
+MegApp.init.gameWindowInit();

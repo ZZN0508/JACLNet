@@ -1,0 +1,45 @@
+
+try {
+  if (location.search.indexOf('?pc') !== 0 && /Android|Windows Phone|iPhone|iPod/i.test(navigator.userAgent)) {
+    window.location.href = 'https://xw.qq.com?f=qqcom';
+  }
+} catch (e) {}
+
+
+        function sogouShow() {}
+        function sosoShow() {}
+      
+
+  var currentFullYear = (new Date()).getFullYear();
+  document.getElementById('currentFullYear').innerHTML = currentFullYear;
+
+
+  //<![CDATA[
+  var serverTime = new Date(2021, 06-1, 11, 14, 51, 17);
+  //]]>
+  
+if(typeof(pgvMain) == 'function')pgvMain();
+
+var TIME_BEFORE_LOAD_CRYSTAL = (new Date).getTime();
+
+
+if(typeof crystal === 'undefined' && Math.random() <= 1) {
+  (function() {
+    var TIME_AFTER_LOAD_CRYSTAL = (new Date).getTime();
+    var img = new Image(1,1);
+    img.src = "//dp3.qq.com/qqcom/?adb=1&dm=www&err=1002&blockjs="+(TIME_AFTER_LOAD_CRYSTAL-TIME_BEFORE_LOAD_CRYSTAL);
+  })();
+}
+
+
+  // 腾讯分析代码
+  var _mtac = {};
+  (function() {
+      var mta = document.createElement("script");
+      mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.2";
+      mta.setAttribute("name", "MTAH5");
+      mta.setAttribute("sid", "500460529");
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(mta, s);
+  })();
+  

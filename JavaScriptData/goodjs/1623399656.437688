@@ -1,0 +1,63 @@
+
+var __session__ = {"user":{"id":false,"language":"en","accepted_languages":["zh-CN","zh"],"rules":{"maximum_number_of_files":65536,"maximum_number_of_recipients":3,"storage_limit":0,"transfer_limit":2147483648,"transfer_limit_for_default_recipient":21474836480,"can_password_protect_transfers":false,"default_free_expiry":"7d","default_pro_expiry":"28d"}}};
+
+var __trackjs__={enabled:!0,token:"c695133a6747471db439aca0a2500556"};
+var __recaptcha__={siteKey:"6LcSPjQUAAAAAA564_maWrrykToPliPNfbKrIcdf"};window.recaptchaOptions={lang:"en"};
+
+  var __launch_darkly__ = {
+    enabled: true,
+    client_id: "5b82f23280914154b163996e",
+    feature_flags: {"account-state-field":true,"adblock-mitigation":false,"admiral-cookie-consent":false,"baxter-tos":false,"bundle-2021-creative":true,"bundle-2021-creative-splashpage":false,"bundle-splashpage-experiment":"legacy","ccpa-banner":false,"cookie-banner":false,"cookie-banner-copy":"none","cookie-wall":false,"cookie-wall-variations":"trees-long","cross-product-usage-survey-upsell":false,"disable-splashpage":false,"dmca-takedown-claim-form":false,"downgrade-intervention":false,"email-transfers":"control","expiry-date-refactor":true,"folder-upload-accessibility":true,"force-account-verification":true,"free-account-affluent":false,"transfer-verification":true,"free-account-launch":true,"free-account-onboarding":true,"free-accounts-pro-expiration-reminders":false,"implement-spaces":false,"increased-transfer-limit":"control","individual-user-email-verification":false,"intercom":true,"iterable-marketing-integration":false,"marketing-pixel-tracking":true,"mobile-push-notifications":false,"navigation-bar-redesign":true,"new-transfer-expiry-options":true,"old-splashpage":false,"otp-verification":true,"peek-rollout":true,"pro-account-onboarding":true,"pro-pass-banner-upsells":false,"pro-pass-upsells":false,"pro-transfer-window":false,"programmatic-advertising":false,"programmatic-advertising-enable-kevel":false,"progress-panel-banner":false,"progress-panel-tooltip":false,"projects-promo-notice":false,"received-transfers-redesign":true,"receiving-page":"sticky-app-bar","reject-consent-button-visibility":false,"remove-transfer-default-expiry":false,"rename-transfer":false,"sendgrid-marketing-integration":true,"sign-in-panel-redesign":false,"signup-verification":true,"smartling-integration":false,"spot-illustrations":true,"sso-rollout":true,"storm-rollout":true,"storm-rollout-us":true,"tcf-powered-cookie-wall":true,"teams-survey-upsell":false,"teams-transfer":true,"teams-transfer-create-team-on-login":true,"teams-transfer-management-link":true,"tos-transfer-window":false,"transfer-tooltip":true,"transfer-verification-new-ui":true,"upsell_survey":false,"wallpaper-rotation-intervals-per-country":{"max":600000,"mid":180000,"min":45000},"we-transfer-outage-banner":"control","$flagsState":{"account-state-field":{"version":5,"reason":{"kind":"FALLTHROUGH"},"variation":0},"adblock-mitigation":{"version":6,"reason":{"kind":"FALLTHROUGH"},"variation":1},"admiral-cookie-consent":{"version":2,"reason":{"kind":"OFF"},"variation":1},"baxter-tos":{"version":4,"reason":{"kind":"FALLTHROUGH"},"variation":1},"bundle-2021-creative":{"version":6,"reason":{"kind":"FALLTHROUGH"},"variation":0},"bundle-2021-creative-splashpage":{"version":2,"reason":{"kind":"OFF"},"variation":1},"bundle-splashpage-experiment":{"version":18,"reason":{"kind":"OFF"},"variation":4,"trackEvents":true},"ccpa-banner":{"version":6,"reason":{"kind":"FALLTHROUGH"},"variation":1},"cookie-banner":{"version":21,"reason":{"kind":"OFF"},"variation":1},"cookie-banner-copy":{"version":9,"reason":{"kind":"OFF"},"variation":3},"cookie-wall":{"version":13,"reason":{"kind":"OFF"},"variation":1},"cookie-wall-variations":{"version":8,"reason":{"kind":"FALLTHROUGH"},"variation":2},"cross-product-usage-survey-upsell":{"version":2,"reason":{"kind":"OFF"},"variation":1},"disable-splashpage":{"version":2,"reason":{"kind":"OFF"},"variation":1},"dmca-takedown-claim-form":{"version":4,"reason":{"kind":"OFF"},"variation":1},"downgrade-intervention":{"version":11,"reason":{"kind":"FALLTHROUGH"},"variation":1,"trackEvents":true},"email-transfers":{"version":10,"reason":{"kind":"OFF"},"variation":0,"trackEvents":true},"expiry-date-refactor":{"version":6,"reason":{"kind":"FALLTHROUGH"},"variation":0},"folder-upload-accessibility":{"version":5,"reason":{"kind":"FALLTHROUGH"},"variation":0},"force-account-verification":{"version":8,"reason":{"kind":"FALLTHROUGH"},"variation":0},"free-account-affluent":{"version":13,"reason":{"kind":"OFF"},"variation":1,"trackEvents":true},"transfer-verification":{"version":27,"reason":{"kind":"FALLTHROUGH"},"variation":0},"free-account-launch":{"version":10,"reason":{"kind":"FALLTHROUGH"},"variation":0,"trackEvents":true},"free-account-onboarding":{"version":3,"reason":{"kind":"FALLTHROUGH"},"variation":0},"free-accounts-pro-expiration-reminders":{"version":6,"reason":{"kind":"FALLTHROUGH"},"variation":1},"implement-spaces":{"version":74,"reason":{"kind":"FALLTHROUGH"},"variation":1},"increased-transfer-limit":{"version":5,"reason":{"kind":"OFF"},"variation":0,"trackEvents":true},"individual-user-email-verification":{"version":6,"reason":{"kind":"FALLTHROUGH"},"variation":1},"intercom":{"version":4,"reason":{"kind":"FALLTHROUGH"},"variation":0},"iterable-marketing-integration":{"version":2,"reason":{"kind":"OFF"},"variation":1},"marketing-pixel-tracking":{"version":8,"reason":{"kind":"FALLTHROUGH"},"variation":0},"mobile-push-notifications":{"version":3,"reason":{"kind":"OFF"},"variation":1},"navigation-bar-redesign":{"version":10,"reason":{"kind":"OFF"},"variation":0},"new-transfer-expiry-options":{"version":17,"reason":{"kind":"FALLTHROUGH"},"variation":0},"old-splashpage":{"version":2,"reason":{"kind":"OFF"},"variation":1},"otp-verification":{"version":9,"reason":{"kind":"OFF"},"variation":0},"peek-rollout":{"version":76,"reason":{"kind":"FALLTHROUGH"},"variation":0},"pro-account-onboarding":{"version":3,"reason":{"kind":"FALLTHROUGH"},"variation":0},"pro-pass-banner-upsells":{"version":7,"reason":{"kind":"OFF"},"variation":1},"pro-pass-upsells":{"version":6,"reason":{"kind":"OFF"},"variation":1},"pro-transfer-window":{"version":18,"reason":{"kind":"FALLTHROUGH"},"variation":1,"trackEvents":true},"programmatic-advertising":{"version":55,"reason":{"kind":"FALLTHROUGH"},"variation":1},"programmatic-advertising-enable-kevel":{"version":2,"reason":{"kind":"OFF"},"variation":1},"progress-panel-banner":{"version":2,"reason":{"kind":"OFF"},"variation":1},"progress-panel-tooltip":{"version":13,"reason":{"kind":"OFF"},"variation":1},"projects-promo-notice":{"version":3,"reason":{"kind":"OFF"},"variation":1},"received-transfers-redesign":{"version":6,"reason":{"kind":"FALLTHROUGH"},"variation":0},"receiving-page":{"version":6,"reason":{"kind":"OFF"},"variation":1,"trackEvents":true},"reject-consent-button-visibility":{"version":3,"reason":{"kind":"FALLTHROUGH"},"variation":1},"remove-transfer-default-expiry":{"version":12,"reason":{"kind":"OFF"},"variation":1},"rename-transfer":{"version":2,"reason":{"kind":"OFF"},"variation":1},"sendgrid-marketing-integration":{"version":3,"reason":{"kind":"FALLTHROUGH"},"variation":0},"sign-in-panel-redesign":{"version":6,"reason":{"kind":"OFF"},"variation":1,"trackEvents":true},"signup-verification":{"version":8,"reason":{"kind":"FALLTHROUGH"},"variation":0,"trackEvents":true},"smartling-integration":{"version":2,"reason":{"kind":"OFF"},"variation":1},"spot-illustrations":{"version":3,"reason":{"kind":"FALLTHROUGH"},"variation":0},"sso-rollout":{"version":22,"reason":{"kind":"FALLTHROUGH"},"variation":0},"storm-rollout":{"version":69,"reason":{"kind":"FALLTHROUGH"},"variation":0},"storm-rollout-us":{"version":26,"reason":{"kind":"FALLTHROUGH"},"variation":0},"tcf-powered-cookie-wall":{"version":9,"reason":{"kind":"FALLTHROUGH"},"variation":0},"teams-survey-upsell":{"version":4,"reason":{"kind":"OFF"},"variation":1},"teams-transfer":{"version":38,"reason":{"kind":"FALLTHROUGH"},"variation":0},"teams-transfer-create-team-on-login":{"version":20,"reason":{"kind":"FALLTHROUGH"},"variation":0},"teams-transfer-management-link":{"version":13,"reason":{"kind":"FALLTHROUGH"},"variation":0},"tos-transfer-window":{"version":5,"reason":{"kind":"FALLTHROUGH"},"variation":1},"transfer-tooltip":{"version":8,"reason":{"kind":"OFF"},"variation":0},"transfer-verification-new-ui":{"version":7,"reason":{"kind":"FALLTHROUGH"},"variation":0},"upsell_survey":{"version":5,"reason":{"kind":"OFF"},"variation":1},"wallpaper-rotation-intervals-per-country":{"version":5,"reason":{"kind":"FALLTHROUGH"},"variation":1},"we-transfer-outage-banner":{"version":41,"reason":{"kind":"OFF"},"variation":2}},"$valid":true},
+    user: {"key":"b8b7f55e-dfa3-4097-9d01-49973920b69e","anonymous":true,"ip":"45.152.113.66","custom":{"plus-user-id":null,"is-mobile":false,"is-wetransfer-staff":false,"is-qa-source":false},"privateAttributeNames":["country","is-mobile","plus-user-id","is-wetransfer-staff","is-qa-source","ip"],"country":"JP"}
+  };
+
+
+    var __curated_wallpapers__ = [{"image_path":"curated/wallpaper/one-full.jpg","thumbnail_large":"curated/wallpaper/one_thumbnail_large.jpg","credits":"Bernardo Henning","curated":true},{"image_path":"curated/wallpaper/two-full.jpg","thumbnail_large":"curated/wallpaper/two_thumbnail_large.jpg","credits":"Bernardo Henning","curated":true},{"image_path":"curated/wallpaper/three-full.jpg","thumbnail_large":"curated/wallpaper/three_thumbnail_large.jpg","credits":"Ana Cuba","curated":true},{"image_path":"curated/wallpaper/four-full.jpg","thumbnail_large":"curated/wallpaper/four_thumbnail_large.jpg","credits":"Ana Cuba","curated":true},{"image_path":"curated/wallpaper/five-full.jpg","thumbnail_large":"curated/wallpaper/five_thumbnail_large.jpg","credits":"Hiroyuki Izutsu","curated":true},{"image_path":"curated/wallpaper/six-full.jpg","thumbnail_large":"curated/wallpaper/six_thumbnail_large.jpg","credits":"Hiroyuki Izutsu","curated":true}];
+  
+
+  // remove no-js class when this is executed
+  document.documentElement.className = document.documentElement.className.replace(/\s*no-js\s*/, " ");
+
+
+  window.asset_host = "https://prod-cdn.wetransfer.net";
+
+
+  var modernBrowser = (
+    'Promise' in window &&
+    'Symbol' in window &&
+    'URLSearchParams' in window &&
+    'entries' in Object && 
+    'requestAnimationFrame' in window && 
+    !!Array.prototype.find &&
+    !!NodeList.prototype.forEach
+  );
+
+  if (!modernBrowser) {
+    var polyfillScript = document.createElement('script');
+    polyfillScript.src = "https://prod-cdn.wetransfer.net/packs/js/polyfills.js";
+    document.body.appendChild(polyfillScript);
+  }
+  
+  [].map.call(document.querySelectorAll('#preload-assets'),function(l,s){
+    s=document.createElement('script');
+    s.src = 'noModule' in s ? l.href : l.getAttribute('fallback');
+    l.parentNode.appendChild(s);
+  })
+
+
+  var __stripe__ = { publishable_key: 'pk_live_Mr2LqPswsFjzCjBTJCmOXB0S', api_version: '2020-03-02' };
+
+
+  var __walter_api__ = {
+    url: "https://walter.wetransfer.net/event"
+  };
+
+
+  var __auth0_config__ = {
+    domain: "auth.wetransfer.com",
+    audience: "aud://transfer-api-prod.wetransfer/",
+    client_id: "dXWFQjiW1jxWCFG0hOVpqrk4h9vGeanc"
+  };
+
+
+  var accountAppUrl = 'https://myaccount.wetransfer.com';

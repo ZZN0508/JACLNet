@@ -1,0 +1,1476 @@
+(function () {var d = document, w = window, n = navigator, wp = w.performance, os, osMap, getCookie;if (!n || !n.sendBeacon || !wp || !wp.now) return;osMap = {'Win': 'Windows', 'Mac': 'MacOs', 'X11': 'Unix', 'Linux': 'Linux'};os = navigator.appVersion.match(/Win|Mac|X11|Linux/);getCookie = function (cookie) {var re = new RegExp('(?:(?:^|.*;\\s*)' + cookie + '\\s*\\=\\s*([^;]*).*$)|^.*$');return d.cookie.replace(re, '$1');};w.__trackAbandons = function () {d.removeEventListener('visibilitychange', w.__trackAbandons);n.sendBeacon('https://pixiedust.buzzfeed.com/events', w.JSON.stringify([{client_session_id: getCookie('bf-xdomain-session-uuid') || '00000000-0000-0000-0000-000000000000',client_uuid: getCookie('bf_visit') || '00000000-0000-0000-0000-000000000000',context_page_id: '1',context_page_type: 'feed',destination: 'buzzfeed_news',event_ts: Math.round(w.Date.now() / 1000),event_uri: w.location.href,event_uuid: '00000000-0000-0000-0000-000000000000',metric_name: 'load-abandonment',metric_type: 'custom',metric_value: wp.now(),mode: (w.matchMedia && w.matchMedia('screen and (max-width:51.9rem)').matches) ? 'mobile' : 'desktop',os: os ? osMap[os[0]] : 'Unknown',page_edition: 'en-us',page_session_id: '00000000-0000-0000-0000-000000000000',referrer_uri: d.referrer,source: 'web_bf',type: 'web_performance_metric',viewport_size: { width: w.screen.width, height: w.screen.height }}]));};d.addEventListener('visibilitychange', w.__trackAbandons);})();
+
+(function() {
+  var host = window.location.hostname;
+  // var element = document.createElement('script');
+  // var firstScript = document.getElementsByTagName('script')[0];
+  // var url = 'https://quantcast.mgr.consensu.org'
+  //   .concat('/choice/', '3aud4J6uA4Z6Y', '/', host, '/choice.js?timestamp=', Date.now())
+  var uspTries = 0;
+  var uspTriesLimit = 3;
+  // element.async = true;
+  // element.type = 'text/javascript';
+  // element.src = url;
+
+  // firstScript.parentNode.insertBefore(element, firstScript);
+
+  function makeStub() {
+    var TCF_LOCATOR_NAME = '__tcfapiLocator';
+    var queue = [];
+    var win = window;
+    var cmpFrame;
+
+    function addFrame() {
+      var doc = win.document;
+      var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+      if (!otherCMP) {
+        if (doc.body) {
+          var iframe = doc.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = TCF_LOCATOR_NAME;
+          doc.body.appendChild(iframe);
+        } else {
+          setTimeout(addFrame, 5);
+        }
+      }
+      return !otherCMP;
+    }
+
+    function tcfAPIHandler() {
+      var gdprApplies;
+      var args = arguments;
+
+      if (!args.length) {
+        return queue;
+      } else if (args[0] === 'setGdprApplies') {
+        if (
+          args.length > 3 &&
+          args[2] === 2 &&
+          typeof args[3] === 'boolean'
+        ) {
+          gdprApplies = args[3];
+          if (typeof args[2] === 'function') {
+            args[2]('set', true);
+          }
+        }
+      } else if (args[0] === 'ping') {
+        var retr = {
+          gdprApplies: gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: 'stub'
+        };
+
+        if (typeof args[2] === 'function') {
+          args[2](retr);
+        }
+      } else {
+        queue.push(args);
+      }
+    }
+
+    function postMessageEventHandler(event) {
+      var msgIsString = typeof event.data === 'string';
+      var json = {};
+
+      try {
+        if (msgIsString) {
+          json = JSON.parse(event.data);
+        } else {
+          json = event.data;
+        }
+      } catch (ignore) {}
+
+      var payload = json.__tcfapiCall;
+
+      if (payload) {
+        window.__tcfapi(
+          payload.command,
+          payload.version,
+          function(retValue, success) {
+            var returnMsg = {
+              __tcfapiReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: payload.callId
+              }
+            };
+            if (msgIsString) {
+              returnMsg = JSON.stringify(returnMsg);
+            }
+            event.source.postMessage(returnMsg, '*');
+          },
+          payload.parameter
+        );
+      }
+    }
+
+    while (win) {
+      try {
+        if (win.frames[TCF_LOCATOR_NAME]) {
+          cmpFrame = win;
+          break;
+        }
+      } catch (ignore) {}
+
+      if (win === window.top) {
+        break;
+      }
+      win = win.parent;
+    }
+    if (!cmpFrame) {
+      addFrame();
+      win.__tcfapi = tcfAPIHandler;
+      win.addEventListener('message', postMessageEventHandler, false);
+    }
+  };
+
+  // 📋 8/15 TODO: Not really a todo, but these couple of lines
+  // are sometimes finnicky.
+  if (typeof module !== 'undefined') {
+    module.exports = makeStub;
+  } else {
+    makeStub();
+  }
+
+  var uspStubFunction = function() {
+    var arg = arguments;
+    if (typeof window.__uspapi !== uspStubFunction) {
+      setTimeout(function() {
+        if (typeof window.__uspapi !== 'undefined') {
+          window.__uspapi.apply(window.__uspapi, arg);
+        }
+      }, 500);
+    }
+  };
+
+  var checkIfUspIsReady = function() {
+    uspTries++;
+    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+      console.warn('USP is not accessible');
+    } else {
+      clearInterval(uspInterval);
+    }
+  };
+
+  if (typeof window.__uspapi === 'undefined') {
+    window.__uspapi = uspStubFunction;
+    var uspInterval = setInterval(checkIfUspIsReady, 6000);
+  }
+})();
+
+
+  window.BZFD = {
+    Config: {"cluster":"prod","facebook_app_id":"862012947269736","facebook_pages":"21898300328,1457722161221362,1412406255640941","imageServiceUrl":"https://img.buzzfeed.com/buzzfeed-static","pixiedustUrl":"https://pixiedust.buzzfeed.com","isConsentRequired":true,"webRoot":"https://www.buzzfeed.com","branchKey":"key_live_ceFzhmH1fxNfPm55351GdbnhwxioKRyh","base_url":"","staticRoot":"/static-assets","bfAppId":352969997,"bfwInfoCookie":"bf2-b_info","facebookApi":{"version":"v2.9","appId":"862012947269736"},"emailSignUpUrl":"https://www.buzzfeed.com/newsletter/v3/subscriptions","env":"prod","sentryUrl":"https://afa4961bdef04ae0ba22ae058bbf6685@sentry.io/136284","canaryDeploy":false,"abeagle":{"url":"https://abeagle-public.buzzfeed.com","isEnabled":"false"},"tracking":{"pixiedust":{"impression_sampling_rate":0.05,"instrumentation_sampling_rate":0.1,"page_view_url":"feed"},"googleAnalytics":{"id":"UA-1740781-1"},"pixels":{"facebook":{"custom_audience":260954170738952}}},"video_app_api":"https://videoapp-api-ng.buzzfeed.com/v2/videos","feeds_api_origin":"https://feeds.buzzfeed.com","recsys_api_origin":"https://recsys-api.buzzfeed.com","ads":{"sizes":{"NATIVE":[5,5],"FLUID":"fluid","RESEARCH_PIXEL":[1,1],"RESEARCH_SURVEY":[2,2],"PROGRAMMATIC_PREBID":[1,1],"PROGRAMMATIC_BILLBOARD":[970,250],"PROGRAMMATIC_HORIZONTAL_4to1":[970,250],"PROGRAMMATIC_SMARTPHONE_BANNER":[320,50],"PROGRAMMATIC_HORIZONTAL_6to1":[320,50],"PROGRAMMATIC_LEADERBOARD":[728,90],"PROGRAMMATIC_HORIZONTAL_8to1":[728,90],"PROGRAMMATIC_SUPER_LEADERBOARD":[970,90],"PROGRAMMATIC_HORIZONTAL_10to1":[970,90],"PROGRAMMATIC_VERTICAL":[300,600],"PROGRAMMATIC_VERTICAL_1to2":[300,600],"PROGRAMMATIC_MEDIUM_RECTANGLE":[300,250],"PROGRAMMATIC_TILE_1to1":[300,250],"BIGSTORY_LEGACY_PARTNER":[300,250]},"programmaticSizes":[[300,250],[728,90],[320,50],[300,600],[970,250],[970,90]]}},
+    Context: {"page":{"id":1,"destination":"buzzfeed","edition":"us","localization":{"country":"en-us","language":"en","locale":"en_US","translations":{"ADVERTISE_WITH_BUZZFEED":"Advertise with BuzzFeed","ADVERTISE_WITH_URL":"https://advertise.buzzfeed.com","ADVERTISEMENT":"Advertisement","PAID_POST":"Paid Post","PROMOTED_BY":"Promoted By","PROMOTED":"Promoted","SPONSORED_BY":"Sponsored By","ABOUT_US":"About Us","AGAIN":"Again!","AGAIN_SPAIN":"","BREAKING":"Breaking","BREAKING_NEWS":"Breaking News","BUZZFEED_COM":"buzzfeed.com","BUZZFEED_HOME":"BuzzFeed Home","BUZZFEED_INC":"BuzzFeed, Inc","BUZZFEED_REPORTING_TO_YOU":"BuzzFeed, Reporting To You","BUZZFEED_QUIZZES":"BuzzFeed Quizzes","CLOSE":"Close","COOKIE_INFO":"Cookie Info","COPYRIGHT_BUZZFEED_INC":"Copyright BuzzFeed, Inc. All rights reserved.","CUTE":"Cute","DASHBOARD":"Dashboard","DAY_AGO":"{} day ago","DAYS_AGO":"{} days ago","EMAIL":"Email","ENTER_VALID_EMAIL":"Please enter a valid email address","FAIL":"Fail","FOLLOW_US_ON_TWITTER":"Follow us on Twitter","FOLLOW_US_ON_TWITTER_NEWS":"","FOLLOW_US_ON":"Follow us on","GET_FIRST_EMAIL":"You're almost there! Check your inbox and confirm your subscription now!","GET_OUR_AWARD_WINNING_NEWS_APP":"Get our award-winning News App!","GET_OUR_NEWS_APP":"Get our News App!","GIVE_MORE_FEEDBACK":"Give More Feedback","GO_TO_THE_RECIPE":"Go to the recipe!","GOT_A_TIP":"Got a tip?","GREAT":"Great!","HEY_BUZZFEED_COMMUNITY":"Hey BuzzFeed Community!","HOUR_AGO":"{} hour ago","HOURS_AGO":"{} hours ago","JUST_NOW":"just now","LATEST":"Latest","LET_US_KNOW_HOW_WE_CAN_MAKE_THE_NEW_HOMEPAGE_BETTER":"Let us know how we can make the new homepage better.","LIKE_US_ON_FACEBOOK":"Like us on Facebook","LIKE_US_ON_FACEBOOK_NEWS":"","LIKE_US_ON":"Like us on","LIVE":"LIVE","LOAD_MORE":"Load more","LOG_IN_OR_SIGN_UP_TO_CREATE_YOUR_OWN_POSTS":"<a href=\"/signin\" data-bfa=\"@a:vertical-more;@d:login;\">Log in</a> or <a href=\"/signup\" data-bfa=\"@a:vertical-more;@d:signup;\">sign up</a> to create your own posts.","LOG_IN_TO_BUZZFEED":"Log In To BuzzFeed","LOG_OUT":"Log Out","LOL":"LOL","MAKE_A_POST":"Make A Post!","MAKE_IT_YOUR_DEFAULT":"Make it your default.","META_DESCRIPTION_HOME":"BuzzFeed has breaking news, vital journalism, quizzes, videos, celeb news, Tasty food videos, recipes, DIY hacks, and all the trending buzz you\u2019ll want to share with your friends. Copyright BuzzFeed, Inc. All rights reserved.","META_DESCRIPTION_HOME_SPAIN":"","MINUTE_AGO":"{} minute ago","MINUTES":"minutes","MINUTES_AGO":"{} minutes ago","MONTH_AGO":"{} month ago","MONTHS_AGO":"{} months ago","MORE_PLEASE":"More Please","MORE":"More","MY_DRAFTS":"My Drafts","NEW_POST":"New Post","NEWS":"News","NEXT_PAGE":"Next page","OMG":"OMG","PIN":"Pin","PLAY":"Play","POPULAR_CATEGORIES":"Popular Categories","PREVIOUS_PAGE":"Previous page","QUICKLY_CATCH_UP":"Quickly Catch Up","QUIZZES":"Quizzes","QUIZZES_ON_BUZZFEED":"Quizzes on BuzzFeed","READ_MORE":"Read More","REPORTING_TO_YOU":"Reporting To You","SEARCH":"Search","SEARCH_ALL_QUIZZES":"Search All Quizzes","SECTIONS":"Sections","SHARE":"Share","SIGN_UP":"Sign up","SMS":"SMS","SORRY_SOMETHING_WRONG":"Sorry! Something went wrong. Please try again.","SUBSCRIBE_TO_US_ON":"Subscribe To Us On","SUBSCRIBE_TO_OUR_RSS":"Subscribe to our RSS feed","SUPPORT_US":"Support Us","SWITCH_TO_ENGLISH":"Switch to English","SWITCH_TO_US":"Switch to US.","THANKS_FOR_YOUR_FEEDBACK":"Thanks for your feedback!","THATS_AWESOME":"That's awesome!","TOP_POSTS":"Top Posts","TOP_POSTS_THIS_WEEK":"Top Posts This Week","TRENDING_NOW":"Trending Now","TRENDING_NOW_SPAIN":"","TRENDING":"Trending","TRENDING_QUIZZES":"Trending Quizzes","TRENDING_VIDEOS":"Trending Videos","TRY":"Try \u201c{{name}}\u201d","VIDEO_DURATION":"Video duration","VIEW_PROFILE":"View Profile","VIEWS":"Views","WATCH":"Watch","WATCH_IT_LIVE":"Watch it live in the Facebook App","WED_LOVE_TO_HEAR_WHAT_ELSE_YOU_HAVE_TO_SAY":"We'd love to hear what else you have to say.","WED_LOVE_TO_HEAR_WHAT_ELSE_YOU_HAVE_TO_SAY_SPAIN":"","WED_LOVE_YOUR_FEEDBACK":"We'd love your feedback!","WEEK_AGO":"{} week ago","WEEKS_AGO":"{} weeks ago","WELCOME_TO_THE_NEW_BUZZFEED_HOMEPAGE":"Welcome to the new BuzzFeed homepage!","WELCOME_TO_THE_NEW_BUZZFEED_HOMEPAGE_FEEDBACK":"Welcome to the new BuzzFeed homepage!","WERE_SORRY_TO_HEAR_THAT":"We're sorry to hear that.","WERE_SORRY_TO_HEAR_THAT_SPAIN":"","WHAT_DO_YOU_THINK":"What do you think?","WIN":"Win","WTF":"WTF","YEAR_AGO":"{} year ago","YEARS_AGO":"{} years ago","YOUR_EMAIL":"Email address (required)"}},"name":"home","filter":null,"filters":{}}}
+  };
+
+
+  (function(w){
+    w['bfa'] = w['bfa'] || function() {
+      (w['bfa'].c = w['bfa'].c || []).push(arguments)
+    };
+  })(window);
+
+
+  (function() {
+
+    window.BZFD.Config.enhanced = (function() {
+      if (location.search.match("nojs")) {
+        return false;
+      }
+
+      
+      if ('MutationObserver' in window) {
+
+        
+        if (navigator.userAgent.match(/iphone|ipad|ipod/i)) {
+
+          
+          return 'content' in document.createElement('template')
+        }
+        return true;
+
+      }
+    }());
+
+    if (window.BZFD.Config.enhanced) {
+      document.documentElement.classList.remove('core-ux');
+      document.documentElement.classList.add('enhanced-ux');
+    } else {
+      
+        (new Image()).src = 'https://pixiedust.buzzfeed.com/v1.gif?source=buzz_web&platform=feedpager&type=instrumentation&target=ux&value=core';
+      
+    }
+
+  }());
+
+
+  (function() {
+    /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+    !function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+
+    /*! loadCSS rel=preload polyfill. [c]2017 Filament Group, Inc. MIT License */
+    !function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+
+    var createScript = function(options) {
+      var head = document.getElementsByTagName('head')[0];
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.async = false;
+      script.src = options.src;
+      script.onerror = function() {
+        
+        
+          var chunkName = options.src
+            .split('/')
+            .filter(function(path) { return /\.js$/.test(path); })
+            .map(function(filename) { return filename.split('.')[0]; })[0];
+
+          (new Image()).src = 'https://pixiedust.buzzfeed.com/v1.gif?source=buzz_web&platform=feedpager&type=instrumentation&target=chunk&value=timeout&tags=' + JSON.stringify({ chunk_name: chunkName });
+        
+      };
+
+      if (typeof options.callback === 'function') {
+        script.addEventListener('load', options.callback);
+      }
+
+      
+      head.appendChild(script, head);
+    };
+
+    
+    window.BZFD.Util = window.BZFD.Util || {};
+    window.BZFD.Util.createScript = createScript;
+
+  }());
+
+
+  if (typeof navigator.connection !== 'undefined') {
+    window.bfa('track/website/instrumentation', {
+      data: {
+        target: 'network_api',
+        value: 'enabled',
+        tags: {
+          effective_type: navigator.connection.effectiveType
+        }
+      },
+    });
+  }
+
+
+  (function(a,c,d,e){if(!a[c]){var b=a[c]={};b[d]=[];b[e]=function(a){b[d].push(a)}}})(window,'Scroll','_q','do');
+  Scroll.config = {
+    detected: document.cookie.indexOf("scroll0=") > -1
+  };
+
+{"adPos": "awareness", "adType": "awareness", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [320, 50], [970, 250], "fluid", [5, 5], [970, 90]], "targeting": {"pos": ["awareness"], "wid": 42}, "trackingData": {"pixiedust": {"position_in_unit": 0, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 42}
+
+    {"adPos": "pixel", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[1, 1]], "targeting": {"pos": ["pixel"], "wid": 0}, "trackingData": {}, "viewability": "low", "wid": 0}
+  
+
+      window.BZFD = window.BZFD || {};
+      window.BZFD.__HEADER_STATE__ = {"theme":"light","brand":"bfo","edition":"us","showBadges":true,"config":{"bf_url":"https://www.buzzfeed.com","brand_urls":{"asis":"https://www.buzzfeed.com/asis","bfo":"https://www.buzzfeed.com","bringme":"https://www.buzzfeed.com/bringme","goodful":"https://www.buzzfeed.com/goodful","news":"https://www.buzzfeednews.com","nifty":"https://www.buzzfeed.com/nifty","adobe":"https://www.buzzfeed.com/makethefeed","lgbtq":"https://www.buzzfeed.com/lgbtq"},"cms_url":"https://cms.buzzfeed.com","community_url":"https://community.buzzfeed.com","contributors_url":"https://contributors.buzzfeed.com","dashbird_url":"https://dashbird.buzzfeed.io","dashbird_community_url":"https://community-dashbird.buzzfeed.com","image_service_url":"https://img.buzzfeed.com/buzzfeed-static","new_post_path":"/post","settings_path":"/settings","ga":"ga"},"navItems":{"destinations":[{"url":"https://www.buzzfeednews.com","name":"bfn","label":"bfnews","description":"Reporting on what you care about. We hold major institutions accountable and expose wrongdoing."},{"url":"https://www.tasty.co","name":"tasty","description":"Search, watch, and cook every single Tasty recipe and video ever - all in one place!"},{"url":"/goodful","name":"goodful","description":"Self care and ideas to help you live a healthier, happier life."},{"url":"/bringme","name":"bringme","description":"Obsessed with travel? Discover unique things to do, places to eat, and sights to see in the best destinations around the world with Bring Me!"},{"url":"/asis","name":"asis","description":"Something for everyone interested in hair, makeup, style, and body positivity."}],"topics":[{"url":"/quizzes","name":"Quizzes"},{"url":"/tvandmovies","name":"TV & Movies"},{"url":"/shopping","name":"Shopping"},{"url":"/videos","name":"Videos"},{"url":"https://www.buzzfeednews.com","name":"News","label":"bfnews"},{"url":"https://tasty.co","name":"Tasty","label":"tasty"}],"badges":[{"name":"lol","url":"/lol"},{"name":"win","url":"/win"},{"name":"trending","url":"/trending"}],"sections":[{"name":"Pop Culture","subSections":[{"name":"TV & Movies","url":"/tvandmovies"},{"name":"Celebrity","url":"/celebrity"},{"name":"Best of the Internet","url":"/bestoftheinternet"},{"name":"Animals","url":"/animals"},{"name":"Music","url":"/music"},{"name":"Rewind","url":"/rewind"},{"name":"Books","url":"/books"},{"name":"LGBTQ","url":"/lgbtq"}]},{"name":"Quizzes","url":"/quizzes","subSections":[{"name":"Latest","url":"/quizzes"},{"name":"Trending","url":"/trending/quizzes"},{"name":"Food","url":"/quizzes/food"},{"name":"Love","url":"/quizzes/love"},{"name":"Trivia","url":"/quizzes/trivia"},{"name":"Quiz Party","url":"/quizparty?utm_source=buzzfeed&utm_campaign=bf_nav_menu"}]},{"name":"Shopping","url":"/shopping","subSections":[{"name":"Latest","url":"/shopping"},{"name":"Gift Guides","url":"/giftguide"},{"name":"Deals","url":"/shopping/deals"},{"name":"Home","url":"/shopping/home"},{"name":"Clothing","url":"/shopping/clothing"},{"name":"Gadgets","url":"/shopping/gadgets"},{"name":"Beauty","url":"/shopping/beauty"},{"name":"Pets","url":"/pets"},{"url":"https://bzfd.it/38X2aeN","name":"Merch","label":"merch"}]},{"name":"Video","url":"/videos","subSections":[{"name":"Latest","url":"/videos"},{"name":"Cocoa Butter","nav_label":"NEW!","nav_label_type":"badge","url":"/cocoabutter"},{"name":"Mom In Progress","url":"/mominprogress"},{"name":"Worth It","url":"/worthit"},{"name":"Unsolved True Crime","url":"/unsolved"},{"name":"Unsolved Supernatural","url":"/unsolved"},{"name":"Multiplayer","url":"/multiplayerbybuzzfeed"},{"name":"Pero Like","url":"/perolike"}]},{"name":"Lifestyle","subSections":[{"name":"As/Is: Style","url":"/asis"},{"name":"BringMe: Travel","url":"/bringme"},{"name":"Goodful: Wellness","url":"/goodful"},{"name":"Nifty: DIY","url":"/nifty"},{"name":"Parents","url":"/parents"},{"name":"Food","url":"/food"},{"name":"Weddings","url":"/weddings"},{"name":"Sex And Love","url":"/sex-and-love","nav_label":"NEW!","nav_label_type":"badge"}]}],"community":[{"name":"What is Community?","url":"/community/about"},{"name":"Join Community!","url":"https://community.buzzfeed.com"},{"name":"Featured Posts","url":"/community"},{"name":"Leaderboard","url":"/community/leaderboard"}],"about":[{"url":"/about","name":"About Us"},{"url":"https://advertise.buzzfeed.com","name":"Advertise"},{"url":"/about/jobs","name":"Jobs"},{"url":"/newsletters?origin=nav","name":"Newsletters"}],"footer":[{"url":"/press","name":"Press"},{"url":"/rss","name":"RSS"},{"url":"/about/privacy","name":"Privacy"},{"url":"/consent-preferences","name":"Consent Preferences"},{"url":"/about/useragreement","name":"User Terms"},{"url":"/about/accessibility","name":"Accessibility Statement"},{"url":"/about/privacy#adchoices","name":"Ad Choices"},{"url":"/help","name":"Help"},{"url":"/about/contact","name":"Contact"},{"url":"/archive","name":"Sitemap"}],"trendingTopics":[{"url":"https://www.buzzfeed.com/tag/loki","name":"Loki Is Here 💚"},{"url":"https://www.buzzfeed.com/trending/quizzes","name":"Trending Quizzes"},{"url":"https://www.buzzfeed.com/badge/pride2021","name":"Celebrating Pride 🌈"},{"url":"https://www.buzzfeednews.com/collection/coronavirus","name":"The Latest On COVID-19"}]},"i18n":{"about":"About","edition":"Edition","or":"or","sign_up":"Sign Up","to_post":"to post and comment!","log_in":"Sign In","browse_sections":"Browse Sections","browse_brands":"Browse Brands","view_profile":"View profile","settings":"Settings","new_post":"New Post","my_drafts":"My Drafts","dashboard":"Dashboard","logout":"Log Out","search":"Search BuzzFeed","more_buzzfeed_brands":"more BuzzFeed brands","buzzfeed_badges":"BuzzFeed badges","hot_topics":"Hot Topics","community":"Community","skip_to_content":"Skip To Content","useful_information":"useful information","hamburger":"open menu to see more links","a11y_search":"open form to search"}};
+    
+
+    {
+      "enabled_fe": false
+    }
+  
+
+      {
+        "feedName": "home",
+        "feedParams": {},
+        "flexproEnabled": "1",
+        "ads": {"density": 7, "placements": [4, 8, 14], "units": [{"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story1", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story1"], "wid": 1}, "trackingData": {"pixiedust": {"position_in_unit": 3, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 1}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story2", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story2"], "wid": 2}, "trackingData": {"pixiedust": {"position_in_unit": 9, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 2}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story3", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story3"], "wid": 3}, "trackingData": {"pixiedust": {"position_in_unit": 15, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 3}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story4", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story4"], "wid": 4}, "trackingData": {"pixiedust": {"position_in_unit": 21, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 4}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story5", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story5"], "wid": 5}, "trackingData": {"pixiedust": {"position_in_unit": 27, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 5}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story6", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story6"], "wid": 6}, "trackingData": {"pixiedust": {"position_in_unit": 33, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 6}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story7", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story7"], "wid": 7}, "trackingData": {"pixiedust": {"position_in_unit": 39, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 7}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story8", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story8"], "wid": 8}, "trackingData": {"pixiedust": {"position_in_unit": 45, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 8}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story9", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story9"], "wid": 9}, "trackingData": {"pixiedust": {"position_in_unit": 51, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 9}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story10", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story10"], "wid": 11}, "trackingData": {"pixiedust": {"position_in_unit": 57, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 11}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story11", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story11"], "wid": 12}, "trackingData": {"pixiedust": {"position_in_unit": 63, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 12}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story12", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story12"], "wid": 16}, "trackingData": {"pixiedust": {"position_in_unit": 69, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 16}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story13", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story13"], "wid": 17}, "trackingData": {"pixiedust": {"position_in_unit": 75, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 17}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story14", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story14"], "wid": 18}, "trackingData": {"pixiedust": {"position_in_unit": 81, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 18}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story15", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story15"], "wid": 19}, "trackingData": {"pixiedust": {"position_in_unit": 87, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 19}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story16", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story16"], "wid": 20}, "trackingData": {"pixiedust": {"position_in_unit": 93, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 20}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story17", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story17"], "wid": 21}, "trackingData": {"pixiedust": {"position_in_unit": 99, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 21}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story18", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story18"], "wid": 22}, "trackingData": {"pixiedust": {"position_in_unit": 105, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 22}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story19", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story19"], "wid": 23}, "trackingData": {"pixiedust": {"position_in_unit": 111, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 23}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story20", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story20"], "wid": 24}, "trackingData": {"pixiedust": {"position_in_unit": 117, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 24}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story21", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story21"], "wid": 25}, "trackingData": {"pixiedust": {"position_in_unit": 123, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 25}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story22", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story22"], "wid": 28}, "trackingData": {"pixiedust": {"position_in_unit": 129, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 28}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story23", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story23"], "wid": 29}, "trackingData": {"pixiedust": {"position_in_unit": 135, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 29}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story24", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story24"], "wid": 30}, "trackingData": {"pixiedust": {"position_in_unit": 141, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 30}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story25", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story25"], "wid": 31}, "trackingData": {"pixiedust": {"position_in_unit": 147, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 31}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story26", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story26"], "wid": 32}, "trackingData": {"pixiedust": {"position_in_unit": 153, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 32}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story27", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story27"], "wid": 33}, "trackingData": {"pixiedust": {"position_in_unit": 159, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 33}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story28", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story28"], "wid": 34}, "trackingData": {"pixiedust": {"position_in_unit": 165, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 34}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story29", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story29"], "wid": 35}, "trackingData": {"pixiedust": {"position_in_unit": 171, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 35}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story30", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story30"], "wid": 36}, "trackingData": {"pixiedust": {"position_in_unit": 177, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 36}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story31", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story31"], "wid": 37}, "trackingData": {"pixiedust": {"position_in_unit": 183, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 37}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story32", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story32"], "wid": 38}, "trackingData": {"pixiedust": {"position_in_unit": 189, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 38}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story33", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story33"], "wid": 39}, "trackingData": {"pixiedust": {"position_in_unit": 195, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 39}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story34", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story34"], "wid": 40}, "trackingData": {"pixiedust": {"position_in_unit": 201, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 40}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story35", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story35"], "wid": 41}, "trackingData": {"pixiedust": {"position_in_unit": 207, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 41}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story36", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story36"], "wid": 43}, "trackingData": {"pixiedust": {"position_in_unit": 213, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 43}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story37", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story37"], "wid": 44}, "trackingData": {"pixiedust": {"position_in_unit": 219, "unit_name": "main", "unit_type": "feed"}}, "viewability": "low", "wid": 44}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story38", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story38"], "wid": 50}, "trackingData": {"pixiedust": {"position_in_unit": 225, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 50}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story39", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story39"], "wid": 51}, "trackingData": {"pixiedust": {"position_in_unit": 231, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 51}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "story40", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[728, 90], [300, 250], [320, 50], "fluid", [5, 5]], "targeting": {"pos": ["story40"], "wid": 52}, "trackingData": {"pixiedust": {"position_in_unit": 237, "unit_name": "main", "unit_type": "feed"}}, "viewability": "high", "wid": 52}, "with_companions": false}], "unitsRepeated": []},
+        "hasNextPage": true
+      }
+    
+
+    
+      {"filter":"default","feedLoadedMsg":"feed-ready-for-ads--default-mod-feed-cards-1","density":7,"placements":[4,8,14],"units":[{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story1","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story1"],"wid":1},"trackingData":{"pixiedust":{"position_in_unit":3,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":1},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story2","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story2"],"wid":2},"trackingData":{"pixiedust":{"position_in_unit":9,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":2},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story3","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story3"],"wid":3},"trackingData":{"pixiedust":{"position_in_unit":15,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":3},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story4","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story4"],"wid":4},"trackingData":{"pixiedust":{"position_in_unit":21,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":4},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story5","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story5"],"wid":5},"trackingData":{"pixiedust":{"position_in_unit":27,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":5},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story6","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story6"],"wid":6},"trackingData":{"pixiedust":{"position_in_unit":33,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":6},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story7","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story7"],"wid":7},"trackingData":{"pixiedust":{"position_in_unit":39,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":7},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story8","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story8"],"wid":8},"trackingData":{"pixiedust":{"position_in_unit":45,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":8},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story9","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story9"],"wid":9},"trackingData":{"pixiedust":{"position_in_unit":51,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":9},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story10","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story10"],"wid":11},"trackingData":{"pixiedust":{"position_in_unit":57,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":11},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story11","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story11"],"wid":12},"trackingData":{"pixiedust":{"position_in_unit":63,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":12},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story12","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story12"],"wid":16},"trackingData":{"pixiedust":{"position_in_unit":69,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":16},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story13","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story13"],"wid":17},"trackingData":{"pixiedust":{"position_in_unit":75,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":17},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story14","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story14"],"wid":18},"trackingData":{"pixiedust":{"position_in_unit":81,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":18},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story15","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story15"],"wid":19},"trackingData":{"pixiedust":{"position_in_unit":87,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":19},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story16","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story16"],"wid":20},"trackingData":{"pixiedust":{"position_in_unit":93,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":20},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story17","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story17"],"wid":21},"trackingData":{"pixiedust":{"position_in_unit":99,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":21},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story18","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story18"],"wid":22},"trackingData":{"pixiedust":{"position_in_unit":105,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":22},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story19","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story19"],"wid":23},"trackingData":{"pixiedust":{"position_in_unit":111,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":23},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story20","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story20"],"wid":24},"trackingData":{"pixiedust":{"position_in_unit":117,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":24},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story21","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story21"],"wid":25},"trackingData":{"pixiedust":{"position_in_unit":123,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":25},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story22","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story22"],"wid":28},"trackingData":{"pixiedust":{"position_in_unit":129,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":28},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story23","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story23"],"wid":29},"trackingData":{"pixiedust":{"position_in_unit":135,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":29},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story24","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story24"],"wid":30},"trackingData":{"pixiedust":{"position_in_unit":141,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":30},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story25","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story25"],"wid":31},"trackingData":{"pixiedust":{"position_in_unit":147,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":31},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story26","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story26"],"wid":32},"trackingData":{"pixiedust":{"position_in_unit":153,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":32},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story27","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story27"],"wid":33},"trackingData":{"pixiedust":{"position_in_unit":159,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":33},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story28","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story28"],"wid":34},"trackingData":{"pixiedust":{"position_in_unit":165,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":34},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story29","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story29"],"wid":35},"trackingData":{"pixiedust":{"position_in_unit":171,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":35},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story30","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story30"],"wid":36},"trackingData":{"pixiedust":{"position_in_unit":177,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":36},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story31","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story31"],"wid":37},"trackingData":{"pixiedust":{"position_in_unit":183,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":37},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story32","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story32"],"wid":38},"trackingData":{"pixiedust":{"position_in_unit":189,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":38},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story33","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story33"],"wid":39},"trackingData":{"pixiedust":{"position_in_unit":195,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":39},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story34","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story34"],"wid":40},"trackingData":{"pixiedust":{"position_in_unit":201,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":40},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story35","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story35"],"wid":41},"trackingData":{"pixiedust":{"position_in_unit":207,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":41},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story36","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story36"],"wid":43},"trackingData":{"pixiedust":{"position_in_unit":213,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":43},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story37","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story37"],"wid":44},"trackingData":{"pixiedust":{"position_in_unit":219,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":44},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story38","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story38"],"wid":50},"trackingData":{"pixiedust":{"position_in_unit":225,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":50},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story39","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story39"],"wid":51},"trackingData":{"pixiedust":{"position_in_unit":231,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":51},"with_companions":false},{"companions":[],"is_enabled":true,"page":"home","slot":{"adPos":"story40","adType":"post","isInfinite":false,"platform":null,"position":null,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story40"],"wid":52},"trackingData":{"pixiedust":{"position_in_unit":237,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":52},"with_companions":false}],"unitsRepeated":[]}
+    
+  
+{"throttle_timeout": 0,"render_lookahead": 1000}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5971959",
+      "show_new_labels": false
+    }
+  
+{"adPos":"story1","adType":"post","isInfinite":true,"platform":null,"position":4,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story1"],"wid":"1-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":3,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"1-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5978075",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5963044",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5965286",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+{"adPos":"story2","adType":"post","isInfinite":true,"platform":null,"position":8,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story2"],"wid":"2-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":9,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"2-1"}
+
+            {
+              "unit": "trending-no-quizzes",
+              "unitType": "carousel",
+              "unitName": "feed/trending",
+              "color": "pink",
+              "loadXsmall": true,
+              "loadSmall": true,
+              "loadMedium": false,
+              "loadLarge": false,
+              "showNumber": true,
+              "title": "Trending Now",
+              "params": "?origin=tuh",
+              "subUnit": "trending_now",
+              "endpoint": "web/trending",
+              "metavertical": "all_verticals",
+              "type": "post"
+            }
+          
+
+            {
+              "unit": "trending-quizzes",
+              "unitType": "carousel",
+              "unitName": "feed/trending-quizzes",
+              "color": "pink",
+              "loadXsmall": true,
+              "loadSmall": true,
+              "loadMedium": false,
+              "loadLarge": false,
+              "showNumber": true,
+              "title": "Trending Quizzes",
+              "params": "?origin=tuh",
+              "subUnit": "trending_quizzes",
+              "endpoint": "web/trending",
+              "metavertical": "buzz",
+              "type": "quiz"
+            }
+          
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974891",
+      "show_new_labels": false
+    }
+  
+
+          {
+            "unit": "web/videos/trending",
+            "unitUrl": "web/videos/trending/shuffle",
+            "unitType": "carousel",
+            "unitName": "feed/recsys-trending-videos",
+            "requestParams": {
+              "variation": 48
+            },
+            "color": "pink",
+            "loadXsmall": true,
+            "loadSmall": true,
+            "loadMedium": false,
+            "loadLarge": false,
+            "showNumber": true,
+            "pageSize": 10,
+            "title": "Top 10 Trending Videos",
+            "subUnit": "trending_videos"
+          }
+        
+{"adPos":"story3","adType":"post","isInfinite":true,"platform":null,"position":14,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story3"],"wid":"3-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":15,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"3-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974676",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5963186",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "133143"
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977994",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5970726",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977928",
+      "show_new_labels": false
+    }
+  
+{"adPos":"story4","adType":"post","isInfinite":true,"platform":null,"position":21,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story4"],"wid":"4-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":21,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"4-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977909",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5969655",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5971099",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5113379",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977871",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "129171"
+    }
+  
+{"adPos":"story5","adType":"post","isInfinite":true,"platform":null,"position":28,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story5"],"wid":"5-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":27,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"5-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977877",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974905",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977698",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972191",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5975773",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974740",
+      "show_new_labels": false
+    }
+  
+{"adPos":"story6","adType":"post","isInfinite":true,"platform":null,"position":35,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story6"],"wid":"6-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":33,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"6-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977858",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972737",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "131885"
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5970088",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974015",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5973526",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+{"adPos":"story7","adType":"post","isInfinite":true,"platform":null,"position":42,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story7"],"wid":"7-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":39,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"7-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5971879",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972599",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5970954",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5978073",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977537",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "134122"
+    }
+  
+{"adPos":"story8","adType":"post","isInfinite":true,"platform":null,"position":49,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story8"],"wid":"8-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":45,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"8-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5964951",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977949",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972262",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5973722",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5975782",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5976953",
+      "show_new_labels": false
+    }
+  
+{"adPos":"story9","adType":"post","isInfinite":true,"platform":null,"position":56,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story9"],"wid":"9-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":51,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"9-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5969930",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974983",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "133984"
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977649",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977795",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977831",
+      "show_new_labels": false
+    }
+  
+{"adPos":"story10","adType":"post","isInfinite":true,"platform":null,"position":63,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story10"],"wid":"11-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":57,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"11-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972651",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972060",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5971828",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5944329",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972791",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "129161"
+    }
+  
+{"adPos":"story11","adType":"post","isInfinite":true,"platform":null,"position":70,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story11"],"wid":"12-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":63,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"12-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974201",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5973322",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977686",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977504",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977601",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974665",
+      "show_new_labels": false
+    }
+  
+{"adPos":"story12","adType":"post","isInfinite":true,"platform":null,"position":77,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story12"],"wid":"16-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":69,"unit_name":"main","unit_type":"feed"}},"viewability":"low","wid":"16-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5973381",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977890",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "131379"
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5963208",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5973458",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977816",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+{"adPos":"story13","adType":"post","isInfinite":true,"platform":null,"position":84,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story13"],"wid":"17-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":75,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"17-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974271",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977536",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974984",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5976864",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977662",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "131793"
+    }
+  
+{"adPos":"story14","adType":"post","isInfinite":true,"platform":null,"position":91,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story14"],"wid":"18-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":81,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"18-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977894",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972827",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972887",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972355",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5973271",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5963995",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+{"adPos":"story15","adType":"post","isInfinite":true,"platform":null,"position":98,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story15"],"wid":"19-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":87,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"19-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5976658",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5975648",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "133992"
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5971873",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5974677",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5973499",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+{"adPos":"story16","adType":"post","isInfinite":true,"platform":null,"position":105,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story16"],"wid":"20-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":93,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"20-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5969193",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977736",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5966619",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5972593",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5970728",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "128964"
+    }
+  
+{"adPos":"story17","adType":"post","isInfinite":true,"platform":null,"position":112,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story17"],"wid":"21-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":99,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"21-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5971695",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5925244",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5879582",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "renderLookahead": -300
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5976997",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5971002",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5975877",
+      "show_new_labels": false
+    }
+  
+{"adPos":"story18","adType":"post","isInfinite":true,"platform":null,"position":119,"renderLookahead":"x0.25","size":[[728,90],[300,250],[320,50],"fluid",[5,5]],"targeting":{"pos":["story18"],"wid":"22-1","infinite_index":1},"trackingData":{"pixiedust":{"position_in_unit":105,"unit_name":"main","unit_type":"feed"}},"viewability":"high","wid":"22-1"}
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5968965",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "throttle_timeout": 0 ,
+      "render_lookahead": 1000,
+      "id": "5977235",
+      "show_new_labels": false
+    }
+  
+
+    {
+      "id": "125547"
+    }
+  
+
+    { "ads": {"density": 0, "placements": [4, 6, 8], "units": [{"companions": [], "idx_in_parent": 4, "is_enabled": true, "page": "home", "slot": {"adPos": "promo1", "adType": "ex", "isInfinite": false, "platform": "desktop", "position": null, "renderLookahead": "x0.25", "size": [[300, 600], [300, 250], "fluid"], "targeting": {"pos": ["promo1"], "wid": 230}, "trackingData": {"pixiedust": {"position_in_unit": 5, "unit_name": "right", "unit_type": "sidebar"}}, "viewability": "low", "wid": 230}, "with_companions": false}, {"companions": [], "idx_in_parent": 6, "is_enabled": true, "page": "home", "slot": {"adPos": "promo2", "adType": "ex", "isInfinite": false, "platform": "desktop", "position": null, "renderLookahead": "x0.25", "size": [[300, 600], [300, 250], "fluid"], "targeting": {"pos": ["promo2"], "wid": 231}, "trackingData": {"pixiedust": {"position_in_unit": 7, "unit_name": "right", "unit_type": "sidebar"}}, "viewability": "low", "wid": 231}, "with_companions": false}, {"companions": [], "idx_in_parent": 8, "is_enabled": true, "page": "home", "slot": {"adPos": "promo3", "adType": "ex", "isInfinite": false, "platform": "desktop", "position": null, "renderLookahead": "x0.25", "size": [[300, 600], [300, 250], "fluid"], "targeting": {"pos": ["promo3"], "wid": 232}, "trackingData": {"pixiedust": {"position_in_unit": 9, "unit_name": "right", "unit_type": "sidebar"}}, "viewability": "low", "wid": 232}, "with_companions": false}], "unitsRepeated": []} }
+  
+
+    {
+    "baseURL": "https://www.buzzfeed.com",
+    "newsLogoUrl": "https://www.buzzfeednews.com",
+    "pixiedust": {
+        "position_in_unit": 0,
+        "subunit_name": "bfn-quickly-catch-up",
+        "subunit_type": "package",
+        "unit_name": "right",
+        "unit_type": "sidebar"
+    },
+    "title": "Buzzfeed News"
+}
+    
+
+    {"adPos": "bigstory", "adType": "post", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[300, 600], [300, 250], "fluid", [5, 5]], "targeting": {"pos": ["bigstory"], "wid": 13}, "trackingData": {"pixiedust": {"position_in_unit": 1, "unit_name": "right", "unit_type": "sidebar"}}, "viewability": "low", "wid": 13}
+  
+
+    {
+    "color": "blue",
+    "endpoint": "web/trending",
+    "imageCrop": "wide",
+    "loadAds": false,
+    "loadLarge": true,
+    "loadMedium": true,
+    "loadSmall": false,
+    "loadXsmall": false,
+    "metavertical": "all_verticals",
+    "morePath": "/trending",
+    "moreTitle": "More Trending",
+    "pageSize": 10,
+    "params": "?origin=tuh",
+    "pixiedust": {
+        "position_in_unit": 4,
+        "subunit_name": "trending_now",
+        "subunit_type": "package",
+        "unit_name": "right",
+        "unit_type": "sidebar"
+    },
+    "showImage": true,
+    "showNumber": true,
+    "title": "Trending Now",
+    "titleIcon": "trending-icon",
+    "type": "post",
+    "unit": "trending-no-quizzes",
+    "unitName": "sidebar/trending",
+    "unitType": "list"
+}
+    
+{"adPos":"promo1","adType":"ex","isInfinite":false,"platform":"desktop","position":4,"renderLookahead":"x0.25","size":[[300,600],[300,250],"fluid"],"targeting":{"pos":["promo1"],"wid":230},"trackingData":{"pixiedust":{"position_in_unit":5,"unit_name":"right","unit_type":"sidebar"}},"viewability":"low","wid":230}
+
+    {
+    "color": "blue",
+    "endpoint": "web/trending",
+    "imageCrop": "wide",
+    "loadAds": false,
+    "loadLarge": true,
+    "loadMedium": true,
+    "loadSmall": false,
+    "loadXsmall": false,
+    "metavertical": "buzz",
+    "morePath": "/quizzes",
+    "moreTitle": "More Quizzes",
+    "pageSize": 10,
+    "params": "?origin=tuh",
+    "pixiedust": {
+        "position_in_unit": 6,
+        "subunit_name": "trending_quizzes",
+        "subunit_type": "package",
+        "unit_name": "right",
+        "unit_type": "sidebar"
+    },
+    "showImage": true,
+    "showNumber": true,
+    "title": "Trending Quizzes",
+    "titleIcon": "trending-icon",
+    "type": "quiz",
+    "unit": "trending-quizzes",
+    "unitName": "sidebar/trending-quizzes",
+    "unitType": "list"
+}
+    
+{"adPos":"promo2","adType":"ex","isInfinite":false,"platform":"desktop","position":6,"renderLookahead":"x0.25","size":[[300,600],[300,250],"fluid"],"targeting":{"pos":["promo2"],"wid":231},"trackingData":{"pixiedust":{"position_in_unit":7,"unit_name":"right","unit_type":"sidebar"}},"viewability":"low","wid":231}
+
+    {
+    "color": "purple",
+    "imageCrop": "wide",
+    "loadAds": true,
+    "loadLarge": true,
+    "loadMedium": true,
+    "loadSmall": false,
+    "loadXsmall": false,
+    "pageSize": 40,
+    "pixiedust": {
+        "position_in_unit": 2,
+        "subunit_name": "top_posts",
+        "subunit_type": "package",
+        "unit_name": "right",
+        "unit_type": "sidebar"
+    },
+    "showImage": true,
+    "showNumber": false,
+    "title": "Top Posts",
+    "unit": "morebuzz",
+    "unitName": "sidebar/morebuzz",
+    "unitType": "list"
+}
+    
+
+    {
+    "color": "blue",
+    "imageCrop": "wide",
+    "loadAds": false,
+    "loadLarge": true,
+    "loadMedium": true,
+    "loadSmall": false,
+    "loadXsmall": false,
+    "morePath": "/videos/trending",
+    "moreTitle": "More Trending Videos",
+    "pageSize": 3,
+    "pixiedust": {
+        "position_in_unit": 9,
+        "subunit_name": "trending_videos",
+        "subunit_type": "package",
+        "target_content_type": "video",
+        "unit_name": "right",
+        "unit_type": "sidebar"
+    },
+    "requestParams": {
+        "variation": 48
+    },
+    "showImage": true,
+    "showNumber": true,
+    "title": "Trending Videos",
+    "titleIcon": "trending-icon",
+    "unit": "web/videos/trending",
+    "unitName": "sidebar/video-trending",
+    "unitType": "list",
+    "unitUrl": "web/videos/trending/shuffle"
+}
+    
+
+    
+      
+      {
+        
+        
+        
+
+        
+          "units": [{"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "promo4", "adType": "ex", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[300, 600], [300, 250], "fluid"], "targeting": {"pos": ["promo4"], "wid": 233}, "trackingData": {"pixiedust": {"position_in_unit": 9, "unit_name": "right", "unit_type": "sidebar"}}, "viewability": "low", "wid": 233}, "with_companions": false}, {"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "promo5", "adType": "ex", "isInfinite": false, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[300, 600], [300, 250], "fluid"], "targeting": {"pos": ["promo5"], "wid": 234}, "trackingData": {"pixiedust": {"position_in_unit": 9, "unit_name": "right", "unit_type": "sidebar"}}, "viewability": "low", "wid": 234}, "with_companions": false}],
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+
+        
+        
+        
+
+        
+          "unitsRepeated": [{"companions": [], "is_enabled": true, "page": "home", "slot": {"adPos": "promo-infinite", "adType": "ex", "isInfinite": true, "platform": null, "position": null, "renderLookahead": "x0.25", "size": [[300, 600], [300, 250], "fluid"], "targeting": {"pos": ["promo-infinite"], "wid": 2300}, "trackingData": {"pixiedust": {"position_in_unit": 9, "unit_name": "right", "unit_type": "sidebar"}}, "viewability": "high", "wid": 2300}, "with_companions": false}],
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+
+        "density": 5,
+        "placements": []
+      }
+    
+  
+
+  (function() {
+    if (!window.BZFD.Config.enhanced) {
+      
+      window.BZFD.Util.createScript({
+          src: "/static-assets/js/vendor.ea519ba5da9beae7dbd6.js"
+      });
+    }
+
+    
+    window.BZFD.Util.createScript({
+      src: "/static-assets/js/bfa.54b3345e900b22ee9528.js"
+    });
+
+  }());

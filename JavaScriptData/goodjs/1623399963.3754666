@@ -1,0 +1,1 @@
+(this.$WP=this.$WP||[]).push(["q0TyIl",(e,t)=>{"use strict";var i,s,u,n,o=e=>{var[{page:t}]=i(s),{locale:o}=i(u);return n(e)?"Optimus":"en-US"===o.code&&"Home"===t?"Vacations":null};return[()=>{e("useTakeoverVariant",o)},[e=>i=e.useContext,e=>(s=e.Route,u=e.Environment),e=>n=e.useOptimusAdSlotEligibility]]},["cDcdfi","2R4xv2","kLoEDZ"]]);

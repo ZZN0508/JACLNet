@@ -1,0 +1,1019 @@
+var mobile_ad_configure={};
+mobile_ad_configure['mobile_doctor_consult_sogou']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_top_fudong']={'width':'100%','height':'48px'};
+mobile_ad_configure['mobile_top_fudong_depart']={'width':'100%','height':'48px'};
+mobile_ad_configure['mobile_400_doctor_consult']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_400_doctor_consult_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_bottom_doctor_diagnosis']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_bottom_doctor_diagnosis_depart']={'width':'100%','height':'62px'};
+
+mobile_ad_configure['mobile_relation_text']={'width':'100%','height':'49px'};
+mobile_ad_configure['mobile_top_line_tw']={'width':'100%','height':'111px'};
+mobile_ad_configure['mobile_sousuo_text']={'width':'100%','height':'60px'};
+//mobile_ad_configure['mobile_doctor_online_lecture']={'width':'100%','height':'90px'};
+//mobile_ad_configure['mobile_doctor_online_lecture_department']={'width':'100%','height':'90px'};
+
+mobile_ad_configure['mobile_3g_image_consult']={'width':'100%','height':'68px'}
+mobile_ad_configure['mobile_3g_image_consult_depart']={'width':'100%','height':'68px'}
+//mobile_ad_configure['mobile_3g_online_consult']={'width':'100%','height':'62px'}
+//mobile_ad_configure['mobile_3g_online_consult_depart']={'width':'100%','height':'62px'}
+
+mobile_ad_configure['mobile_search_bottom']={'width':'100%','height':'48px'}
+
+mobile_ad_configure['mobile_zhuanti_400_wenzi']={'width':'100%','height':'26px'};
+mobile_ad_configure['mobile_zhuanti_400_zixun']={'width':'100%','height':'68px'};
+mobile_ad_configure['mobile_zhuanti_400_zixun_lian']={'width':'100%','height':'68px'};
+//mobile_ad_configure['mobile_hospital_bottom_float']={'width':'100%','height':'50px'};
+//mobile_ad_configure['mobile_hospital_bottom_float_depart']={'width':'100%','height':'50px'};
+mobile_ad_configure['mobile_search_doctor']={'width':'100%','height':'100%'};
+mobile_ad_configure['mobilebrands_index_lunbo1']={'width':'100%','height':'100%'};
+mobile_ad_configure['mobilebrands_index_lunbo2']={'width':'100%','height':'100%'};
+mobile_ad_configure['mobilebrands_index_lunbo3']={'width':'100%','height':'100%'};
+mobile_ad_configure['mobile_brand_tuwen_sogou']={'width':'100%','height':'62px%'};
+//mobile_ad_configure['mobilebrands_medicine_tw']={'width':'100%','height':'290px'};
+//mobile_ad_configure['mobilebrands_common_medicine']={'width':'100%','height':'52px'};
+mobile_ad_configure['mobile_jb_400_zixun']={'width':'100%','height':'68px'};
+mobile_ad_configure['mobile_disease_text']={'width':'100%','height':'34px'};
+
+mobile_ad_configure['mobile_zixun_wenzi1']={'width':'100%','height':'28px'};
+mobile_ad_configure['mobile_zixun_wenzi2']={'width':'100%','height':'28px'};
+//mobile_ad_configure['mobile_news_button']={'width':'100%','height':'87px'};
+mobile_ad_configure['mobile_news_brand_imgtext']={'width':'100%','height':'72px'};
+mobile_ad_configure['mobile_news_hot_ask']={'width':'100%','height':'70px'};
+mobile_ad_configure['mobile_400_wenzi']={'width':'100%','height':'26px'};
+mobile_ad_configure['mobile_400_wenzi_depart']={'width':'100%','height':'26px'};
+mobile_ad_configure['mobile_400_zixun_wenzi']={'width':'100%','height':'36px'};
+mobile_ad_configure['mobile_400_zixun_wenzi_depart']={'width':'100%','height':'36px'};
+mobile_ad_configure['mobile_shop_wenzi']={'width':'100%','height':'26px'};
+mobile_ad_configure['mobile_shop_wenzi_depart']={'width':'100%','height':'26px'};
+mobile_ad_configure['mobile_400_zixun']={'width':'100%','height':'68px'};
+mobile_ad_configure['mobile_400_zixun_depart']={'width':'100%','height':'68px'};
+mobile_ad_configure['mobile_400_zixun_baidu']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_baidu_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_online_wenzhen']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_online_wenzhen_depart']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_400_zixun_dianshang']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_online_wenzhen_dianshang']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_400_zixun_dingzhi']={'width':'100%','height':'72px'};
+mobile_ad_configure['mobile_400_zixun_dingzhi_depart']={'width':'100%','height':'72px'};
+mobile_ad_configure['mobile_brand_imgtext']={'width':'100%','height':'72px'};
+mobile_ad_configure['mobile_shop_imgtext1']={'width':'100%','height':'72px'};
+mobile_ad_configure['mobile_shop_imgtext1_depart']={'width':'100%','height':'72px'};
+//mobile_ad_configure['mobile_online_ask_doctor']={'width':'100%','height':'70px'};
+//mobile_ad_configure['mobile_online_ask_doctor_depart']={'width':'100%','height':'70px'};
+//mobile_ad_configure['mobile_quickly_talk']={'width':'100%','height':'32px'};
+//mobile_ad_configure['mobile_quickly_talk_depart']={'width':'100%','height':'32px'};
+//mobile_ad_configure['mobile_health_navigation']={'width':'100%','height':'110px'};
+//mobile_ad_configure['mobile_health_navigation_depart']={'width':'100%','height':'110px'};
+//mobile_ad_configure['mobile_health_search']={'width':'100%','height':'110px'};
+//mobile_ad_configure['mobile_health_search_depart']={'width':'100%','height':'110px'};
+mobile_ad_configure['mobile_ask_doctor']={'width':'120px','height':'42px'};
+mobile_ad_configure['mobile_ask_doctor_depart']={'width':'120px','height':'42px'};
+//mobile_ad_configure['mobile_jswz']={'width':'100%','height':'26px'};
+//mobile_ad_configure['mobile_jswz_depart']={'width':'100%','height':'26px'};
+mobile_ad_configure['mobile_400_zixun_official']={'width':'100%','height':'62px'};
+
+
+//2018-06-26 add
+mobile_ad_configure['mobile_400_zixun_im']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_im_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_online_wenzhen_im']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_online_wenzhen_im_depart']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_dibu_fuchuang_im']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_dibu_fuchuang_im_depart']={'width':'100%','height':'60px'};
+
+//2018-07-30
+mobile_ad_configure['mobile_online_wenzhen_3g']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_online_wenzhen_3g_depart']={'width':'100%','height':'94px'};
+
+mobile_ad_configure['mobile_400_zixun_mip_float']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_mip_float_depart']={'width':'100%','height':'168px'};
+
+
+
+
+mobile_ad_configure['mobile_top_float_new']={'width':'100%','height':'48px'};
+mobile_ad_configure['mobile_top_float_new_depart']={'width':'100%','height':'48px'};
+mobile_ad_configure['mobile_dibu_fuchuang_new']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_dibu_fuchuang_new_depart']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_top_float_official']={'width':'100%','height':'48px'};
+mobile_ad_configure['mobile_400_zixun_float']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_float_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_so']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_so_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_baidu_sobu']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_baidu_sobu_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_baidu_floatbu']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_baidu_floatbu_depart']={'width':'100%','height':'168px'};
+//mobile_ad_configure['mobile_online_doctor_answer']={'width':'100%','height':'60px'};
+//mobile_ad_configure['mobile_online_doctor_answer_depart']={'width':'100%','height':'60px'};
+mobile_ad_configure['flow_search_doctor']={'width':'544px','height':'69px'};
+//mobile_ad_configure['mobile_hot_text']={'width':'100%','height':'30px'};
+//mobile_ad_configure['mobile_hot_text_depart']={'width':'100%','height':'30px'};
+//mobile_ad_configure['mobile_free_consult_doctor']={'width':'100%','height':'41px'};
+//mobile_ad_configure['mobile_free_consult_doctor_depart']={'width':'100%','height':'41px'};
+
+mobile_ad_configure['mobile_top_float']={'width':'100%','height':'37px'};
+mobile_ad_configure['mobile_top_float_depart']={'width':'100%','height':'37px'};
+mobile_ad_configure['mobile_bottom_tw_combine']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_bottom_tw_combine_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_bottom_tw_combine_official']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_sogou_bottom_float']={'width':'100%','height':'36px'};
+mobile_ad_configure['mobile_sogou_bottom_float_depart']={'width':'100%','height':'36px'};
+
+mobile_ad_configure['mobile_top_zixun']={'width':'100%','height':'50px'};
+mobile_ad_configure['mobile_top_zixun_depart']={'width':'100%','height':'50px'};
+
+mobile_ad_configure['mobile_top_float_list']={'width':'100%','height':'37px'};
+mobile_ad_configure['mobile_top_float_list_depart']={'width':'100%','height':'37px'};
+mobile_ad_configure['mobile_bottom_tw_list']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_bottom_tw_list_depart']={'width':'100%','height':'62px'};
+
+//mobile_ad_configure['mobile_healthcare_tw']={'width':'100%','height':'66px'};
+//mobile_ad_configure['mobile_healthcare_tw_depart']={'width':'100%','height':'66px'};
+mobile_ad_configure['mobile_same_doctor_consult']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_same_doctor_consult_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_one_to_one']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_one_to_one_depart']={'width':'100%','height':'62px'};
+
+mobile_ad_configure['mobile_top_float_window']={'width':'100%','height':'37px'};
+mobile_ad_configure['mobile_top_float_window_depart']={'width':'100%','height':'37px'};
+
+mobile_ad_configure['mobile_doctor_consult']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_doctor_consult_depart']={'width':'100%','height':'62px'};
+
+//mobile_ad_configure['mobile_to_doctor_zixun']={'width':'90px','height':'28px'};
+//mobile_ad_configure['mobile_to_doctor_zixun_depart']={'width':'90px','height':'28px'};
+
+//mobile_ad_configure['yimei_3g_consult_button']={'width':'40px','height':'40px'};
+//mobile_ad_configure['yimei_mobile_bottom_banner']={'width':'100%','height':'40px'};
+//mobile_ad_configure['yimei_mobile_bottom_float']={'width':'100%','height':'40px'};
+//mobile_ad_configure['yimei_3g_rec_expert']={'width':'100%','height':'153px'};
+//mobile_ad_configure['yimei_3g_hot_activity']={'width':'100%','height':'133px'};
+//mobile_ad_configure['yimei_3g_recom_read']={'width':'100%','height':'201px'};
+//mobile_ad_configure['yimei_3g_top_text']={'width':'100%','height':'35px'};
+//mobile_ad_configure['yimei_mobile_top_lunbo']={'width':'100%','height':'160px'};
+//mobile_ad_configure['yimei_mobile_zx_banner']={'width':'100%','height':'75px'};
+
+
+//mobile_ad_configure['yimei_ask_answer_depart']={'width':'300px','height':'314px'};
+
+
+mobile_ad_configure['mobile_zixun_wenzi1']={'width':'100%','height':'28px'};
+mobile_ad_configure['mobile_zixun_wenzi2']={'width':'100%','height':'28px'};
+mobile_ad_configure['mobile_ask_doctor']={'width':'120px','height':'42px'};
+//mobile_ad_configure['mobile_hospital_shop']={'width':'100%','height':'85px'};
+mobile_ad_configure['mobile_brand_imgtext']={'width':'100%','height':'72px'};
+//mobile_ad_configure['mobile_free_consult']={'width':'50px','height':'50px'};
+
+mobile_ad_configure['mobile_search_bottom_float']={'width':'100%','height':'60px'};
+//mobile_ad_configure['mobile_bottom_float']={'width':'100%','height':'60px'};
+//mobile_ad_configure['mobile_bottom_float_depart']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_right_float_button']={'width':'60px','height':'60px'};
+mobile_ad_configure['mobile_right_float_button_depart']={'width':'60px','height':'60px'};
+//mobile_ad_configure['mobile_right_float_ua']={'width':'60px','height':'60px'};
+mobile_ad_configure['mobile_right_float_ua_depart']={'width':'60px','height':'60px'};
+
+//mobile_ad_configure['mobile_bottom_float_new_sj']={'width':'100%','height':'85px'};
+//mobile_ad_configure['mobile_bottom_float_new']={'width':'100%','height':'85px'};
+
+mobile_ad_configure['mobile_400_zixun_sougou']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_bottom_float_sougou']={'width':'100%','height':'48px'};
+mobile_ad_configure['mobile_sickness_button_sougou']={'width':'100%','height':'38px'};
+mobile_ad_configure['mobile_sougou_free_consult']={'width':'50px','height':'50px'};
+mobile_ad_configure['mobile_sougou_doctor_free_consult']={'width':'126px','height':'41px'};
+mobile_ad_configure['mobile_sogou_consult_other_doctor']={'width':'120px','height':'20px'};
+
+//3Gonline
+mobile_ad_configure['online3g_top_float']={'width':'100%','height':'45px'};
+mobile_ad_configure['online3g_text_one']={'width':'193px','height':'28px'};
+mobile_ad_configure['online3g_text_two']={'width':'193px','height':'28px'};
+mobile_ad_configure['online3g_consult_illness']={'width':'100%','height':'161px'};
+mobile_ad_configure['online3g_expert_recom']={'width':'100%','height':'272px'};
+mobile_ad_configure['online3g_relevant_ask']={'width':'100%','height':'246px'};
+mobile_ad_configure['online3g_expert_online_button']={'width':'56px','height':'60px'};
+mobile_ad_configure['online3g_bottom_banner']={'width':'100%','height':'62px'};
+mobile_ad_configure['online3g_bottom_float']={'width':'100%','height':'45px'};
+mobile_ad_configure['online3g_middle_eject']={'width':'240px','height':'230px'};
+mobile_ad_configure['online3g_top_banner']={'width':'100%','height':'120px'};
+
+mobile_ad_configure['online3g_top_float_word']={'width':'100%','height':'45px'};
+mobile_ad_configure['online3g_text_one_word']={'width':'193px','height':'28px'};
+mobile_ad_configure['online3g_text_two_word']={'width':'193px','height':'28px'};
+mobile_ad_configure['online3g_consult_illness_word']={'width':'100%','height':'161px'};
+mobile_ad_configure['online3g_expert_recom_word']={'width':'100%','height':'272px'};
+mobile_ad_configure['online3g_relevant_ask_word']={'width':'100%','height':'246px'};
+mobile_ad_configure['online3g_expert_online_button_word']={'width':'56px','height':'60px'};
+mobile_ad_configure['online3g_bottom_banner_word']={'width':'100%','height':'62px'};
+mobile_ad_configure['online3g_bottom_float_word']={'width':'100%','height':'45px'};
+mobile_ad_configure['online3g_middle_eject_word']={'width':'240px','height':'230px'};
+mobile_ad_configure['online3g_top_banner_word']={'width':'100%','height':'120px'};
+mobile_ad_configure['online3g_focus_tw']={'width':'100%','height':'90px'};
+mobile_ad_configure['online3g_focus_tw_keyword']={'width':'100%','height':'90px'};
+mobile_ad_configure['topic_online3g_focus_tw_keyword']={'width':'100%','height':'90px'};
+
+//club
+//mobile_ad_configure['club_v2_left_float']={'width':'190','height':'326'};
+//mobile_ad_configure['club_v2_left_float_depart']={'width':'190','height':'326'};
+//mobile_ad_configure['club_v2_left_float_depart_for_yimei']={'width':'190','height':'326'};
+//mobile_ad_configure['club_v2_left_float_div']={'width':'190','height':'326'};
+//mobile_ad_configure['club_v2_left_float_div_depart']={'width':'190','height':'326'};
+mobile_ad_configure['asksuccess_onlinedoctor']={'width':'379px','height':'226px'};
+mobile_ad_configure['club_ask_wenzi']={'width':'662px','height':'75px'};
+mobile_ad_configure['club_ask_wenzi_depart']={'width':'610px','height':'77px'};
+//mobile_ad_configure['club_v2_bottom_bantong']={'width':'662px','height':'75px'};
+//mobile_ad_configure['club_v2_bottom_bantong_depart']={'width':'662px','height':'75px'};
+mobile_ad_configure['club_v2_brand_yiping']={'width':'300px','height':'250px'};
+//mobile_ad_configure['club_quiz_doctor_consult']= {'width':'663px','height':'78px'};
+//mobile_ad_configure['club_quiz_doctor_consult_depart']= {'width':'663px','height':'78px'};
+//mobile_ad_configure['club_quiz_doctor_leftfloat']= {'width':'190px','height':'326px'};
+//mobile_ad_configure['club_quiz_doctor_leftfloat_depart']= {'width':'190px','height':'326px'};
+//mobile_ad_configure['club_quiz_doctor_leftfloat_depart_for_yimei']= {'width':'190px','height':'326px'};
+mobile_ad_configure['club_quiz_doctor_online']= {'width':'300px','height':'357px'};
+mobile_ad_configure['club_quiz_doctor_online_depart']= {'width':'300px','height':'357px'};
+mobile_ad_configure['club_quiz_doctor_online_new']= {'width':'262px','height':'357px'};
+mobile_ad_configure['club_ask_doctor_leftfloat']= {'width':'160px','height':'300px'};
+mobile_ad_configure['club_ask_doctor_leftfloat_depart']= {'width':'160px','height':'300px'};
+mobile_ad_configure['club_360_quiz_doctor_online']= {'width':'262px','height':'357px'};
+
+//mobile_ad_configure['club_ask_free_consult']= {'width':'665px','height':'72px'};
+//mobile_ad_configure['club_ask_free_consult_depart']= {'width':'665px','height':'72px'};
+//mobile_ad_configure['club_quick_button']= {'width':'665px','height':'80px'};
+//mobile_ad_configure['club_quick_button_depart']= {'width':'665px','height':'80px'};
+//mobile_ad_configure['club_more_diag']= {'width':'300px','height':'357px'};
+//mobile_ad_configure['club_more_diag_depart']= {'width':'300px','height':'357px'};
+mobile_ad_configure['only_keyword_club_more_diag']= {'width':'300px','height':'357px'};
+//mobile_ad_configure['club_sort_left_float']= {'width':'190px','height':'326px'};
+//mobile_ad_configure['club_sort_left_float_depart']= {'width':'190px','height':'326px'};
+mobile_ad_configure['only_keyword_club_sort_left_float']= {'width':'190px','height':'326px'};
+mobile_ad_configure['club_visit_doctor']= {'width':'673px','height':'166px'};
+mobile_ad_configure['club_visit_doctor_depart']= {'width':'673px','height':'166px'};
+
+mobile_ad_configure['docin_club_quick_button']= {'width':'665px','height':'80px'};
+mobile_ad_configure['docin_club_quick_button_depart']= {'width':'665px','height':'80px'};
+mobile_ad_configure['docin_club_more_diag']= {'width':'300px','height':'357px'};
+mobile_ad_configure['docin_club_more_diag_depart']= {'width':'300px','height':'357px'};
+mobile_ad_configure['docin_club_sort_left_float']= {'width':'190px','height':'326px'};
+mobile_ad_configure['docin_club_sort_left_float_depart']= {'width':'190px','height':'326px'};
+mobile_ad_configure['docin_club_visit_doctor']= {'width':'816px','height':'166px'};
+mobile_ad_configure['docin_club_visit_doctor_depart']= {'width':'816px','height':'166px'};
+mobile_ad_configure['club_visit_doctor_sogou']={'width':'605px','height':'134px'};
+
+//brands
+mobile_ad_configure['brands_jibindex_top_bantong']={'width':'630px','height':'75px'};
+mobile_ad_configure['brands_jibindex_top_leftbutton']={'width':'160px','height':'75px'};
+mobile_ad_configure['brands_jibindex_top_rightbutton']={'width':'160px','height':'75px'};
+mobile_ad_configure['brands_zhuanti_top_rightbutton']={'width':'160px','height':'75px'};
+mobile_ad_configure['brands_zhuanti_top_leftbutton']={'width':'160px','height':'75px'};
+mobile_ad_configure['brands_zhuanti_top_bantong']={'width':'630px','height':'75px'};
+mobile_ad_configure['brands_zhuanti_erpingbantong']={'width':'620px','height':'100px'};
+mobile_ad_configure['brands_doctor_recommend_medicine']={'width':'605px%','height':'134px'};
+//mobile_ad_configure['brands_common_medicine']={'width':'265px','height':'50px'};
+//mobile_ad_configure['brands_praise_medicine']={'width':'690px','height':'95px'};
+//mobile_ad_configure['brands_zhengzhuang_common_medicine']={'width':'690px','height':'95px'};
+//mobile_ad_configure['brands_medicine_net_special']={'width':'690px','height':'135px'};
+
+//jib
+mobile_ad_configure['jib_top_banner_single']={'width':'980px','height':'60px'};
+mobile_ad_configure['jib_index_doc']={'width':'210px','height':'90px'};
+mobile_ad_configure['jib_right_buttonimg']={'width':'280px','height':'91px'};
+mobile_ad_configure['jib_right_doc2']={'width':'500px','height':'395px'};
+mobile_ad_configure['jib_right_hos']={'width':'500px','height':'395px'};
+mobile_ad_configure['jib_right_text']={'width':'500px','height':'395px'};
+mobile_ad_configure['new_jib_right_keyword2_baidu']={'width':'731px','height':'77px'};
+mobile_ad_configure['jib_right_button2_single_baidu']={'width':'237px','height':'75px'};
+mobile_ad_configure['jib_right_tjys2_baidu']={'width':'233px','height':'750px'};
+mobile_ad_configure['jib_right_tjyy2_baidu']={'width':'239px','height':'912px'};
+mobile_ad_configure['jib_right_keyword2_baidu']={'width':'223px','height':'220px'};
+
+//pindao_wenzhang
+mobile_ad_configure['pindao_wenzhang_leftwz']={'width':'625px','height':'32px'};
+//mobile_ad_configure['pindao_wenzhang_zjzx']={'width':'648px','height':'70px'};
+mobile_ad_configure['pindao_wenzhang_ypjd']={'width':'300px','height':'125px'};
+mobile_ad_configure['pindao_wenzhang_ypwz']={'width':'300px','height':'100px'};
+//mobile_ad_configure['pindao_wenzhang_jkjyzleft']={'width':'135px','height':'106px'};
+//mobile_ad_configure['pindao_wenzhang_jkjyzright']={'width':'135px','height':'106px'};
+//mobile_ad_configure['pindao_wenzhang_jkjyzwz']={'width':'297px','height':'44px'};
+//mobile_ad_configure['pindao_wenzhang_dyzntop']={'width':'298px','height':'71px'};
+//mobile_ad_configure['pindao_wenzhang_dyznbottom']={'width':'298px','height':'71px'};
+mobile_ad_configure['pindao_wenzhang_dpjd']={'width':'300px','height':'125px'};
+mobile_ad_configure['pindao_wenzhang_jctj']={'width':'300px','height':'160px'};
+mobile_ad_configure['pindao_wenzhang_dbtl']={'width':'980px','height':'75px'};
+
+//flow
+mobile_ad_configure['flow_wenzhang_img']={'width':'300px','height':'250px'};
+mobile_ad_configure['flow_wenzhang_ypjd']={'width':'300px','height':'250px'};
+
+//onlineindex
+mobile_ad_configure['onlineindex_yiping']={'width':'725px','height':'93px'};
+mobile_ad_configure['onlineindex_erping']={'width':'725px','height':'93px'};
+mobile_ad_configure['onlineindex_top_banner']={'width':'980px','height':'93px'};
+mobile_ad_configure['onlineindex_top_button']={'width':'292px','height':'51px'};
+mobile_ad_configure['onlineindex_left_button']={'width':'245px','height':'68px'};
+mobile_ad_configure['onlineindex_right_button']={'width':'316px','height':'100px'};
+mobile_ad_configure['onlineindex_lunbo1']={'width':'245px','height':'303px'};
+mobile_ad_configure['onlineindex_lunbo2']={'width':'245px','height':'303px'};
+mobile_ad_configure['onlineindex_lunbo3']={'width':'245px','height':'303px'};
+mobile_ad_configure['onlineindex_lunbo4']={'width':'245px','height':'303px'};
+
+//ztindex
+mobile_ad_configure['ztindex_leftbutton']={'width':'190px','height':'100px'};
+mobile_ad_configure['ztindex_lunbo1']={'width':'292px','height':'195px'};
+mobile_ad_configure['ztindex_lunbo2']={'width':'292px','height':'195px'};
+mobile_ad_configure['ztindex_lunbo3']={'width':'292px','height':'195px'};
+mobile_ad_configure['ztindex_lunbo4']={'width':'292px','height':'195px'};
+mobile_ad_configure['ztindex_lunbo5']={'width':'292px','height':'195px'};
+mobile_ad_configure['ztindex_dbwz']={'width':'450px','height':'33px'};
+mobile_ad_configure['ztindex_rightbutton1']={'width':'221px','height':'112px'};
+mobile_ad_configure['ztindex_rightbutton2']={'width':'221px','height':'112px'};
+mobile_ad_configure['ztindex_rightbutton3']={'width':'221px','height':'112px'};
+mobile_ad_configure['ztindex_rightbutton4']={'width':'221px','height':'112px'};
+mobile_ad_configure['ztindex_ycwz']={'width':'208px','height':'103px'};
+mobile_ad_configure['ztindex_zjzx']={'width':'223px','height':'365px'};
+mobile_ad_configure['ztindex_yiping']={'width':'980px','height':'90px'};
+mobile_ad_configure['ztindex_hzyy']={'width':'223px','height':'268px'};
+mobile_ad_configure['ztindex_erping']={'width':'980px','height':'90px'};
+mobile_ad_configure['ztindex_sanping']={'width':'980px','height':'90px'};
+mobile_ad_configure['ztindex_siping']={'width':'980px','height':'90px'};
+//mobile_ad_configure['zhuanti_leftfloat']={'width':'200px','height':'294px'};
+
+//onlinearticle
+mobile_ad_configure['onlinearticle_quick_way']={'width':'320','height':'268px'};
+mobile_ad_configure['onlinearticle_everyday_reply']={'width':'298px','height':'350px'};
+mobile_ad_configure['onlinearticle_doctor_recom']={'width':'300px','height':'493px'};
+mobile_ad_configure['onlinearticle_workplace_ass']={'width':'680px','height':'260px'};
+mobile_ad_configure['onlinearticle_pic_in_pic']={'width':'200px','height':'300px'};
+mobile_ad_configure['onlinearticle_left_eject']={'width':'130px','height':'350px'};
+mobile_ad_configure['onlinearticle_right_eject']={'width':'250px','height':'200px'};
+mobile_ad_configure['onlinearticle_bottom_float']={'width':'1000px','height':'60px'};
+mobile_ad_configure['onlinearticle_consult_illness']={'width':'330px','height':'206px'};
+mobile_ad_configure['onlinearticle_hot_tag']={'width':'330px','height':'206px'};
+mobile_ad_configure['onlinearticle_top_banner']={'width':'1000px','height':'120px'};
+
+//brands
+mobile_ad_configure['brands_pdindex_button']={'width':'162px','height':'102px'};
+mobile_ad_configure['brands_pdindex_yiping']={'width':'980px','height':'75px'};
+mobile_ad_configure['brands_pdindex_erping']={'width':'980px','height':'75px'};
+mobile_ad_configure['brands_pdindex_sanping']={'width':'980px','height':'75px'};
+mobile_ad_configure['brands_pdindex_top_tonglan']={'width':'980px','height':'75px'};
+mobile_ad_configure['brands_ztindex_top_tonglan']={'width':'980px','height':'75px'};
+mobile_ad_configure['brands_pdlist_top_tonglan']={'width':'980px','height':'75px'};
+//mobile_ad_configure['brands_pindao_left_wenzi']={'width':'625px','height':'32px'};
+mobile_ad_configure['brands_ztindex_lunbo1_pdindex']={'width':'348px','height':'243px'};
+mobile_ad_configure['brands_ztindex_lunbo2_pdindex']={'width':'348px','height':'243px'};
+mobile_ad_configure['brands_ztindex_lunbo3_pdindex']={'width':'348px','height':'243px'};
+mobile_ad_configure['brands_ztindex_lunbo4_pdindex']={'width':'348px','height':'243px'};
+mobile_ad_configure['brands_ztindex_lunbo5_pdindex']={'width':'348px','height':'243px'};
+
+//yimei
+mobile_ad_configure['yimei_bottom_screen_focus']={'width':'338px','height':'258px'};
+mobile_ad_configure['yimei_club_bottom_button']={'width':'300px','height':'143px'};
+mobile_ad_configure['yimei_club_hot_text']={'width':'300px','height':'291px'};
+mobile_ad_configure['yimei_hot_news_text']={'width':'300px','height':'291px'};
+mobile_ad_configure['yimei_club_top_left_button']={'width':'160px','height':'75px'};
+mobile_ad_configure['yimei_club_top_bantong']={'width':'630px','height':'75px'};
+mobile_ad_configure['yimei_club_top_right_button']={'width':'160px','height':'75px'};
+mobile_ad_configure['yimei_club_one_screen_focus']={'width':'300px','height':'250px'};
+mobile_ad_configure['yimei_club_two_screen_focus']={'width':'300px','height':'250px'};
+mobile_ad_configure['yimei_club_doctor_online']={'width':'665px','height':'77px'};
+mobile_ad_configure['yimei_left_float_depart']={'width':'190px','height':'326px'};
+mobile_ad_configure['yimei_news_left_float']={'width':'86px','height':'486px'};
+mobile_ad_configure['yimei_news_expert_online']={'width':'764px','height':'142px'};
+//mobile_ad_configure['yimei_news_bottom_bt']={'width':'764px','height':'130px'};
+mobile_ad_configure['yimei_one_screen_focus']={'width':'338px','height':'258px'};
+mobile_ad_configure['yimei_channel_left_float']={'width':'190px','height':'326px'};
+mobile_ad_configure['yimei_zixun_top_banner']={'width':'1200px','height':'120px'};
+mobile_ad_configure['yimei_zixun_activity']={'width':'298px','height':'362px'};
+mobile_ad_configure['yimei_free_consult_button']={'width':'338px','height':'98px'};
+mobile_ad_configure['yimei_zixun_focus_text']={'width':'780px','height':'38px'};
+mobile_ad_configure['yimei_zixun_free_consult']={'width':'765px','height':'100px'};
+mobile_ad_configure['yimei_zixun_related_hospital']={'width':'765px','height':'321px'};
+//mobile_ad_configure['yimei_zixun_hot_question']={'width':'298px','height':'356px'};
+//mobile_ad_configure['yimei_left_float_keyword']={'width':'190px','height':'326px'};
+mobile_ad_configure['yimei_project_top_banner']={'width':'1024px','height':'74px'};
+mobile_ad_configure['yimei_project_one_screen']={'width':'380px','height':'300px'};
+mobile_ad_configure['yimei_project_bottom_screen']={'width':'380px','height':'300px'};
+mobile_ad_configure['yimei_project_hot_focus']={'width':'380px','height':'313px'};
+mobile_ad_configure['yimei_project_immediate_consult']={'width':'380px','height':'142px'};
+mobile_ad_configure['yimei_project_plastic_expert']={'width':'380px','height':'437px'};
+mobile_ad_configure['yimei_project_plastic_hospital']={'width':'380px','height':'437px'};
+
+//topic
+mobile_ad_configure['topic_doctor_lefteject']={'width':'160px','height':'300px'};
+//mobile_ad_configure['topic_leftfloat']={'width':'200px','height':'294px'};
+mobile_ad_configure['topic_ypjdtp']={'width':'300px','height':'125px'};
+mobile_ad_configure['topic_dpjdtp']={'width':'296px','height':'125px'};
+mobile_ad_configure['topic_jkjyz']={'width':'293px','height':'150px'};
+mobile_ad_configure['topic_qztp']={'width':'620px','height':'68px'};
+mobile_ad_configure['topic_jdwz']={'width':'620px','height':'32px'};
+mobile_ad_configure['topic_ypjdwz']={'width':'300px','height':'150px'};
+mobile_ad_configure['topic_left_tjtp']={'width':'140px','height':'110px'};
+mobile_ad_configure['topic_right_tjtp']={'width':'140px','height':'110px'};
+mobile_ad_configure['topic_tjwz']={'width':'293px','height':'150px'};
+mobile_ad_configure['topic_tjzj']={'width':'300px','height':'196px'};
+//pdindex
+mobile_ad_configure['pdindex_bantongimg1']={'width':'730px','height':'90px'};
+mobile_ad_configure['pdindex_bantongimg2']={'width':'730px','height':'90px'};
+mobile_ad_configure['pdindex_bantongimg3']={'width':'730px','height':'90px'};
+mobile_ad_configure['pdindex_bantongimg4']={'width':'730px','height':'90px'};
+mobile_ad_configure['pdindex_rightbtn1']={'width':'234px','height':'90px'};
+mobile_ad_configure['pdindex_rightbtn2']={'width':'234px','height':'90px'};
+mobile_ad_configure['pdindex_rightbtn3']={'width':'234px','height':'90px'};
+mobile_ad_configure['pdindex_rightbtn4']={'width':'234px','height':'90px'};
+//mobile_ad_configure['pdindex_topwz']={'width':'450px','height':'20px'};
+mobile_ad_configure['pdindex_ypwz']={'width':'222px','height':'214px'};
+mobile_ad_configure['pdindex_zjzx']={'width':'212px','height':'301px'};
+mobile_ad_configure['pdindex_yipingimg']={'width':'224px','height':'143px'};
+
+//xywyindex
+mobile_ad_configure['xywyindex_right_lunbo1']={'width':'300px','height':'260px'};
+mobile_ad_configure['xywyindex_right_lunbo2']={'width':'300px','height':'260px'};
+mobile_ad_configure['xywyindex_right_lunbo3']={'width':'300px','height':'260px'};
+mobile_ad_configure['xywyindex_onescreen_banner']={'width':'1000px','height':'100px'};
+mobile_ad_configure['xywyindex_twoscreen_lunbo1']={'width':'300px','height':'306px'};
+mobile_ad_configure['xywyindex_twoscreen_lunbo2']={'width':'300px','height':'306px'};
+mobile_ad_configure['xywyindex_twoscreen_lunbo3']={'width':'300px','height':'306px'};
+mobile_ad_configure['xywyindex_right_tuwen']={'width':'258px','height':'98px'};
+mobile_ad_configure['xywyindex_right_text']={'width':'258px','height':'192px'};
+mobile_ad_configure['xywyindex_recom_medicine']={'width':'300px','height':'341px'};
+mobile_ad_configure['xywyindex_lunbo_one']={'width':'530px','height':'330px'};
+mobile_ad_configure['xywyindex_lunbo_two']={'width':'530px','height':'330px'};
+mobile_ad_configure['xywyindex_lunbo_three']={'width':'530px','height':'330px'};
+mobile_ad_configure['xywyindex_lunbo_four']={'width':'530px','height':'330px'};
+mobile_ad_configure['xywyindex_erping_lunbo_one']={'width':'258px','height':'220px'};
+mobile_ad_configure['xywyindex_erping_lunbo_two']={'width':'258px','height':'220px'};
+mobile_ad_configure['xywyindex_erping_lunbo_three']={'width':'258px','height':'220px'};
+mobile_ad_configure['xywyindex_health_hot_tw']={'width':'228px','height':'98px'};
+mobile_ad_configure['xywyindex_health_hot_text']={'width':'228px','height':'192px'};
+mobile_ad_configure['xywyindex_medicine_recom']={'width':'260px','height':'318px'};
+
+//mvideo
+//mobile_ad_configure['mvideo_video_ads_depart']={'width':'100%','height':'100%'};
+//mobile_ad_configure['mvideo_doctor_info_depart']={'width':'100%','height':'173px'};
+//mobile_ad_configure['mvideo_synopsis_depart']={'width':'100%','height':'100%'};
+//mobile_ad_configure['mvideo_project_ads_depart']={'width':'100%','height':'100%'};
+//mobile_ad_configure['mvideo_hospital_info_depart']={'width':'100%','height':'104px'};
+//mobile_ad_configure['mvideo_bottom_float_depart']={'width':'100%','height':'58px'};
+
+//health3g
+mobile_ad_configure['health3g_400_health_consult']={'width':'100%','height':'68px'};
+mobile_ad_configure['health3g_400_health_consult_depart']={'width':'100%','height':'68px'};
+mobile_ad_configure['health3g_400_health_consult_new']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_400_health_consult_new_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_bottom_tw']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_bottom_tw_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_top_float']={'width':'100%','height':'48px'};
+mobile_ad_configure['health3g_top_float_depart']={'width':'100%','height':'48px'};
+mobile_ad_configure['health3g_bottom_float']={'width':'100%','height':'60px'};
+mobile_ad_configure['health3g_bottom_float_depart']={'width':'100%','height':'60px'};
+mobile_ad_configure['health3g_zixun_sougou']={'width':'100%','height':'68px'};
+mobile_ad_configure['health3g_bottom_float_sougou']={'width':'100%','height':'50px'};
+mobile_ad_configure['health3g_ask_doctor_shenma']={'width':'120px','height':'20px'};
+mobile_ad_configure['health3g_ask_doctor_depart_shenma']={'width':'120px','height':'20px'};
+mobile_ad_configure['health3g_dibu_fuchuang_shenma']={'width':'100%','height':'60px'};
+mobile_ad_configure['health3g_dibu_fuchuang_shenma_depart']={'width':'100%','height':'60px'};
+mobile_ad_configure['health3g_400_zixunv1_shenma']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_400_zixunv1_shenma_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_online_wenzhen_shenma']={'width':'100%','height':'94px'};
+mobile_ad_configure['health3g_online_wenzhen_shenma_depart']={'width':'100%','height':'94px'};
+mobile_ad_configure['health3g_400_zixun_shenma']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_400_zixun_shenma_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_online_wenzhen_qq']={'width':'100%','height':'36px'};
+mobile_ad_configure['health3g_online_wenzhen_qq_depart']={'width':'100%','height':'36px'};
+mobile_ad_configure['health3g_ask_doctor_qq']={'width':'120px','height':'20px'};
+mobile_ad_configure['health3g_ask_doctor_qq_depart']={'width':'120px','height':'20px'};
+
+mobile_ad_configure['health3g_400_zixunv1_qq']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_400_zixunv1_qq_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_400_zixun_qq']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_400_zixun_qq_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_online_wenzhenv2_qq']={'width':'100%','height':'94px'};
+mobile_ad_configure['health3g_online_wenzhenv2_qq_depart']={'width':'100%','height':'94px'};
+
+mobile_ad_configure['health3g_zixun_tuwen1']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_zixun_tuwen2']={'width':'100%','height':'168px'};
+
+mobile_ad_configure['health3g_zixun_tuwen1_word']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_zixun_tuwen1_column']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_zixun_tuwen2_word']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_zixun_tuwen2_column']={'width':'100%','height':'168px'};
+
+mobile_ad_configure['health3g_fast_application_health_tw']={'width':'100%','height':'95px'};
+
+//wenkang
+mobile_ad_configure['wenkang_more_dialog']={'width':'310px','height':'357px'};
+mobile_ad_configure['wenkang3g_doctor_diagnosis']={'width':'100%','height':'62px'};
+mobile_ad_configure['wenkang_more_button']={'width':'660px','height':'80px'};
+mobile_ad_configure['wenkang3g_right_float']={'width':'60px','height':'60px'};
+mobile_ad_configure['wenkang3g_bottom_float']={'width':'100%','height':'50px'};
+mobile_ad_configure['wenkang3g_top_float']={'width':'100%','height':'37px'};
+//mobile_ad_configure['wenkang3g_ask_zixun']={'width':'100%','height':'62px'};
+mobile_ad_configure['wenkang3g_ask_left_float']={'width':'60px','height':'60px'};
+mobile_ad_configure['wenkang3g_ask_bottom_float']={'width':'100%','height':'50px'};
+mobile_ad_configure['wenkang3g_ask_zixun_qq']={'width':'100%','height':'62px'};
+mobile_ad_configure['wenkang3g_ask_left_qq_float']={'width':'60px','height':'60px'};
+mobile_ad_configure['wenkang3g_ask_bottom_qq_float']={'width':'100%','height':'50px'};
+mobile_ad_configure['wenkang3g_bottom_float_szzc']={'width':'100%','height':'50px'};
+//mobile_ad_configure['wenkang_left_eject_360']={'width':'200px','height':'140px'};
+mobile_ad_configure['wenkang_more_diagnosis_360']={'width':'310px','height':'357px'};
+mobile_ad_configure['wenkang_more_botton_360']={'width':'660px','height':'80px'};
+
+//3gzixun
+mobile_ad_configure['mobile_3g_zixun_tuwen']={'width':'100%','height':'113.5px'};
+mobile_ad_configure['mobile_3g_zixun_anliwenzhang']={'width':'100%','height':'221px'};
+mobile_ad_configure['mobile_3g_zixun_zhuanjia']={'width':'100%','height':'75px'};
+mobile_ad_configure['mobile_3g_zixun_yiyuan']={'width':'100%','height':'75px'};
+//ååŒ»åé™¢
+mobile_ad_configure['mingyimy_doctor_list_banner']={'width':'100%','height':'142px'};
+mobile_ad_configure['mingyimy_hospital_list_banner']={'width':'100%','height':'142px'};
+mobile_ad_configure['mingyimy_relate_doctor_recom']={'width':'100%','height':'292px'};
+mobile_ad_configure['mingyimy_relate_hospital_recom']={'width':'100%','height':'292px'};
+mobile_ad_configure['mingyimy_hospital_depart_doctor']={'width':'100%','height':'130px'};
+mobile_ad_configure['mingyimy_hospital_disease_doctor']={'width':'100%','height':'130px'};
+
+//2018-08-10
+mobile_ad_configure['mobile_club_400_zixun_w']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_club_400_zixun_w_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_club_doctor_400_zixun_w']={'width':'100%','height':'324px'};
+mobile_ad_configure['mobile_club_doctor_400_zixun_w_depart']={'width':'100%','height':'324px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_right_w']={'width':'60px','height':'60px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_right_w_depart']={'width':'60px','height':'60px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_big_w']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_big_w_depart']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_club_brand_imgtext_w']={'width':'100%','height':'72px'};
+mobile_ad_configure['mobile_3g_club_thequestion_w']={'width':'100%','height':'82px'};
+mobile_ad_configure['mobile_3g_club_thequestion_w_depart']={'width':'100%','height':'82px'};
+
+mobile_ad_configure['mobile_club_400_zixun_g']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_club_400_zixun_g_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_club_doctor_400_zixun_g']={'width':'100%','height':'135px'};
+mobile_ad_configure['mobile_club_doctor_400_zixun_g_depart']={'width':'100%','height':'135px'};
+mobile_ad_configure['mobile_club_other_doctor_g']={'width':'120px','height':'20px'};
+mobile_ad_configure['mobile_club_wenzhen_g']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_club_wenzhen_g_depart']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_right_g']={'width':'60px','height':'60px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_right_g_depart']={'width':'60px','height':'60px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_big_g']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_club_dibu_fuchuang_big_g_depart']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_club_brand_imgtext_g']={'width':'100%','height':'72px'};
+mobile_ad_configure['mobile_3g_club_thequestion_g']={'width':'100%','height':'82px'};
+mobile_ad_configure['mobile_3g_club_thequestion_g_depart']={'width':'100%','height':'82px'};
+
+//2018-08-21
+mobile_ad_configure['health3g_400_zixunv1_imqq']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_400_zixunv1_imqq_depart']={'width':'100%','height':'62px'};
+mobile_ad_configure['health3g_ask_doctor_imqq']={'width':'120px','height':'20px'};
+mobile_ad_configure['health3g_ask_doctor_imqq_depart']={'width':'120px','height':'20px'};
+mobile_ad_configure['health3g_400_zixun_imqq']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_400_zixun_imqq_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_online_wenzhen_imqq']={'width':'100%','height':'94px'};
+mobile_ad_configure['health3g_online_wenzhen_imqq_depart']={'width':'100%','height':'94px'};
+mobile_ad_configure['wenkang3g_tuwen_combine_imqq']={'width':'100%','height':'125px'};
+mobile_ad_configure['wenkang3g_tuwen_combine_imqq_depart']={'width':'100%','height':'125px'};
+mobile_ad_configure['health3g_relation_wenzhen_imqq']={'width':'100%','height':'22px'};
+mobile_ad_configure['health3g_relation_wenzhen_imqq_depart']={'width':'100%','height':'22px'};
+mobile_ad_configure['mobile_healthcare_tw_imqq']={'width':'100%','height':'105px'};
+mobile_ad_configure['mobile_healthcare_tw_imqq_depart']={'width':'100%','height':'105px'};
+
+//2018-11-13  qqåˆä½œç™¾ç§‘æ–°å»ºäº”ä¸ªå‰¯key
+mobile_ad_configure['health3g_400_zixun_bkqq']={'width':'100%','height':'62px'};
+mobile_ad_configure['mobile_3g_tw_zixun_bkqq']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3g_online_zixun_bkqq']={'width':'100%','height':'94px'};
+mobile_ad_configure['health3g_free_online_zixun_bkqq']={'width':'120px','height':'20px'};
+mobile_ad_configure['health3g_free_online_zixun_bkqq']={'width':'100%','height':'125px'};
+
+
+//2019-01-09
+mobile_ad_configure['mobile_400_zixun_shenma_mip']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_400_zixun_shenma_mip_depart']={'width':'100%','height':'168px'};
+mobile_ad_configure['mobile_online_wenzhen_shenma_mip']={'width':'100%','height':'94px'};
+mobile_ad_configure['mobile_online_wenzhen_shenma_mip_depart']={'width':'100%','height':'94px'};
+//2019-01-16
+mobile_ad_configure['mobile_400_dibu_fuchuang_shenma_mip']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_400_dibu_fuchuang_shenma_mip_depart']={'width':'100%','height':'60px'};
+//2019-02-25 å¿«æ·åº”ç”¨å»ºå…«ä¸ªå‰¯key
+mobile_ad_configure['health3gim_400_zixun_xiaomi']={'width':'100%','height':'68px'};
+mobile_ad_configure['health3gim_400_zixun_depart_xiaomi']={'width':'100%','height':'68px'};
+mobile_ad_configure['health3gim_400_zixun_baidu_xiaomi']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3gim_400_zixun_baidu_depart_xiaomi']={'width':'100%','height':'168px'};
+mobile_ad_configure['health3gim_online_wenzhen_xiaomi']={'width':'100%','height':'94px'};
+mobile_ad_configure['health3gim_online_wenzhen_depart_xiaomi']={'width':'100%','height':'94px'};
+mobile_ad_configure['health3gim_dibu_fuchuang_xiaomi']={'width':'100%','height':'50px'};
+mobile_ad_configure['health3gim_dibu_fuchuang_depart_xiaomi']={'width':'100%','height':'50px'};
+
+//2019-11-07
+mobile_ad_configure['jib_doctor_left']={'width':'160px','height':'300px'};
+mobile_ad_configure['jib_zk_hospital']={'width':'690px','height':'470px'};
+mobile_ad_configure['jib_bt_img']={'width':'690px','height':'80px'};
+mobile_ad_configure['jib_rightjd_img']={'width':'280px','height':'185px'};
+mobile_ad_configure['mobile_jib_dibu_fuchuang']={'width':'100%','height':'60px'};
+mobile_ad_configure['mobile_jib_top_hosp']={'width':'100%','height':'96px'};
+
+mobile_ad_configure['mobile_3g_ask_doc_reply']={'width':'100%','height':'449px'};
+mobile_ad_configure['mobile_3g_ask_doc_reply_depart']={'width':'100%','height':'449px'};
+mobile_ad_configure['club_ask_doc_reply']={'width':'663px','height':'295px'};  
+mobile_ad_configure['club_ask_doc_reply_depart']={'width':'663px','height':'295px'};
+mobile_ad_configure['mobile_3g_ask_doc_reply_shenma']={'width':'100%','height':'449px'};
+mobile_ad_configure['mobile_3g_ask_doc_reply_depart_shenma']={'width':'100%','height':'449px'};
+
+mobile_ad_configure['mobile_3g_ask_doc_reply_shenma_mip']={'width':'100%','height':'202px'};
+mobile_ad_configure['mobile_3g_ask_doc_reply_depart_shenma_mip']={'width':'100%','height':'202px'};
+mobile_ad_configure['mobile_3g_zk_hospital']={'width':'100%','height':'338px'};
+
+mobile_ad_configure['mobile_3g_ask_bidding_tw']={'width':'100%','height':'150px'};
+mobile_ad_configure['mobile_3g_ask_bidding_tw_depart']={'width':'100%','height':'150px'};
+
+
+mobile_ad_configure['mingyimy_leftfloat']={'width':'200px','height':'280px'};
+
+mobile_ad_configure['brands_channel_article_erping_bantong']={'width':'648px','height':'80px'};
+mobile_ad_configure['brands_pindao_top_tonglan']={'width':'980px','height':'75px'};
+
+//document.domain="xywy.com";
+var display_domain="//display.xywy.com/index.php?r=index/index";
+var d_url='';
+var thekeyword='';
+var art_title='';
+var qdetail='';
+var fromdomain='';
+var gg_clientID;
+
+var fromurl = document.URL;
+fromurl=encodeURIComponent(fromurl);
+
+if( typeof(qtagname) == "undefined" ) {
+ var qtagname='';
+}
+
+
+var mobileAd = {
+ init : function() {
+  this.getKeyword("self");
+  this.getClient();
+ },
+
+ getClient : function() {
+  gg_clientID = mobileAd.getCookie('clientac');
+  if( !gg_clientID ) {
+   var nnum = parseInt(Math.random(10,1)*1000000)+"";
+   if(nnum.length < 6){
+    for (var nnuml = nnum.length; nnuml < 6; nnuml++) {
+     nnum += "0"
+    }
+   }
+   gg_clientID = new Date().getTime()+nnum;
+   mobileAd.setCookie( 'clientac', gg_clientID );
+  }
+ },
+
+ getCookie : function(name) {
+  var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+  if(arr=document.cookie.match(reg))
+   return unescape(arr[2]);
+  else
+   return;
+ },
+
+ setCookie : function( name, value ) {
+  var Days = 30;
+  var exp = new Date();
+  exp.setTime(exp.getTime() + Days*24*60*60*1000);
+  document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+ },
+
+ ParseUrl : function (local_url, par) {
+  //èŽ·å–å½“å‰URL
+  //èŽ·å–è¦å–å¾—çš„getå‚æ•°ä½ç½®
+  var get = local_url.indexOf(par +"=");
+  if(get == -1){
+   return false;
+  }
+  //æˆªå–å­—ç¬¦ä¸²
+  var get_par = local_url.slice(par.length + get + 1);
+  //åˆ¤æ–­æˆªå–åŽçš„å­—ç¬¦ä¸²æ˜¯å¦è¿˜æœ‰å…¶ä»–getå‚æ•°
+  var nextPar = get_par.indexOf("&");
+  if(nextPar != -1){
+   get_par = get_par.slice(0, nextPar);
+  }
+  return get_par;
+ },
+
+ getKeyword : function(type) {
+  if(type=="parent") {
+   d_url=parent.location.href;
+   fromdomain=parent.location.host;
+   var the_url = parent.referrer;
+   var qdetailcObj = parent.document.getElementById("qdetailc");
+   art_title = parent.document.title;
+  
+   if(typeof(parent.qtagname)!="undefined"){
+    qtagname=parent.qtagname;
+   }
+  }
+  else {
+   d_url=document.location.href;
+   fromdomain=document.location.host;
+   var the_url = document.referrer;
+   var qdetailcObj = document.getElementById("qdetailc");
+   art_title = document.title;
+  }
+  if( d_url ) {
+   if(d_url.indexOf('?')!='undefined') {
+    var urlArr=d_url.split('?');
+    d_url=urlArr[0];
+   }
+   if(d_url.indexOf('#')!='undefined') {
+    var urlArr=d_url.split('#');
+    d_url=urlArr[0];
+   }
+   d_url = encodeURIComponent(d_url);
+  }
+
+  var strDate = new Date(),wds_arr='',de=decodeURIComponent,c='gbk',host="",r=/http[s]{0,1}:\/\/([^\/]+)\//i,r2 = /(?:baidu.+?wd=|baidu.+?word=|xywy.+?keyword=|sogou.+?keyword=|google.+?q=|so.+?q=|bing.+?q=|soso.+?w=|yahoo.+?q=|yahoo.+?[\?|&]p=|360.+?q=)([^&]*)/;
+  if(r2.test(the_url)) {
+
+   huachFlag = 1;
+   if(the_url.indexOf('ie=utf-8')>-1) {
+    c="utf";
+   }
+   else if(the_url.indexOf('ie=gbk')>-1) {
+    c="gbk";
+   }
+   else {
+    host = the_url.match(r);
+    if(typeof(host)!="undefined" && typeof(host[1])!="undefined") {
+     if(host[1]=='www.sogou.com' || host[1]=='www.soso.com' || host[1]=='so.xywy.com' || host[1]=='www.baidu.com') {
+      if(the_url.indexOf('ie=utf-8')>-1) {
+       c = "utf";
+      }
+     }
+     else if(host[1]=='so.360.cn' || host[1]=='www.so.com') {
+      if(the_url.indexOf('ie=gbk')>-1) {
+       c = "gbk";
+      }
+      else c = "utf";
+     }
+     else {
+      c = "utf";
+     }
+    }
+   }
+   wds_arr = the_url.match(r2);
+
+   if(typeof(wds_arr)!="undefined" && typeof(wds_arr[1])!='undefined') {
+    thekeyword = wds_arr[1];
+    /*
+    if (/(iPhone)/i.test(navigator.userAgent)) {
+     thekeyword = '';
+    }
+    */
+    if (c=="utf") {
+     thekeyword = de(thekeyword);
+    }
+    if(thekeyword.indexOf('%')>-1) {
+     thekeyword = mobileAd.decodeUrl(thekeyword);
+    }
+   }
+  }
+
+  if(qdetailcObj) {
+   qdetail=qdetailcObj.innerHTML;
+   if(qdetail) {
+    qdetail=qdetail.replace(/<script.*?>.*?<\/script>/ig,'');
+    qdetail=qdetail.replace(/<\/?[^>]*>/ig,"");
+    qdetail = qdetail.replace('æ›¾ç»æ²»ç–—æƒ…å†µåŠæ˜¯å¦æœ‰è¿‡æ•ã€é—ä¼ ç—…å²','');
+    qdetail = qdetail.replace('ç—…æƒ…æè¿°ï¼ˆå‘ç—…æ—¶é—´ã€ä¸»è¦ç—‡çŠ¶ã€ç—‡çŠ¶å˜åŒ–ç­‰ï¼‰ï¼š','');
+    qdetail = qdetail.replace('æ›¾ç»æ²»ç–—æƒ…å†µå’Œæ•ˆæžœï¼š','');
+    qdetail = qdetail.replace('æƒ³å¾—åˆ°æ€Žæ ·çš„å¸®åŠ©ï¼š','');
+    qdetail=qdetail.replace(/&nbsp;/g,"");
+    qdetail=qdetail.replace(/\s/g,"");
+    qdetail=qdetail.replace(/\r\n/g,"");
+   }
+  }
+
+  var title_arr = new Array();
+  if(art_title.indexOf('-')>-1) {
+   title_arr = art_title.split('-');
+   art_title = title_arr[0];
+  }
+  if(art_title.indexOf('_')>-1) {
+   title_arr = art_title.split('_');
+   art_title = title_arr[0];
+  }
+
+ },
+
+ decodeUrl : function( thekeyword ) {
+  var ret;
+  try {
+   ret = decodeURIComponent(thekeyword);
+  }
+  catch(ex) {
+   ret = '';
+  }
+  return ret;
+ },
+
+ getAd : function( param ) {
+  var ad_key = param.ad_key;
+  var department = param.department;
+  var index_level = param.index_level;
+  var callback = param.callback;
+  var mark = param.mark;
+  var extension = param.extension;
+  var charset = param.charset;
+  var column = param.column;
+  var keyword = param.keyword;
+
+  /*
+  var custom = param.custom;
+
+  var custom_str = '';
+  if( typeof( custom )=="undefined" ) {
+   $.each( custom, function( index, value ) {
+    custom_str = custom_str +'&'+ index + '=' + value;
+   });
+  }
+  */
+
+  if( typeof( index_level ) != "undefined" && index_level != "" && index_level != "self" ) {
+    mobileAd.getKeyword( index_level );
+  }
+
+  if( typeof( ad_key )!="undefined" ) {
+   if( typeof( department )=="undefined" ) {
+    department = 0;
+   }
+   if(typeof(callback)=="undefined") {
+    callback='xywyback';
+   }
+   if( typeof( mark )=="undefined" ) {
+    mark = '';
+   }
+   if( typeof( extension )=="undefined" ) {
+    extension = '';
+   }
+   if( typeof( charset )=="undefined" ) {
+    charset = 'gbk';
+   }
+   if( typeof( column )=="undefined" ) {
+    column = 0;
+   }
+   if( typeof( keyword )=="undefined" ) {
+    var keyword=thekeyword+"|"+qtagname+art_title+qdetail;
+   }
+
+
+   keyword = keyword.substr(0,120);
+   keyword = encodeURIComponent(keyword);
+
+   /*
+   var data_array = decodeURIComponent(d_url).match(/^https?:\/\/[\w\.\/]*club\.xywy\.com[\w\.\/]*\/([0-9]*)\.html?/i);
+   if( data_array != null ) {
+     var clubid = '&clubid='+data_array[1];
+   }
+   else {
+     var clubid = '';
+   }
+   */
+
+   //var theurl = display_domain+"&a="+ad_key+"&department="+department+"&keyword="+keyword+"&url="+d_url+"&mark="+mark+"&column="+column+"&charset="+charset+mobileAd.getLAL()+custom_str;
+   var theurl = display_domain+"&a="+ad_key+"&department="+department+"&keyword="+keyword+"&url="+d_url+"&mark="+mark+"&extension="+extension+"&column="+column+"&charset="+charset+mobileAd.getLAL();
+
+   //ucæµè§ˆå™¨,ç›´æŽ¥ç©¿é€
+   if(navigator.userAgent.indexOf('UCBrowser') > -1) {
+    if( typeof(_RET_IP) != "undefined" && _RET_IP != "" ) {
+     theurl += "&addr="+encodeURIComponent(_RET_IP.data.area);
+    }
+   }
+   else {
+    if( typeof(_REMOTE_IP) != "undefined" && _REMOTE_IP != "" ) {
+     //åŒ¹é…åˆ°ipä¸º100.å¼€å¤´,ä¸ä¼ ipå‚æ•°
+     var reg = /^100\..*/;
+     if( reg.test( _REMOTE_IP.data.ip ) == false ) {
+      theurl += "&ip="+encodeURIComponent(_REMOTE_IP.data.ip);
+     }
+    }
+   }
+
+   $.ajax({
+    type: "GET",
+    url: theurl,
+    dataType: "jsonp",
+    jsonpCallback: callback,
+    async: false,
+    success: function(json) {
+     if(json.result==1) {
+      var so_keyword='';
+      so_keyword=art_title;
+      var patten=/\"http:\/\/m.so.xywy.com\/([\w\=\.\?]+)\"/g;
+      $.each( json.content, function( key, result ) {
+
+       if( key == 'pvKeyword' ) {
+        $("body").append(result);
+       }
+       else {
+        //result=result.replace( /#keyword#/g, encodeURIComponent(so_keyword) );
+        result=result.replace( /#keyword#/g, keyword );
+        if(result.indexOf("http://m.so.xywy.com/") >-1 && so_keyword!='') {
+         result=result.replace(/#XYWY_TITLE/g,encodeURIComponent(so_keyword));
+         result=result.replace(patten, "\"http://m.so.xywy.com/$1&keyword="+encodeURIComponent(so_keyword)+"\"");
+        }
+
+        if(result.indexOf("http://xs3.op.xywy.com") >-1) {
+         result=result.replace(/http:\/\/xs3.op.xywy.com/g,'https://xs3.op.xywy.com');
+        }
+        
+        if(result.indexOf("http://static.xa.xywy.com") >-1) {
+         result=result.replace(/http:\/\/static.xa.xywy.com/g,'https://xa.static.xywy.com');
+        }
+
+        if( typeof(json.mark) != "undefined" && json.mark != "" ) {
+         var dom_div = $('.'+json.mark);
+        }
+        else {
+         var dom_div = $('.'+key+'_div');
+        }
+        dom_div.show();
+        dom_div.each( function( index, element ) {
+         $(this).html(result);
+        });
+
+        var width='100%';
+        var height='100%';
+
+        if( typeof(mobile_ad_configure[key]) != "undefined" ) {
+         width = mobile_ad_configure[key].width;
+         height = mobile_ad_configure[key].height;
+        }
+
+        $('.'+key+'_div iframe').attr({ width: width, height: height });
+       }
+      });
+     }
+    }
+   });
+
+
+  }
+
+ },
+
+ getLAL : function() {
+  var lat_lng = '';
+  var lal = '';
+        if(typeof(Quan_X) == 'undefined') {
+            Quan_X = 0;
+        }
+        if(typeof(Quan_Y) == 'undefined') {
+            Quan_Y = 0;
+        }
+  var lng = Quan_X;
+  var lat = Quan_Y;
+
+  if( lng !=0 && lat!=0 && lat!='' && lng !='' ) {
+   lat_lng = '&lng='+lng+'&lat='+lat;
+  }
+  return lat_lng;
+ },
+
+ getParseWordInp: function( type ){
+  type = type?type:0;
+  var cur_url='';
+  try{
+   cur_url = parent.location.href;
+  }catch(err){
+   cur_url = location.href;
+  }
+  $.ajax({
+   type: "GET",
+   url:"//display.xywy.com/index.php?r=getkeywords/index",
+   dataType: "jsonp",
+   data: {"keyword": thekeyword+'|'+art_title+qdetail, "url": cur_url, "all":1 },
+   jsonpCallback: '_parse_word',
+   async: false,
+   success: function(json) {
+    if(json.status==1) {
+
+     if( type == 0 ){
+      word = json.data[0].b_word;
+      $(".item-hd-so-inp").val(word);
+     }
+
+     var webtype = type==0?'3g':'pc';
+     var keysid = '';
+     for( var i in json.data ){
+      keysid += ','+ json.data[i].kid;
+     }
+     keysid = keysid.substr(1);
+
+     new Image().src = "https://stat-z.xywy.com/stat.png?keyword="+keysid+"&from="+webtype+"&time=" + new Date().getTime() +"time";
+
+    }
+   }
+  });
+ }
+
+};
+
+mobileAd.init();

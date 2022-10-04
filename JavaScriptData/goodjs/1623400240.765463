@@ -1,0 +1,4 @@
+/*
+ Copyright(c) 2020 TransUnion LLC. All Rights Reserved. 80808bae-d4c3-47ac-9929-5d77264d823c
+*/
+(function c(){var a=window,b=a.io_global_object_name||"IGLOO";a=a[b]=a[b]||{};a=a.io=a.io||{};b=a.io_ddp;if(a.logoMain)return!1;a.logoMain=c;a.logoVer="5.4.0";b&&b._if_ubb&&(b._CTOKEN="lZWSM3cz0PexckXKlB3en6PaxKYaL3mGHCyCzcWCoWo=",b._if_ubb());try{a.api.io_bb.add("LID","BO/Ifax55gk+lCtEC7327Fq9Vmf5Jh2Gvh1zsvq9SRxdC8iWooBVShQX567A4m3bj+euuS4ZiwGa3RDxBGiJZQ==")}catch(d){}})();

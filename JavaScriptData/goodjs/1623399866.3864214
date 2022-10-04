@@ -1,0 +1,395 @@
+
+var gtmData = "{}";
+
+
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'AW-845664086');
+	
+
+				gtag('config', 'UA-19303147-22', { 'optimize_id': 'GTM-KR4WGN8', 'send_page_view': false});
+				gtag('config', 'UA-19303147-22', { 'optimize_id': 'GTM-KHXTLLN', 'send_page_view': false});
+	
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if ('function' === typeof window.gtm) {
+			window.gtm();
+
+			dataLayer.push({
+				country: 'JP'
+			});
+        }
+    });
+    
+
+		{"@context":"http:\/\/schema.org","@type":"Organization","logo":"https:\/\/www.freepik.com\/media\/img\/logos\/freepik.svg","name":"Freepik","sameAs":["https:\/\/www.facebook.com\/Freepik","https:\/\/twitter.com\/freepik","https:\/\/www.pinterest.es\/freepik\/","https:\/\/www.instagram.com\/freepik","https:\/\/www.youtube.com\/channel\/UC9wPXN2TIWoUamqONb7v8Pw"],"url":"https:\/\/www.freepik.com\/"}	
+
+		{"@context":"http:\/\/schema.org","@type":"WebSite","name":"Freepik","url":"https:\/\/www.freepik.com\/","potentialAction":{"@type":"SearchAction","target":"https:\/\/www.freepik.com\/search?query={search_term_string}","query-input":"required name=search_term_string"}}	
+
+        var URL_RESOURCE_KEYWORDS = 'free-photos-vectors';
+        var URL_CATEGORY = 'free-vectors';
+        var ACCOUNTS_BASE_URL = 'https://www.freepik.com/profile/';
+        var ACCOUNTS_API_KEY = 'aHR0cHM6Ly93d3cuZnJlZXBpay5jbw==';
+        var GOOGLE_ANALYTICS_ID = 'UA-19303147-22';
+        var NUM_RELATED_RESOURCES = 40;
+        var NUM_SPONSOR_RESOURCES = 40;
+        var URL_STATIC_IMG = "https://freepik.cdnpk.net/img/";
+        var BASE_URL = 'https://www.freepik.com/';
+        var DOMAIN_FP = BASE_URL.replace(/(^\w+:|^)\/\//, '').replace(/\/+$/, '');
+        var TRACKER_URL = 'https://www.freepik.com/';
+        var REDIRECT_URL = 'https://www.freepik.com/redirect/';
+        var SPONSOR_BASE_URL = 'https://fpedge.cdnpk.net/';
+        var LANGUAGE = 'en';
+        var LANGUAGE_NAME = 'english';
+        var NUM_RESOURCES = '13934594';
+        var NUM_RESOURCES_SELECTION = '2736421';
+        var NUM_RESOURCES_PREMIUM = '13346474';
+        var NUM_RESOURCES_ESSENTIAL = '2708055';
+        var BASIC_PRICE = '$11.99 USD';
+        var MONTHLY_PRICE = '$8.25 USD';
+        var YEARLY_PRICE = '$99.00 USD';
+        var CONFIG_NUM_TOTAL_RESOURCES = 50;
+        var CONFIG_NUM_LATEST_RESOURCES = 2;
+        var RE_CAPTCHA_KEY_INVISIBLE = '6LfEmSMUAAAAAEDmOgt1G7o7c53duZH2xL_TXckC';
+        var RE_CAPTCHA_API_KEY = '6LfEmSMUAAAAAEDmOgt1G7o7c53duZH2xL_TXckC';
+		var CRITEO_ACCOUNT_ID = '54019';
+        var OPTIMAL_BROWSER = false;
+        var IS_MOBILE = false;
+		var URL_FREEPIK_EDITOR = 'https://wepik.com/api/redirector/';
+		var URL_FREEPIK_WEPIK_ALL_PHOTOS = 'https://wepik.com/edit/new-artboard';
+		var URL_FREEPIK_STORIES = 'https://stories.freepiklabs.com/api/redirector/';
+        var SPONSOR_URL = '//www.freepik.com?url=aHR0cHM6Ly9jbGsudHJhZGVkb3VibGVyLmNvbS9jbGljaz9wPTI2NDM1NSZhPTMwNjg3OTAmZz0yNDMwNTkxMCZ1cmw9aHR0cHMlM0ElMkYlMkZzdG9jay5hZG9iZS5jb20lMkZwcm9tbyUyRmZpcnN0bW9udGhmcmVlJTNGYXNfY29udGVudCUzRGJhbm5lciUyNmFzX2NhbXBhaWduJTNEZnJlZXBpaw==';
+        var SPONSOR_URL_IMPRESS = '';
+        var DOWNLOADS_CONSUMED = 0;
+        var DOWNLOADS_LIMIT = 3;
+
+		var CSRF_TOKEN = 'c9738e6272923cef750ff5362982ffe3';
+
+		var USER_COUNTRY_CODE = 'JP';
+		var USER_COUNTRY_CODE_ISO_3 = 'JPN';
+		var USER_CURRENCY = 'EURO';
+        var USER_PRICE_MONTHLY = '9.99';
+        var USER_PRICE_YEARLY = '89.99';
+		var USER_PRICE_ESSENTIAL_MONTHLY = '4.99';
+
+		var IMG_ZOOM_STRIP = 40;
+
+        var HOW_EDIT_URL = {
+            psd: '//support.freepik.com/hc/en-us/articles/202642031-What-is-a-PSD-',
+            vector: '//support.freepik.com/hc/en-us/articles/203578042-How-to-edit-a-vector-file-from-Freepik-',
+            icon: '//support.freepik.com/hc/en-us/articles/203578042-How-to-edit-a-vector-file-from-Freepik-',
+            photo: '//support.freepik.com/hc/en-us/articles/360024473313-How-to-edit-a-JPG',
+        }
+
+        var SUPPORT_URL = '//support.freepik.com/hc/en-us';
+        var HOW_ATTRIBUTE_AUTHOR_URL = '//support.freepik.com/hc/en-us/articles/208976585-Attribution-How-when-and-where-';
+        var PREMIUM_LICENSE_URL = 'https://www.freepik.com/standard-license-freepik';
+        var STANDARD_LICENSE_URL = 'https://www.freepik.com/standard-license-freepik';
+        var APP_RELEASE = '2.228.0';
+
+		var TESTAB_LANDING_PRICING = true;
+
+        var FEATURE_ESSENTIAL_PLAN = true;
+		var FEATURE_BUYER_PERSONA = false;
+		var FEATURE_NEW_JS_TRANSLATIONS = false;
+		var FEATURE_SPONSOR_COUPON_WINDOW = false;
+		var FEATURE_SPONSOR_OPTIMIZE_AWAIT = false;
+		var FEATURE_FEEDBACK_PHOTO_HOME = false;
+		var FEATURE_WATERMARK = false;
+		var SPONSOR_SHOW_ADOBESTOCK_PERCENT = 100;
+        var FEATURE_AUTH_COOKIE_CHECK = false;
+        var FEATURE_COUPON_IN_BR = false;
+        var FEATURE_NOTIFICATION_CENTER = false;
+        var FEATURE_NEW_PINTEREST_IMAGES = false;
+        var FEATURE_ENABLE_SSEO = true;
+        var FEATURE_NOTIFICATION_80_DOWNLOADS = true;
+        var FEATURE_BLOCK_DOWNLOAD_USING_XHR = true;
+        var FEATURE_UPDATE_DOWNLOADS_MENU_USER = false;
+        var FEATURE_STATIC_SLIDER = true;
+        var FEATURE_TAGS_COLLECTIONS = true;
+        var FEATURE_GETTY = false;
+        var FEATURE_NEXTSEARCH = true;
+        var FEATURE_BLOCK_DOWNLOAD_TOO_MANY_IPS = true;
+        var FEATURE_RESOURCE_OPTIMIZE_TESTS = false;
+        var FEATURE_XHR_DOWNLOADS = false;
+        var FEATURE_FILTERS_HIDE_BY_DEFAULT = true;
+        var FEATURE_USER_CONFIG_NOTIFICATION = false;
+        var FEATURE_USER_ESSENTIAL_UNPAID = true;
+        var FEATURE_XHR_LIKES_USING_REDIS = false;
+        var FEATURE_XHR_LIKES_BY_MYSQL_WO_MEMCACHED = true;
+        var FEATURE_DOWNLOAD_JPG_SIZES = true;
+        var FEATURE_NPS_DOWNLOAD = true;
+        var FEATURE_DISPLAY_SRCSET = false;
+        var FEATURE_DETAIL_MOBILE = false;
+        var FEATURE_ENABLE_TWITTER_LOGIN = false;
+        var FEATURE_STICKY_NAV = true;
+        var FEATURE_LANDING_TAG_PHOTO_TITLE = true;
+		var FEATURE_FIXED_FIRST_POSITIONS = true;
+		var FEATURE_EYEEM = false;
+		var FEATURE_HOTJAR_TRUSTPILOT = true;
+		var FEATURE_SWIPE_NATURAL = true;
+		var FEATURE_LIMIT_SIZING_AFFILIATE = true;
+		var FEATURE_LIMIT_SIZING_SERIES = true;
+		var FEATURE_HIDE_SPONSOR_VISIBILITY = true;
+		var FEATURE_PRELOAD_IMAGE_DETAIL = true;
+		var FEATURE_AUTOPROMO_GAM = true;
+		var FEATURE_FIVERR = true;
+		var FEATURE_FULLWIDTH_RESOURCES = true;
+		var FEATURE_ADOBE_EMPTY_SEARCHES = true;
+		var FEATURE_SEARCH_FILTER = false;
+		var FEATURE_MOVE_EDIT_BUTTON = false;
+		var FEATURE_WEPIK_ALL_PHOTOS = true;
+		var FEATURE_DISABLE_KEYWORD_VIEW_JS = true;
+
+		var FIXED_RESOURCES_IN_RESULTS = 5;
+		var JS_SENTRY_ENABLED = false;
+
+		        var HUBSPOT_ENDPOINT_URL = 'xhr/events/send';
+		
+        var COLLECTION_COUNT = 0;
+        var COLLECTION_LIMIT = 100;
+
+        var ESSENTIAL_USER_TYPE = '0';
+        var ESSENTIAL_COUNTRY = '0';
+
+        var RecaptchaDownloads;
+                var TOP_SEARCH_TERMS = [
+            'background',
+            'logo',
+            'business card',
+            'infography',
+            'banner',
+            'pattern',
+            'flyer',
+            'abstract background'
+        ];
+
+		
+        function randomAvatar(name) {
+            if ('function' === typeof randomAvatarMethod && name) {
+                return randomAvatarMethod(name);
+            }
+
+            return 'https://freepik.cdnpk.net/img/avatars/01.svg';
+		}
+
+					var MAX_WIDTH_RESOURCE = 0;
+			
+
+                window.googletag = window.googletag || {cmd: []};
+                googletag.cmd.push(function() {
+                    googletag.pubads().setTargeting("domain", DOMAIN_FP);
+                });
+
+        window.suggestmeyes_loaded = true;
+	
+
+        var detailAttr = [];
+
+        function setDetailAttributes(detailId, attr) {
+            var names = {
+                ci: 'cacheId',
+                ts: 'thumbnailsSmall',
+                tl: 'thumbnailsLarge',
+                tz: 'thumbnailsZoom',
+                mk: 'mainKeywords',
+                mkl: 'mainKeywordsLabel',
+                mks: 'mainKeywordsSponsor',
+                dc: 'downloads',
+                dfu: 'downloadFileUrl',
+                dlu: 'downloadLandingUrl',
+                diu: 'downloadLicenseUrl',
+                aid: 'authorId',
+                aname: 'authorName',
+                auid: 'authorUserId',
+                aavatar: 'authorAvatar',
+                alink: 'authorLink',
+                cd: 'creationDate',
+                ca: 'creationAgo',
+                ph: 'previewHeight',
+                pw: 'previewWidth',
+                al: 'attributionLink',
+                at: 'attributionText',
+                atr: 'authorTotalResources',
+                kw: 'keywords',
+                cg: 'categories',
+                ct: 'comments',
+                cl: 'likes',
+                ls: 'selection',
+                lp: 'premium',
+                ptv: 'printTypeValue',
+                pti: 'printTypeId',
+                tp: 'typology',
+				ris: 'ris',
+				fe: 'freepikEditor',
+				fs: 'freepikStories',
+            }
+            var link = document.getElementById("dtl-" + detailId);
+            for (var k in attr) {
+                link.dataset[names[k] || k] = attr[k];
+            }
+        }
+	
+
+        var globalCampaignData = [];
+        var autoCampaignJson = [
+            'https://static.freepikcompany.com/freepik/cross-selling/campaign.json',
+        ];
+	
+
+		var stockBannerImage = '';
+		var stockBannerUrl = '';
+		var stockBannerPixelVariation = '';
+		var stockBannerPixelAffiliate = '';
+        var bannerAffiliate = [];
+        var urlPopupAffiliate = '';
+	
+
+		var optimizeTests = [];
+    
+
+    document.body.classList.remove('noscript');
+
+    function checkIfGrLibraryLoaded() {
+        return ('undefined' !== typeof gr) && (null !== gr);
+    }
+
+    if (checkIfGrLibraryLoaded() && gr.isLogged()) {
+        document.body.classList.add('logged-user');
+    }
+
+    if (checkIfGrLibraryLoaded() && gr.isPremium()) {
+        document.body.classList.add('premium-user');
+    }
+
+    if (checkIfGrLibraryLoaded() && gr.isEssential()) {
+        document.body.classList.add('essential-user');
+    }
+
+    if (checkIfGrLibraryLoaded() && gr.user && gr.user.email.match(/\@freepik.com/)) {
+        document.body.classList.add('admin-user');
+	}
+
+	if ('undefined' !== typeof CampaignHelpers && CampaignHelpers.showBanner()) {
+		document.body.classList.add('campaign-active');
+    }
+
+
+    if (typeof gr !== 'undefined' && gr.updateUI) {
+        gr.updateUI();
+    }
+
+if ('undefined' !== typeof Showcase) Showcase.setButton();
+
+    if ('function' === typeof window.setupFilters) {
+        window.setupFilters();
+    }
+
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"white clouds and pink background 14140119","contentUrl":"https:\/\/image.freepik.com\/free-photo\/white-clouds-pink-background_23-2148964556.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/white-clouds-pink-background_23-2148964556.jpg?size=664&ext=jpg","datePublished":"2021-05-16 11:39:45"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"landing page template for coronavirus awareness 13879790","contentUrl":"https:\/\/image.freepik.com\/free-psd\/landing-page-template-coronavirus-awareness_23-2148956342.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/landing-page-template-coronavirus-awareness_23-2148956342.jpg?size=664&ext=jpg","datePublished":"2021-05-03 13:55:21"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"engraving hand drawn ornamental certificate 14140281","contentUrl":"https:\/\/image.freepik.com\/free-vector\/engraving-hand-drawn-ornamental-certificate_23-2148965697.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/engraving-hand-drawn-ornamental-certificate_23-2148965697.jpg?size=664&ext=jpg","datePublished":"2021-05-16 13:51:21"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"remote art school poster template 13762568","contentUrl":"https:\/\/image.freepik.com\/free-psd\/remote-art-school-poster-template_23-2148942042.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/remote-art-school-poster-template_23-2148942042.jpg?size=338&ext=jpg","datePublished":"2021-04-24 16:30:51"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"city in a tornado, doomsday scene illustration. 14402247","contentUrl":"https:\/\/image.freepik.com\/free-photo\/city-tornado-doomsday-scene-illustration_456031-22.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/city-tornado-doomsday-scene-illustration_456031-22.jpg?size=664&ext=jpg","datePublished":"2021-05-24 12:25:17"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"delicious rice dumplings and hot tea set 14098362","contentUrl":"https:\/\/image.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-set_281653-2468.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-set_281653-2468.jpg?size=664&ext=jpg","datePublished":"2021-05-14 18:55:31","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14098362"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"hand painted watercolor dragon boat's zongzi background 14063733","contentUrl":"https:\/\/image.freepik.com\/free-vector\/hand-painted-watercolor-dragon-boat-s-zongzi-background_52683-62950.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/hand-painted-watercolor-dragon-boat-s-zongzi-background_52683-62950.jpg?size=664&ext=jpg","datePublished":"2021-05-13 19:18:25"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"square box mockup 13498161","contentUrl":"https:\/\/image.freepik.com\/free-psd\/square-box-mockup_337857-153.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/square-box-mockup_337857-153.jpg?size=664&ext=jpg","datePublished":"2021-04-06 16:24:47"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"delicious rice dumplings and hot tea set 14098363","contentUrl":"https:\/\/image.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-set_281653-2469.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-set_281653-2469.jpg?size=664&ext=jpg","datePublished":"2021-05-14 18:55:32","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14098363"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"flat summer sale illustration 14351451","contentUrl":"https:\/\/image.freepik.com\/free-vector\/flat-summer-sale-illustration_52683-63375.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/flat-summer-sale-illustration_52683-63375.jpg?size=664&ext=jpg","datePublished":"2021-05-22 18:07:30"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"wood sideboard in living room interior with copy space 14061172","contentUrl":"https:\/\/image.freepik.com\/free-photo\/wood-sideboard-living-room-interior-with-copy-space_43614-767.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/wood-sideboard-living-room-interior-with-copy-space_43614-767.jpg?size=664&ext=jpg","datePublished":"2021-05-13 14:18:12"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"gradient call to action buttons 14140632","contentUrl":"https:\/\/image.freepik.com\/free-vector\/gradient-call-action-buttons_23-2148965943.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/gradient-call-action-buttons_23-2148965943.jpg?size=664&ext=jpg","datePublished":"2021-05-16 14:16:22"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"close up mobile screen 13396509","contentUrl":"https:\/\/image.freepik.com\/free-psd\/close-up-mobile-screen_23-2148915401.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/close-up-mobile-screen_23-2148915401.jpg?size=664&ext=jpg","datePublished":"2021-03-26 17:10:18"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"business card mockup 13735285","contentUrl":"https:\/\/image.freepik.com\/free-psd\/business-card-mockup_1389-1213.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/business-card-mockup_1389-1213.jpg?size=664&ext=jpg","datePublished":"2021-04-22 14:36:28"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"still life pet food assortment 14603301","contentUrl":"https:\/\/image.freepik.com\/free-photo\/still-life-pet-food-assortment_23-2148982368.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/still-life-pet-food-assortment_23-2148982368.jpg?size=664&ext=jpg","datePublished":"2021-05-29 18:34:57"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"white children room with copy space 14061170","contentUrl":"https:\/\/image.freepik.com\/free-photo\/white-children-room-with-copy-space_43614-766.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/white-children-room-with-copy-space_43614-766.jpg?size=664&ext=jpg","datePublished":"2021-05-13 14:18:07"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"complex aerial view of city 14481994","contentUrl":"https:\/\/image.freepik.com\/free-photo\/complex-aerial-view-city_23-2148975282.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/complex-aerial-view-city_23-2148975282.jpg?size=664&ext=jpg","datePublished":"2021-05-26 09:42:21"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"duanwu festival rice dumpling zongzi 14273391","contentUrl":"https:\/\/image.freepik.com\/free-vector\/duanwu-festival-rice-dumpling-zongzi_185694-645.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/duanwu-festival-rice-dumpling-zongzi_185694-645.jpg?size=664&ext=jpg","datePublished":"2021-05-20 05:53:22","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14273391"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"delicious rice dumplings and hot tea set 14098360","contentUrl":"https:\/\/image.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-set_281653-2466.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-set_281653-2466.jpg?size=664&ext=jpg","datePublished":"2021-05-14 18:55:27","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14098360"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"the challenger stands in front of the spooky castle illustration. 14402210","contentUrl":"https:\/\/image.freepik.com\/free-photo\/challenger-stands-front-spooky-castle-illustration_456031-14.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/challenger-stands-front-spooky-castle-illustration_456031-14.jpg?size=664&ext=jpg","datePublished":"2021-05-24 12:24:08"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"gradient vaccination campaign illustrated 14139964","contentUrl":"https:\/\/image.freepik.com\/free-vector\/gradient-vaccination-campaign-illustrated_52683-63119.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/gradient-vaccination-campaign-illustrated_52683-63119.jpg?size=338&ext=jpg","datePublished":"2021-05-16 10:12:35"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"speed race text effect, editable fast and sport text style 14049946","contentUrl":"https:\/\/image.freepik.com\/free-vector\/speed-race-text-effect-editable-fast-sport-text-style_314614-333.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/speed-race-text-effect-editable-fast-sport-text-style_314614-333.jpg?size=664&ext=jpg","datePublished":"2021-05-13 06:28:17"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"display wood podium with leaf geometric platform 14099593","contentUrl":"https:\/\/image.freepik.com\/free-vector\/display-wood-podium-with-leaf-geometric-platform_412828-353.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/display-wood-podium-with-leaf-geometric-platform_412828-353.jpg?size=664&ext=jpg","datePublished":"2021-05-14 20:27:16","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14099593"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"flat summer instagram posts collection with photo 14351470","contentUrl":"https:\/\/image.freepik.com\/free-vector\/flat-summer-instagram-posts-collection-with-photo_52683-63377.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/flat-summer-instagram-posts-collection-with-photo_52683-63377.jpg?size=664&ext=jpg","datePublished":"2021-05-22 18:07:45","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14351470"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"paper style luxury background 14237486","contentUrl":"https:\/\/image.freepik.com\/free-vector\/paper-style-luxury-background_52683-63408.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/paper-style-luxury-background_52683-63408.jpg?size=664&ext=jpg","datePublished":"2021-05-19 07:47:38"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"profile picconcept illustration 14230945","contentUrl":"https:\/\/image.freepik.com\/free-vector\/profile-picconcept-illustration_114360-6189.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/profile-picconcept-illustration_114360-6189.jpg?size=338&ext=jpg","datePublished":"2021-05-19 04:37:44"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"gradient vaccination campaign illustrated 14140000","contentUrl":"https:\/\/image.freepik.com\/free-vector\/gradient-vaccination-campaign-illustrated_52683-63118.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/gradient-vaccination-campaign-illustrated_52683-63118.jpg?size=338&ext=jpg","datePublished":"2021-05-16 10:12:44"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"gradient summer background for videocalls 14063721","contentUrl":"https:\/\/image.freepik.com\/free-vector\/gradient-summer-background-videocalls_52683-63101.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/gradient-summer-background-videocalls_52683-63101.jpg?size=664&ext=jpg","datePublished":"2021-05-13 19:18:22"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"3d logo mockup modern office black wall 14209344","contentUrl":"https:\/\/image.freepik.com\/free-psd\/3d-logo-mockup-modern-office-black-wall_35761-537.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/3d-logo-mockup-modern-office-black-wall_35761-537.jpg?size=664&ext=jpg","datePublished":"2021-05-18 14:38:15","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14209344"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"arrangement of summer still life elements 14212821","contentUrl":"https:\/\/image.freepik.com\/free-photo\/arrangement-summer-still-life-elements_23-2148968970.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/arrangement-summer-still-life-elements_23-2148968970.jpg?size=664&ext=jpg","datePublished":"2021-05-18 18:46:49"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"delicious rice dumplings and hot tea on table 14098358","contentUrl":"https:\/\/image.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-table_281653-2465.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/delicious-rice-dumplings-hot-tea-table_281653-2465.jpg?size=664&ext=jpg","datePublished":"2021-05-14 18:55:25","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14098358"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"birthday background with realistic balloons 14237553","contentUrl":"https:\/\/image.freepik.com\/free-vector\/birthday-background-with-realistic-balloons_52683-63289.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/birthday-background-with-realistic-balloons_52683-63289.jpg?size=664&ext=jpg","datePublished":"2021-05-19 07:47:51"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"realistic super sale background 14140030","contentUrl":"https:\/\/image.freepik.com\/free-vector\/realistic-super-sale-background_52683-62855.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/realistic-super-sale-background_52683-62855.jpg?size=664&ext=jpg","datePublished":"2021-05-16 10:39:25"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"set of delivery man ride motorcycle, cartoon art illustration 14088979","contentUrl":"https:\/\/image.freepik.com\/free-vector\/set-delivery-man-ride-motorcycle-cartoon-art-illustration_56104-613.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/set-delivery-man-ride-motorcycle-cartoon-art-illustration_56104-613.jpg?size=664&ext=jpg","datePublished":"2021-05-14 09:29:35","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14088979"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"gift box mockup template 13545158","contentUrl":"https:\/\/image.freepik.com\/free-psd\/gift-box-mockup-template_1051-2925.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/gift-box-mockup-template_1051-2925.jpg?size=664&ext=jpg","datePublished":"2021-04-09 11:23:11"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"hand painted watercolor dragon boat's zongzi background 14064555","contentUrl":"https:\/\/image.freepik.com\/free-vector\/hand-painted-watercolor-dragon-boat-s-zongzi-background_23-2148963514.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/hand-painted-watercolor-dragon-boat-s-zongzi-background_23-2148963514.jpg?size=664&ext=jpg","datePublished":"2021-05-13 19:24:07"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"hand drawn vaccination campaign badge collection 14064574","contentUrl":"https:\/\/image.freepik.com\/free-vector\/hand-drawn-vaccination-campaign-badge-collection_52683-63020.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/hand-drawn-vaccination-campaign-badge-collection_52683-63020.jpg?size=338&ext=jpg","datePublished":"2021-05-13 19:24:36"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"set of delivery man logo set 14088976","contentUrl":"https:\/\/image.freepik.com\/free-vector\/set-delivery-man-logo-set_56104-612.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/set-delivery-man-logo-set_56104-612.jpg?size=664&ext=jpg","datePublished":"2021-05-14 09:29:32"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"storytelling flyer template 13403069","contentUrl":"https:\/\/image.freepik.com\/free-psd\/storytelling-flyer-template_23-2148909506.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/storytelling-flyer-template_23-2148909506.jpg?size=338&ext=jpg","datePublished":"2021-03-28 11:16:18"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"sales background with gradient shapes 14212165","contentUrl":"https:\/\/image.freepik.com\/free-vector\/sales-background-with-gradient-shapes_79603-1657.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/sales-background-with-gradient-shapes_79603-1657.jpg?size=664&ext=jpg","datePublished":"2021-05-18 18:19:03"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"contest awards emblems set 14263592","contentUrl":"https:\/\/image.freepik.com\/free-vector\/contest-awards-emblems-set_1284-58247.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/contest-awards-emblems-set_1284-58247.jpg?size=664&ext=jpg","datePublished":"2021-05-20 02:53:00"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"realistic luxury background 14351240","contentUrl":"https:\/\/image.freepik.com\/free-vector\/realistic-luxury-background_52683-63659.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/realistic-luxury-background_52683-63659.jpg?size=664&ext=jpg","datePublished":"2021-05-22 18:04:49"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"covid 19 social media post 13452100","contentUrl":"https:\/\/image.freepik.com\/free-psd\/covid-19-social-media-post_23-2148923225.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/covid-19-social-media-post_23-2148923225.jpg?size=664&ext=jpg","datePublished":"2021-03-31 15:41:05"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"assortment of summer still life elements 14212846","contentUrl":"https:\/\/image.freepik.com\/free-photo\/assortment-summer-still-life-elements_23-2148968978.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/assortment-summer-still-life-elements_23-2148968978.jpg?size=664&ext=jpg","datePublished":"2021-05-18 18:46:52"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"realistic 3d super sale background 14140032","contentUrl":"https:\/\/image.freepik.com\/free-vector\/realistic-3d-super-sale-background_52683-62854.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/realistic-3d-super-sale-background_52683-62854.jpg?size=664&ext=jpg","datePublished":"2021-05-16 10:39:25"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"mockup concrete wall with ornamental plants and decoration item on cabinet 14017326","contentUrl":"https:\/\/image.freepik.com\/free-photo\/mockup-concrete-wall-with-ornamental-plants-decoration-item-cabinet_41470-3548.jpg","thumbnail":"https:\/\/img.freepik.com\/free-photo\/mockup-concrete-wall-with-ornamental-plants-decoration-item-cabinet_41470-3548.jpg?size=664&ext=jpg","datePublished":"2021-05-12 12:02:38"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"frontal minimal 3d phones mockup levitating 13195209","contentUrl":"https:\/\/image.freepik.com\/free-psd\/frontal-minimal-3d-phones-mockup-levitating_167960-62.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/frontal-minimal-3d-phones-mockup-levitating_167960-62.jpg?size=664&ext=jpg","datePublished":"2021-03-15 09:24:00"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"cute dragon with paddles on chrome yellow background 14098379","contentUrl":"https:\/\/image.freepik.com\/free-vector\/cute-dragon-with-paddles-chrome-yellow-background_281653-2482.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/cute-dragon-with-paddles-chrome-yellow-background_281653-2482.jpg?size=664&ext=jpg","datePublished":"2021-05-14 18:55:47","license":"https:\/\/www.freepikcompany.com\/legal#nav-freepik-agreement","acquireLicensePage":"https:\/\/www.freepik.com\/profile\/preagreement\/getstarted\/14098379"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"gradient elegant certificate template 14351254","contentUrl":"https:\/\/image.freepik.com\/free-vector\/gradient-elegant-certificate-template_52683-63588.jpg","thumbnail":"https:\/\/img.freepik.com\/free-vector\/gradient-elegant-certificate-template_52683-63588.jpg?size=664&ext=jpg","datePublished":"2021-05-22 18:04:52"}
+{"@context":"http:\/\/schema.org","@type":"ImageObject","name":"cosmetic product packaging mockup 13517101","contentUrl":"https:\/\/image.freepik.com\/free-psd\/cosmetic-product-packaging-mockup_1150-40282.jpg","thumbnail":"https:\/\/img.freepik.com\/free-psd\/cosmetic-product-packaging-mockup_1150-40282.jpg?size=664&ext=jpg","datePublished":"2021-04-08 02:54:12"}
+
+	if ('undefined' !== typeof Showcase) {
+		Showcase.setMulti();
+		Showcase.setLayout();
+
+		if ('undefined' !== typeof Lazyload) {
+			Lazyload.run();
+		}
+	}
+
+	[].slice.call(document.querySelectorAll('.avatar img'))
+		.forEach(function(img) {
+			var image = new Image();
+			image.onerror = function() {
+				img.src = randomAvatar.apply(null, [img.alt]);
+			}
+			image.src = img.src;
+		});
+
+
+	if ('undefined' !== typeof SwiperInitialize) {
+		SwiperInitialize({
+			selector: ".swiper-home",			breakPoint: 1400,						isCollection: true        });
+	}
+
+
+        function CollectionItemClasses() {
+            if ('undefined' !== typeof Showcase) {
+                Array.prototype.slice.call(document.getElementsByClassName('collections__showcase'))
+                    .forEach(function (collection) {
+                        Showcase.setLayoutMethodFixedClass(collection);
+                    });
+            }
+        }
+
+        window.addEventListener('resize', CollectionItemClasses)
+        document.addEventListener('DOMContentLoaded', CollectionItemClasses);
+	
+(function(){function Q(){try{if((d.setItem("_tp_t","a"),"a"!==d.getItem("_tp_t"))||(d.removeItem("_tp_t"),"function"!=typeof navigator.sendBeacon))return!1}catch(a){return!1}return!0}function R(){var a=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src").set;Object.defineProperty(HTMLImageElement.prototype,"src",{set:function(c){return n({method:"GET",endpoint:c,protocol:"img"}),a.apply(this,arguments)}});var b=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=
+function(c,e){return"src"==c.toLowerCase()&&n({method:"GET",endpoint:e,protocol:"img"}),b.apply(this,arguments)}}function S(){var a=r.prototype.open,b=r.prototype.send;r.prototype.open=function(c,e){return this._tpUrl=e,this._tpMethod=c,a.apply(this,arguments)};r.prototype.send=function(c){return n({method:this._tpMethod,endpoint:this._tpUrl,payload:c,protocol:"xhr"}),b.apply(this,arguments)}}function T(){var a=navigator.sendBeacon;navigator.sendBeacon=function(b,c){return n({method:"POST",endpoint:b,
+payload:c,protocol:"beacon"}),a.apply(this,arguments)}}function n(a){setTimeout(function(){try{a:{var b=a.endpoint,c;for(c in t)if(-1!==b.indexOf(c)){var e=t[c];break a}e=!1}if(e){var g=d.getItem("_trackingplan_sample_rate_ts");var p=null!==g&&(parseInt(g)+1E3*B<(new Date).getTime()?(f({m:"Trackingplan sample rate expired"}),K(!1),!1):{sampleRate:parseInt(d.getItem("_trackingplan_sample_rate")),isSampledUser:parseInt(d.getItem("_trackingplan_is_sampled_user"))});if(!1===p)var L=(u.push(a),f({m:"Pre queued, queue length \x3d "+
+u.length}),setTimeout(U,C),!1);else{if(V(v,p)){var N={provider:e,request:{endpoint:a.endpoint,method:a.method,post_payload:a.payload||null},context:{href:k.location.href,hostname:k.location.hostname,user_agent:navigator.userAgent},tp_id:l,source_alias:D,environment:E,sdk:M.sdk,sdk_version:M.sdkVersion,sampling_rate:p.sampleRate,debug:w},m=JSON.stringify(N);if(m.length+2>x)O("["+m+"]",q),f({m:"Track \x3e Batch Size: "+m.length});else{var y=h.length+m.length;y>x&&(f({m:"Batch reaching limit: "+y}),
+z(q));y=h.length+m.length;f({m:"Queue len: "+y,rawTrack:N});0!==h.length&&(h+=",");h+=m}var P=!0}else P=(f({m:"Request ignored (sampling)",mode:v,dict:p}),!0);L=P}return L}}catch(W){F({m:"Trackingplan process error",error:W,request:a})}},0)}function z(a){if(0!=h.length){var b=h;h="";O("["+b+"]",a)}}function O(a,b){function c(e){var g=new XMLHttpRequest;g.open("POST",A+l,!0);g.onreadystatechange=function(){if(4===g.readyState)try{f({m:"Parsed",response:JSON.parse(g.response)})}catch(p){}};g.send(e)}
+f({m:"Sent",rawEvents:JSON.parse(a)});"xhr"===b?c(a):"beacon"===b?navigator.sendBeacon(A+l,a):void 0}function V(a,b){switch(a){case "user":return 1===b.isSampledUser;case "track":return Math.random()<1/b.sampleRate;case "all":return!0;default:return!1}}function U(){if(!G){var a=new XMLHttpRequest,b=H+"config-"+l+".json";a.onreadystatechange=function(){if(4==this.readyState)try{for(K(JSON.parse(this.responseText).sample_rate);u.length;){var c=u.shift();n(c)}}catch(e){}G=!1};a.open("GET",b,!0);G=!0;
+a.send()}}function K(a){if(!1===a)return d.removeItem("_trackingplan_sample_rate"),d.removeItem("_trackingplan_sample_rate_ts"),void d.removeItem("_trackingplan_is_sampled_user");var b=Math.random()<1/a?1:0;f({m:"Trackingplan sample rate \x3d "+a+". isSampledUser "+b});d.setItem("_trackingplan_sample_rate_ts",(new Date).getTime());d.setItem("_trackingplan_sample_rate",a);d.setItem("_trackingplan_is_sampled_user",b)}function X(a,b){for(var c in b)a[c]=b[c];return a}function f(a){w&&I.log("TP "+l,a)}
+function F(a){k.console&&I.warn&&I.warn(a)}var d=localStorage,k=window,I=console,r=k.XMLHttpRequest;if(k.Trackingplan)return void F("Trackingplan snippet included twice.");var t={"google-analytics.com":"googleanalytics","analytics.google.com":"googleanalytics","segment.com":"segment","segment.io":"segment","quantserve.com":"quantserve","intercom.com":"intercom",amplitude:"amplitude",appsflyer:"appsflyer",mixpanel:"mixpanel",kissmetrics:"kissmetrics","hull.io":"hull"},l=null,E="PRODUCTION",D=null,
+q="xhr",w=!1,A="https://tracks.trackingplan.com/v1/",H="https://config.trackingplan.com/",C=0,B=86400,v="user",x=6E4,J=20,G=!1,u=[],h="",M=k.Trackingplan={sdk:"js",sdkVersion:"1.5.1",init:function(a,b){b=b||{};try{if(!Q())throw Error("Not compatible browser");l=a;E=b.environment||E;D=b.sourceAlias||D;q=b.sendMethod||q;t=X(t,b.customDomains||{});w=b.debug||w;A=b.tracksEndPoint||A;H=b.configEndPoint||H;C=b.delayConfigDownload||C;B=b.sampleRateTTL||B;v=b.samplingMode||v;x=b.batchSize||x;J=b.batchInterval||
+J;R();S();T();document.addEventListener("visibilitychange",function(){"hidden"===document.visibilityState&&z("beacon")});k.addEventListener("pagehide",function(){z("beacon")});setInterval(function(){z(q)},1E3*J);f({m:"TP init finished",options:b})}catch(c){F({m:"TP init error",error:c})}}}})();Trackingplan.init("TP269762");
+dataLayer.push({event:"optimize.activate"});
+function OptanonWrapper(){window.dataLayer.push({event:"OneTrustGroupsUpdated"})};
+function getSelector(a,b){b=b||100;var c="";try{for(;a&&9!==a.nodeType;){var d=a.id?"#"+a.id:a.nodeName.toLowerCase()+(a.className&&a.className.length?"."+Array.from(a.classList.values()).join("."):"");if(c.length+d.length>b-1)return c||d;c=c?d+"\x3e"+c:d;if(a.id)break;a=a.parentNode}}catch(e){}return c}function getLargestLayoutShiftEntry(a){return a.reduce(function(b,c){return b&&b.value>c.value?b:c})}
+function getLargestLayoutShiftSource(a){return a.reduce(function(b,c){return b.node&&b.previousRect.width*b.previousRect.height>c.previousRect.width*c.previousRect.height?b:c})}function wasFIDBeforeDCL(a){var b=performance.getEntriesByType("navigation")[0];return b&&a.startTime<b.domContentLoadedEventStart}
+function getDebugInfo(a,b){b=b||[];if(b.length){if("LCP"===a)return a=b[b.length-1],{debug_target:getSelector(a.element),event_time:a.startTime};if("FID"===a)return a=b[0],{debug_target:getSelector(a.target),debug_event:a.name,debug_timing:wasFIDBeforeDCL(a)?"pre_dcl":"post_dcl",event_time:a.startTime};if("CLS"===a&&(a=getLargestLayoutShiftEntry(b))&&a.sources&&(b=getLargestLayoutShiftSource(a.sources)))return{debug_target:getSelector(b.node),event_time:a.startTime}}return{debug_target:"(not set)"}}
+;
+function getRating(b,a){switch(b){case "LCP":return calculateRating(a,2500,4E3);case "FID":return calculateRating(a,100,300);case "CLS":return calculateRating(a,.1,.25);case "FCP":return calculateRating(a,2E3,4E3);case "TTFB":return calculateRating(a,500,1500);default:return"(not set)"}}function calculateRating(b,a,c){return b||0===b?b>c?"poor":b>a?"in":"good":"(not set)"};
+function sendToDataLayer(a){var b={name:a.name,id:a.id,value:a.value,delta:a.delta,rating:getRating(a.name,a.value),valueRounded:Math.round("CLS"===a.name?1E3*a.value:a.value),deltaRounded:Math.round("CLS"===a.name?1E3*a.value:a.value)};a=getDebugInfo(a.name,a.entries);a.debug_target&&(b.debugTarget=a.debug_target);a.debug_event&&(b.debugEvent=a.debug_event);a.debug_timing&&(b.debugTiming=a.debug_timing);a.event_time&&(b.eventTime=a.event_time);dataLayer.push({event:"coreWebVitals",webVitalsMeasurement:b})}
+;

@@ -1,0 +1,38 @@
+(function() {
+    var parentWindow;
+    var gptDiv;
+    var adDiv;
+
+    parentWindow = window.top;
+
+    gptDiv = document.createElement('div');
+    gptDiv.id = 'div-gpt-ad-1512970539733-0';
+    adDiv = parentWindow.document.getElementById('gooad-badge300_2');
+    adDiv.appendChild(gptDiv);
+    parentWindow.googletag.cmd.push(function() { parentWindow.googletag.display('div-gpt-ad-1512970539733-0'); });
+
+
+
+    var IEVer, browser, styleElem, headElem, styleDescription, sheet;
+
+    IEVer = navigator.userAgent.match(/MSIE\s+([6-9]|10)/);
+
+    if (IEVer) {
+        browser = parseInt(IEVer[1]);    // 6-10(IE)
+    } else {
+        browser = 99;    // IE11, Edge, etc(ModernBrowser)
+    }
+
+    styleElem = parentWindow.document.createElement("style");
+    styleElem.type = 'text/css';
+    headElem = parentWindow.document.getElementsByTagName('head')[0];
+    headElem.appendChild(styleElem);
+    styleDescription = '#gooad-badge300_2 {text-align:center; margin:0 0 1em}';
+
+    if (browser <= 8) {
+        styleElem.styleSheet.cssText = styleDescription;
+    } else {
+        sheet = styleElem.sheet;
+        sheet.insertRule(styleDescription, 0);
+    }
+}());

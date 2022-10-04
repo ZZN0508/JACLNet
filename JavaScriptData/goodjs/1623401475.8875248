@@ -1,0 +1,141 @@
+
+var winhref = window.location.href.replace("/content/samsung","").replace(".html","/");
+if ( winhref.indexOf("?") > 0) {
+	winhref = winhref.substring(0, winhref.indexOf("?"));
+}
+var siteCode = winhref.split("/")[3];
+
+//depth Info.
+var depth = winhref.split("/").length;
+var depth_last = winhref.split("/")[depth-1];
+if(depth_last =="" || depth_last.charAt(0)=="?"){
+	depth -= 1;
+}
+
+//set pathIndicator(not product page)
+var pageName = "";    
+var depth_2 = "";
+var depth_3 = "";
+var depth_4 = "";
+var depth_5 = "";
+
+var digitalData = {
+	"page" : {
+			"pageInfo" : {
+					"siteCode"    : siteCode,
+					"pageName"    : pageName,
+					"pageID"      : "L2NvbnRlbnQvc2Ftc3VuZy90dw==",
+					"pageTrack"   : "home",
+					"originPlaform" : "web"
+			},
+			"pathIndicator" : {
+					"depth_2" : depth_2,
+					"depth_3" : depth_3,
+					"depth_4" : depth_4,
+					"depth_5" : depth_5
+			}
+	},
+	"user": {
+			"userDeviceList": [
+			]
+	},
+	"product" : {
+			"category" : "", 
+			"model_code" : "", // PD class정보 이용하여 설정
+			"model_name" : "", // PD page(server-side)
+			"displayName" : "", // PD class정보 이용하여 설정
+			"pvi_type_code" : "", //PD page(server-side)
+			"pvi_type_name" : "", //PD page(server-side)
+			"pvi_subtype_code" : "", //PD page(server-side)
+			"pvi_subtype_name" : "",//PD page(server-side)
+			"pd_type" : "", //PD type
+            "content_id" : "",
+            "products" : "",
+            "prodView" : ""
+	}
+}
+
+
+	digitalData.page.pageInfo.pageTrack = "home";
+
+(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"SJ-98b4700d-ddd4-42bc-aef9-760908d6689b","rua.cook":"true","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"true","rua.isuxp":"false","rua.texp":"norulematch"}]);
+
+		var isInIframe = (window.location != window.top.location);
+		var isNotDotcom = ( window.location.href.indexOf('samsung.com') < 0);
+        var isTopNotDotcom = ( window.top.location.href.indexOf('samsung.com') < 0);
+        
+		//404 페이지에서는 실행하지 않음.
+		if ( window.location.href.indexOf('404') < 0 && isTopNotDotcom) {
+			if ( isInIframe == true ) {
+				   console.log('isInIframe =' + isInIframe );
+				   //에러 페이지 이동  self.location.href   /"+siteCd+"/common/404.html 
+				   window.location.href = '/tw/common/404.html';
+				} else {
+				   console.log('isInIframe =' + isInIframe );
+				}    
+		}
+		
+{"@context":"http://schema.org","@type":"Organization","name":"Samsung 台灣","url":"https://www.samsung.com/tw/","logo":"https://www.samsung.com/tw/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/global-samsung-logo.svg"}
+
+function targetPageParams() { 
+
+    return { 
+
+      "at_property": "24b92366-ada2-9db6-c9de-276e7bd333de" 
+
+    }; 
+
+  } 
+
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-831199516');
+
+
+
+    var _swg = _swg || {};
+
+    (function(t) {
+
+        function e(e) {
+
+            var a = document.createElement("script"),
+
+                c = document.getElementsByTagName("script")[0];
+
+            a.type = "text/javascript",
+
+                a.async = !0,
+
+                a.src = e,
+
+                c.parentNode.insertBefore(a, c)
+
+        }
+
+        t.iframe_display = true,
+
+        t.iframe_url = "https://samsungasiasupport1.zendesk.com/hc/en-us/categories/360000308952-General",
+
+        t.iframe_css_url = "https://theme.zdassets.com/theme_assets/2289436/7ebca1d73f008c26341c8d57321b2dddcbe1a698.css",
+
+        e("https://theme.zdassets.com/theme_assets/2289436/31dfb3394044bdd3eaf00c89b604cbfc13c64b1d.js")
+
+    })(_swg || {})
+
+
+_satellite["_runScript1"](function(event, target, Promise) {
+//login
+var directCallFlv2 = _satellite.cookie.get("directCallFlv2");
+var directCallFlAA = _satellite.cookie.get("directCallFlAA");
+
+if(directCallFlAA!=directCallFlv2 && directCallFlv2=="Y"){
+  _satellite.setVar('GUID', $.cookies.get("guid", {domain : ".samsung.com"}));
+  _satellite.track('login');
+} 
+_satellite.cookie.set("directCallFlAA", directCallFlv2, {expires: null, domain : ".samsung.com"});
+});
+
+function fcTrack(t,a){var e=a;_satellite.setVar("fcEvent",t),_satellite.setVar("fcData",e),_satellite.track("floatingChat")}function fcTrack(t,a,e){var l=a;_satellite.setVar("fcEvent",t),_satellite.setVar("fcData",l),_satellite.setVar("fcAgent",e),_satellite.track("floatingChat")}

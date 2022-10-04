@@ -1,0 +1,89 @@
+var timer;
+ var submitted;
+ String.prototype.endWith = function(str){
+  var reg = new RegExp(str+"$");
+  return reg.test(this);
+   }
+ function value_blur_function(){
+  //1----------鍒ゆ柇杈撳叆鍩熷悕淇℃伅鏄腑鏂囪繕鏄嫳鏂囷紝纭畾妫€绱㈠簱淇℃伅
+  //寰楀埌瑕佹绱㈢殑鍩熷悕淇℃伅
+  var txt = document.f.domain.value;
+  if(!txt || txt == "璇疯緭鍏ユ偍鎯虫煡璇㈢殑淇℃伅"){
+   return false;
+  }
+  //鍒嗘瀽鏄腑鏂囪繕鏄嫳鏂�,纭畾涓枃搴撹繕鏄嫳鏂囧簱
+  var isEnglish = "1" ;
+  var strName = txt;
+  //byte[] buf = strName.getBytes();
+  for(i=0; i<strName.length; i++)
+  {
+   c = strName.charCodeAt(i);
+   if(c>127)
+   {
+    isEnglish = "0";
+    break;
+   }
+  }
+  //鏍规嵁鍒ゆ柇缁撴灉锛岄噸鏂拌缃� form 鐨� action 涓� 楠岃瘉鐮佷俊鎭�
+  var f_default_ext = document.getElementById("f_default_ext").value;
+  if(isEnglish == "1" && (strName.toUpperCase().endWith(".CN") || f_default_ext==".cn")){
+   document.f.action = "https://whois.cnnic.cn/WhoisServlet";
+   loadimage(isEnglish);
+  }else{
+   document.f.action = "https://whois.cnnic.cn/WhoisServlet";
+   loadimage(isEnglish);
+  }
+  //2-----------------------鍒嗘瀽鍚庣紑淇℃伅
+  if(isEnglish == "1"){
+   if(!strName.toUpperCase().endWith(".CN") && !strName.toUpperCase().endWith("銆侰N")){
+    strName = strName+f_default_ext;
+    document.f.domain.value = strName;
+    return false;
+   }
+  }else{
+   if(!strName.toUpperCase().endWith(".CN") && !strName.toUpperCase().endWith("銆侰N") && !strName.endWith(".涓浗") && !strName.endWith("銆備腑鍥�") && !strName.endWith(".鍏徃") && !strName.endWith("銆傚叕鍙�") && !strName.endWith(".缃戠粶") && !strName.endWith("銆傜綉缁�")){
+    strName = strName+f_default_ext;
+    document.f.domain.value = strName;
+    return false;
+   }
+  }
+  
+ }
+ function beforesubmit(){
+  //鍒嗘瀽鏄惁宸茬粡鎻愪氦,濡傛灉宸茬粡鎻愪氦,涓嶈繘琛屾彁浜�
+  if(submitted)
+   return false;
+  var txt = document.f.domian.value;
+  var random = document.f.vcinput.value;
+  if(!txt || txt == "璇疯緭鍏ユ偍鎯虫煡璇㈢殑淇℃伅"){
+   alert("璇疯緭鍏ユ偍鎯虫煡璇㈢殑淇℃伅,鐒跺悗鎻愪氦");
+   document.f.domain.focus();
+   return false;
+  }
+  //if(!random){
+  // alert("璇疯緭鍏ラ獙璇佺爜,鐒跺悗鎻愪氦");
+  // document.f.vcinput.focus();
+  // return false;
+  //}
+  timer = window.setInterval("reload()",2000);
+  document.charset='gb2312';
+  submitted = true;
+  document.f.submit();
+ }
+   function loadimage(isEnglish){
+  if(isEnglish == "1")
+   document.getElementById("vcimage").src = "https://whois.cnnic.cn/validatecode/image.jsp?"+Math.random();
+  else if(isEnglish == "0")
+   document.getElementById("vcimage").src = "https://whois.cnnic.cn/validatecode/image.jsp?"+Math.random();
+
+   }
+
+   function reload(){
+  loadimage();
+  document.f.vcinput.value = "";
+  clearInterval(timer);
+  submitted = false;
+   }
+   window.onload=function(){
+  loadimage(1);
+   }

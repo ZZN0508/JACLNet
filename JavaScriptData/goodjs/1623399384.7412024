@@ -1,0 +1,958 @@
+if (typeof SKYPE == 'undefined') {
+ SKYPE = {};
+}
+
+
+/* @TODO find a proper name for this */
+SKYPE.Form = {};
+
+SKYPE.Form.Input = function() {
+
+ var _input = {
+
+  styleSelectElements: function() {
+
+   if ($.browser.msie && $.browser.version == "6.0") {
+    return;
+   }
+
+   /**
+    * Takes select element selector as parameter and adds custom styled
+    * span right after the original element in the DOM.
+    * Binds change event to the select element that manipulates
+    * the custom spans inner text.
+    *
+    * @name     createStyledSpans
+    * @methodOf SKYPE.Form.Input.styleSelectElements
+    * @param    {selector}   $el element to turn into custom select
+    */
+   var _createStyledSpans = function($el) {
+
+     var title = $('option:selected', $el).text();
+
+     $styledSpan = $('<span class="styledSelect">' + title + '</span>');
+
+     $select = $el.after($styledSpan);
+
+     $select.change(function() {
+      var val = $('option:selected', this).text();
+      $el.next().text(val);
+
+      _updateLogo($el);
+      _updateFlag($el);
+     });
+
+     _updateLogo($el);
+     _updateFlag($el);
+
+    },
+    
+    /**
+     * Loops through all element classnames and assigns the ones matched in the predefined
+     * array of classnames to the custom span element
+     *
+     * @name     assignClassnames
+     * @methodOf SKYPE.Form.Input.styleSelectElements
+     * @param    {selector} $el element to turn into custom select
+     */
+    _assignClassnames = function($el, $fieldRow) {
+
+     var classnames = ['error', 'short', 'inline', 'disabled'];
+
+     for (var i = 0; i < classnames.length; i++) {
+      if ($fieldRow.hasClass(classnames[i])) {
+       $styledSpan.addClass(classnames[i]);
+      }
+
+      if ($el.attr(classnames[i])) {
+       $fieldRow.addClass(classnames[i]);
+      }
+     }
+    },
+
+    /**
+     * Prepends the element a logo span
+     * @name     _updateLogo
+     * @methodOf SKYPE.Form.Input.styleSelectElements
+     * @param $el
+     */
+    _updateLogo = function($el) {
+
+     if ($el.parent().hasClass("hasLogo")) {
+
+      if ($el.val() !== 'none' && $el.val() !== '') {
+       $el.next().addClass('hasLogo');
+       $el.next().prepend('<img class="logo ' + $el.val() + '"></img');
+       $el.next().children().attr('src','/assets/images/logos/payment-method/' + $el.val() + '.png');
+      } else if ($el.val() == 'none') {
+       $el.next().addClass('hasLogo');
+       $el.next().prepend('<span class="logo"></span');
+      } else {
+       $el.next().removeClass('hasLogo');
+      }
+
+     }
+
+    },
+
+    /**
+     * Prepends the element a logo span
+     * @name     _updateFlag
+     * @methodOf SKYPE.Form.Input.styleSelectElements
+     * @param $el
+     */
+    _updateFlag = function($el) {
+
+     if ($el.parent().hasClass("hasFlag")) {
+
+      if ($el.val() !== 'none' && $el.val() !== '') {
+       $el.next().addClass('hasFlag');
+       $el.next().prepend('<img class="flag ' + $el.val() + '"></img');
+       $el.next().children().attr('src','/assets/images/flags/96px/' + $el.val() + '.png');
+      } else if ($el.val() == 'none') {
+       $el.next().addClass('hasFlag');
+       $el.next().prepend('<span class="flag"></span');
+      } else {
+       $el.next().removeClass('hasFlag');
+      }
+
+     }
+
+    },
+
+    /**
+     * Binds classname changes to element focus state
+     *
+     * @name     changeClassnamesOnFocus
+     * @methodOf SKYPE.Form.Input.styleSelectElements
+     */
+    _changeClassnamesOnFocus = function($el, $fieldRow) {
+
+     $el.on('focus', function() {
+      
+      $el.next().removeClass('hover').addClass('active');
+      $fieldRow.removeClass('hover').addClass('active');
+
+
+      if ($fieldRow.hasClass('inline')) {
+       //$el.next().removeClass('removeBackground');
+      }
+      
+
+     }).on('blur', function() {
+
+      $el.next().removeClass('active');
+      $fieldRow.removeClass('active');
+
+      if ($fieldRow.hasClass('inline')) {
+       //$el.next().addClass('removeBackground');
+       //$el.next().removeClass('removeBackground');
+      }
+
+     });
+    },
+
+    /**
+     * Binds classname changes to element hover state
+     * and calculates the inline select width dynamically
+     *
+     * @name     changeClassnamesOnFocus
+     * @methodOf SKYPE.Form.Input.styleSelectElements
+     */
+    _changeClassnamesOnHover = function($el, $fieldRow) {
+
+     if ($fieldRow.hasClass('inline')) {
+
+      var thisWidth = $el.width();
+
+      $el.next().width(thisWidth + 3).removeClass('removeBackground');
+      $el.width(thisWidth + 40);
+      $el.next().next('.icon').css('left', thisWidth - 31);
+     }
+
+     $el.hover(function() {
+
+      //$el.next().removeClass('removeBackground');
+
+      if (!$el.next('.styledSelect').hasClass('active')) {
+       $el.next('.styledSelect').addClass('hover');
+      }
+
+     }, function() {
+      
+      $el.next('.styledSelect').removeClass('hover');
+
+      if (!$fieldRow.hasClass('active') && $fieldRow.hasClass('inline')) {
+       //$el.next().addClass('removeBackground');
+      }
+
+     });
+    };
+
+   $('select.customSelectElement').each(function() {
+
+    var $el = $(this),
+     $fieldRow = $(this).closest('.fieldRow');
+
+    _createStyledSpans($el);
+    _assignClassnames($el, $fieldRow);
+
+    _changeClassnamesOnFocus($el, $fieldRow);
+    _changeClassnamesOnHover($el, $fieldRow);
+
+   });
+  },
+
+  /**
+   * Finds a select option by value, if found then selects the found option in the custom select component
+   *
+   * @name     selectByValue
+   * @methodOf SKYPE.Form.Input
+   * @param    {selector}   $select - the jQuery <select> element. If this is not a custom select element this function returns immedetly.
+   * @param    value - option value to be selected
+   */
+  selectByValue: function($select, value, skipTrigger) {
+
+   if (!$select.hasClass("customSelectElement")) return; //Not a custom select element return here
+   //Find option to select
+   var $valueToSelect = $select.find('option[value="' + value + '"]');
+
+   //If option exists make the selection
+   if ($valueToSelect.length > 0) {
+    //Remove currently selected option
+    $select.find("option").removeAttr("selected");
+
+    var $selectedValue = $valueToSelect.attr("selected", "selected");
+
+    $select.siblings('.styledSelect').html($selectedValue.text());
+
+    if (!skipTrigger) {
+     $select.trigger("change");
+    }
+   }
+  },
+
+  /**
+   * Clears select options. Leaves default option untouched if newLabel is not defined.
+   *
+   * @name     clearSelectOptions
+   * @methodOf SKYPE.Form.Input
+   * @param    {selector}   $select - the jQuery <select> element. If this is not a custom select element this function returns immedetly.
+   * @param    newLabel - Changes the default option value on the custom select component
+   */
+  clearSelectOptions: function($select, newLabel) {
+
+   if (!$select.hasClass("customSelectElement")) return; //Not a custom select element return here
+   if ($select === undefined) return;
+
+   var $options = $select.find("option");
+
+   $.each($options, function(index, item) {
+    if (index > 0) $(item).detach();
+   });
+
+   if (newLabel !== undefined) {
+    $select.siblings(".styledSelect").html(newLabel);
+    $options.first().html(newLabel);
+   }
+
+   SKYPE.Form.Input.selectByValue($select, $options.first().val());
+
+   $select.siblings("styledSelect hasLogo").empty();
+
+  },
+
+  /**
+   * Populates the custom select element options.
+   *
+   * @name     populateSelectOptions
+   * @methodOf SKYPE.Form.Input
+   * @param    {selector}   $select - the jQuery <select> element. If this is not a custom select element this function returns immedetly.
+   * @param    optionsArr - JS Array of options to be populated.
+   * @param    append - If true the options are appended to the options list. Otherwise previous options will be removed. Default option persists.
+   * @param    selectedValue - If defined then the defined option value will be selected after select options population.
+   */
+  populateSelectOptions: function($select, optionsArr, append, selectedValue) {
+
+   if (!$select.hasClass("customSelectElement")) return; //Not a custom select element return here
+   if ($select === undefined || $select === null) return;
+
+   if (optionsArr === undefined || optionsArr.length === 0) return;
+
+   if (append !== true) SKYPE.Form.Input.clearSelectOptions($select);
+
+   $.each(optionsArr, function(index, value) {
+    $('<option value="' + value + '">' + value + '</option>').appendTo($select);
+   });
+
+   if (selectedValue !== undefined || selectedValue !== null) SKYPE.Form.Input.selectByValue($select, selectedValue);
+  },
+
+  /**
+   * Binds classname changes to element focus state
+   *
+   * @name     changeClassnamesOnFocus
+   * @methodOf SKYPE.Form.Input
+   */
+  changeClassnamesOnFocus: function($el) {
+
+   $el.bind('focus', function() {
+    $('.fieldRow').removeClass('active');
+    $(this).closest('.fieldRow').removeClass('hover').addClass('active');
+   });
+
+   $el.bind('blur', function() {
+    $(this).closest('.fieldRow').removeClass('active');
+
+    if (!$(this).closest('.fieldRow').hasClass('active') && $(this).closest('.fieldRow').hasClass('inline')) {
+     $el.next().addClass('removeBackground');
+    }
+   });
+  },
+
+  setOne: function($input) {
+   if ($input.get(0).disabled) return;
+
+   if ($input.get(0).checked === true) {
+    $input.closest('label').addClass('checked');
+   } else {
+    $input.closest('label').removeClass('checked');
+   }
+  },
+
+  changeCheckbox: function($input) {
+   if ($input.get(0).disabled) return;
+   
+   //$input.closest('.fieldRow').removeClass('error');
+
+   if ($input.get(0).checked === true) {
+    $input.closest('label').addClass('checked');
+   } else {
+    $input.closest('label').removeClass('checked');
+   }
+  },
+
+  changeRadio: function($input) {
+
+   if ($input.get(0).disabled) return;
+
+   var _name = $input.attr('name'),
+    $inputGroup = $('input[name=' + _name + ']', $input.closest('form'));
+
+   $inputGroup.each(function() {
+    $(this).removeAttr('checked').closest('label').removeClass('checked');
+   });
+
+   $input.attr("checked", "checked");
+   $input.closest('label').addClass('checked');
+
+  },
+
+  init: function() {
+   var $input = $('input[type=checkbox],input[type=radio]'),
+    $label = $input.closest('label');
+
+   $input.each(function() {
+    //$(this).css('left', '-1000px');
+    $(this).closest('label').find('.icon').css('display', 'block');
+
+    if ($(this).get(0).disabled === true) {
+     $(this).closest('label').addClass('disabled');
+    } else {
+     _input.setOne($(this));
+    }
+   });
+
+   if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/msie 6/i)) {
+    $label.bind('click', function() {
+     
+     var $input = $(this).find('input');
+
+     if ($input.is(':checked')){
+      
+      $input.removeAttr('checked')
+
+     } else {
+      
+      $input.attr('checked', 'checked')
+
+     }
+     
+     $input.trigger('change');
+    });
+   }
+   
+
+   $input.bind('change', function(event) {
+    if ($(this).get(0).type == 'radio') {
+     _input.changeRadio($(this));
+    } else {
+     _input.changeCheckbox($(this));
+    }
+   });
+
+   _input.styleSelectElements();
+   
+   $('input[type=text]').each(function() {
+    _input.changeClassnamesOnFocus($(this));
+   });
+
+   $('input[type=email]').each(function() {
+    _input.changeClassnamesOnFocus($(this));
+   });
+
+   $('input[type=number]').each(function() {
+    _input.changeClassnamesOnFocus($(this));
+   });
+
+   $('input[type=tel]').each(function() {
+    _input.changeClassnamesOnFocus($(this));
+   });
+
+   $('input[type=url]').each(function() {
+    _input.changeClassnamesOnFocus($(this));
+   });
+
+   /* Checkbox events */
+   
+   /* Radio interaction events */
+
+   $radio = $('.radioList :radio');
+
+   $radio.on('focus', function(){
+    $(this).closest('ul').addClass('focus');
+   });
+
+   $radio.on('blur', function(event){
+    $(this).closest('ul').removeClass('focus');
+   });
+   
+   $radio.on('click', function(event){
+    $(this).focus();
+   });
+
+
+   $('.radioList label').on('mouseenter', function(){
+    
+    $(this).addClass('hover');
+
+   }).on('mouseleave', function(){
+    
+    $(this).removeClass('hover')
+
+   });
+
+
+   /* Checkbox interaction events */
+
+   $(".checkbox").hover(function() {
+    $(this).addClass("hover")
+   }, function() {
+    $(this).removeClass("hover")
+   });
+
+   $checkbox = $('input[type=checkbox]');
+
+   $checkbox.on('focus', function(){
+    $(this).closest('.fieldRow').addClass('focus');
+   });
+
+   $checkbox.on('click', function(event){
+    $(this).focus();
+   });
+
+   $checkbox.on('blur', function(event){
+    $(this).closest('.fieldRow').removeClass('focus');
+   });
+
+  }
+ };
+
+ return {
+  changeClassnamesOnFocus: function() {
+   return _input.changeClassnamesOnFocus();
+  },
+  validateInputFields: function() {
+   return _input.validateInputFields;
+  },
+  styleSelectElements: function() {
+   return _input.styleSelectElements;
+  },
+  setOne: function($label) {
+   return _input.setOne($label);
+  },
+  changeCheckbox: function($label) {
+   return _input.changeCheckbox($label);
+  },
+  changeRadio: function($label) {
+   return _input.changeRadio($label);
+  },
+  init: function() {
+   return _input.init();
+  },
+  selectByValue: function($select, value, skipTrigger) {
+   return _input.selectByValue($select, value, skipTrigger);
+  },
+  clearSelectOptions: function($select, newLabel) {
+   return _input.clearSelectOptions($select, newLabel);
+  },
+  populateSelectOptions: function($select, optionsArr, append, selectedValue) {
+   return _input.populateSelectOptions($select, optionsArr, append, selectedValue);
+  }
+ };
+}();
+
+/**
+ * Validates the form element passed to it and performs
+ * necessary ui manipulations.
+ *
+ * @name     ValidateFormElements
+ * @methodOf SKYPE.Form
+ */
+SKYPE.Form.ValidateFormElements = function() {
+
+ /**
+  * Performs checks on form element passed to it
+  * and returns true on valid field and false on invalid field.
+  */
+ var _rules = {
+
+  checkbox: function($el) {
+   if (!$el.is(':checked')) {
+    return false;
+   } else {
+    return true;
+   }
+  },
+  select: function($el) {
+   var value = $el.val();
+
+   if (value === 'none' || value === '') {
+    return false;
+   } else {
+    return true;
+   }
+  },
+  input: function($el) {
+   if ($el.val() === '') {
+    return false;
+   } else {
+    return true;
+   }
+  }
+ },
+
+ /**
+  * Performs necessary ui manipulations of form field (parent) passed to it
+  *
+  * @name      ui
+  * @methodOf  SKYPE.Form.ValidateFormElements
+  * @parameter {selector}   $el      jQuery selector of an element
+  *                           to perform manipulation on.
+  * @parameter   {boolean}   status   Boolean value for the current element
+  *                           validation status.
+  */
+ _ui = function($el, status) {
+
+  if (status === true) {
+   $el.closest('.fieldRow').removeClass('error');
+  } else {
+   $el.closest('.fieldRow').addClass('error');
+   SKYPE.Form.invalidElementCount++;
+  }
+ },
+
+ /**
+  * Decides if element is validatable and selects correct validation
+  * path for each element type.
+  *
+  * @name      validate
+  * @methodOf  SKYPE.Form.ValidateFormElements
+  * @parameter {selector}   $el      jQuery selector of an element
+  *                           to perform validation on.
+  */
+ _validate = function($el) {
+
+  if ($el.is(':checkbox')) {
+   _ui($el, _rules.checkbox($el));
+  } else if ($el.is('select')) {
+   _ui($el, _rules.select($el));
+  } else if ($el.is('input')) {
+   _ui($el, _rules.input($el));
+  } else {
+   return 'Element does not qualify for validation.';
+  }
+ },
+
+ /**
+  * Hides error bubbles from invalid fields
+  *
+  * @name     _hideErrors
+  * @methodOf SKYPE.Form.ValidateFormElements
+  */
+ _hideErrors = function() {
+  $('.fieldRow.error').removeClass('active');
+ };
+
+ return {
+  validate: function($el) {
+   return _validate($el);
+  },
+  hideErrors: function() {
+   return _hideErrors();
+  }
+ };
+}();
+
+/**
+ * @name     messagesHandler
+ * @methodOf SKYPE.Form
+ */
+SKYPE.Form.messagesHandler = function() {
+
+ /**
+  * Shows messagebox with message and position defined in the payload.
+  *
+  * @name     positionMessage
+  * @methodOf SKYPE.Form.messagesHandler
+  * @param    {payload} object containing message position and message content.
+  */
+ var _positionMessage = function(payload) {
+   var framePosition = $('#frameContainer').position(),
+    $generalErrorMessage = $('#generalErrorMessage');
+
+   /**
+    * In case the position is defined, it is a field error and needs positioning
+    */
+   if (payload.type === 'error') {
+    _hideMessage();
+
+    /**
+     * Returns false if FORM was just submitted and there's
+     * already one or more messages visible or if payload.mobile is 'true'
+     * (meaning inline errors will be shown instead and not positioned by parent)
+     */
+    if ($('.message.error:visible').length > 0 && SKYPE.Form.formWasSubmitted === true) {
+     SKYPE.Form.formWasSubmitted = false;
+     return false;
+    } else if (SKYPE.CurrentResponsiveState == 'mobile') {
+     if (!payload.position) {
+      $generalErrorMessage.html(payload.message);
+      $generalErrorMessage.show();
+     }
+     return false;
+    }
+
+    SKYPE.Form.ValidateFormElements.hideErrors();
+
+    if (typeof payload.position !== 'undefined' && payload.position !== null) {
+     $('.tip.genericMessageContainer').hide();
+     $('.error.genericMessageContainer').find('.message.error').html(payload.message);
+     $('.error.genericMessageContainer').css({
+      top: parseInt(framePosition.top, 10) + parseInt(payload.position.top, 10),
+      left: (parseInt(framePosition.left, 10) + parseInt(payload.position.left, 10) + parseInt(payload.position.width, 10)),
+      display: 'block'
+     });
+    } else {
+     $generalErrorMessage.html(payload.message);
+     $generalErrorMessage.show();
+    }
+   } else if (payload.type === 'info') {
+    $('#generalOverlay').find('p').html(payload.message);
+    if ($('.tip.genericMessageContainer').css('display') !== 'block') {
+     $('.error.genericMessageContainer').hide();
+     $('.tip.genericMessageContainer').find('.message.tip').html(payload.message);
+
+     $('.tip.genericMessageContainer').css({
+      top: parseInt(framePosition.top, 10) + parseInt(payload.position.top, 10),
+      left: (parseInt(framePosition.left, 10) + parseInt(payload.position.left, 10) + parseInt(payload.position.width, 10))
+     });
+
+     if (SKYPE.CurrentResponsiveState == 'mobile') {
+      $('.tip.genericMessageContainer').hide();
+      SKYPE.Overlay.show($('<span data-id="generalOverlay"></span>'));
+     } else {
+      $('.tip.genericMessageContainer').show();
+      SKYPE.Overlay.close();
+     }
+
+    } else {
+     _hideMessage();
+    }
+   }
+  },
+
+  /**
+   * Hides visible messagebox
+   *
+   * @name      hideMessage
+   * @methodOf   SKYPE.Form.messagesHandler
+   */
+  _hideMessage = function() {
+   $('.genericMessageContainer').hide();
+   SKYPE.Overlay.close();
+  },
+
+  /**
+   * Listens for boolean string values to perform
+   * actions for mobile view.
+   *
+   * @name     mobileListener
+   * @methodOf SKYPE.Form.messagesHandler
+   * @param    {test} 'true' - is mobile view
+   */
+  _mobileListener = function(test) {
+
+   if (test === 'true') {
+    _hideMessage();
+   }
+
+  };
+
+ return {
+  positionMessage: function(payload) {
+   return _positionMessage(payload);
+  },
+  hideMessage: function() {
+   return _hideMessage();
+  },
+  mobileListener: function(test) {
+   _mobileListener(test);
+  }
+ };
+}();
+
+$(document).ready(function() {
+ 
+ //make sidebar pin to the screen for desktop and tablet ie 8 and above
+ // if (!($.browser.msie && $.browser.version < 8)  && SKYPE.CurrentResponsiveState !== 'mobile') {
+
+ //  var $sidebar = $('.sideContent'), 
+ //   $mainContent = $('.mainContent'), 
+ //         $window = $(window),
+ //         dir = $('html').attr('dir'),
+ //         sidebarOffset  = $sidebar.offset(),
+ //         leftPosition = 0,
+ //         sidebarMargin = 'margin-left',
+ //         sidebarFloat = 'right';
+
+ //     if (dir === 'rtl') {
+
+ //      sidebarMargin = 'margin-right';
+ //      sidebarFloat = 'left';
+
+ //     };
+
+ //  _positionRelativeTop = function(){
+
+ //   $sidebar.css('position', 'relative');
+ //   $sidebar.css('top', 'auto');
+ //   $sidebar.css('left', 'auto');
+ //   $sidebar.css('right', 'auto');
+ //   $sidebar.css('float', sidebarFloat);
+ //   $sidebar.css(sidebarMargin, '0');
+ //  }
+
+ //  _positionFixedScroll = function(leftPosition){
+
+ //   $sidebar.css('position', 'fixed');
+ //   $sidebar.css('top', '0');
+
+ //   if (navigator.userAgent.match(/Android 3/)){
+
+ //    $sidebar.css(sidebarMargin, '0');
+
+ //    if (dir === 'rtl') {
+
+ //     $sidebar.css('right', (2 + leftPosition + parseInt($mainContent.css('padding-right').replace('px', '')) + 'px'));
+
+ //    } else {
+     
+ //     $sidebar.css('left', (2 + leftPosition + parseInt($mainContent.css('padding-right').replace('px', '')) + 'px'));
+
+ //    }
+
+ //   } else {
+
+ //    $sidebar.css(sidebarMargin, (leftPosition - $(document).scrollLeft()) + 'px');
+
+ //   }
+   
+ //  }
+
+ //  _positionAbsoluteBottom = function(leftPosition, topPosition){
+
+ //   $sidebar.css('position', 'absolute');
+ //   $sidebar.css('top', topPosition + 'px');
+ //   $sidebar.css('left', 'auto');
+ //   $sidebar.css('right', 'auto');
+
+ //   $sidebar.css(sidebarMargin, leftPosition + 'px');
+ //  }
+
+ //  _doSidebarPositioning = function(){
+   
+ //   leftPosition = $mainContent.outerWidth() + parseInt($mainContent.css('padding-right').replace('px', ''));
+   
+ //   var mainContentBottom = $mainContent.outerHeight() + $mainContent.offset().top;
+
+ //   if ($window.scrollTop() > sidebarOffset.top && $window.scrollTop() <= mainContentBottom - $sidebar.outerHeight() ) {
+
+ //    _positionFixedScroll(leftPosition);
+
+ //   } else if (($window.scrollTop() >= mainContentBottom - $sidebar.outerHeight()) && $sidebar.outerHeight() < $mainContent.outerHeight()) {
+
+ //    var topPosition = ( mainContentBottom -  $sidebar.outerHeight() - sidebarOffset.top );
+
+ //    _positionAbsoluteBottom(leftPosition, topPosition);
+    
+ //   } else {
+
+ //    _positionRelativeTop();
+
+ //   }
+
+ //  }
+
+ //  $window.on('scroll',function(event) {
+   
+ //   if (SKYPE.CurrentResponsiveState === 'mobile') { return; }
+
+ //   _doSidebarPositioning();
+
+ //  }); 
+
+ //  /*
+  
+ //  $window.on('touchmove',function(event) {
+   
+ //   if (SKYPE.CurrentResponsiveState === 'mobile') { return; }
+
+ //   _doSidebarPositioning();
+
+ //  });
+
+ //  */
+
+ //  if ($sidebar.length > 0){
+
+ //   $(window).on('responsiveStateChange', function(event) {
+   
+ //    if (event.state === 'mobile'){
+
+ //     _positionRelativeTop();
+
+ //    } else  {
+
+ //     _doSidebarPositioning();
+
+ //    } 
+   
+ //   });
+
+ //   _doSidebarPositioning();
+
+ //  }
+
+ // }
+
+ //Select by option value
+ $("#markVisaSelected").click(function() {
+  SKYPE.Form.Input.selectByValue($("#dynamicSelect"), "Visa");
+ });
+
+ $("#markMastercardSelected").click(function() {
+  SKYPE.Form.Input.selectByValue($("#dynamicSelect"), "Mastercard");
+ });
+
+ $("#markPaypalSelected").click(function() {
+  SKYPE.Form.Input.selectByValue($("#dynamicSelect"), "Paypal");
+ });
+
+ //Populate select component dynamicly
+ $("#clearSelectOptions").click(function() {
+  SKYPE.Form.Input.clearSelectOptions($("#dynamicSelect"));
+ });
+
+ $("#clearSelectOptionsNewLabel").click(function() {
+  SKYPE.Form.Input.clearSelectOptions($("#dynamicSelect"), "Choose a payment method");
+ });
+
+ $("#substitudeOptions").click(function() {
+  SKYPE.Form.Input.populateSelectOptions($("#dynamicSelect"), ["Mastercard", "Ukash"]);
+ });
+
+ $("#appendOptions").click(function() {
+  SKYPE.Form.Input.populateSelectOptions($("#dynamicSelect"), ["Moneybookers", "Paypal"], true);
+ });
+
+ $("#substitudeOptionsWithSelected").click(function() {
+  SKYPE.Form.Input.populateSelectOptions($("#dynamicSelect"), ["Moneybookers", "Paypal"], false, "Paypal");
+ });
+
+ $('.toggleInvalid').on('click', function() {
+  $select = $(".dualInput").toggleClass("error");
+ });
+
+ /**
+  * Collects validatable elements and runs validation function on each
+  * and binds change event to them that performs the same action again.
+  **/
+ $validatableElements = $('.required select').add($('.required input')).not(':disabled');
+
+ var runValidation = function($el) {
+   SKYPE.Form.ValidateFormElements.validate($el);
+  };
+
+ $($validatableElements).each(function() {
+  $(this).unbind('change.validation, blur.validation');
+  $(this).bind('change.validation, blur.validation', function() {
+   runValidation($(this));
+  });
+ });
+
+ $('form.validationRequired .submit').on('click', function(e) {
+  e.preventDefault();
+
+  SKYPE.Form.formWasSubmitted = true;
+
+  /**
+   * Counter that holds the number of erronous elements
+   * that is used on deciding whether to submit the form or not.
+   **/
+  SKYPE.Form.invalidElementCount = 0;
+
+  /**
+   * Collects validatable elements and runs validation function on each
+   * and binds change event to them that performs the same action again.
+   **/
+  var $thisForm = $(this).closest('form'),
+   $validatableElements = $('.required select', $thisForm).add($('.required input', $thisForm)).not(':disabled');
+
+  var runValidation = function($el) {
+    SKYPE.Form.ValidateFormElements.validate($el);
+   };
+
+  $($validatableElements).each(function() {
+   runValidation($(this));
+   $(this).unbind('change.validation');
+   $(this).bind('change.validation', function() {
+    runValidation($(this));
+   });
+  });
+
+  /**
+   * If number of erronous elements is 0 then submits the form
+   * else prevents it.
+   * Also shows first error by default, while others are hidden.
+   **/
+  if (SKYPE.Form.invalidElementCount === 0) {
+   SKYPE.frameApi.parent.parentFormValidated(true);
+  } else {
+   SKYPE.frameApi.parent.parentFormValidated(false);
+   $('.fieldRow.error:first').addClass('active');
+  }
+
+  SKYPE.frameApi.parent.validateFrame();
+ });
+});

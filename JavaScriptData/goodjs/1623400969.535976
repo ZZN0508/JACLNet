@@ -1,0 +1,66 @@
+/* Git */
+;(function( w, d, $ ){
+ 
+ 'use strict';
+ 
+ // name space
+ w.kkkns || (w.kkkns = {});
+ w.kkkns.des || (w.kkkns.des = {});
+ 
+ // public
+ w.kkkns.des.heightFit;
+ 
+ // private
+ var isIE8 = ( 0 < $('.is-ie8').length ) ? true : false;
+ 
+ w.kkkns.des.heightFit = function(data){
+  
+  var
+   height = 0,
+   mode = (data.mode==='innerHeight') ? 'innerHeight' : 'height',
+   items = $('.'+data.className, ((data.parent) ? data.parent : d) ).get(),
+   column = data.column-0 || items.length,
+   temp;
+  
+  for(var i=0; i<items.length; i++){
+   
+   items[i].style.minHeight = 0;
+   items[i].style.height = 'auto';
+   
+  }
+  
+  for(var i=0; i<items.length/column; i++){
+   
+   height = 0;
+   
+   for(var j=0; j<column; j++){
+    
+    temp = $(items[(i*column)+j])[mode]();
+    height = (temp<height) ? height : temp ;
+    
+   }
+   
+   for(var j=0; j<column; j++) {
+    
+    if(items[(i*column)+j]) {
+     
+     if(!isIE8){
+      
+      items[(i*column)+j].style.minHeight = height+'px';
+      
+     }else{
+      
+      items[(i*column)+j].style.height = height+'px';
+      
+     }
+     
+    }
+    
+   }
+   
+  }
+  
+ };
+ 
+ 
+}( window, document, jQuery||j$ ));

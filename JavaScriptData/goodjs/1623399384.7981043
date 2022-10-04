@@ -1,0 +1,103 @@
+if (typeof SKYPE == 'undefined') {
+ var SKYPE = {};
+}
+
+/**
+ * Standardised animations for elements across site
+ *
+ * @author Darius Hodaei (dahodaei@microsoft.com)
+ */
+SKYPE.Animation = function(){
+
+ var _masRollover = function(properties){
+
+  $(properties.selector).each(function(){
+
+   var $this = $(this); 
+
+   var animation = function(callback){
+     stop();
+
+     var animProperties;
+     if(properties.anim) animProperties =  properties.anim.call($this);
+     
+     // cancel animation if we return false
+     if(animProperties === false) return;
+
+     animProperties = animProperties || {};
+     animProperties.width = '100%';
+
+     $this.animate(animProperties,{duration : 50, 
+      complete: function(){
+       if(callback) callback();
+      }
+     });
+    },
+    stop = function(callback){
+     $this.stop(true);
+
+     var resetProperties;
+     if(properties.reset) resetProperties =  properties.reset.call($this);
+        
+     resetProperties = resetProperties || {};
+     resetProperties.width = '90%';
+
+     $this.css(resetProperties);
+
+     if(callback) callback();
+    };
+
+   properties.trigger = properties.trigger? $(properties.trigger) : $this;
+   
+   // apply animation to relevant states
+   properties.trigger.hover(function(){ animation(properties.hover); }, function(){ stop(properties.out); })
+    .focus(function(){ animation(properties.focus); })
+    .blur(function(){ stop(properties.blur); })
+    .click(function(){ stop(properties.click); });
+
+   $(window).on('responsiveStateChange', function(){ stop(); });
+  });
+
+ },
+ _detectAnimationSupport = function(){
+
+  var testElement = $('<div/>'),
+      support = false;
+    
+  $(document).append(testElement);
+
+  
+  if( testElement[0].style.animationName ) { 
+   support = true; 
+  }
+  else {
+
+    var vendorExtensions = ['Webkit','Moz','O','ms','Khtml'];
+
+    for( var i = 0; i < vendorExtensions.length; i++ ) {
+
+      if(testElement[0].style[vendorExtensions[i] + 'AnimationName'] !== undefined ) {
+        support = true;
+        break;
+      }
+    }
+  }
+
+  testElement.remove();
+  return support;
+ };
+
+ return {
+  masRollover : _masRollover,
+  supported : _detectAnimationSupport
+ };
+
+}();
+
+$(document).ready(function(){
+
+ if(SKYPE.Animation.supported()){
+  $('html').addClass('animation');
+ }
+ else $('html').addClass('no-animation');
+})

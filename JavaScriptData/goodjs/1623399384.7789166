@@ -1,0 +1,129 @@
+$(document).ready(function(){
+
+ function thisClick(e) {
+
+     $('input[type=text]').each(function() {
+
+      var mouseX = e.pageX;
+         var mouseY = e.pageY;
+         var offset = $(this).offset();
+         var width = $(this).width();
+         var height = $(this).height();
+
+         if ($(this).parent().hasClass('prefixInput')) {
+
+          if (mouseX > offset.left-50 && mouseX < offset.left+width+98 
+             && mouseY > offset.top && mouseY < offset.top+height+31) {
+
+           $(this).focus();
+
+          }
+
+         }
+
+         else {
+
+          if (mouseX > offset.left && mouseX < offset.left+width+48 
+             && mouseY > offset.top && mouseY < offset.top+height+31) {
+
+           $(this).focus();
+
+          }
+
+         }
+
+     });
+
+ }
+
+ function iconOver(e) {
+
+     $('input[type=text]').each(function() {
+
+      var mouseX = e.pageX;
+         var mouseY = e.pageY;
+         var offset = $(this).offset();
+         var width = $(this).width();
+         var height = $(this).height();
+
+         if ($(this).parent().hasClass('prefixInput')) {
+
+          if (mouseX > offset.left && mouseX < offset.left+width+98 
+             && mouseY > offset.top && mouseY < offset.top+height+31) {
+
+           $(this).css("border-width","2px");
+           $(this).css("margin","0 -61px");
+
+          }
+
+         }
+
+         else {
+
+          if (mouseX > offset.left && mouseX < offset.left+width+48 
+             && mouseY > offset.top && mouseY < offset.top+height+31) {
+
+           $(this).css("border-width","2px");
+           $(this).css("margin","0 -11px");
+
+          }
+
+         }
+
+     });
+
+ }
+
+ function prefixOver(e) {
+
+     $('input[type=text]').each(function() {
+
+      var mouseX = e.pageX;
+         var mouseY = e.pageY;
+         var offset = $(this).offset();
+         var width = $(this).width();
+         var height = $(this).height();
+
+         if ($(this).parent().hasClass('disabled')) {
+
+          return;
+
+         }
+
+         else {
+
+          if (mouseX > offset.left && mouseX < offset.left+width+48 
+             && mouseY > offset.top && mouseY < offset.top+height+31) {
+
+           $(this).css("border-width","2px");
+           $(this).css("margin","0 -61px");
+
+          }
+
+         }
+
+     });
+
+ }
+
+ function thisOut(e) {
+
+     $('input[type=text]').each(function() {
+
+      $(this).css("border-width","");
+         $(this).css("margin","");
+
+     });
+
+ }
+
+
+ $(".icon").click(thisClick);
+
+ $(".icon").hover(iconOver,thisOut).stop();
+
+ $(".prefix").click(thisClick);
+
+ $(".prefix").hover(prefixOver,thisOut).stop();
+
+});

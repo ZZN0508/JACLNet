@@ -1,0 +1,33 @@
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.alliance4creativity.com/#website","url":"https://www.alliance4creativity.com/","name":"Alliance for Creativity and Entertainment","description":"","potentialAction":[{"@type":"SearchAction","target":"https://www.alliance4creativity.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://www.alliance4creativity.com/watch-it-legally/#webpage","url":"https://www.alliance4creativity.com/watch-it-legally/","name":"Watch It Legally (redirect page) - Alliance for Creativity and Entertainment","isPartOf":{"@id":"https://www.alliance4creativity.com/#website"},"datePublished":"2019-05-01T16:17:19+00:00","dateModified":"2020-02-27T18:58:23+00:00","breadcrumb":{"@id":"https://www.alliance4creativity.com/watch-it-legally/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.alliance4creativity.com/watch-it-legally/"]}]},{"@type":"BreadcrumbList","@id":"https://www.alliance4creativity.com/watch-it-legally/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"WebPage","@id":"https://www.alliance4creativity.com/","url":"https://www.alliance4creativity.com/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@type":"WebPage","@id":"https://www.alliance4creativity.com/watch-it-legally/","url":"https://www.alliance4creativity.com/watch-it-legally/","name":"Watch It Legally (redirect page)"}}]}]}
+try{Typekit.load({ async: true });}catch(e){}
+
+			var url = "/where-to-watch";
+			var delay = "3500";
+			window.onload = function(){
+				setTimeout(GoToURL, delay);
+			}
+			function GoToURL(){
+				// IE8 and lower fix to pass the http referer
+				if( typeof IE_fix != "undefined" ) {
+					var referLink = document.createElement( 'a' );
+					referLink.href = url;
+					document.body.appendChild( referLink );
+					referLink.click();
+				}
+				
+				// All other browsers
+				else {
+					
+					window.location.replace( url );
+				} 
+			}
+		
+
+/* <![CDATA[ */
+var a3_lazyload_params = {"apply_images":"1","apply_videos":"1"};
+/* ]]> */
+
+
+/* <![CDATA[ */
+var a3_lazyload_extend_params = {"edgeY":"0","horizontal_container_classnames":""};
+/* ]]> */

@@ -1,0 +1,12 @@
+<html><head></head><body>// AdserverX
+window.googletag = window.googletag || {};
+window.googletag.cmd = window.googletag.cmd || [];
+(function () {
+    if (window.googletag !== undefined) {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "https://adx.c.appier.net/pb/0wHT9JDiP3SORJx/pb.bid?acid=kVFeURKEAFGnc8cHXSXDYA&amp;haid=Hac9Br3U&amp;hzids=HtuJ9M-Q,mhMi9ro1,WtIJ930Q,Htu59M-Q,mh9e9ro1,WtIF930Q,WtAF930Q,WhueW9Op";
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+})();
+</body></html>

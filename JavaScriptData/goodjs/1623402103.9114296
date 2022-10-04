@@ -1,0 +1,897 @@
+/* <![CDATA[ */ ringDataLayer = {"content":{"object":{"type":"list"},"part":1,"source":{"system":"ring_content_space","id":"a17e9bfd-e62d-4ed5-9041-0365fd2eefeb"}},"context":{"publication_structure":{"root":"WWW_ONET_PL"},"id":{"aureus_offers":["0j6rehmhwv","mrfk9cobi6","s2f2cvwwrc","5i5zttv0el","ztuxhd41gn","tvfmpsg7sz","hwwvxcb0oh","hc25nmyilh","gcjkx3ao36","klwvnmdhbt","lh18nwtkp1","lbabwqgwwu","lhztuwnjza","tuwblxzsab","bnjudf88or","lkikdj2gna","33zozuyszj","tnvsatckjj"]}}}; /* ]]> */
+/* <![CDATA[ */ accConf = {"rum":{"data":{"RTYPE":"{\"type\":\"list\"}"}}}; /* ]]> */
+
+        !function(){var r="undefined"!=typeof window&&window===this?this:"undefined"!=typeof global&&null!=global?global:this,e="function"==typeof Object.defineProperties?Object.defineProperty:function(t,e,n){t!=Array.prototype&&t!=Object.prototype&&(t[e]=n.value)};function n(){n=function(){},r.Symbol||(r.Symbol=t)}var i=0;function t(t){return"jscomp_symbol_"+(t||"")+i++}function o(){n();var t=r.Symbol.iterator;t||(t=r.Symbol.iterator=r.Symbol("iterator")),"function"!=typeof Array.prototype[t]&&e(Array.prototype,t,{configurable:!0,writable:!0,value:function(){return a(this)}}),o=function(){}}function a(t){var e,n=0;return e=function(){return n<t.length?{done:!1,value:t[n++]}:{done:!0}},o(),(e={next:e})[r.Symbol.iterator]=function(){return this},e}function l(t){o();var e=t[Symbol.iterator];return e?e.call(t):a(t)}function p(t){if(!(t instanceof Array)){t=l(t);for(var e,n=[];!(e=t.next()).done;)n.push(e.value);t=n}return t}var h=0;var m="img script iframe link audio video source".split(" ");function v(t,e){for(var n=(t=l(t)).next();!n.done;n=t.next())if(n=n.value,e.includes(n.nodeName.toLowerCase())||v(n.children,e))return!0;return!1}function w(t,e){if(2<t.length)return performance.now();for(var n=[],r=(e=l(e)).next();!r.done;r=e.next())r=r.value,n.push({timestamp:r.start,type:"requestStart"}),n.push({timestamp:r.end,type:"requestEnd"});for(r=(e=l(t)).next();!r.done;r=e.next())n.push({timestamp:r.value,type:"requestStart"});for(n.sort(function(t,e){return t.timestamp-e.timestamp}),t=t.length,e=n.length-1;0<=e;e--)switch(r=n[e],r.type){case"requestStart":t--;break;case"requestEnd":if(2<++t)return r.timestamp;break;default:throw Error("Internal Error: This should never happen")}return 0}function s(t){t=t||{},this.w=!!t.useMutationObserver,this.u=t.minValue||null,t=window.__tti&&window.__tti.e;var i,o,a,s,u,c,f,r,n,e,d=window.__tti&&window.__tti.o;this.a=t?t.map(function(t){return{start:t.startTime,end:t.startTime+t.duration}}):[],d&&d.disconnect(),this.b=[],this.f=new Map,this.j=null,this.v=-1/0,this.i=!1,this.h=this.c=this.s=null,i=this.m.bind(this),o=this.l.bind(this),a=XMLHttpRequest.prototype.send,s=h++,XMLHttpRequest.prototype.send=function(t){for(var e=[],n=0;n<arguments.length;++n)e[n-0]=arguments[n];var r=this;return i(s),this.addEventListener("readystatechange",function(){4===r.readyState&&o(s)}),a.apply(this,e)},u=this.m.bind(this),c=this.l.bind(this),f=fetch,fetch=function(t){for(var i=[],e=0;e<arguments.length;++e)i[e-0]=arguments[e];return new Promise(function(e,n){var r=h++;u(r),f.apply(null,[].concat(p(i))).then(function(t){c(r),e(t)},function(t){c(t),n(t)})})},(r=this).c=new PerformanceObserver(function(t){for(var e=(t=l(t.getEntries())).next();!e.done;e=t.next())if("resource"===(e=e.value).entryType&&(r.b.push({start:e.fetchStart,end:e.responseEnd}),y(r,w(r.g,r.b)+5e3)),"longtask"===e.entryType){var n=e.startTime+e.duration;r.a.push({start:e.startTime,end:n}),y(r,n+5e3)}}),r.c.observe({entryTypes:["longtask","resource"]}),this.w&&(this.h=(n=this.B.bind(this),(e=new MutationObserver(function(t){for(var e=(t=l(t)).next();!e.done;e=t.next())"childList"==(e=e.value).type&&v(e.addedNodes,m)?n(e):"attributes"==e.type&&m.includes(e.target.tagName.toLowerCase())&&n(e)})).observe(document,{attributes:!0,childList:!0,subtree:!0,attributeFilter:["href","src"]}),e))}function u(t){t.i=!0;var e=0<t.a.length?t.a[t.a.length-1].end:0,n=w(t.g,t.b);y(t,Math.max(n+5e3,e))}function y(o,t){!o.i||o.v>t||(clearTimeout(o.j),o.j=setTimeout(function(){var t=performance.timing.navigationStart,e=w(o.g,o.b);t=(window.a&&window.a.A?1e3*window.a.A().C-t:0)||performance.timing.domContentLoadedEventEnd-t;if(o.u)var n=o.u;else n=performance.timing.domContentLoadedEventEnd?(n=performance.timing).domContentLoadedEventEnd-n.navigationStart:null;var r=performance.now();null===n&&y(o,Math.max(e+5e3,r+1e3));var i=o.a;(e=r-e<5e3?null:r-(e=i.length?i[i.length-1].end:t)<5e3?null:Math.max(e,n))&&(o.s(e),clearTimeout(o.j),o.i=!1,o.c&&o.c.disconnect(),o.h&&o.h.disconnect()),y(o,performance.now()+1e3)},t-performance.now()),o.v=t)}s.prototype.getFirstConsistentlyInteractive=function(){var e=this;return new Promise(function(t){e.s=t,"complete"==document.readyState?u(e):window.addEventListener("load",function(){u(e)})})},s.prototype.m=function(t){this.f.set(t,performance.now())},s.prototype.l=function(t){this.f.delete(t)},s.prototype.B=function(){y(this,performance.now()+5e3)},r.Object.defineProperties(s.prototype,{g:{configurable:!0,enumerable:!0,get:function(){return[].concat(p(this.f.values()))}}});try{if(window.dlRumData=[],"PerformanceLongTaskTiming"in window&&new s({}).getFirstConsistentlyInteractive().then(function(t){t&&window.dlRumData.push({metricName:"TTI",eventValue:t})}),"PerformanceObserver"in window)new PerformanceObserver(function(t){for(var e=t.getEntries(),n=0,r=e.length;n<r;n++){var i=e[n],o="",a=Math.round(i.startTime+i.duration);if("first-contentful-paint"===i.name)o="FCP";else{if("first-paint"!==i.name)continue;o="FP"}window.dlRumData.push({metricName:o,eventValue:a})}}).observe({entryTypes:["paint"]})}catch(t){}}();
+        
+
+        if(accConf&&accConf.rum&&accConf.rum.data)for(var key in window.dlRumData||(window.dlRumData=[]),accConf.rum.data)window.dlRumData.push({metricName:key,eventValue:accConf.rum.data[key]});
+        
+/* <![CDATA[ */
+            window.suggestmeyes_loaded = true;
+        /* ]]> */
+
+window.onetAds = {
+        'async': 1,
+        'target': 'GLOWNA/NOWASG',
+        'adSlots': [],
+        'sgn_cookie': 0,
+        'keywords':["V2021","WARSZAWA"],
+        'DV':'www',
+        'clickmap': 1,
+        'noDot': 0,
+        'no_gemius': 1,
+        'kropka': {'DV': 'WARSZAWA'},
+        'ver': 2,
+        'eventsapi': true,
+        'time': {},
+        'startTime': (new Date()).getTime(),
+        'policy': 1,
+        'whitelistId': 'onet-ad-flat-gigaboard1',
+        'lazy': 1,
+        'lazyPercentage': 150,
+        'cmd': []
+    };
+
+
+            window.requestAnimationFrame=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(e){window.setTimeout(e,1e3/60)},Element.prototype.matches||(Element.prototype.matches=Element.prototype.msMatchesSelector||Element.prototype.webkitMatchesSelector),Element.prototype.closest||(Element.prototype.closest=function(e){var t=this;do{if(t.matches(e))return t;t=t.parentElement||t.parentNode}while(null!==t&&1===t.nodeType);return null});
+        
+
+            window.nsglibCommon=function(){var e,t=!1,n="default",o="default";return{getMagazineDestoyListenerStatus:function(){return t},setMagazineDestroyListenerStatus:function(){t||(t=!0)},setWebsiteVariant:function(t){e=t},getWebsiteVariant:function(){return e},setUcsVariantName:function(e){n=e},getUcsVariantName:function(){return n},setPageType:function(e){o=e},getPageType:function(){return o},isStaticVersion:function(){return!(!window.accStaticr||!window.accStaticr.offline)}}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.ress=function(){var e=window.ressVersion||"desktop";return{setRessVersion:function(t){if(!t)return;e=t},getRessVersion:function(){return e}}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.push=function(){var e=!1;return{setPushDevMode:function(){e=!0},getPushDevMode:function(){return e}}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.domBuilder=function(){var e=!1;try{var t=Object.defineProperty({},"passive",{get:function(){e=!0}});window.addEventListener("testPassive",null,t),window.removeEventListener("testPassive",null,t)}catch(e){}return{createFragment:function(){return function e(t){var o={create:function a(e){var o=document.createElement(e);return t.appendChild(o),function e(t){var o={create:a,setHtml:function(e){return t.innerHTML=e,o},addHtml:function(e){var n=document.createElement("div");n.innerHTML=e;var i=n.childNodes;for(;i.length>0;)t.appendChild(i.item(0));return o},createText:function(e){var n=document.createTextNode(e);return t.appendChild(n),o},setAttr:function(e){for(var n in e)t.setAttribute(n,e[n]);return o},getDomElement:function(){return t},setCss:function(e){var n;for(var i in e)n=e[i],"float"===i?(t.style.cssFloat=n,t.style.styleFloat=n):t.style[s(i)]=n;return o},addClass:function(e){return r(t,e),o},removeClass:function(e){return i(t,e),o},appendChild:function(e){return t.appendChild(e),o},addEvent:function(e,i){return n(t,e,i),o}};return o;function a(n){var o=document.createElement(n);return t.appendChild(o),e(o)}function s(e){return e.replace(RegExp("-([a-z0-9])","gi"),function(e,t){return t?t.toUpperCase():""})}}(o)},setHtml:function(e){return t.innerHTML=e,o},addHtml:function(e){var n=document.createElement("div");n.innerHTML=e;var i=n.childNodes;for(;i.length>0;)t.appendChild(i.item(0));return o},createText:function(e){var n=document.createTextNode(e);return t.appendChild(n),o},setAttr:function(e){for(var n in e)t.setAttribute(n,e[n]);return o},getDomElement:function(){return t},setCss:function(e){var n;for(var i in e)n=e[i],"float"===i?(t.style.cssFloat=n,t.style.styleFloat=n):t.style[s(i)]=n;return o},addClass:function(e){return r(t,e),o},removeClass:function(e){return i(t,e),o},appendChild:function(e){return t.appendChild(e),o},addEvent:function(e,i){return n(t,e,i),o}};return o;function a(n){var o=document.createElement(n);return t.appendChild(o),e(o)}function s(e){return e.replace(RegExp("-([a-z0-9])","gi"),function(e,t){return t?t.toUpperCase():""})}}(document.createDocumentFragment())},hasClass:o,removeClass:i,addClass:r,addEvent:n,removeEvent:function(e,t,n){e.removeEventListener?e.removeEventListener(t,n,!1):e.detachEvent&&e.detachEvent("on"+t,n)}};function n(t,n,o,i){var r;t.addEventListener?(r=e?i:"object"==typeof i?i.capture||!1:i,t.addEventListener(n,o,r)):t.attachEvent&&t.attachEvent("on"+n,o)}function o(e,t){return void 0!==e.classList?e.classList.contains(t):RegExp("(\\s|^)"+t+"(\\s|$)").test(e.className)}function i(e,t){void 0!==e.classList?e.classList.remove(t):e.className=e.className.replace(RegExp("(\\s|^)"+t+"(\\s|$)")," ").replace(/^\s+|\s+$/g,"")}function r(e,t){if(t.indexOf(" ")>=0)for(var n=t.split(" "),i=0;i<n.length;i++)r(e,n[i]);else void 0!==e.classList?e.classList.add(t):o(e,t)||(e.className+=(e.className?" ":"")+t)}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.phxLayer=function(){var e=!1,t=!1,n=[],o=null;return{layerIsOpened:function(){return e},layerIsStatic:function(){return t},setStaticLayer:function(){t=!0},setCorrectScrollPosition:function(){o&&clearTimeout(o);o=setTimeout(function(){var e=n.shift();e&&e.rect&&e.domElement&&void 0!==window.pageYOffset&&setTimeout(function(){var t=e.domElement.getBoundingClientRect();0!==t.height&&Math.abs(e.rect.top-t.top)>10&&window.scrollTo(0,window.pageYOffset+t.top-e.rect.top)},600)},600)},setLayerOpenedStatus:function(t){e=t},setCorrectScrollPositionQueue:function(e){n.push(e)}}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.phx=function(){var e;window.phxScriptsLoaded=!1,window.interstitialAds={};var t=!1,n="desktop"!==window.nsglibCommon.ress.getRessVersion()?5e3:1e3;return function(){try{var e=localStorage.getItem("sg.phxautorefresh.time");t=e>+new Date-1e4,localStorage.removeItem("sg.phxautorefresh.time")}catch(e){t=!1}}(),e=setTimeout(o,n),window.nsglibCommon.domBuilder.addEvent(document,"scroll",o),window.nsglibCommon.domBuilder.addEvent(document,"mousedown",o),window.nsglibCommon.domBuilder.addEvent(document,"touchstart",o),window.onetAds.cmd.push(function(e){e.on("registerChangeViewCallback",function(e,t){t&&(window.interstitialAds={isActive:!0,callback:t})})}),{wasStaticScrollAutorefresh:function(){return t}};function o(){window.phxScriptsLoaded||(clearTimeout(e),window.nsglibCommon.domBuilder.removeEvent(document,"scroll",o),window.nsglibCommon.domBuilder.removeEvent(document,"mousedown",o),window.nsglibCommon.domBuilder.removeEvent(document,"touchstart",o),window.phxScriptsLoaded=!0,require(["local/common/phx/phx"],function(e){e.init()}))}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.headData=function(){var e={title:{get:function(){return document.title},set:function(e){document.title=e}},description:{tagName:"meta",query:{name:"description"},key:"content"},canonical:{tagName:"link",query:{rel:"canonical"},key:"href"},og:{title:{tagName:"meta",query:{property:"og:title"},key:"content"},description:{tagName:"meta",query:{property:"og:description"},key:"content"},url:{tagName:"meta",query:{property:"og:url"},key:"content"},type:{tagName:"meta",query:{property:"og:type"},key:"content"},locale:{tagName:"meta",query:{property:"og:locale"},key:"content"},image:{src:{tagName:"meta",query:{property:"og:image"},key:"content"},width:{tagName:"meta",query:{property:"og:image:width"},key:"content"},height:{tagName:"meta",query:{property:"og:image:height"},key:"content"},type:{tagName:"meta",query:{property:"og:image:type"},key:"content"}}},metaRobots:{tagName:"meta",query:{name:"robots"},key:"content"},referrer:{tagName:"meta",query:{name:"referrer"},key:"content"},fbAppId:{tagName:"meta",query:{name:"fb:app_id"},key:"content"}},t="phxInitialHeadData";return{get:n,set:o,save:function(){try{sessionStorage.setItem(t,JSON.stringify(n()))}catch(e){console.error(e)}},restore:function(){try{var n=JSON.parse(sessionStorage.getItem(t));o(n,e)}catch(e){console.error(e)}}};function n(t){var o=t||e;return Object.keys(o).reduce(function(e,t){var r=o[t],a=function(e){try{return JSON.parse(JSON.stringify(e))}catch(t){return console.warn(t),e}}(e);if(r.get)a[t]=r.get();else if(r.tagName){var s=i(r.tagName,r.query);a[t]=s?s[r.key]:void 0}else a[t]=n(o[t]);return a},{})}function o(t,n){var r=n||e;Object.keys(r).forEach(function(e){var n=r[e];if(n.set)n.set(t[e]||"");else if(n.tagName){var a={};a[n.key]=t[e]||"",function(e,t,n){var o=i(e,t)||function(e,t){var n=document.createElement(e);return Object.keys(t).forEach(function(e){n.setAttribute(e,t[e])}),document.head.appendChild(n),n}(e,t);Object.keys(n).forEach(function(e){o.setAttribute(e,n[e])})}(n.tagName,n.query,a)}else o(t[e],r[e])})}function i(e,t){var n=Object.keys(t).map(function(e){return["[",e,'="',t[e],'"]'].join("")}).join("");return document.querySelector(e+n)}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.phxAdsConfigurator=function(){var e,t=[],n="",o=!1,i=[],r={},a=[];return{destroyMainPageSlots:function(){i=window.dlApi.destroySlots()},destroyLayerSlots:function(){window.dlApi.destroySlots()},addKeywords:function(e){if("string"==typeof e)-1===t.indexOf(e)&&t.push(e);else if("object"==typeof e)for(var n=0;n<e.length;n++)-1===t.indexOf(e[n])&&t.push(e[n])},saveOriginalAdsConfiguration:function(){if(!0===o)return;o=!0,e={async:window.onetAds.async,no_gemius:window.onetAds.no_gemius,lazy:window.onetAds.lazy,lazyPercentage:window.onetAds.lazyPercentage,eventsapi:window.onetAds.eventsapi,DV:window.onetAds.DV,dv:window.onetAds.dv,clickmap:window.onetAds.clickmap,target:window.onetAds.target,keywords:[],kropka:{},keyvalues:{}},window.onetAds.kropka.DV&&(e.kropka.DV=window.onetAds.kropka.DV);window.onetAds.kropka.EI&&d(window.onetAds.kropka.EI.split(","));"mobile"===window.nsglibCommon.ress.getRessVersion()?(e.mobile=window.onetAds.mobile,e.autoslot=window.onetAds.autoslot,e.cookieInfo=window.onetAds.cookieInfo):(e.sgn_cookie=window.onetAds.sgn_cookie,e.noDot=0,e.ver=window.onetAds.ver,e.policy=window.onetAds.policy,e.whitelistId=window.onetAds.whitelistId,window.onetAds.keyvalues.city&&(e.keyvalues.city=window.onetAds.keyvalues.city));window.dlApi.on("afterDestroySlot",s),window.dlApi.on("showAds",window.nsglibCommon.phxLayer.setCorrectScrollPosition)},updateAdsConfiguration:function(e,t){var n={};n.DV=e.dv,n.adsNoBanner=e.noBanner,n.target=e.target,n.async=1,n.lazy=1,n.lazyPercentage=100,n.keywords=e.keywords,n.keyvalues=e.keyvalues||{},n.no_gemius=1,n.kropka=e.kropka,window.dlApi.changeView(n,t),window.dlApi.autoslot=0},restoreMainPageAdsConfiguration:function(o,i){e.keywords=[];for(var r=0;r<t.length;r++)e.keywords.push(t[r]);n&&(e.keyvalues.city=n);a.length&&(e.kropka.EI=a.join(","));e&&e.kropka&&e.kropka.DR&&delete e.kropka.DR;"nonInstantBack"===o&&(e.kropka.DR=localStorage.getItem("sg.externalOpen.url"));"scroll"===o?e.kropka.CD="auto":delete e.kropka.CD;window.dlApi.changeView(e,i),localStorage.getItem("sg.externalOpen.url")&&"nonInstantBack"===o&&(window.dlApi.dr=localStorage.getItem("sg.externalOpen.url"))},restoreMainPageSlots:function(){var e=window.dlApi.restoreSlots(i);if(e&&e.length)for(var t=0;t<e.length;t++)nsglibCommon.slotHelpers.addEventForStickySlots(e[t]),"flat-gigaboard1"===e[t].slot&&"desktop"===nsglibCommon.ress.getRessVersion()&&nsglibCommon.slotHelpers.addExtraClassForSportEuroSection(e[t]);window.dlApi.fetch()},registerRestoreContent:function(e){var t=document.getElementById(e);r[e]=t&&t.cloneNode(!0)},updateOnetAdsForLocalLink:function(e,o){if(e){var i=t.indexOf(e);i>-1&&t.splice(i,1)}-1===t.indexOf(o)&&t.push(o);n=o},addStaticSlots:function(){window.onetAds.cmd.push(function(e){e.defineSlot("flat-belkagorna","onet-ad-flat-belkagorna").setCollapseEmpty(!0)})},extendKropkaEi:d,afterDestroySlot:s};function s(e,t){if(!0!==window.nsglibCommon.phxLayer.layerIsOpened()){var n;if(r[t.originalDiv]&&(n=document.getElementById(t.originalDiv))){var o=r[t.originalDiv].cloneNode(!0);if(!o)return;n.parentNode.replaceChild(o,n),o.getAttribute("data-run-module-isrun")&&o.removeAttribute("data-run-module-isrun"),"true"===o.getAttribute("data-ad-hasasyncslot")&&o.removeAttribute("data-run-module"),require.runnerBox.runElement(o)}if("desktop"===nsglibCommon.ress.getRessVersion()&&/flat-link/.test(t.slot)&&(n=document.getElementById(t.originalDiv))){var i=n.previousSibling;i&&i.parentNode.removeChild(i)}}}function d(e){for(var t=0;t<e.length;t++)a.push(e[t])}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.dataLayer=function(){var e=null;return function(){var e=document.getElementById("dataLayerParams")?document.getElementById("dataLayerParams").getAttribute("content"):void 0;if(e)try{t(e=JSON.parse(e))}catch(e){console.error(e)}}(),{update:t,restore:function(){window.dataLayer=window.dataLayer||[],window.dataLayer.push(e)}};function t(t){if(window.dataLayer=window.dataLayer||[],null===e)for(var o in e={},t)t.hasOwnProperty(o)&&(e[o]=n(o));t.layerCloseType="",window.dataLayer.push(t)}function n(e){if(window.dataLayer)for(var t=0;t<window.dataLayer.length;t++)if(window.dataLayer[t][e])return window.dataLayer[t][e];return""}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.windowParams=function(){var e={};return function(){var e=document.getElementById("windowParams")?document.getElementById("windowParams").getAttribute("content"):void 0;if(e)try{var n=JSON.parse(e);t(n)}catch(e){console.error(e)}}(),{update:t,restore:function(){for(var t in e)e.hasOwnProperty(t)&&(window[t]=e[t])},windowSize:function(){var e=window.innerWidth||document.documentElement&&document.documentElement.clientWidth||document.body&&document.body.clientWidth||0,t=window.innerHeight||document.documentElement&&document.documentElement.clientHeight||document.body&&document.body.clientHeight||0;return{width:e,height:t}}};function t(t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=window[n]||void 0,window[n]=t[n])}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.superWidget=function(){return{moveAfterTop:function(){if(window.location.hash&&function(e){for(var t=["e404","odblokuj","powiadomienia","wylogowanie","zamkniecie","zapytaj"],n=0;n<t.length;n++)if(0===e.indexOf("#"+t[n]))return!0;return!1}(window.location.hash)||window.location.href.indexOf("/poczta")>-1){var e=document.getElementById("SuperWidgetModule");if(e){e=e.parentNode;var t=document.getElementById("onet-ad-top");t&&t.parentNode.insertBefore(e,t.nextSibling)}}}}}(),window.nsglibCommon=window.nsglibCommon||{},window.nsglibCommon.slotHelpers=function(){var e=[];return{setHeightForStickyContainer:function(e,t){t=t||0;for(var n=0,o=0;o<e.parentNode.childNodes.length;o++)e.parentNode.childNodes[o]!==e&&e.parentNode.childNodes[o].scrollHeight>0&&(n+=e.parentNode.childNodes[o].scrollHeight);var i=-n-t,r=e.parentNode.previousElementSibling.childNodes;if(r.length)for(var a=0;a<r.length;a++){var s=r[a];if(s.childNodes.length){var d=getComputedStyle(s);i+=parseInt(d.marginTop,10)+parseInt(d.marginBottom,10);for(var o=0;o<s.childNodes.length;o++)if(s.childNodes[o].scrollHeight){var l=s.childNodes[o].scrollHeight,u=getComputedStyle(s.childNodes[o]);l+=parseInt(u.marginTop,10)+parseInt(u.marginBottom,10),i+=l}}}i>0&&(e.style.minHeight=i+"px")},delay:t,tryFetchAds:function(t){if(t){var n=e.indexOf(t);n>-1&&e.splice(n,1)}e.length||nsglibCommon.phxLayer.layerIsOpened()||onetAds.cmd.push(function(e){e.fetch()})},findAdSlots:function(t){if(!t)return;var n=t.querySelectorAll('[data-ad-hasasyncslot="true"]');if(n.length)for(var o=0;o<n.length;o++)e.push(n[o].id);else"mobile"===nsglibCommon.ress.getRessVersion()&&onetAds.cmd.push(function(e){e.fetch()})},addEventForStickySlots:n,manageSlotPlaceholders:function(e){adsLib.triggerEmbedPlaceholder(e)},embedDesktopStickySlot:function(e){var o=!1;if(!e||!e.slot||!e.slot.slot||"desktop"!==nsglibCommon.ress.getRessVersion())return;if(n(e.slot),!e.isSticky)return;!function(n){var i=document.getElementById(n);if(i)if(e.stickyHeight)i&&(i.style.minHeight=e.stickyHeight+"px");else{dlApi.on("refreshStickySlots",function(){if(o)return;o=!0,t(function(){try{window.nsglibCommon.slotHelpers.setHeightForStickyContainer(i),o=!1}catch(e){}},600)})}}("sticky"+e.slot.div)},addExtraClassForSportEuroSection:function(e){if(!e)return;var t=document.getElementById(e.div);if(!t)return;function n(e){var n=t.parentNode.querySelector(".items");n&&("ADD"===e?nsglibCommon.domBuilder.addClass(n,"hideRows"):nsglibCommon.domBuilder.removeClass(n,"hideRows"))}o(t),e.on("render",function(){n("ADD"),o(t)}),e.on("destroy",n)}};function t(e,t){if(t=parseInt(t,10),e&&t){var n=(new Date).getTime();!function o(){(new Date).getTime()-n>=t?e():window.requestAnimationFrame(o)}()}}function n(e){if("mobile"!==nsglibCommon.ress.getRessVersion()&&e){/^(flat-gigaboard|panel|right)\d+$/gm.exec(e.slot)&&(e.on("render",function(e){onetAds.fire("refreshStickySlots",e)}),e.on("empty",function(e){onetAds.fire("refreshStickySlots",e)}),e.on("afterDestroy",function(e){onetAds.fire("refreshStickySlots",e)}))}}function o(e){var t=function(e){for(;(e=e.parentElement)&&!e.classList.contains("layoutWrapper"););return e}(e);t&&t.getAttribute("id")&&require(["local/desktop/components/alignColumn"],function(e){var n=t.getAttribute("id");e.rightUpdate(n,16),setTimeout(function(){e.rightUpdate(n,16)},3e3)})}}(),window.store=function(){var e,t,n=[],o={},i=null,r=!1,a=!1,s="",d=null;return{setAggId:function(e){s=e},getAggId:function(){return s},defineAsyncSection:function(e,t){e&&n.push({id:e,domElement:window.document.getElementById(e)})},observe:function(t){if(i=document.querySelector(t),window.accStaticr)return void i.setAttribute("style","display:none;");n=function(){i&&e&&e.observe(i)},u()?window.document.addEventListener("DOMContentLoaded",n):n();var n},getUsedUuids:function(){for(var e=Object.keys(o),t=[],n=e.length;n>0;n--){var i=e[n-1];o.hasOwnProperty(i)&&o[i].uuids&&o[i].uuids.length&&Array.prototype.push.apply(t,o[i].uuids)}return t},setUsedUuids:function(e){if(e.parentSplit)return void function(e){if(!e.sectionsIds||!e.sectionsIds.length)return;o[e.parentSplit]||(o[e.parentSplit]={uuids:[]});for(var t=0;t<e.sectionsIds.length;t++)for(var n=e.sectionsIds[t],i=e.domElement.querySelectorAll(n+" [data-ei]"),r=0;r<i.length;r++){var a=i[r];a.hasAttribute("data-uuid-ui")&&o[e.parentSplit].uuids.push(a.getAttribute("data-uuid-ui"))}}(e);var t=e.domElement.querySelectorAll("[data-ei]");if(!t||!t.length)return;o[e.id]||(o[e.id]={uuids:[]});for(var n=0;n<t.length;n++){var i=t[n];i.hasAttribute("data-uuid-ui")&&o[e.id].uuids.push(i.getAttribute("data-uuid-ui"))}},initObserver:function(e){d=e+"px",u()?window.document.addEventListener("DOMContentLoaded",l):l()},restore:function(){m()},processAjaxPage:m};function l(){"function"==typeof window.IntersectionObserver&&(e=new IntersectionObserver(function(e){for(var t=0;t<e.length;t++)r=e[t].isIntersecting,c()},{rootMargin:d}))}function u(){return/Trident\/|MSIE/.test(window.navigator.userAgent)}function c(){if(!0===r&&!0!==a&&!nsglibCommon.phxLayer.layerIsOpened()){var o=n.shift();if(!o)return e.unobserve(i),void i.setAttribute("style","display:none;");!function(e){var n=e.id.split("_")[1];if(!n)return;a=!0,require(["local/common/picoAjax/index"],function(o){o({method:"GET",url:"/getAjaxPage?id="+n,retry:5,success:function(n){n?function(e){e.tmpDiv=document.createElement("div"),e.tmpDiv.innerHTML=e.text,t=e;var n=e.tmpDiv.querySelectorAll("div[data-split]");if(n.length){for(var o=[],i=[],r=0;r<n.length;r++){var a=n[r].getAttribute("data-split");o.push({dom:n[r],id:a}),i.push(a)}require(["local/common/externalContent/index"],function(n){n.get({elements:o,parentSplit:t.domElement.id,domElement:e.tmpDiv,ids:i})})}else m()}({text:n,domElement:e.domElement}):f()},failure:f})})}(o)}}function m(){window.nsglibCommon.phxLayer.layerIsOpened()||(t&&t.domElement&&t.tmpDiv&&(t.domElement.appendChild(t.tmpDiv),function(e){for(var t=e.domElement.querySelectorAll("[data-ei]"),n=[],o=0;o<t.length;o++){var i=t[o].getAttribute("data-ei");-1===n.indexOf(i)&&n.push(i)}window.dlApi&&window.dlApi.registerAureusOffers&&n.length&&(window.dlApi.registerAureusOffers(n),nsglibCommon.phxAdsConfigurator.extendKropkaEi(n))}({domElement:t.tmpDiv}),"mobile"===nsglibCommon.ress.getRessVersion()&&nsglibCommon.slotHelpers.manageSlotPlaceholders(t.domElement),nsglibCommon.slotHelpers.findAdSlots(t.domElement),require.runnerBox.runElement(t.domElement),t=null),f())}function f(){setTimeout(function(){a=!1,c()},0)}}();
+            window.nsglibCommon = window.nsglibCommon || {};
+
+window.nsglibCommon.gemius = (function() {
+
+    var inserted = false;
+    var defaultGemiusId = null;
+
+    return {
+        hit : hit,
+        logInserted : logInserted,
+        logDefaultId : logDefaultId
+    };
+
+    function logDefaultId(gemiusId) {
+
+        defaultGemiusId = gemiusId;
+    }
+
+    function logInserted() {
+
+        inserted = true;
+    }
+
+    function hit(gemiusId) {
+
+        if (inserted === false) {
+            insertGemius();
+        }
+
+        if (typeof (gemius_hit) === 'function') {
+
+            if (typeof gemiusId !== 'undefined') {
+
+                gemius_hit(gemiusId);
+
+            } else if (defaultGemiusId) {
+
+                gemius_hit(defaultGemiusId);
+
+            } else {
+
+                console.log('+ gemius -> brak zdefiniowanego gemius id');
+            }
+        } else {
+            console.log('brak funkcji gemius_hit');
+        }
+    }
+
+    function insertGemius() {
+
+        inserted = true;
+
+        function gemius_pending(i) {
+            window[i] = window[i] || function() {
+                var x = window[i + '_pdata'] = window[i + '_pdata'] || [];
+                x[x.length] = arguments;
+            };
+        }
+
+        gemius_pending('gemius_hit');
+        gemius_pending('gemius_event');
+        gemius_pending('pp_gemius_hit');
+        gemius_pending('pp_gemius_event');
+
+        (function(d, t) {
+            try {
+                var gt = d.createElement(t),
+                    s = d.getElementsByTagName(t)[0],
+                    l = 'http' + ((location.protocol == 'https:') ? 's' : '');
+                gt.setAttribute('async', 'async');
+                gt.setAttribute('defer', 'defer');
+                gt.src = l + '://onet.hit.gemius.pl/xgemius.js';
+                s.parentNode.insertBefore(gt, s);
+            } catch (e) {}
+        })(document, 'script');
+
+    }
+})();
+        window.store.initObserver('1500')
+        
+
+            nsglibCommon.setPageType('default');
+        
+
+    window.onetAds.noDot = (nsglib.wasAutorefresh() ? 1 : 0);
+    if(window.nsglibCommon.phx.wasStaticScrollAutorefresh() === true) {
+        window.onetAds.kropka.CD = 'auto';
+    }
+
+    
+
+
+            nsglibCommon.setWebsiteVariant('APROD_2_12_X');
+            nsglibCommon.setUcsVariantName('APROD_2_12_X');
+            nsglib.adsSetupEvent();
+
+            
+
+        
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-belkagorna", "onet-ad-flat-belkagorna").setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 500);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+{"data":{"ress":"desktop","test":"false","data":{"items":{"270085":{"weather":{"temperature":21,"temperatureTomorrow":24,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Białystok","url":"https://pogoda.onet.pl/prognoza-pogody/bialystok-270085"},"pollution":{"pollutionLevel":1,"tooOld":false}},"276560":{"weather":{"temperature":21,"temperatureTomorrow":22,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/1.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Słonecznie","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Bydgoszcz","url":"https://pogoda.onet.pl/prognoza-pogody/bydgoszcz-276560"},"pollution":{"pollutionLevel":1,"tooOld":false}},"287788":{"weather":{"temperature":22,"temperatureTomorrow":21,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/1.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Słonecznie","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Gdańsk","url":"https://pogoda.onet.pl/prognoza-pogody/gdansk-287788"},"pollution":{"pollutionLevel":1,"tooOld":false}},"289581":{"weather":{"temperature":22,"temperatureTomorrow":20,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z przelotnymi opadami deszczu","tooOld":false},"city":{"name":"Gorzów Wielkopolski","url":"https://pogoda.onet.pl/prognoza-pogody/gorzow-wielkopolski-289581"},"pollution":{"pollutionLevel":2,"tooOld":true}},"299998":{"weather":{"temperature":22,"temperatureTomorrow":25,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Katowice","url":"https://pogoda.onet.pl/prognoza-pogody/katowice-299998"},"pollution":{"pollutionLevel":1,"tooOld":false}},"300882":{"weather":{"temperature":22,"temperatureTomorrow":24,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Kielce","url":"https://pogoda.onet.pl/prognoza-pogody/kielce-300882"},"pollution":{"pollutionLevel":1,"tooOld":false}},"304806":{"weather":{"temperature":20,"temperatureTomorrow":18,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z przelotnymi opadami deszczu","tooOld":false},"city":{"name":"Koszalin","url":"https://pogoda.onet.pl/prognoza-pogody/koszalin-304806"},"pollution":{"pollutionLevel":2,"tooOld":false}},"306020":{"weather":{"temperature":21,"temperatureTomorrow":25,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z przelotnymi opadami deszczu","tooOld":false},"city":{"name":"Kraków","url":"https://pogoda.onet.pl/prognoza-pogody/krakow-306020"},"pollution":{"pollutionLevel":1,"tooOld":false}},"311624":{"weather":{"temperature":22,"temperatureTomorrow":25,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Lublin","url":"https://pogoda.onet.pl/prognoza-pogody/lublin-311624"},"pollution":{"pollutionLevel":1,"tooOld":false}},"313660":{"weather":{"temperature":21,"temperatureTomorrow":24,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Pochmurno z przelotnymi opadami deszczu","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Łódź","url":"https://pogoda.onet.pl/prognoza-pogody/lodz-313660"},"pollution":{"pollutionLevel":2,"tooOld":false}},"325715":{"weather":{"temperature":20,"temperatureTomorrow":22,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/1.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Słonecznie","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Olsztyn","url":"https://pogoda.onet.pl/prognoza-pogody/olsztyn-325715"},"pollution":{"pollutionLevel":1,"tooOld":false}},"325985":{"weather":{"temperature":21,"temperatureTomorrow":24,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Opole","url":"https://pogoda.onet.pl/prognoza-pogody/opole-325985"},"pollution":{"pollutionLevel":1,"tooOld":false}},"335979":{"weather":{"temperature":20,"temperatureTomorrow":23,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Pochmurno z przelotnymi opadami deszczu","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Poznań","url":"https://pogoda.onet.pl/prognoza-pogody/poznan-335979"},"pollution":{"pollutionLevel":3,"tooOld":false}},"342624":{"weather":{"temperature":20,"temperatureTomorrow":25,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z przelotnymi opadami deszczu","tooOld":false},"city":{"name":"Rzeszów","url":"https://pogoda.onet.pl/prognoza-pogody/rzeszow-342624"},"pollution":{"pollutionLevel":2,"tooOld":false}},"351446":{"weather":{"temperature":19,"temperatureTomorrow":22,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Suwałki","url":"https://pogoda.onet.pl/prognoza-pogody/suwalki-351446"},"pollution":{"pollutionLevel":1,"tooOld":false}},"351892":{"weather":{"temperature":23,"temperatureTomorrow":20,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z przelotnymi opadami deszczu","tooOld":false},"city":{"name":"Szczecin","url":"https://pogoda.onet.pl/prognoza-pogody/szczecin-351892"},"pollution":{"pollutionLevel":2,"tooOld":false}},"355171":{"weather":{"temperature":21,"temperatureTomorrow":23,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Toruń","url":"https://pogoda.onet.pl/prognoza-pogody/torun-355171"},"pollution":{"pollutionLevel":2,"tooOld":false}},"357732":{"weather":{"temperature":20,"temperatureTomorrow":24,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Pochmurno z przelotnymi opadami deszczu","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Warszawa","url":"https://pogoda.onet.pl/prognoza-pogody/warszawa-357732"},"pollution":{"pollutionLevel":1,"tooOld":false}},"362450":{"weather":{"temperature":22,"temperatureTomorrow":24,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/7.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z opadami deszczu","tooOld":false},"city":{"name":"Wrocław","url":"https://pogoda.onet.pl/prognoza-pogody/wroclaw-362450"},"pollution":{"pollutionLevel":1,"tooOld":false}},"365801":{"weather":{"temperature":17,"temperatureTomorrow":21,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z przelotnymi opadami deszczu","tooOld":false},"city":{"name":"Zakopane","url":"https://pogoda.onet.pl/prognoza-pogody/zakopane-365801"},"pollution":{"pollutionLevel":1,"tooOld":true}},"368720":{"weather":{"temperature":21,"temperatureTomorrow":22,"icoUrl":"https://ocdn.eu/weather/weather_state_icons/2.svg","icoTomorrowUrl":"https://ocdn.eu/weather/weather_state_icons/5.svg","description":"Przejaśnienia, zachmurzenie umiarkowane","descriptionTomorrow":"Pochmurno z przelotnymi opadami deszczu","tooOld":false},"city":{"name":"Zielona Góra","url":"https://pogoda.onet.pl/prognoza-pogody/zielona-gora-368720"},"pollution":{"pollutionLevel":1,"tooOld":true}}},"pollution":{"pollutionLevelDescriptions":{"lev0":"Brak danych","lev1":"Dobry","lev2":"Dobry","lev3":"Umiarkowany","lev4":"Zły","lev5":"Bardzo zły","lev6":"Bardzo zły"}}},"url":{"query":{"ress":"desktop","url":"https://www.onet.pl/","test":"false","websiteVariant":"APROD_2_12_X"},"pathname":"/widgets/superwidget","asPath":"/widgets/superwidget?ress=desktop&url=https%3A%2F%2Fwww.onet.pl%2F&test=false&websiteVariant=APROD_2_12_X"}},"modulePath":"Widget/SuperWidget","id":"SuperWidgetModule"}
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("top", "onet-ad-top").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-hpl", "flat-hpl").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-natnav", "onet-ad-flat-natnav").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=importantnews]'),
+                        id: 'importantnews'
+                    });
+                
+
+            store.setUsedUuids({
+                domElement: document.querySelector('[data-section=importantnews]'),
+                id: 'importantnews'
+            });
+        
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("top-extra", "slot-top-extra").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-topbar", "flat-top-bar").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-pasekart", "onet-ad-flat-pasekart").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-magazyn", "onet-ad-flat-magazyn").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                                    onetAds.cmd.push(function (dlApi) {
+                                        dlApi.defineSlot("flat-player-branding-sg", "onet-ad-flat-player-branding-sg-2", {kwrd: 'big'}).setCollapseEmpty(true);
+                                    });
+                                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle1", "regtangle1-agg");  slot.imgTransform("resizecropauto", { width: 300, height: 168});    });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=importantnews2]'),
+                        id: 'importantnews2'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-top');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-top');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+
+        store.setAggId('aggregator3');
+    
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("nativestd", "agg-nativestd-pos1");    nsglibCommon.phxAdsConfigurator.registerRestoreContent("agg-nativestd-pos1"); });
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-top"),id:'split-section-top'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-a"),id:'split-section-a'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-b"),id:'split-section-b'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-c"),id:'split-section-c'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-d"),id:'split-section-d'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-e"),id:'split-section-e'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-f"),id:'split-section-f'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-g"),id:'split-section-g'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-h"),id:'split-section-h'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-i"),id:'split-section-i'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-j"),id:'split-section-j'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-k"),id:'split-section-k'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-l"),id:'split-section-l'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-m"),id:'split-section-m'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-n"),id:'split-section-n'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-o"),id:'split-section-o'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-p"),id:'split-section-p'})
+            
+
+                store.setUsedUuids({domElement:document.querySelector("#split-section-q"),id:'split-section-q'})
+            
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right", "slotright1stickydestkop").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                nsglib.markHpLiveTop();
+            
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-gigaboard1", "onet-ad-flat-gigaboard1").setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 500);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                            nsglibCommon.slotHelpers.addExtraClassForSportEuroSection(slot);
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natsport", "onet-ad-flat-natsport-pos4", {"pos":"4"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natsport-pos4"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-1", {"pos":"1"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-1", {"pos":"1"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-1"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle2", "rectangle2-agg");  slot.imgTransform("resizecropauto", { width: 300, height: 168});    });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxa]'),
+                        id: 'bigboxa'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-a');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-a');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle1stickydesktop", {"pos":"1"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-gigaboard2", "onet-ad-flat-gigaboard2").setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 500);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("nativestd", "agg-nativestd-2", {"pos":"2"});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("agg-nativestd-2"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-2", {"pos":"2"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-2", {"pos":"2"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-2"); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxb]'),
+                        id: 'bigboxb'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-b');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-b');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natbiznes", "onet-ad-flat-natbiznes-pos:4", {"pos":"4"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natbiznes-pos:4"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natbiznes", "onet-ad-flat-natbiznes-pos7", {"pos":"7"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natbiznes-pos7"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natbiznes", "onet-ad-flat-natbiznes-pos11", {"pos":"11"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natbiznes-pos11"); });
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle2stickydesktop", {"pos":"2"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-gigaboard3", "onet-ad-flat-gigaboard3").setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 75);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-3", {"pos":"3"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-3"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-boxright4", "flat-boxright4");  slot.imgTransform("resizecropauto", { width: 300, height: 168});    });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-4", {"pos":"4"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-4"); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxc]'),
+                        id: 'bigboxc'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-c');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-c');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-3", {"pos":"3"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxd]'),
+                        id: 'bigboxd'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-d');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-d');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle3stickydesktop", {"pos":"3"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-gigaboard4", "onet-ad-flat-gigaboard4").setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 75);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-pos4-vod", {"pos":"4"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natfilmksiazki", "onet-ad-flat-natfilmksiazki-pos2", {"pos":"2"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natfilmksiazki-pos2"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natfilmksiazki", "onet-ad-flat-natfilmksiazki-pos9", {"pos":"9"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natfilmksiazki-pos9"); });
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle4stickydesktop", {"pos":"4"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("panel", "slot-panel1", {"pos":"1"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-5", {"pos":"5"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-5", {"pos":"5"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-5"); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxe]'),
+                        id: 'bigboxe'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-e');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-e');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-6", {"pos":"6"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxf]'),
+                        id: 'bigboxf'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-f');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-f');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-nattech", "onet-ad-flat-nattech-pos4", {"pos":"4"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-nattech-pos4"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-nattech", "onet-ad-flat-nattech-pos7", {"pos":"7"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-nattech-pos7"); });
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle5stickydesktop", {"pos":"5"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natofertyinspiracje", "onet-ad-flat-natofertyinspiracje-pos1", {"pos":"1"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natofertyinspiracje-pos1"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-offer", "onet-ad-flat-offer-pos1", {"pos":"1"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-offer-pos1"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-offer", "onet-ad-flat-offer-pos2", {"pos":"2"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-offer-pos2"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-offer", "onet-ad-flat-offer-pos3", {"pos":"3"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-offer-pos3"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-7", {"pos":"7"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxg]'),
+                        id: 'bigboxg'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-g');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-g');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle6stickydesktop", {"pos":"6"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("panel", "slot-panel2", {"pos":"2"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-6", {"pos":"6"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-6"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-8", {"pos":"8"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxh]'),
+                        id: 'bigboxh'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-h');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-h');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-9", {"pos":"9"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxi]'),
+                        id: 'bigboxi'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-i');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-i');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natmoto", "onet-ad-flat-natmoto-pos3", {"pos":"3"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natmoto-pos3"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natmoto", "onet-ad-flat-natmoto-pos8", {"pos":"8"});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natmoto-pos8"); });
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle7stickydesktop", {"pos":"7"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("panel", "slot-panel3", {"pos":"3"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-10", {"pos":"10"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-7", {"pos":"7"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-7"); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxj]'),
+                        id: 'bigboxj'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-j');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-j');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-11", {"pos":"11"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxk]'),
+                        id: 'bigboxk'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-k');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-k');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natpodroze", "onet-ad-flat-natpodroze-pos4", {"pos":"4"});  slot.imgTransform("resizecropauto", { width: 95, height: 59});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natpodroze-pos4"); });
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle8stickydesktop", {"pos":"8"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("panel", "slot-panel4", {"pos":"4"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-12", {"pos":"12"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-8", {"pos":"8"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-8"); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxl]'),
+                        id: 'bigboxl'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-l');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-l');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-13", {"pos":"13"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxm]'),
+                        id: 'bigboxm'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-m');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-m');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natnoizz", "onet-ad-flat-natnoizz-pos2", {"pos":"2"});  slot.imgTransform("resizecropauto", { width: 95, height: 59});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natnoizz-pos2"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natnoizz", "onet-ad-flat-natnoizz-pos3", {"pos":"3"});  slot.imgTransform("resizecropauto", { width: 95, height: 59});   nsglibCommon.phxAdsConfigurator.registerRestoreContent("onet-ad-flat-natnoizz-pos3"); });
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle9stickydesktop", {"pos":"9"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("panel", "onet-ad-panel5", {"pos":"5"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-9", {"pos":"9"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-9"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-14", {"pos":"14"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+            (function(){
+                var section = document.getElementById('split-section-n');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-n');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-10", {"pos":"10"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-10"); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxo]'),
+                        id: 'bigboxo'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-o');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-o');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-widget", "onet-ad-flat-widget").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-15", {"pos":"15"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+                    store.setUsedUuids({
+                        domElement: document.querySelector('[data-section=bigboxp]'),
+                        id: 'bigboxp'
+                    });
+                
+
+            (function(){
+                var section = document.getElementById('split-section-p');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-p');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("flat-natwall", "natwall-agg-11", {"pos":"11"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    nsglibCommon.phxAdsConfigurator.registerRestoreContent("natwall-agg-11"); });
+window.onetAds.cmd.push(function (dlApi) {var slot = dlApi.defineSlot("rectangle", "rectangle-agg-16", {"pos":"16"});  slot.imgTransform("resizecropauto", { width: 300, height: 168});    slot.setProperty("lazyPercentage", 100); });
+
+            (function(){
+                var section = document.getElementById('split-section-q');
+                if(section) {
+                    var placeholder = document.getElementById('split-placeholder-q');
+                    if(placeholder) {
+                        placeholder.appendChild(section);
+                    }
+                }
+            })();
+        
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("right2", "slotrectangle10stickydesktop", {"pos":"10"}).setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazyPercentage', 100);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "true", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("layer", "onet-ad-cbreak").setCollapseEmpty(true);
+                        
+                        slot.setProperty('lazy', 0);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+
+        window.store.observe('#observeContainer');
+    
+
+                    onetAds.cmd.push(function (dlApi) {
+                        var slot = dlApi.defineSlot("flat-belkadolna", "onet-ad-flat-belkadolna").setCollapseEmpty(true);
+                        
+                        nsglibCommon.slotHelpers.embedDesktopStickySlot({slot: slot, isSticky: "false", stickyHeight: ""});
+                        /* TODO: usunąć po EURO */
+                        
+                    });
+                
+/* <![CDATA[ */
+        onetAds.time['TI1']=(new Date()).getTime()-onetAds['startTime'];
+    /* ]]> */
+
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+        onetAds.keyvalues.layout = 'pwa';
+    }
+    
+
+        window.nsglibCommon.superWidget.moveAfterTop();
+    
+{"props":{"pageProps":{}},"page":"/loader","query":{},"buildId":"c956d14","assetPrefix":"https://ocdn.eu/phx","nextExport":true,"autoExport":true,"isFallback":false,"head":[["meta",{"charSet":"utf-8"}],["meta",{"name":"viewport","content":"width=device-width"}]]}

@@ -1,0 +1,2821 @@
+(function webpackUniversalModuleDefinition(root, factory) {
+ if(typeof exports === 'object' && typeof module === 'object')
+  module.exports = factory(require("base"), require("core"), require("ui"), require("feature-hdfc-navigation"), require("feature-hdfc-cryptojs"));
+ else if(typeof define === 'function' && define.amd)
+  define("feature-hdfc-common-utility", ["base", "core", "ui", "feature-hdfc-navigation", "feature-hdfc-cryptojs"], factory);
+ else if(typeof exports === 'object')
+  exports["feature-hdfc-common-utility"] = factory(require("base"), require("core"), require("ui"), require("feature-hdfc-navigation"), require("feature-hdfc-cryptojs"));
+ else
+  root["feature-hdfc-common-utility"] = factory(root["base"], root["core"], root["ui"], root["feature-hdfc-navigation"], root["feature-hdfc-cryptojs"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_84__, __WEBPACK_EXTERNAL_MODULE_103__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/  // The module cache
+/******/  var installedModules = {};
+/******/
+/******/  // The require function
+/******/  function __webpack_require__(moduleId) {
+/******/
+/******/   // Check if module is in cache
+/******/   if(installedModules[moduleId])
+/******/    return installedModules[moduleId].exports;
+/******/
+/******/   // Create a new module (and put it into the cache)
+/******/   var module = installedModules[moduleId] = {
+/******/    exports: {},
+/******/    id: moduleId,
+/******/    loaded: false
+/******/   };
+/******/
+/******/   // Execute the module function
+/******/   modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/   // Flag the module as loaded
+/******/   module.loaded = true;
+/******/
+/******/   // Return the exports of the module
+/******/   return module.exports;
+/******/  }
+/******/
+/******/
+/******/  // expose the modules object (__webpack_modules__)
+/******/  __webpack_require__.m = modules;
+/******/
+/******/  // expose the module cache
+/******/  __webpack_require__.c = installedModules;
+/******/
+/******/  // __webpack_public_path__
+/******/  __webpack_require__.p = "";
+/******/
+/******/  // Load entry module and return exports
+/******/  return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 0:
+/***/ (function(module, exports, __webpack_require__) {
+
+ module.exports = __webpack_require__(98);
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports) {
+
+ module.exports = function(module) {
+  if(!module.webpackPolyfill) {
+   module.deprecate = function() {};
+   module.paths = [];
+   // module.parent = undefined by default
+   module.children = [];
+   module.webpackPolyfill = 1;
+  }
+  return module;
+ }
+
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+ module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports) {
+
+ module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports) {
+
+ module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+
+/***/ }),
+
+/***/ 84:
+/***/ (function(module, exports) {
+
+ module.exports = __WEBPACK_EXTERNAL_MODULE_84__;
+
+/***/ }),
+
+/***/ 98:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {'use strict';
+ 
+ !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, module, __webpack_require__(4), __webpack_require__(5), __webpack_require__(6), __webpack_require__(99), __webpack_require__(84), __webpack_require__(100), __webpack_require__(101), __webpack_require__(102), __webpack_require__(104), __webpack_require__(105), __webpack_require__(106), __webpack_require__(109), __webpack_require__(110)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module, base, core, ui) {
+     'use strict';
+ 
+     module.name = 'feature-hdfc-common-utility';
+ 
+     __webpack_require__(99);
+     var navigationFramework = __webpack_require__(84);navigationFramework.async = true;
+ 
+     var deps = [core.name, ui.name, navigationFramework.name];
+ 
+     run.$inject = ['$rootScope', '$uibModalStack'];
+     function run($rootScope, $uibModalStack) {
+         $rootScope.$watch(function () {
+             return $uibModalStack.getTop();
+         }, function (newValue, oldValue) {
+             if (newValue !== oldValue) {
+                 if (newValue) {
+                     gadgets.pubsub.publish("enableDisableBackButton", { "enable": 0 });
+                 } else {
+                     gadgets.pubsub.publish("enableDisableBackButton", { "enable": 1 });
+                 }
+             }
+         });
+     }
+ 
+     module.exports = base.createModule(module.name, deps).directive(__webpack_require__(100)).filter(__webpack_require__(101)).service(__webpack_require__(102)).service(__webpack_require__(104)).service(__webpack_require__(105)).service(__webpack_require__(106)).service(__webpack_require__(109)).service(__webpack_require__(110)).run(run);
+ }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+ /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, exports) {
+
+ "use strict";
+ 
+ /**
+  * Bunch of useful filters for angularJS(with no external dependencies!)
+  * @version v0.5.16 - 2017-04-07 * @link https://github.com/a8m/angular-filter
+  * @author Ariel Mashraki <ariel@mashraki.co.il>
+  * @license MIT License, http://www.opensource.org/licenses/MIT
+  */!function (a, b, c) {
+   "use strict";
+   function d(a) {
+     return E(a) ? a : Object.keys(a).map(function (b) {
+       return a[b];
+     });
+   }function e(a) {
+     return null === a;
+   }function f(a, b) {
+     var d = Object.keys(a);return d.map(function (d) {
+       return b[d] !== c && b[d] == a[d];
+     }).indexOf(!1) == -1;
+   }function g(a, b) {
+     function c(a, b, c) {
+       for (var d = 0; b + d <= a.length;) {
+         if (a.charAt(b + d) == c) return d;d++;
+       }return -1;
+     }for (var d = 0, e = 0; e <= b.length; e++) {
+       var f = c(a, d, b.charAt(e));if (f == -1) return !1;d += f + 1;
+     }return !0;
+   }function h(a, b, c) {
+     var d = 0;return a.filter(function (a) {
+       var e = y(c) ? d < b && c(a) : d < b;return d = e ? d + 1 : d, e;
+     });
+   }function i(a, b) {
+     return Math.round(a * Math.pow(10, b)) / Math.pow(10, b);
+   }function j(a, b, c) {
+     b = b || [];var d = Object.keys(a);return d.forEach(function (d) {
+       if (D(a[d]) && !E(a[d])) {
+         var e = c ? c + "." + d : c;j(a[d], b, e || d);
+       } else {
+         var f = c ? c + "." + d : d;b.push(f);
+       }
+     }), b;
+   }function k(a) {
+     return a && a.$evalAsync && a.$watch;
+   }function l() {
+     return function (a, b) {
+       return a > b;
+     };
+   }function m() {
+     return function (a, b) {
+       return a >= b;
+     };
+   }function n() {
+     return function (a, b) {
+       return a < b;
+     };
+   }function o() {
+     return function (a, b) {
+       return a <= b;
+     };
+   }function p() {
+     return function (a, b) {
+       return a == b;
+     };
+   }function q() {
+     return function (a, b) {
+       return a != b;
+     };
+   }function r() {
+     return function (a, b) {
+       return a === b;
+     };
+   }function s() {
+     return function (a, b) {
+       return a !== b;
+     };
+   }function t(a) {
+     return function (b, c) {
+       return b = D(b) ? d(b) : b, !(!E(b) || z(c)) && b.some(function (b) {
+         return B(c) && D(b) || A(c) ? a(c)(b) : b === c;
+       });
+     };
+   }function u(a, b) {
+     return b = b || 0, b >= a.length ? a : E(a[b]) ? u(a.slice(0, b).concat(a[b], a.slice(b + 1)), b) : u(a, b + 1);
+   }function v(a) {
+     return function (b, c) {
+       function e(a, b) {
+         return !z(b) && a.some(function (a) {
+           return I(a, b);
+         });
+       }if (b = D(b) ? d(b) : b, !E(b)) return b;var f = [],
+           g = a(c);return z(c) ? b.filter(function (a, b, c) {
+         return c.indexOf(a) === b;
+       }) : b.filter(function (a) {
+         var b = g(a);return !e(f, b) && (f.push(b), !0);
+       });
+     };
+   }function w(a, b, c) {
+     return b ? a + c + w(a, --b, c) : a;
+   }function x() {
+     return function (a) {
+       return B(a) ? a.split(" ").map(function (a) {
+         return a.charAt(0).toUpperCase() + a.substring(1);
+       }).join(" ") : a;
+     };
+   }var y = b.isDefined,
+       z = b.isUndefined,
+       A = b.isFunction,
+       B = b.isString,
+       C = b.isNumber,
+       D = b.isObject,
+       E = b.isArray,
+       F = b.forEach,
+       G = b.extend,
+       H = b.copy,
+       I = b.equals;String.prototype.contains || (String.prototype.contains = function () {
+     return String.prototype.indexOf.apply(this, arguments) !== -1;
+   }), b.module("a8m.angular", []).filter("isUndefined", function () {
+     return function (a) {
+       return b.isUndefined(a);
+     };
+   }).filter("isDefined", function () {
+     return function (a) {
+       return b.isDefined(a);
+     };
+   }).filter("isFunction", function () {
+     return function (a) {
+       return b.isFunction(a);
+     };
+   }).filter("isString", function () {
+     return function (a) {
+       return b.isString(a);
+     };
+   }).filter("isNumber", function () {
+     return function (a) {
+       return b.isNumber(a);
+     };
+   }).filter("isArray", function () {
+     return function (a) {
+       return b.isArray(a);
+     };
+   }).filter("isObject", function () {
+     return function (a) {
+       return b.isObject(a);
+     };
+   }).filter("isEqual", function () {
+     return function (a, c) {
+       return b.equals(a, c);
+     };
+   }), b.module("a8m.conditions", []).filter({ isGreaterThan: l, ">": l, isGreaterThanOrEqualTo: m, ">=": m, isLessThan: n, "<": n, isLessThanOrEqualTo: o, "<=": o, isEqualTo: p, "==": p, isNotEqualTo: q, "!=": q, isIdenticalTo: r, "===": r, isNotIdenticalTo: s, "!==": s }), b.module("a8m.is-null", []).filter("isNull", function () {
+     return function (a) {
+       return e(a);
+     };
+   }), b.module("a8m.after-where", []).filter("afterWhere", function () {
+     return function (a, b) {
+       if (a = D(a) ? d(a) : a, !E(a) || z(b)) return a;var c = a.map(function (a) {
+         return f(b, a);
+       }).indexOf(!0);return a.slice(c === -1 ? 0 : c);
+     };
+   }), b.module("a8m.after", []).filter("after", function () {
+     return function (a, b) {
+       return a = D(a) ? d(a) : a, E(a) ? a.slice(b) : a;
+     };
+   }), b.module("a8m.before-where", []).filter("beforeWhere", function () {
+     return function (a, b) {
+       if (a = D(a) ? d(a) : a, !E(a) || z(b)) return a;var c = a.map(function (a) {
+         return f(b, a);
+       }).indexOf(!0);return a.slice(0, c === -1 ? a.length : ++c);
+     };
+   }), b.module("a8m.before", []).filter("before", function () {
+     return function (a, b) {
+       return a = D(a) ? d(a) : a, E(a) ? a.slice(0, b ? --b : b) : a;
+     };
+   }), b.module("a8m.chunk-by", ["a8m.filter-watcher"]).filter("chunkBy", ["filterWatcher", function (a) {
+     return function (b, c, d) {
+       function e(a, b) {
+         for (var c = []; a--;) {
+           c[a] = b;
+         }return c;
+       }function f(a, b, c) {
+         return E(a) ? a.map(function (a, d, f) {
+           return d *= b, a = f.slice(d, d + b), !z(c) && a.length < b ? a.concat(e(b - a.length, c)) : a;
+         }).slice(0, Math.ceil(a.length / b)) : a;
+       }return a.isMemoized("chunkBy", arguments) || a.memoize("chunkBy", arguments, this, f(b, c, d));
+     };
+   }]), b.module("a8m.concat", []).filter("concat", [function () {
+     return function (a, b) {
+       if (z(b)) return a;if (E(a)) return D(b) ? a.concat(d(b)) : a.concat(b);if (D(a)) {
+         var c = d(a);return D(b) ? c.concat(d(b)) : c.concat(b);
+       }return a;
+     };
+   }]), b.module("a8m.contains", []).filter({ contains: ["$parse", t], some: ["$parse", t] }), b.module("a8m.count-by", []).filter("countBy", ["$parse", function (a) {
+     return function (b, c) {
+       var e,
+           f = {},
+           g = a(c);return b = D(b) ? d(b) : b, !E(b) || z(c) ? b : (b.forEach(function (a) {
+         e = g(a), f[e] || (f[e] = 0), f[e]++;
+       }), f);
+     };
+   }]), b.module("a8m.defaults", []).filter("defaults", ["$parse", function (a) {
+     return function (b, c) {
+       if (b = D(b) ? d(b) : b, !E(b) || !D(c)) return b;var e = j(c);return b.forEach(function (b) {
+         e.forEach(function (d) {
+           var e = a(d),
+               f = e.assign;z(e(b)) && f(b, e(c));
+         });
+       }), b;
+     };
+   }]), b.module("a8m.every", []).filter("every", ["$parse", function (a) {
+     return function (b, c) {
+       return b = D(b) ? d(b) : b, !(E(b) && !z(c)) || b.every(function (b) {
+         return D(b) || A(c) ? a(c)(b) : b === c;
+       });
+     };
+   }]), b.module("a8m.filter-by", []).filter("filterBy", ["$parse", function (a) {
+     return function (b, e, f, g) {
+       var h;return f = B(f) || C(f) ? String(f).toLowerCase() : c, b = D(b) ? d(b) : b, !E(b) || z(f) ? b : b.filter(function (b) {
+         return e.some(function (c) {
+           if (~c.indexOf("+")) {
+             var d = c.replace(/\s+/g, "").split("+");h = d.map(function (c) {
+               return a(c)(b);
+             }).join(" ");
+           } else h = a(c)(b);return !(!B(h) && !C(h)) && (h = String(h).toLowerCase(), g ? h === f : h.contains(f));
+         });
+       });
+     };
+   }]), b.module("a8m.first", []).filter("first", ["$parse", function (a) {
+     return function (b) {
+       var e, f, g;return b = D(b) ? d(b) : b, E(b) ? (g = Array.prototype.slice.call(arguments, 1), e = C(g[0]) ? g[0] : 1, f = C(g[0]) ? C(g[1]) ? c : g[1] : g[0], g.length ? h(b, e, f ? a(f) : f) : b[0]) : b;
+     };
+   }]), b.module("a8m.flatten", []).filter("flatten", function () {
+     return function (a, b) {
+       return b = b || !1, a = D(a) ? d(a) : a, E(a) ? b ? [].concat.apply([], a) : u(a, 0) : a;
+     };
+   }), b.module("a8m.fuzzy-by", []).filter("fuzzyBy", ["$parse", function (a) {
+     return function (b, c, e, f) {
+       var h,
+           i,
+           j = f || !1;return b = D(b) ? d(b) : b, !E(b) || z(c) || z(e) ? b : (i = a(c), b.filter(function (a) {
+         return h = i(a), !!B(h) && (h = j ? h : h.toLowerCase(), e = j ? e : e.toLowerCase(), g(h, e) !== !1);
+       }));
+     };
+   }]), b.module("a8m.fuzzy", []).filter("fuzzy", function () {
+     return function (a, b, c) {
+       function e(a, b) {
+         var c,
+             d,
+             e = Object.keys(a);return 0 < e.filter(function (e) {
+           return c = a[e], !!d || !!B(c) && (c = f ? c : c.toLowerCase(), d = g(c, b) !== !1);
+         }).length;
+       }var f = c || !1;return a = D(a) ? d(a) : a, !E(a) || z(b) ? a : (b = f ? b : b.toLowerCase(), a.filter(function (a) {
+         return B(a) ? (a = f ? a : a.toLowerCase(), g(a, b) !== !1) : !!D(a) && e(a, b);
+       }));
+     };
+   }), b.module("a8m.group-by", ["a8m.filter-watcher"]).filter("groupBy", ["$parse", "filterWatcher", function (a, b) {
+     return function (c, d) {
+       function e(a, b) {
+         var c,
+             d = {};return F(a, function (a) {
+           c = b(a), d[c] || (d[c] = []), d[c].push(a);
+         }), d;
+       }return !D(c) || z(d) ? c : b.isMemoized("groupBy", arguments) || b.memoize("groupBy", arguments, this, e(c, a(d)));
+     };
+   }]), b.module("a8m.is-empty", []).filter("isEmpty", function () {
+     return function (a) {
+       return D(a) ? !d(a).length : !a.length;
+     };
+   }), b.module("a8m.join", []).filter("join", function () {
+     return function (a, b) {
+       return z(a) || !E(a) ? a : (z(b) && (b = " "), a.join(b));
+     };
+   }), b.module("a8m.last", []).filter("last", ["$parse", function (a) {
+     return function (b) {
+       var e,
+           f,
+           g,
+           i = H(b);return i = D(i) ? d(i) : i, E(i) ? (g = Array.prototype.slice.call(arguments, 1), e = C(g[0]) ? g[0] : 1, f = C(g[0]) ? C(g[1]) ? c : g[1] : g[0], g.length ? h(i.reverse(), e, f ? a(f) : f).reverse() : i[i.length - 1]) : i;
+     };
+   }]), b.module("a8m.map", []).filter("map", ["$parse", function (a) {
+     return function (b, c) {
+       return b = D(b) ? d(b) : b, !E(b) || z(c) ? b : b.map(function (b) {
+         return a(c)(b);
+       });
+     };
+   }]), b.module("a8m.omit", []).filter("omit", ["$parse", function (a) {
+     return function (b, c) {
+       return b = D(b) ? d(b) : b, !E(b) || z(c) ? b : b.filter(function (b) {
+         return !a(c)(b);
+       });
+     };
+   }]), b.module("a8m.pick", []).filter("pick", ["$parse", function (a) {
+     return function (b, c) {
+       return b = D(b) ? d(b) : b, !E(b) || z(c) ? b : b.filter(function (b) {
+         return a(c)(b);
+       });
+     };
+   }]), b.module("a8m.range", []).filter("range", function () {
+     return function (a, b, c, d, e) {
+       c = c || 0, d = d || 1;for (var f = 0; f < parseInt(b); f++) {
+         var g = c + f * d;a.push(A(e) ? e(g) : g);
+       }return a;
+     };
+   }), b.module("a8m.remove-with", []).filter("removeWith", function () {
+     return function (a, b) {
+       return z(b) ? a : (a = D(a) ? d(a) : a, a.filter(function (a) {
+         return !f(b, a);
+       }));
+     };
+   }), b.module("a8m.remove", []).filter("remove", function () {
+     return function (a) {
+       a = D(a) ? d(a) : a;var b = Array.prototype.slice.call(arguments, 1);return E(a) ? a.filter(function (a) {
+         return !b.some(function (b) {
+           return I(b, a);
+         });
+       }) : a;
+     };
+   }), b.module("a8m.reverse", []).filter("reverse", [function () {
+     return function (a) {
+       return a = D(a) ? d(a) : a, B(a) ? a.split("").reverse().join("") : E(a) ? a.slice().reverse() : a;
+     };
+   }]), b.module("a8m.search-field", []).filter("searchField", ["$parse", function (a) {
+     return function (b) {
+       var c, e;b = D(b) ? d(b) : b;var f = Array.prototype.slice.call(arguments, 1);return E(b) && f.length ? b.map(function (b) {
+         return e = f.map(function (d) {
+           return (c = a(d))(b);
+         }).join(" "), G(b, { searchField: e });
+       }) : b;
+     };
+   }]), b.module("a8m.to-array", []).filter("toArray", function () {
+     return function (a, b) {
+       return D(a) ? b ? Object.keys(a).map(function (b) {
+         return G(a[b], { $key: b });
+       }) : d(a) : a;
+     };
+   }), b.module("a8m.unique", []).filter({ unique: ["$parse", v], uniq: ["$parse", v] }), b.module("a8m.where", []).filter("where", function () {
+     return function (a, b) {
+       return z(b) ? a : (a = D(a) ? d(a) : a, a.filter(function (a) {
+         return f(b, a);
+       }));
+     };
+   }), b.module("a8m.xor", []).filter("xor", ["$parse", function (a) {
+     return function (b, c, e) {
+       function f(b, c) {
+         var d = a(e);return c.some(function (a) {
+           return e ? I(d(a), d(b)) : I(a, b);
+         });
+       }return e = e || !1, b = D(b) ? d(b) : b, c = D(c) ? d(c) : c, E(b) && E(c) ? b.concat(c).filter(function (a) {
+         return !(f(a, b) && f(a, c));
+       }) : b;
+     };
+   }]), b.module("a8m.math.abs", []).filter("abs", function () {
+     return function (a) {
+       return Math.abs(a);
+     };
+   }), b.module("a8m.math.byteFmt", []).filter("byteFmt", function () {
+     var a = [{ str: "B", val: 1024 }];return ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"].forEach(function (b, c) {
+       a.push({ str: b, val: 1024 * a[c].val });
+     }), function (b, c) {
+       if (C(c) && isFinite(c) && c % 1 === 0 && c >= 0 && C(b) && isFinite(b)) {
+         for (var d = 0; d < a.length - 1 && b >= a[d].val;) {
+           d++;
+         }return b /= d > 0 ? a[d - 1].val : 1, i(b, c) + " " + a[d].str;
+       }return "NaN";
+     };
+   }), b.module("a8m.math.degrees", []).filter("degrees", function () {
+     return function (a, b) {
+       if (C(b) && isFinite(b) && b % 1 === 0 && b >= 0 && C(a) && isFinite(a)) {
+         var c = 180 * a / Math.PI;return Math.round(c * Math.pow(10, b)) / Math.pow(10, b);
+       }return "NaN";
+     };
+   }), b.module("a8m.math.kbFmt", []).filter("kbFmt", function () {
+     var a = [{ str: "KB", val: 1024 }];return ["MB", "GB", "TB", "PB", "EB", "ZB", "YB"].forEach(function (b, c) {
+       a.push({ str: b, val: 1024 * a[c].val });
+     }), function (b, c) {
+       if (C(c) && isFinite(c) && c % 1 === 0 && c >= 0 && C(b) && isFinite(b)) {
+         for (var d = 0; d < a.length - 1 && b >= a[d].val;) {
+           d++;
+         }return b /= d > 0 ? a[d - 1].val : 1, i(b, c) + " " + a[d].str;
+       }return "NaN";
+     };
+   }), b.module("a8m.math.max", []).filter("max", ["$parse", function (a) {
+     function b(b, c) {
+       var d = b.map(function (b) {
+         return a(c)(b);
+       });return d.indexOf(Math.max.apply(Math, d));
+     }return function (a, c) {
+       return E(a) ? z(c) ? Math.max.apply(Math, a) : a[b(a, c)] : a;
+     };
+   }]), b.module("a8m.math.min", []).filter("min", ["$parse", function (a) {
+     function b(b, c) {
+       var d = b.map(function (b) {
+         return a(c)(b);
+       });return d.indexOf(Math.min.apply(Math, d));
+     }return function (a, c) {
+       return E(a) ? z(c) ? Math.min.apply(Math, a) : a[b(a, c)] : a;
+     };
+   }]), b.module("a8m.math.percent", []).filter("percent", function () {
+     return function (a, b, c) {
+       var d = B(a) ? Number(a) : a;return b = b || 100, c = c || !1, !C(d) || isNaN(d) ? a : c ? Math.round(d / b * 100) : d / b * 100;
+     };
+   }), b.module("a8m.math.radians", []).filter("radians", function () {
+     return function (a, b) {
+       if (C(b) && isFinite(b) && b % 1 === 0 && b >= 0 && C(a) && isFinite(a)) {
+         var c = 3.14159265359 * a / 180;return Math.round(c * Math.pow(10, b)) / Math.pow(10, b);
+       }return "NaN";
+     };
+   }), b.module("a8m.math.radix", []).filter("radix", function () {
+     return function (a, b) {
+       var c = /^[2-9]$|^[1-2]\d$|^3[0-6]$/;return C(a) && c.test(b) ? a.toString(b).toUpperCase() : a;
+     };
+   }), b.module("a8m.math.shortFmt", []).filter("shortFmt", function () {
+     return function (a, b) {
+       return C(b) && isFinite(b) && b % 1 === 0 && b >= 0 && C(a) && isFinite(a) ? a < 1e3 ? "" + a : a < 1e6 ? i(a / 1e3, b) + " K" : a < 1e9 ? i(a / 1e6, b) + " M" : i(a / 1e9, b) + " B" : "NaN";
+     };
+   }), b.module("a8m.math.sum", []).filter("sum", function () {
+     return function (a, b) {
+       return E(a) ? a.reduce(function (a, b) {
+         return a + b;
+       }, b || 0) : a;
+     };
+   }), b.module("a8m.ends-with", []).filter("endsWith", function () {
+     return function (a, b, c) {
+       var d,
+           e = c || !1;return !B(a) || z(b) ? a : (a = e ? a : a.toLowerCase(), d = a.length - b.length, a.indexOf(e ? b : b.toLowerCase(), d) !== -1);
+     };
+   }), b.module("a8m.latinize", []).filter("latinize", [function () {
+     function a(a) {
+       return a.replace(/[^\u0000-\u007E]/g, function (a) {
+         return c[a] || a;
+       });
+     }for (var b = [{ base: "A", letters: "Aâ’¶ï¼¡Ã€ÃÃ‚áº¦áº¤áºªáº¨ÃƒÄ€Ä‚áº°áº®áº´áº²È¦Ç Ã„Çžáº¢Ã…ÇºÇÈ€È‚áº áº¬áº¶á¸€Ä„Èºâ±¯" }, { base: "AA", letters: "êœ²" }, { base: "AE", letters: "Ã†Ç¼Ç¢" }, { base: "AO", letters: "êœ´" }, { base: "AU", letters: "êœ¶" }, { base: "AV", letters: "êœ¸êœº" }, { base: "AY", letters: "êœ¼" }, { base: "B", letters: "Bâ’·ï¼¢á¸‚á¸„á¸†ÉƒÆ‚Æ" }, { base: "C", letters: "Câ’¸ï¼£Ä†ÄˆÄŠÄŒÃ‡á¸ˆÆ‡È»êœ¾" }, { base: "D", letters: "Dâ’¹ï¼¤á¸ŠÄŽá¸Œá¸á¸’á¸ŽÄÆ‹ÆŠÆ‰ê¹" }, { base: "DZ", letters: "Ç±Ç„" }, { base: "Dz", letters: "Ç²Ç…" }, { base: "E", letters: "Eâ’ºï¼¥ÃˆÃ‰ÃŠá»€áº¾á»„á»‚áº¼Ä’á¸”á¸–Ä”Ä–Ã‹áººÄšÈ„È†áº¸á»†È¨á¸œÄ˜á¸˜á¸šÆÆŽ" }, { base: "F", letters: "Fâ’»ï¼¦á¸žÆ‘ê»" }, { base: "G", letters: "Gâ’¼ï¼§Ç´Äœá¸ ÄžÄ Ç¦Ä¢Ç¤Æ“êž ê½ê¾" }, { base: "H", letters: "Hâ’½ï¼¨Ä¤á¸¢á¸¦Èžá¸¤á¸¨á¸ªÄ¦â±§â±µêž" }, { base: "I", letters: "Iâ’¾ï¼©ÃŒÃÃŽÄ¨ÄªÄ¬Ä°Ãá¸®á»ˆÇÈˆÈŠá»ŠÄ®á¸¬Æ—" }, { base: "J", letters: "Jâ’¿ï¼ªÄ´Éˆ" }, { base: "K", letters: "Kâ“€ï¼«á¸°Ç¨á¸²Ä¶á¸´Æ˜â±©ê€ê‚ê„êž¢" }, { base: "L", letters: "Lâ“ï¼¬Ä¿Ä¹Ä½á¸¶á¸¸Ä»á¸¼á¸ºÅÈ½â±¢â± êˆê†êž€" }, { base: "LJ", letters: "Ç‡" }, { base: "Lj", letters: "Çˆ" }, { base: "M", letters: "Mâ“‚ï¼­á¸¾á¹€á¹‚â±®Æœ" }, { base: "N", letters: "Nâ“ƒï¼®Ç¸ÅƒÃ‘á¹„Å‡á¹†Å…á¹Šá¹ˆÈ Æêžêž¤" }, { base: "NJ", letters: "ÇŠ" }, { base: "Nj", letters: "Ç‹" }, { base: "O", letters: "Oâ“„ï¼¯Ã’Ã“Ã”á»’á»á»–á»”Ã•á¹ŒÈ¬á¹ŽÅŒá¹á¹’ÅŽÈ®È°Ã–Èªá»ŽÅÇ‘ÈŒÈŽÆ á»œá»šá» á»žá»¢á»Œá»˜ÇªÇ¬Ã˜Ç¾Æ†ÆŸêŠêŒ" }, { base: "OI", letters: "Æ¢" }, { base: "OO", letters: "êŽ" }, { base: "OU", letters: "È¢" }, { base: "OE", letters: "ÂŒÅ’" }, { base: "oe", letters: "ÂœÅ“" }, { base: "P", letters: "Pâ“…ï¼°á¹”á¹–Æ¤â±£êê’ê”" }, { base: "Q", letters: "Qâ“†ï¼±ê–ê˜ÉŠ" }, { base: "R", letters: "Râ“‡ï¼²Å”á¹˜Å˜ÈÈ’á¹šá¹œÅ–á¹žÉŒâ±¤êšêž¦êž‚" }, { base: "S", letters: "Sâ“ˆï¼³áºžÅšá¹¤Åœá¹ Å á¹¦á¹¢á¹¨È˜Åžâ±¾êž¨êž„" }, { base: "T", letters: "Tâ“‰ï¼´á¹ªÅ¤á¹¬ÈšÅ¢á¹°á¹®Å¦Æ¬Æ®È¾êž†" }, { base: "TZ", letters: "êœ¨" }, { base: "U", letters: "Uâ“Šï¼µÃ™ÃšÃ›Å¨á¹¸Åªá¹ºÅ¬ÃœÇ›Ç—Ç•Ç™á»¦Å®Å°Ç“È”È–Æ¯á»ªá»¨á»®á»¬á»°á»¤á¹²Å²á¹¶á¹´É„" }, { base: "V", letters: "Vâ“‹ï¼¶á¹¼á¹¾Æ²êžÉ…" }, { base: "VY", letters: "ê " }, { base: "W", letters: "Wâ“Œï¼·áº€áº‚Å´áº†áº„áºˆâ±²" }, { base: "X", letters: "Xâ“ï¼¸áºŠáºŒ" }, { base: "Y", letters: "Yâ“Žï¼¹á»²ÃÅ¶á»¸È²áºŽÅ¸á»¶á»´Æ³ÉŽá»¾" }, { base: "Z", letters: "Zâ“ï¼ºÅ¹áºÅ»Å½áº’áº”ÆµÈ¤â±¿â±«ê¢" }, { base: "a", letters: "aâ“ï½áºšÃ Ã¡Ã¢áº§áº¥áº«áº©Ã£ÄÄƒáº±áº¯áºµáº³È§Ç¡Ã¤ÇŸáº£Ã¥Ç»ÇŽÈÈƒáº¡áº­áº·á¸Ä…â±¥É" }, { base: "aa", letters: "êœ³" }, { base: "ae", letters: "Ã¦Ç½Ç£" }, { base: "ao", letters: "êœµ" }, { base: "au", letters: "êœ·" }, { base: "av", letters: "êœ¹êœ»" }, { base: "ay", letters: "êœ½" }, { base: "b", letters: "bâ“‘ï½‚á¸ƒá¸…á¸‡Æ€ÆƒÉ“" }, { base: "c", letters: "câ“’ï½ƒÄ‡Ä‰Ä‹ÄÃ§á¸‰ÆˆÈ¼êœ¿â†„" }, { base: "d", letters: "dâ““ï½„á¸‹Äá¸á¸‘á¸“á¸Ä‘ÆŒÉ–É—êº" }, { base: "dz", letters: "Ç³Ç†" }, { base: "e", letters: "eâ“”ï½…Ã¨Ã©Ãªá»áº¿á»…á»ƒáº½Ä“á¸•á¸—Ä•Ä—Ã«áº»Ä›È…È‡áº¹á»‡È©á¸Ä™á¸™á¸›É‡É›Ç" }, { base: "f", letters: "fâ“•ï½†á¸ŸÆ’ê¼" }, { base: "g", letters: "gâ“–ï½‡ÇµÄá¸¡ÄŸÄ¡Ç§Ä£Ç¥É êž¡áµ¹ê¿" }, { base: "h", letters: "hâ“—ï½ˆÄ¥á¸£á¸§ÈŸá¸¥á¸©á¸«áº–Ä§â±¨â±¶É¥" }, { base: "hv", letters: "Æ•" }, { base: "i", letters: "iâ“˜ï½‰Ã¬Ã­Ã®Ä©Ä«Ä­Ã¯á¸¯á»‰ÇÈ‰È‹á»‹Ä¯á¸­É¨Ä±" }, { base: "j", letters: "jâ“™ï½ŠÄµÇ°É‰" }, { base: "k", letters: "kâ“šï½‹á¸±Ç©á¸³Ä·á¸µÆ™â±ªêêƒê…êž£" }, { base: "l", letters: "lâ“›ï½ŒÅ€ÄºÄ¾á¸·á¸¹Ä¼á¸½á¸»Å¿Å‚ÆšÉ«â±¡ê‰êžê‡" }, { base: "lj", letters: "Ç‰" }, { base: "m", letters: "mâ“œï½á¸¿á¹á¹ƒÉ±É¯" }, { base: "n", letters: "nâ“ï½ŽÇ¹Å„Ã±á¹…Åˆá¹‡Å†á¹‹á¹‰ÆžÉ²Å‰êž‘êž¥" }, { base: "nj", letters: "ÇŒ" }, { base: "o", letters: "oâ“žï½Ã²Ã³Ã´á»“á»‘á»—á»•Ãµá¹È­á¹Åá¹‘á¹“ÅÈ¯È±Ã¶È«á»Å‘Ç’ÈÈÆ¡á»á»›á»¡á»Ÿá»£á»á»™Ç«Ç­Ã¸Ç¿É”ê‹êÉµ" }, { base: "oi", letters: "Æ£" }, { base: "ou", letters: "È£" }, { base: "oo", letters: "ê" }, { base: "p", letters: "pâ“Ÿï½á¹•á¹—Æ¥áµ½ê‘ê“ê•" }, { base: "q", letters: "qâ“ ï½‘É‹ê—ê™" }, { base: "r", letters: "râ“¡ï½’Å•á¹™Å™È‘È“á¹›á¹Å—á¹ŸÉÉ½ê›êž§êžƒ" }, { base: "s", letters: "sâ“¢ï½“ÃŸÅ›á¹¥Åá¹¡Å¡á¹§á¹£á¹©È™ÅŸÈ¿êž©êž…áº›" }, { base: "t", letters: "tâ“£ï½”á¹«áº—Å¥á¹­È›Å£á¹±á¹¯Å§Æ­Êˆâ±¦êž‡" }, { base: "tz", letters: "êœ©" }, { base: "u", letters: "uâ“¤ï½•Ã¹ÃºÃ»Å©á¹¹Å«á¹»Å­Ã¼ÇœÇ˜Ç–Çšá»§Å¯Å±Ç”È•È—Æ°á»«á»©á»¯á»­á»±á»¥á¹³Å³á¹·á¹µÊ‰" }, { base: "v", letters: "vâ“¥ï½–á¹½á¹¿Ê‹êŸÊŒ" }, { base: "vy", letters: "ê¡" }, { base: "w", letters: "wâ“¦ï½—áºáºƒÅµáº‡áº…áº˜áº‰â±³" }, { base: "x", letters: "xâ“§ï½˜áº‹áº" }, { base: "y", letters: "yâ“¨ï½™á»³Ã½Å·á»¹È³áºÃ¿á»·áº™á»µÆ´Éá»¿" }, { base: "z", letters: "zâ“©ï½šÅºáº‘Å¼Å¾áº“áº•Æ¶È¥É€â±¬ê£" }], c = {}, d = 0; d < b.length; d++) {
+       for (var e = b[d].letters.split(""), f = 0; f < e.length; f++) {
+         c[e[f]] = b[d].base;
+       }
+     }return function (b) {
+       return B(b) ? a(b) : b;
+     };
+   }]), b.module("a8m.ltrim", []).filter("ltrim", function () {
+     return function (a, b) {
+       var c = b || "\\s";return B(a) ? a.replace(new RegExp("^" + c + "+"), "") : a;
+     };
+   }), b.module("a8m.match", []).filter("match", function () {
+     return function (a, b, c) {
+       var d = new RegExp(b, c);return B(a) ? a.match(d) : null;
+     };
+   }), b.module("a8m.phoneUS", []).filter("phoneUS", function () {
+     return function (a) {
+       return a += "", "(" + a.slice(0, 3) + ") " + a.slice(3, 6) + "-" + a.slice(6);
+     };
+   }), b.module("a8m.repeat", []).filter("repeat", [function () {
+     return function (a, b, c) {
+       var d = ~~b;return B(a) && d ? w(a, --b, c || "") : a;
+     };
+   }]), b.module("a8m.rtrim", []).filter("rtrim", function () {
+     return function (a, b) {
+       var c = b || "\\s";return B(a) ? a.replace(new RegExp(c + "+$"), "") : a;
+     };
+   }), b.module("a8m.slugify", []).filter("slugify", [function () {
+     return function (a, b) {
+       var c = z(b) ? "-" : b;return B(a) ? a.toLowerCase().replace(/\s+/g, c) : a;
+     };
+   }]), b.module("a8m.split", []).filter("split", function () {
+     function a(a) {
+       return a.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+     }return function (b, c, d) {
+       var f, g, h, i;return z(b) || !B(b) ? null : (z(c) && (c = ""), isNaN(d) && (d = 0), f = new RegExp(a(c), "g"), g = b.match(f), e(g) || d >= g.length ? [b] : 0 === d ? b.split(c) : (h = b.split(c), i = h.splice(0, d + 1), h.unshift(i.join(c)), h));
+     };
+   }), b.module("a8m.starts-with", []).filter("startsWith", function () {
+     return function (a, b, c) {
+       var d = c || !1;return !B(a) || z(b) ? a : (a = d ? a : a.toLowerCase(), !a.indexOf(d ? b : b.toLowerCase()));
+     };
+   }), b.module("a8m.stringular", []).filter("stringular", function () {
+     return function (a) {
+       var b = Array.prototype.slice.call(arguments, 1);return a.replace(/{(\d+)}/g, function (a, c) {
+         return z(b[c]) ? a : b[c];
+       });
+     };
+   }), b.module("a8m.strip-tags", []).filter("stripTags", function () {
+     return function (a) {
+       return B(a) ? a.replace(/<\S[^><]*>/g, "") : a;
+     };
+   }), b.module("a8m.test", []).filter("test", function () {
+     return function (a, b, c) {
+       var d = new RegExp(b, c);return B(a) ? d.test(a) : a;
+     };
+   }), b.module("a8m.trim", []).filter("trim", function () {
+     return function (a, b) {
+       var c = b || "\\s";return B(a) ? a.replace(new RegExp("^" + c + "+|" + c + "+$", "g"), "") : a;
+     };
+   }), b.module("a8m.truncate", []).filter("truncate", function () {
+     return function (a, b, c, d) {
+       return b = z(b) ? a.length : b, d = d || !1, c = c || "", !B(a) || a.length <= b ? a : a.substring(0, d ? a.indexOf(" ", b) === -1 ? a.length : a.indexOf(" ", b) : b) + c;
+     };
+   }), b.module("a8m.ucfirst", []).filter({ ucfirst: x, titleize: x }), b.module("a8m.uri-component-encode", []).filter("uriComponentEncode", ["$window", function (a) {
+     return function (b) {
+       return B(b) ? a.encodeURIComponent(b) : b;
+     };
+   }]), b.module("a8m.uri-encode", []).filter("uriEncode", ["$window", function (a) {
+     return function (b) {
+       return B(b) ? a.encodeURI(b) : b;
+     };
+   }]), b.module("a8m.wrap", []).filter("wrap", function () {
+     return function (a, b, c) {
+       return B(a) && y(b) ? [b, a, c || b].join("") : a;
+     };
+   }), b.module("a8m.filter-watcher", []).provider("filterWatcher", function () {
+     this.$get = ["$window", "$rootScope", function (a, b) {
+       function c(b, c) {
+         function d() {
+           var b = [];return function (c, d) {
+             if (D(d) && !e(d)) {
+               if (~b.indexOf(d)) return "[Circular]";b.push(d);
+             }return a == d ? "$WINDOW" : a.document == d ? "$DOCUMENT" : k(d) ? "$SCOPE" : d;
+           };
+         }return [b, JSON.stringify(c, d())].join("#").replace(/"/g, "");
+       }function d(a) {
+         var b = a.targetScope.$id;F(l[b], function (a) {
+           delete j[a];
+         }), delete l[b];
+       }function f() {
+         m(function () {
+           b.$$phase || (j = {});
+         }, 2e3);
+       }function g(a, b) {
+         var c = a.$id;return z(l[c]) && (a.$on("$destroy", d), l[c] = []), l[c].push(b);
+       }function h(a, b) {
+         var d = c(a, b);return j[d];
+       }function i(a, b, d, e) {
+         var h = c(a, b);return j[h] = e, k(d) ? g(d, h) : f(), e;
+       }var j = {},
+           l = {},
+           m = a.setTimeout;return { isMemoized: h, memoize: i };
+     }];
+   }), b.module("angular.filter", ["a8m.ucfirst", "a8m.uri-encode", "a8m.uri-component-encode", "a8m.slugify", "a8m.latinize", "a8m.strip-tags", "a8m.stringular", "a8m.truncate", "a8m.starts-with", "a8m.ends-with", "a8m.wrap", "a8m.trim", "a8m.ltrim", "a8m.rtrim", "a8m.repeat", "a8m.test", "a8m.match", "a8m.split", "a8m.phoneUS", "a8m.to-array", "a8m.concat", "a8m.contains", "a8m.unique", "a8m.is-empty", "a8m.after", "a8m.after-where", "a8m.before", "a8m.before-where", "a8m.defaults", "a8m.where", "a8m.reverse", "a8m.remove", "a8m.remove-with", "a8m.group-by", "a8m.count-by", "a8m.chunk-by", "a8m.search-field", "a8m.fuzzy-by", "a8m.fuzzy", "a8m.omit", "a8m.pick", "a8m.every", "a8m.filter-by", "a8m.xor", "a8m.map", "a8m.first", "a8m.last", "a8m.flatten", "a8m.join", "a8m.range", "a8m.math.max", "a8m.math.min", "a8m.math.abs", "a8m.math.percent", "a8m.math.radix", "a8m.math.sum", "a8m.math.degrees", "a8m.math.radians", "a8m.math.byteFmt", "a8m.math.kbFmt", "a8m.math.shortFmt", "a8m.angular", "a8m.conditions", "a8m.is-null", "a8m.filter-watcher"]);
+ }(window, window.angular);
+
+/***/ }),
+
+/***/ 100:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+ 
+ !(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+ 
+     nbIntgEvents.$inject = ['$timeout'];
+     function nbIntgEvents($timeout) {
+         return {
+             restrict: 'A',
+             link: function link(scope, elements, attrs) {
+                 var setGap, setZineone, setOnlyZineLogin, zineObj;
+                 gadgets.pubsub.subscribe("NBGlobalPublish", function (data) {
+                     setGap = data.gapPref;
+                     setZineone = data.zinePref;
+                     setOnlyZineLogin = data.onlyZineLogin;
+                 });
+                 if (setGap || setZineone) {
+                     var inputCheck = function inputCheck(eventDetails, currentScope) {
+                         if (eventDetails[0] == 5 || eventDetails[0] == 6) {
+                             if (currentScope.value !== "") {
+                                 if (eventDetails.indexOf('sendData') !== -1) {
+                                     zineonePushEventData(eventDetails[1] + 'Input' + _capitalize(eventDetails[2]) + 'Click', currentScope.value);
+                                 } else if (eventDetails.indexOf('encryptedData') !== -1 && currentScope.value.length > 4) {
+                                     zineonePushEventData(eventDetails[1] + 'Input' + _capitalize(eventDetails[2]) + 'Click', hashdata(currentScope.value));
+                                 } else if (eventDetails.indexOf('encryptedData') !== -1 && currentScope.value.length <= 4) {
+                                     zineonePushEventData(eventDetails[1] + 'Input' + _capitalize(eventDetails[2]) + 'Click', Array(currentScope.value.length + 1).join('*'));
+                                 } else {
+                                     zineonePushEventData(eventDetails[1] + 'Input' + _capitalize(eventDetails[2]) + 'Click');
+                                 }
+                                 callGap(eventDetails[1], 'inputBlur', eventDetails[2]);
+                             }
+                         }
+                     };
+ 
+                     var callGap = function callGap(eventCategory, eventAction, eventLabel) {
+                         if (setGap && eventCategory) {
+                             eventCategory = eventCategory.replace("$", "");
+                             console.log("GAP Events----- Event Category: " + eventCategory + ", Event Action: " + eventAction + ", Event Label: " + eventLabel);
+                             if (typeof ga !== 'undefined') {
+                                 ga('send', 'event', eventCategory, eventAction, eventLabel);
+                             }
+                         }
+                     };
+ 
+                     var callGapVPV = function callGapVPV(title, page) {
+                         if (setGap) {
+                             title = title.replace("$", "");
+                             console.log("GAP VPV Events----- Page URL: " + page + ", Title: " + title);
+                             if (typeof ga !== 'undefined') {
+                                 ga('send', { 'hitType': 'pageview', 'page': 'VPV/li/' + page, 'title': title });
+                             }
+                         }
+                     };
+ 
+                     var callGapVPVData = function callGapVPVData(title, page, data) {
+                         if (setGap) {
+                             title = title.replace("$", "");
+                             console.log("GAP VPV Events----- Page URL: " + page + ", Title: " + title + ", Data: " + JSON.stringify(data));
+                             if (typeof ga !== 'undefined') {
+                                 ga('send', { 'hitType': 'pageview', 'page': 'VPV/li/' + page, 'title': title, 'data': data });
+                             }
+                         }
+                     };
+ 
+                     var _capitalize = function _capitalize(stringName) {
+                         return stringName.charAt(0).toUpperCase() + stringName.slice(1);
+                     };
+ 
+                     var hashdata = function hashdata(data) {
+                         var dataToEnc = data.replace(/\s/g, ''); /*to remove spaces*/
+                         var dataLength = dataToEnc.length;
+                         var hashedData = Array(dataLength - 4 + 1).join('*');
+                         var encData = hashedData + dataToEnc.slice(dataLength - 4, dataToEnc.length);
+                         return encData;
+                     };
+ 
+                     var checkDataZine = function checkDataZine(eventData, clickType) {
+                         if (eventData.length == 4) {
+                             zineonePushEventData(eventData[1] + clickType + _capitalize(eventData[2]) + 'Click', eventData[3]);
+                         } else {
+                             zineonePushEventData(eventData[1] + clickType + _capitalize(eventData[2]) + 'Click');
+                         }
+                     };
+ 
+                     var zineonePushEventData = function zineonePushEventData(eventName, data) {
+                         if (setZineone) {
+                             var zineOnePayload, replaceSpecialChars;
+                             if (typeof data != "string") {
+                                 zineOnePayload = JSON.stringify(data);
+                             } else {
+                                 zineOnePayload = data;
+                             }
+ 
+                             if (setOnlyZineLogin) {
+                                 if (eventName.includes("$")) {
+                                     eventName = eventName.replace("$", "");
+                                     console.log("Zineone----- Event Name: " + eventName + ", Event Data: " + zineOnePayload);
+                                     if (typeof ZineOne != 'undefined') {
+                                         ZineOne.pushEvent(eventName, { payload: zineOnePayload });
+                                     }
+                                 }
+                             } else {
+                                 replaceSpecialChars = eventName.replace("$", "");
+                                 replaceSpecialChars = replaceSpecialChars.replace(/[\s-!_%@#$^*()+=;:"'|\\\/?{}\[\],. ]/g, "");
+                                 console.log("Zineone----- Event Name:" + replaceSpecialChars + ", Event Data:" + zineOnePayload);
+                                 if (typeof ZineOne != 'undefined') {
+                                     ZineOne.pushEvent(replaceSpecialChars, { payload: zineOnePayload });
+                                 }
+                             }
+                         }
+                     };
+ 
+                     var eventDetails, eventType;
+                     scope.$watchCollection(attrs.nbIntgEvents, function (value) {
+                         eventDetails = value;
+                     });
+                     elements.on('click', function (e) {
+                         eventType = eventDetails[0];
+                         if (eventType == 1) {
+                             callGap(eventDetails[1], 'buttonClick', eventDetails[2]);
+                             if (eventDetails.length == 4) {
+                                 zineonePushEventData(eventDetails[1] + _capitalize(eventDetails[2]) + 'Click', eventDetails[3]);
+                             } else {
+                                 zineonePushEventData(eventDetails[1] + _capitalize(eventDetails[2]) + 'Click');
+                             }
+                         } else if (eventType == 2) {
+                             callGap(eventDetails[1], 'radioButtonClick', eventDetails[2]);
+                             checkDataZine(eventDetails, 'Radio');
+                         } else if (eventType == 3) {
+                             callGap(eventDetails[1], 'accordionClick', eventDetails[2]);
+                             checkDataZine(eventDetails, 'Accordion');
+                         } else if (eventType == 4) {
+                             callGap(eventDetails[1], 'checkboxClick', eventDetails[2]);
+                             checkDataZine(eventDetails, 'Checkbox');
+                         } else if (eventType == 11) {
+                             callGapVPV(eventDetails[1], eventDetails[2]);
+                             var itemName = eventDetails[2].split('/');
+                             if (eventDetails.length == 4) {
+                                 zineonePushEventData(eventDetails[1] + _capitalize(itemName[itemName.length - 1]) + "Click", eventDetails[3]);
+                             } else {
+                                 zineonePushEventData(eventDetails[1] + _capitalize(itemName[itemName.length - 1]) + "Click");
+                             }
+                         }
+                     });
+                     elements.on('blur', 'input', function (e) {
+                         inputCheck(eventDetails, this);
+                     });
+                     elements.on('blur', function (e) {
+                         inputCheck(eventDetails, this);
+                     });
+ 
+                     gadgets.pubsub.subscribe("nbGap", function (data) {
+                         if (data.count == 0) {
+                             if (data.VPV) {
+                                 var itemName;
+                                 if (data.type == "ack") {
+                                     callGapVPVData(data.title, data.page, data.data);
+                                     zineonePushEventData(data.title.replace(/\s/g, '') + 'Ack', data.data);
+                                 } else if (data.type == "form") {
+                                     callGapVPV(data.title, data.page);
+                                     itemName = data.page.split('/');
+                                     zineonePushEventData(data.title + _capitalize(itemName[itemName.length - 1]) + "Click", data.data);
+                                 } else {
+                                     callGapVPV(data.title, data.page);
+                                     itemName = data.page.split('/');
+                                     zineonePushEventData(data.title + itemName[itemName.length - 1] + "Click", itemName[itemName.length - 1]);
+                                 }
+                                 data.count++;
+                             }
+                             if (data.eventCategory) {
+                                 callGap(data.eventCategory.replace(/\s/g, ''), data.eventAction.replace(/\s/g, ''), data.eventLabel.replace(/\s/g, ''));
+                                 if (data.data) {
+                                     zineObj = data.data;
+                                 } else {
+                                     zineObj = { "name": data.eventLabel };
+                                 }
+                                 zineonePushEventData(data.eventCategory.replace(/\s/g, '') + _capitalize(data.eventLabel.replace(/\s/g, '')) + 'Click', zineObj);
+                                 data.count++;
+                             }
+                         }
+                     });
+                     gadgets.pubsub.subscribe("nbZineone", function (data) {
+                         if (data.count == 0) {
+                             if (data.dataItems) {
+                                 zineonePushEventData(data.eventName, data.dataItems);
+                                 data.count++;
+                             }
+                         }
+                     });
+                 }
+             }
+         };
+     }
+ 
+     var overviewNavigate = function overviewNavigate() {
+         var deviceInfoPlugin;
+         var link = function link(scope, elements, attrs) {
+             elements.on('click', function () {
+                 if (!!window.cxp) {
+                     deviceInfoPlugin = cxp.mobile.plugins['DeviceInfo'];
+                     deviceInfoPlugin.getDeviceInfo(function (data) {
+                         var refresh = false;
+                         if (attrs['refresh'] == "true") {
+                             refresh = true;
+                         }
+                         gadgets.pubsub.publish('toPhoneOverview', { refresh: refresh });
+                     });
+                 }
+             });
+         };
+ 
+         return {
+             restrict: 'A',
+             link: link
+         };
+     };
+ 
+     onLongPress.$inject = ['$parse', '$timeout'];
+     function onLongPress($parse, $timeout) {
+         return {
+             restrict: 'A',
+             link: function link($scope, $elm, $attrs) {
+                 var timer;
+                 var timerDuration = !isNaN($attrs.longPressDuration) && parseInt($attrs.longPressDuration) || 600;
+                 /*By default we prevent long press when user scrolls*/
+                 var preventLongPressOnScroll = $attrs.preventOnscrolling ? $attrs.preventOnscrolling === 'true' : true;
+                 /*Variable used to prevent long press while scrolling*/
+                 var touchStartY;
+                 var touchStartX;
+                 var MAX_DELTA = 15;
+                 /*Bind touch, mouse and click event*/
+                 $elm.bind('touchstart', onEnter);
+                 $elm.bind('touchend', onExit);
+ 
+                 $elm.bind('mousedown', onEnter);
+                 $elm.bind('mouseup', onExit);
+ 
+                 $elm.bind('click', onClick);
+                 /*For windows mobile browser*/
+                 $elm.bind('pointerdown', onEnter);
+                 $elm.bind('pointerup', onExit);
+                 if (preventLongPressOnScroll) {
+                     /*Bind touchmove so that we prevent long press when user is scrolling*/
+                     $elm.bind('touchmove', onMove);
+                 }
+ 
+                 function onEnter(evt) {
+                     var functionHandler = $parse($attrs.onLongPress);
+                     /*For tracking scrolling*/
+                     if ((evt.originalEvent || evt).touches) {
+                         touchStartY = (evt.originalEvent || evt).touches[0].screenY;
+                         touchStartX = (evt.originalEvent || evt).touches[0].screenX;
+                     }
+                     /*Cancel existing timer*/
+                     $timeout.cancel(timer);
+                     /*To handle click event properly*/
+                     $scope.longPressSent = false;
+                     /*We'll set a timeout for 600 ms for a long press*/
+                     timer = $timeout(function () {
+                         $scope.longPressSent = true;
+                         /*If the touchend event hasn't fired,*/
+                         /*apply the function given in on the element's on-long-press attribute*/
+                         $scope.$apply(function () {
+                             functionHandler($scope, {
+                                 $event: evt
+                             });
+                         });
+                     }, timerDuration);
+                 }
+ 
+                 function onExit(evt) {
+                     var functionHandler = $parse($attrs.onTouchEnd);
+                     /*Prevent the onLongPress event from firing*/
+                     $timeout.cancel(timer);
+                     /*If there is an on-touch-end function attached to this element, apply it*/
+                     if ($attrs.onTouchEnd) {
+                         $scope.$apply(function () {
+                             functionHandler($scope, {
+                                 $event: evt
+                             });
+                         });
+                     }
+                 }
+ 
+                 function onClick(evt) {
+                     /*If long press is handled then prevent click*/
+                     if ($scope.longPressSent && (!$attrs.preventClick || $attrs.preventClick === "true")) {
+                         evt.preventDefault();
+                         evt.stopPropagation();
+                         evt.stopImmediatePropagation();
+                     }
+                 }
+ 
+                 function onMove(evt) {
+                     var yPosition = (evt.originalEvent || evt).touches[0].screenY;
+                     var xPosition = (evt.originalEvent || evt).touches[0].screenX;
+                     /*If we scrolled, prevent long presses*/
+                     if (touchStartY !== undefined && touchStartX !== undefined && Math.abs(yPosition - touchStartY) > MAX_DELTA || Math.abs(xPosition - touchStartX) > MAX_DELTA) {
+                         $timeout.cancel(timer);
+                     }
+                 }
+             }
+         };
+     }
+ 
+     function numberDirective() {
+         return {
+             scope: {
+                 ngModel: "="
+             },
+             link: function link(scope, elem, attr, $filter) {
+                 var valueOnKeyPress;
+                 elem.on("keypress", onKeypress);
+                 elem.on("input", onInput);
+                 function onKeypress(e) {
+                     var charCode = e.which ? e.which : e.keyCode;
+                     if (charCode === 0 || charCode === 229) {
+                         charCode = this.value.charCodeAt(this.value.length - 1);
+                     }
+                     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+                         return false;
+                     } else if (charCode == 46 && !attr.allowDecimal) {
+                         return false;
+                     }
+                     return true;
+                 }
+                 function onInput() {
+                     var splitArray = elem.val().split("."),
+                         integerPart = splitArray[0],
+                         decimalPart = splitArray[1] || "";
+                     if (integerPart.length == parseInt(attr.maxLength) + 1 || decimalPart.length == parseInt(attr.allowDecimal) + 1 || splitArray.length > 2) {
+                         scope.$apply(function () {
+                             elem.val(valueOnKeyPress);
+                             scope.ngModel = parseFloat(valueOnKeyPress);
+                         });
+                         return false;
+                     }
+                     valueOnKeyPress = elem.val();
+                 }
+             }
+         };
+     }
+ 
+     function alphaNumeric() {
+         return {
+             scope: {
+                 ngModel: "="
+             },
+             link: function link(scope, elem, attr, $filter) {
+                 elem.on("keypress", onKeypress);
+                 function onKeypress(e) {
+                     var charCode = e.which ? e.which : e.keyCode;
+                     if (charCode === 0 || charCode === 229) {
+                         charCode = this.value.charCodeAt(this.value.length - 1);
+                     }
+                     if ((charCode < 48 || charCode > 57 && charCode < 65 || charCode > 90 && charCode < 97 || charCode > 122) && charCode !== 32) {
+                         return false;
+                     }
+                     return true;
+                 }
+             }
+         };
+     }
+ 
+     var numberSpace = function numberSpace() {
+         return {
+             link: function link(scope, element, attrs) {
+                 element.on('keyup', function (e) {
+                     var number = element.val();
+                     number = number.replace(/[^\d]/g, '');
+                     var length = number.length;
+                     if (length == 14) {
+                         var first = number.slice(0, 4) + " ";
+                         var second = number.slice(4, 10) + " ";
+                         var third = number.slice(10, 14);
+                         var newNumber = first + second + third;
+                         e.target.value = newNumber;
+                     } else if (length <= 16 && length != 14) {
+                         e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+                     }
+                 });
+             }
+         };
+     };
+ 
+     var limitTo = function limitTo() {
+         return {
+             restrict: "A",
+             link: function link(scope, elem, attrs) {
+                 var storedValue;
+                 var limit = parseInt(attrs.limitTo);
+                 elem.on("input", function (e) {
+                     if (elem.val().toString().length > limit) {
+                         if (storedValue) {
+                             elem.val(storedValue);
+                         } else {
+                             elem.val(elem.val().toString().substring(0, limit));
+                         }
+                         return false;
+                     }
+                     storedValue = elem.val();
+                 });
+             }
+         };
+     };
+ 
+     function decimalCasingList() {
+         return {
+             link: function link(scope, elem, attr) {
+                 scope.$watch("value", function () {
+                     scope.value = parseFloat(scope.value);
+                     if (typeof scope.value !== "undefined") {
+                         var divWidth = $(".currency").closest("div").width();
+                         if (divWidth < 200) {
+                             angular.element(".curr").css({ 'font-size': '21px', 'padding-left': '2px' });
+                             angular.element(".decicurr").css('font-size', '10px');
+                             angular.element(".rupeecurr").css('font-size', '21px');
+                         }
+                         var result = scope.value.toString().split('.');
+                         var lastThree = result[0].substring(result[0].length - 3);
+                         var otherNumbers = result[0].substring(0, result[0].length - 3);
+                         if (otherNumbers !== '') lastThree = ',' + lastThree;
+                         scope.integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+                         var numberOfDecimals = attr.decimals || '2';
+                         scope.decimalPart = parseFloat(scope.value).toFixed(numberOfDecimals).toString().split(".")[1];
+                     }
+                 });
+             },
+             scope: {
+                 currency: "=",
+                 value: "=",
+                 constant: "@",
+                 integer: "@"
+ 
+             },
+             restrict: 'EA',
+             template: '<span class="rupeecurr">&#8377</span><span class="curr" ng-style={{integer}}>{{integerPart}}</span><span class="decicurr">.{{decimalPart}}</span>',
+             controller: ['$scope', function ($scope) {
+                 if (typeof $scope.value !== "undefined") {
+                     var divWidth = $(".currency").closest("div").width();
+                     if (divWidth < 200) {
+                         angular.element(".curr").css({ 'font-size': '21px', 'padding-left': '2px' });
+                         angular.element(".decicurr").css('font-size', '10px');
+                         angular.element(".rupeecurr").css('font-size', '21px');
+                     }
+                     var result = $scope.value.toString().split('.');
+                     var lastThree = result[0].substring(result[0].length - 3);
+                     var otherNumbers = result[0].substring(0, result[0].length - 3);
+                     if (otherNumbers !== '') lastThree = ',' + lastThree;
+                     $scope.integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+                     $scope.decimalPart = parseFloat($scope.value).toFixed("2").toString().split(".")[1];
+                 }
+             }]
+         };
+     }
+ 
+     var alphaSpace = function alphaSpace() {
+         return {
+             link: function link(scope, element, attrs) {
+                 element.on('input change', function (e) {
+                     var number = element.val();
+                     number = number.replace(/[^0-9a-zA-Z]+$/, '');
+                     e.target.value = number;
+                 });
+             }
+         };
+     };
+ 
+     function capitalize() {
+         return {
+             require: 'ngModel',
+             link: function link(scope, element, attrs, modelCtrl) {
+                 var capitalize = function capitalize(inputValue) {
+                     if (inputValue == undefined) inputValue = '';
+                     var capitalized = inputValue.toUpperCase();
+                     if (capitalized !== inputValue) {
+                         modelCtrl.$setViewValue(capitalized);
+                         modelCtrl.$render();
+                     }
+                     return capitalized;
+                 };
+                 modelCtrl.$parsers.push(capitalize);
+                 capitalize(scope[attrs.ngModel]);
+             }
+         };
+     }
+ 
+     function noSpecialChar() {
+         return {
+             require: 'ngModel',
+             restrict: 'A',
+             link: function link(scope, element, attrs, modelCtrl) {
+                 modelCtrl.$parsers.push(function (inputValue) {
+                     if (inputValue == null) {
+                         return '';
+                     }
+                     var cleanInputValue = inputValue.replace(/[^\w\s]/gi, '');
+                     if (cleanInputValue != inputValue) {
+                         modelCtrl.$setViewValue(cleanInputValue);
+                         modelCtrl.$render();
+                     }
+                     return cleanInputValue;
+                 });
+             }
+         };
+     }
+ 
+     decimalCasing.$inject = ['lpPortal', '$uibModal'];
+     function decimalCasing(lpPortal, $uibModal) {
+         var result, finalData, resultDisplay, lastThreeDisplay, otherNumbersDisplay, integerOne, lastTwo, lastThree, otherNumbers /*, integerTwo, integerTwoFinal*/;
+         return {
+             link: function link(scope, elem, attr) {
+                 scope.$watch("value", function () {
+                     scope.value = parseFloat(scope.value);
+                     scope.currcode = scope.currencycode;
+                     scope.noOfDecimals = scope.fractioncount != undefined ? parseInt(scope.fractioncount).toString() : "2";
+                     if (typeof scope.currencysymbol !== "undefined" && scope.currencysymbol !== "" && scope.currencysymbol != null) {
+                         scope.currSymbol = scope.currencysymbol;
+                     } else {
+                         if (typeof scope.currcode != 'undefined') {
+                             scope.currSymbol = scope.currcode;
+                         } else {
+                             scope.currSymbol = "";
+                         }
+                     }
+                     if (typeof scope.value !== "undefined") {
+                         if (scope.currcode == 'INR' || scope.currcode == '' || typeof scope.currcode == "undefined" || scope.currSymbol == 'INR' || scope.currSymbol == 'â‚¹') {
+                             result = scope.value.toString().split('.');
+                             finalData = result[0].replace(/-/g, "");
+                             if (finalData > 100000000) {
+                                 scope.showInfoIcon = true;
+                                 resultDisplay = scope.value.toString().split('.');
+                                 lastThreeDisplay = resultDisplay[0].substring(resultDisplay[0].length - 3);
+                                 otherNumbersDisplay = resultDisplay[0].substring(0, resultDisplay[0].length - 3);
+                                 if (otherNumbersDisplay !== '' && otherNumbersDisplay !== '-') {
+                                     lastThreeDisplay = ',' + lastThreeDisplay;
+                                 }
+                                 scope.integerPartDisplay = otherNumbersDisplay.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThreeDisplay;
+                                 scope.decimalPartDisplay = parseFloat(scope.value).toFixed(scope.noOfDecimals).toString().split(".")[1];
+                                 integerOne = result[0].slice(0, -7);
+                                 /*integerTwo = result[0].substr(result[0].length - 7);*/
+                                 /*integerTwoFinal = integerTwo.slice(0, -5);*/
+                                 lastThree = integerOne.substring(integerOne.length - 3);
+                                 otherNumbers = integerOne.substring(0, integerOne.length - 3);
+                                 if (otherNumbers !== '' && otherNumbers !== '-') {
+                                     lastThree = ',' + lastThree;
+                                 }
+                                 scope.integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+                                 scope.decimalPart = scope.decimalPartDisplay;
+                                 scope.decimalType = " Cr";
+                                 scope.finalRupeeVal = scope.currSymbol + " " + scope.integerPartDisplay + "." + scope.decimalPartDisplay + scope.decimalType;
+                                 scope.finalRupeeValue = scope.currSymbol + " " + scope.integerPartDisplay + "." + scope.decimalPartDisplay;
+                             } else {
+                                 scope.showInfoIcon = false;
+                                 lastThree = result[0].substring(result[0].length - 3);
+                                 otherNumbers = result[0].substring(0, result[0].length - 3);
+                                 if (otherNumbers !== '' && otherNumbers !== '-') {
+                                     lastThree = ',' + lastThree;
+                                 }
+                                 scope.integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+                                 scope.decimalType = "";
+                                 scope.decimalPart = parseFloat(scope.value).toFixed(scope.noOfDecimals).toString().split(".")[1];
+                                 scope.finalRupeeVal = scope.currSymbol + " " + scope.integerPart + scope.decimalPart;
+                             }
+                         } else {
+                             scope.showInfoIcon = true;
+                             resultDisplay = scope.value.toString().split('.');
+                             lastThreeDisplay = resultDisplay[0].substring(resultDisplay[0].length - 3);
+                             otherNumbersDisplay = resultDisplay[0].substring(0, resultDisplay[0].length - 3);
+                             if (otherNumbersDisplay !== '' && otherNumbersDisplay !== '-') {
+                                 lastThreeDisplay = ',' + lastThreeDisplay;
+                             }
+                             scope.integerPartDisplay = otherNumbersDisplay.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + lastThreeDisplay;
+                             scope.decimalPartDisplay = parseFloat(scope.value).toFixed(scope.noOfDecimals).toString().split(".")[1];
+                             result = scope.value.toString().split('.');
+                             finalData = result[0].replace(/-/g, "");
+                             if (finalData > 100000000) {
+                                 integerOne = result[0].slice(0, -7);
+                                 /*integerTwo = result[0].substr(result[0].length - 7);*/
+                                 /*integerTwoFinal = integerTwo.slice(0, -5);*/
+                                 lastThree = integerOne.substring(integerOne.length - 3);
+                                 otherNumbers = integerOne.substring(0, integerOne.length - 3);
+                                 if (otherNumbers !== '' && otherNumbers !== '-') {
+                                     lastThree = ',' + lastThree;
+                                 }
+                                 scope.integerPart = otherNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + lastThree;
+                                 scope.decimalPart = scope.decimalPartDisplay;
+                                 scope.decimalType = " B";
+                                 scope.finalRupeeVal = scope.currSymbol + " " + scope.integerPartDisplay + "." + scope.decimalPartDisplay + scope.decimalType;
+                                 scope.finalRupeeValue = scope.currSymbol + " " + scope.integerPartDisplay + "." + scope.decimalPartDisplay;
+                             } else {
+                                 scope.showInfoIcon = false;
+                                 result = scope.value.toString().split('.');
+                                 lastTwo = result[0].substring(result[0].length - 3);
+                                 otherNumbers = result[0].substring(0, result[0].length - 3);
+                                 if (otherNumbers !== '' && otherNumbers !== '-') {
+                                     lastTwo = ',' + lastTwo;
+                                 }
+                                 scope.integerPart = otherNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + lastTwo;
+                                 scope.decimalPart = parseFloat(scope.value).toFixed(scope.noOfDecimals).toString().split(".")[1];
+                                 scope.finalRupeeVal = scope.currSymbol + " " + scope.integerPart + scope.decimalPart;
+                             }
+                         }
+                     }
+                 });
+             },
+             scope: {
+                 currency: "=",
+                 value: "=",
+                 currencycode: "=",
+                 currencysymbol: "=",
+                 fractioncount: "=",
+                 constant: "@",
+                 integer: "@",
+                 fraction: "@",
+                 iconinfo: "="
+             },
+             restrict: 'EA',
+             template: '<span ng-style={{currency}}>{{currSymbol}} </span><span ng-style={{integer}}>{{integerPart}}</span><span ng-style={{fraction}}>.{{decimalPart}}</span><span class="decimal-type" ng-style={{currency}}>{{decimalType}}</span><p  ng-style={{iconinfo}} ng-show="showInfoIcon" class="info-tool-tip" role="img" aria-label="success-exclamation" tabindex="0" uib-popover="{{finalRupeeValue}}" popover-trigger="focus"></p>',
+             controller: ['$scope', function ($scope) {
+                 if (typeof $scope.value !== "undefined") {
+                     $scope.currcode = $scope.currencycode;
+                     $scope.noOfDecimals = $scope.fractioncount != undefined ? parseInt($scope.fractioncount).toString() : "2";
+                     if (typeof $scope.currencysymbol !== "undefined" && $scope.currencysymbol !== "" && $scope.currencysymbol != null) {
+                         $scope.currSymbol = $scope.currencysymbol;
+                     } else {
+                         if (typeof $scope.currcode != 'undefined') {
+                             $scope.currSymbol = $scope.currcode;
+                         } else {
+                             $scope.currSymbol = "";
+                         }
+                     }
+                     if ($scope.currcode == 'INR' || $scope.currcode == '' || typeof $scope.currcode == "undefined" || $scope.currSymbol == 'INR' || $scope.currSymbol == 'â‚¹') {
+                         result = $scope.value.toString().split('.');
+                         finalData = result[0].replace(/-/g, "");
+                         if (finalData > 100000000) {
+                             $scope.showInfoIcon = true;
+                             resultDisplay = $scope.value.toString().split('.');
+                             lastThreeDisplay = resultDisplay[0].substring(resultDisplay[0].length - 3);
+                             otherNumbersDisplay = resultDisplay[0].substring(0, resultDisplay[0].length - 3);
+                             if (otherNumbersDisplay !== '' && otherNumbersDisplay !== '-') {
+                                 lastThreeDisplay = ',' + lastThreeDisplay;
+                             }
+                             $scope.integerPartDisplay = otherNumbersDisplay.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThreeDisplay;
+                             $scope.decimalPartDisplay = parseFloat($scope.value).toFixed($scope.noOfDecimals).toString().split(".")[1];
+                             integerOne = result[0].slice(0, -7);
+                             /*integerTwo = result[0].substr(result[0].length - 7);*/
+                             /*integerTwoFinal = integerTwo.slice(0, -5);*/
+                             lastThree = integerOne.substring(integerOne.length - 3);
+                             otherNumbers = integerOne.substring(0, integerOne.length - 3);
+                             if (otherNumbers !== '' && otherNumbers !== '-') {
+                                 lastThree = ',' + lastThree;
+                             }
+                             $scope.integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+                             $scope.decimalPart = $scope.decimalPartDisplay;
+                             $scope.decimalType = " Cr";
+                             $scope.finalRupeeVal = $scope.currSymbol + " " + $scope.integerPartDisplay + "." + $scope.decimalPartDisplay + $scope.decimalType;
+                             $scope.finalRupeeValue = $scope.currSymbol + " " + $scope.integerPartDisplay + "." + $scope.decimalPartDisplay;
+                         } else {
+                             $scope.showInfoIcon = false;
+                             lastThree = result[0].substring(result[0].length - 3);
+                             otherNumbers = result[0].substring(0, result[0].length - 3);
+                             if (otherNumbers !== '' && otherNumbers !== '-') {
+                                 lastThree = ',' + lastThree;
+                             }
+                             $scope.integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+                             $scope.decimalPart = parseFloat($scope.value).toFixed($scope.noOfDecimals).toString().split(".")[1];
+                             $scope.finalRupeeVal = $scope.currSymbol + " " + $scope.integerPart + $scope.decimalPart;
+                         }
+                     } else {
+                         $scope.showInfoIcon = true;
+                         resultDisplay = $scope.value.toString().split('.');
+                         lastThreeDisplay = resultDisplay[0].substring(resultDisplay[0].length - 3);
+                         otherNumbersDisplay = resultDisplay[0].substring(0, resultDisplay[0].length - 3);
+                         if (otherNumbersDisplay !== '' && otherNumbersDisplay !== '-') {
+                             lastThreeDisplay = ',' + lastThreeDisplay;
+                         }
+                         $scope.integerPartDisplay = otherNumbersDisplay.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + lastThreeDisplay;
+                         $scope.decimalPartDisplay = parseFloat($scope.value).toFixed($scope.noOfDecimals).toString().split(".")[1];
+                         result = $scope.value.toString().split('.');
+                         finalData = result[0].replace(/-/g, "");
+                         if (finalData > 100000000) {
+                             integerOne = result[0].slice(0, -7);
+                             /* integerTwo = result[0].substr(result[0].length - 7);*/
+                             /*integerTwoFinal = integerTwo.slice(0, -5);*/
+                             lastThree = integerOne.substring(integerOne.length - 3);
+                             otherNumbers = integerOne.substring(0, integerOne.length - 3);
+                             if (otherNumbers !== '' && otherNumbers !== '-') {
+                                 lastThree = ',' + lastThree;
+                             }
+                             $scope.integerPart = otherNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + lastThree;
+                             $scope.decimalPart = $scope.decimalPartDisplay;
+                             $scope.decimalType = " Bn";
+                             $scope.finalRupeeVal = $scope.currSymbol + " " + $scope.integerPartDisplay + "." + $scope.decimalPartDisplay + $scope.decimalType;
+                             $scope.finalRupeeValue = $scope.currSymbol + " " + $scope.integerPartDisplay + "." + $scope.decimalPartDisplay;
+                         } else {
+                             $scope.showInfoIcon = false;
+                             result = $scope.value.toString().split('.');
+                             lastTwo = result[0].substring(result[0].length - 3);
+                             otherNumbers = result[0].substring(0, result[0].length - 3);
+                             if (otherNumbers !== '' && otherNumbers !== '-') {
+                                 lastTwo = ',' + lastTwo;
+                             }
+                             $scope.integerPart = otherNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + lastTwo;
+                             $scope.decimalPart = parseFloat($scope.value).toFixed($scope.noOfDecimals).toString().split(".")[1];
+                             $scope.finalRupeeVal = $scope.currSymbol + " " + $scope.integerPart + $scope.decimalPart;
+                         }
+                     }
+                 }
+             }]
+         };
+     }
+ 
+     listDirective.$inject = ['lpPortal'];
+     function listDirective(lpPortal) {
+         var templateURL;
+         if (typeof cxp != "undefined") {
+             templateURL = 'static/features/%5BBBHOST%5D/feature-hdfc-components/templates/list.html';
+         } else {
+             templateURL = lpPortal.root + '/static/features/%5BBBHOST%5D/feature-hdfc-components/templates/list.html';
+         }
+         return {
+             restrict: 'E',
+             scope: {
+                 listInfo: '=info',
+                 casaInfo: '=casa'
+             },
+             templateUrl: templateURL
+         };
+     }
+ 
+     equalHeight.$inject = ['$timeout'];
+     function equalHeight($timeout) {
+         return {
+             link: function link($scope, $element, $attrs, $window) {
+                 var className = $attrs['classname'];
+                 var elements = document.getElementsByClassName(className);
+                 var maxHeight = 0,
+                     i;
+                 $timeout(function () {
+                     for (i = 0; i < elements.length; i++) {
+                         var elementHeight = elements[i].offsetHeight;
+                         if (elementHeight > maxHeight) {
+                             maxHeight = elementHeight;
+                         }
+                     }
+                     for (i = 0; i < elements.length; i++) {
+                         angular.element(elements[i]).css('height', maxHeight + 'px');
+                     }
+                 });
+             }
+         };
+     }
+ 
+     function hdfcAction() {
+         return {
+             restrict: "E",
+             scope: {
+                 actions: '=',
+                 gap: '='
+             },
+             controller: ['$scope', 'DeviceService', function ($scope, DeviceService) {
+                 var actionPanel = sessionStorage.getItem("actionData") || "5";
+                 $scope.itemLimit = actionPanel;
+                 $scope.moreActions = $scope.actions.slice();
+                 $scope.lessActions = $scope.moreActions.splice(0, $scope.itemLimit);
+                 $scope.showVal = "More";
+                 $scope.showValItem = "moreActions";
+                 $scope.showMoreLess = function () {
+                     if (angular.element('.more-action').hasClass("collapsed")) {
+                         $scope.showVal = "Less";
+                         $scope.showValItem = "lessActions";
+                         angular.element('.more-action .panel-cols .glyphicon').addClass("glyphicon-menu-up");
+                         angular.element('.more-action .panel-cols .glyphicon').removeClass("glyphicon-menu-down");
+                     } else {
+                         $scope.showVal = "More";
+                         $scope.showValItem = "moreActions";
+                         angular.element('.more-action .panel-cols .glyphicon').addClass("glyphicon-menu-down");
+                         angular.element('.more-action .panel-cols .glyphicon').removeClass("glyphicon-menu-up");
+                     }
+                 };
+                 $scope.callGap = function (currentListItem, transName) {
+                     var dataObj = { "count": 0, "eventCategory": transName, "eventAction": "actionPanelClick", "eventLabel": currentListItem };
+                     gadgets.pubsub.publish("nbGap", dataObj);
+                 };
+ 
+                 $scope.mobileResolution = false;
+                 if (screen.width < 786) {
+                     $scope.mobileResolution = true;
+                 }
+             }],
+             link: function link(scope, elem, attr) {
+                 scope.$watch(function () {
+                     return scope.actions;
+                 }, function (newVal) {
+                     scope.moreActions = scope.actions.slice();
+                     scope.lessActions = scope.moreActions.splice(0, scope.itemLimit);
+                     scope.showVal = "More";
+                     if (!angular.element('.more-action').hasClass("collapsed")) {
+                         angular.element('.panel-footer.more-action').addClass("collapsed");
+                     }
+                     angular.element('.more-action .panel-cols .glyphicon').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+                     scope.transName = scope.gap;
+                 }, true);
+             },
+             template: '<section class="panel-card hdfc-action clearfix" ng-if="actions.length>0 && !mobileResolution">' + '<div class="panel-grey">' + '<p class="h4">Actions</p>' + '</div>' + '<div class="panel-white clearfix action-tab" ng-class="{\'padding-bottom-zero\': actions.length > itemLimit}">' + '<div class="space-list">' + '<div class="less-list-items" ng-class="{\'padding-bottom-action\': actions.length > itemLimit}">' + '<div class="panel-row" ng-class="{\'staticActionItemHover\' : actionItem.isStaticItem}" ng-repeat="actionItem in lessActions" ng-click="actionItem.callBack();callGap(actionItem.itemName, transName)">' + '<div class="panel-cols">' + '<p class="f6" ng-class="{\'staticActionItem\' : actionItem.isStaticItem}">{{actionItem.itemName}}</p>' + '</div>' + '<div class="panel-cols">' + '<a href="" class="arrow"></a>' + '</div>' + '</div>' + '</div>' + '<div class="more-list-items collapse" id="demo">' + '<div class="panel-row" ng-class="{\'staticActionItemHover\' : actionItem.isStaticItem}" ng-repeat="actionItem in moreActions" ng-click="actionItem.callBack();callGap(actionItem.itemName, transName)">' + '<div class="panel-cols">' + '<p class="f6" ng-class="{\'staticActionItem\' : actionItem.isStaticItem}">{{actionItem.itemName}}</p>' + '</div>' + '<div class="panel-cols">' + '<a href="" class="arrow"></a>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>' + '<div class="panel-footer more-action collapsed" ng-if="actions.length > itemLimit" data-toggle="collapse" data-target="#demo" ng-click="showMoreLess()" aria-expanded="false">' + '<div class="panel-row">' + '<div class="panel-cols">' + '<p class="f6 text-right" ng-click="callGap(showValItem, transName)">{{showVal}} Actions</p>' + '</div>' + '<div class="panel-cols">' + '<a href="" class="glyphicon glyphicon-menu-down"></a>' + '</div>' + '</div>' + '</div>' + '</section>' + '<section class="panel-group hdfc-action-small" id="accordion" ng-if="actions.length>0 &&  mobileResolution">' + '<div class="panel panel-default">' + '<div class="panel-heading">' + '<h4 class="panel-title f9">' + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true">Actions' + '<span class="arrow-up"></span>' + '</a>' + '</h4>' + '</div>' + '<div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true" style="">' + '<div class="panel-body simple-accordion">' + '<section class="panel-card hdfc-action clearfix" ng-if="actions.length>0">' + '<div class="panel-white clearfix action-tab" ng-class="{\'padding-bottom-zero\': actions.length > itemLimit}">' + '<div class="space-list">' + '<div class="less-list-items" ng-class="{\'padding-bottom-action\': actions.length > itemLimit}">' + '<div class="panel-row" ng-class="{\'staticActionItemHover\' : actionItem.isStaticItem}" ng-repeat="actionItem in lessActions" ng-click="actionItem.callBack();callGap(actionItem.itemName, transName)">' + '<div class="panel-cols">' + '<p class="f6" ng-class="{\'staticActionItem\' : actionItem.isStaticItem}">{{actionItem.itemName}}</p>' + '</div>' + '<div class="panel-cols">' + '<a href="" class="arrow"></a>' + '</div>' + '</div>' + '</div>' + '<div class="more-list-items collapse" id="demo">' + '<div class="panel-row" ng-class="{\'staticActionItemHover\' : actionItem.isStaticItem}" ng-repeat="actionItem in moreActions" ng-click="actionItem.callBack();callGap(actionItem.itemName, transName)">' + '<div class="panel-cols">' + '<p class="f6" ng-class="{\'staticActionItem\' : actionItem.isStaticItem}">{{actionItem.itemName}}</p>' + '</div>' + '<div class="panel-cols">' + '<a href="" class="arrow"></a>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>' + '<div class="panel-footer more-action collapsed" ng-if="actions.length > itemLimit" data-toggle="collapse" data-target="#demo" ng-click="showMoreLess()" aria-expanded="false">' + '<div class="panel-row" ng-class="{\'staticActionItemHover\' : actionItem.isStaticItem}">' + '<div class="panel-cols">' + '<p class="f6 ng-class="{\'staticActionItem\' : actionItem.isStaticItem}" text-right" ng-click="callGap(showValItem, transName)">{{showVal}} Actions</p>' + '</div>' + '<div class="panel-cols">' + '<a href="" class="glyphicon glyphicon-menu-down"></a>' + '</div>' + '</div>' + '</div>' + '</section>' + '</div>' + '</div>' + '</div>' + '</section>'
+         };
+     }
+ 
+     /* High Charts */
+     var customHighchart = function customHighchart() {
+         return {
+             restrict: 'E',
+             scope: {
+                 chartConfig: "=config",
+                 chartId: "@"
+             },
+             link: function link(scope, elm) {
+                 elm[0].innerHTML = '<div></div>';
+                 elm[0].children[0].setAttribute('id', scope.chartId);
+             }
+         };
+     };
+ 
+     /*timestamp*/
+     var dbTimestamp = function dbTimestamp() {
+         return {
+             restrict: 'E',
+             scope: {
+                 offlineTime: '=offlineTime'
+             },
+             template: '<div class="panel-row">' + '<div class="clearfix">' + '<div class="image-text fl">' + '<p class="success success-exclamation" title="success" role="img" aria-label="success"></p>' + '</div>' + '<div class="image-text">' + '<p class="text-left f12">You are currently offline.</p>' + '<p class="text-left">Last updated <span>' + '{{offlineTime}}</span> ago. Go online to refresh.</p>' + '</div>' + '</div>' + '</div>'
+         };
+     };
+ 
+     /** Created By : Sushil Kumar
+         Desc :  Loader for net banking
+     */
+     customLoader.$inject = ['lpPortal'];
+     function customLoader(lpPortal) {
+         var imagePath = lpPortal.root + "/static/features/%5BBBHOST%5D/feature-hdfc-common-utility/assets/hdfc-loading.gif";
+ 
+         return {
+             restrict: 'E',
+             scope: {
+                 status: '='
+             },
+             template: '<section ng-if="!status" class="loader-relative"><div class="loader clearfix"><img ng-src="' + imagePath + '" alt="hdfc-loader" /></div></section>'
+         };
+     }
+ 
+     backDirective.$inject = ['NavigationService'];
+     function backDirective(NavigationService) {
+         return {
+             restrict: 'E',
+             template: '<p class="back-icon">' + '<span class="icon chevron goBack" ></span>' + '<a href="" class="goBack">Back</a>' + '</p>',
+             link: function link(scope, elem, attr) {
+                 elem.on('click', '.goBack', function (e) {
+                     NavigationService.back();
+                 });
+             }
+         };
+     }
+ 
+     function hideMenuAfterLogin() {
+         return {
+             restrict: 'A',
+             scope: '=',
+             link: function link(scope, element, attrs) {
+                 var merchantLogin = sessionStorage.getItem("merchantLogin");
+                 var eBrokingLogin = sessionStorage.getItem("eBrokingLogin");
+                 if (scope.displayLink == false) {
+                     var capital = element.context.innerHTML.toUpperCase();
+                     if (capital.includes('MERCHANT SERVICES') && merchantLogin == 'N') {
+                         /*element.context.innerHTML = "";*/
+                         element.context.className = element.context.className.concat(' hide');
+                     }
+                     if (capital.includes('BROKER SERVICES') && eBrokingLogin == 'N') {
+                         element.context.className = element.context.className.concat(' hide');
+                     }
+                 }
+             }
+         };
+     }
+ 
+     exports.nbIntgEvents = nbIntgEvents;
+     exports.customLoader = customLoader;
+     exports.customHighchart = customHighchart;
+     exports.dbTimestamp = dbTimestamp;
+     exports.overviewNavigate = overviewNavigate;
+     exports.numberSpace = numberSpace;
+     exports.limitTo = limitTo;
+     exports.numberDirective = numberDirective;
+     exports.alphaNumeric = alphaNumeric;
+     exports.decimalCasingList = decimalCasingList;
+     exports.alphaSpace = alphaSpace;
+     exports.capitalize = capitalize;
+     exports.noSpecialChar = noSpecialChar;
+     exports.onLongPress = onLongPress;
+     exports.decimalCasing = decimalCasing;
+     exports.listDirective = listDirective;
+     exports.equalHeight = equalHeight;
+     exports.hdfcAction = hdfcAction;
+     exports.backDirective = backDirective;
+     exports.hideMenuAfterLogin = hideMenuAfterLogin;
+ }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_RESULT__;"use strict";
+ 
+ !(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+ 
+     mask.$inject = ['$filter'];
+     function mask($filter) {
+         return function (input, key, startDigit, endDigit) {
+             var output, startLength, endLength, startString, endString;
+             if (input) {
+                 input = input.toString().trim();
+                 var totalLength = input.length;
+ 
+                 switch (key) {
+                     case "mobile":
+                         endLength = totalLength - 5;
+                         output = Array(endLength + 1).join("*") + input.substr(-5);
+                         break;
+                     case "email":
+                         endString = input.substring(input.indexOf("@"), input.length);
+                         startString = input.substring(0, input.indexOf("@"));
+                         output = startString.substring(0, 1) + Array(startString.length - 1).join("*") + startString.substring(startString.length - 1, startString.length) + endString;
+                         break;
+                     case "pin":
+                     case "landline":
+                         startLength = parseInt(totalLength / 2);
+                         endLength = totalLength - startLength;
+                         output = input.substr(0, startLength) + Array(endLength + 1).join("*");
+                         break;
+                     case "dc":
+                         endLength = totalLength - (4 + 4); /*Both 4 stands for leaving 4 digits from both start and end*/
+                         output = input.substr(0, 4) + Array(endLength + 1).join("*") + input.substr(-4);
+                         break;
+                     case "cc":
+                         endLength = totalLength - (6 + 4); /*4 stands for leaving 4 digits from end and 6 from the start*/
+                         output = input.substr(0, 6) + Array(endLength + 1).join("*") + input.substr(-4);
+                         break;
+                     case "date":
+                         var day = $filter('date')(input, 'dd');
+                         var year = $filter('date')(input, 'yyyy');
+                         output = day + "/" + Array(3).join("*") + "/" + year.substr(0, 2) + Array(3).join("*");
+                         break;
+                     case "panno":
+                         endLength = totalLength - (3 + 2); /*3 stands leaving from start and 2 digits from end*/
+                         output = input.substr(0, 3) + Array(endLength + 1).join("X") + input.substr(-2);
+                         break;
+                     case "aadharno":
+                         endLength = totalLength - 4; /*Leaving 4 digits from end*/
+                         output = Array(endLength + 1).join("X") + input.substr(-4);
+                         break;
+                     default:
+                         endLength = totalLength - (startDigit + endDigit);
+                         output = input.substr(0, startDigit) + Array(endLength + 1).join("*") + input.substr(-endDigit);
+                 }
+             } else {
+                 output = input;
+             }
+             return output;
+         };
+     }
+ 
+     function dateFormat() {
+         return function (x) {
+             var inputDate, displayDate;
+             var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+             if (typeof x != "undefined") {
+                 inputDate = new Date(x);
+                 /*if(typeof inputDate == "object"){*/
+                 displayDate = ("0" + inputDate.getDate()).slice(-2) + " " + monthNames[inputDate.getMonth()] + " " + inputDate.getFullYear();
+                 /*}*/
+             }
+             return displayDate;
+         };
+     }
+ 
+     function splitWithChar() {
+         return function (input, splitVal, char) {
+             if (!!input) {
+                 var regex = new RegExp('(.{' + splitVal + '})', 'g');
+                 var splitChar = char || ' ';
+ 
+                 return input.replace(regex, '$1' + splitChar);
+             }
+             return input;
+         };
+     }
+ 
+     function maskNumbers() {
+         return function (input, firstshowndigits, lastshowndigits, disabled) {
+             if (!disabled) {
+                 input = "" + input.trim();
+                 var charlength = input.length;
+                 var starlength = charlength - (firstshowndigits + lastshowndigits);
+                 var output = input.substr(0, firstshowndigits) + Array(starlength + 1).join("*") + input.substr(-lastshowndigits);
+                 return output;
+             } else {
+                 return input;
+             }
+         };
+     }
+ 
+     function accountMaskNumbers() {
+         return function (input, lastshowndigits) {
+             if (input) {
+ 
+                 input = input.toString().trim();
+                 // if(input){
+                 input = "" + input.replace(/ /g, '');
+                 var charlength = input.length;
+ 
+                 if (charlength != 0 && charlength >= lastshowndigits) {
+                     var starlength = charlength - lastshowndigits;
+                     var maskedData = Array(starlength + 1).join("*");
+                     var output = maskedData + input.slice(starlength, charlength);
+                     return output;
+                 } else {
+                     return input;
+                 }
+                 // }
+             }
+         };
+     }
+ 
+     function beautifyAmount() {
+         return function (input, allowCurrency, symbol) {
+ 
+             if (typeof allowCurrency == 'undefined') {
+                 allowCurrency = true;
+             }
+             input = parseFloat(input);
+             if (typeof input !== "undefined") {
+ 
+                 var result = input.toString().split('.');
+ 
+                 var lastThree = result[0].substring(result[0].length - 3);
+ 
+                 var otherNumbers = result[0].substring(0, result[0].length - 3);
+ 
+                 if (otherNumbers !== '') {
+                     lastThree = ',' + lastThree;
+                 }
+                 /*  var output = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;*/
+                 var integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+ 
+                 /*     if (typeof result[1] !== 'undefined') {*/
+                 var decimalPart = parseFloat(input).toFixed("2").toString().split(".")[1];
+ 
+                 input = integerPart + "." + decimalPart;
+                 if (allowCurrency) {
+                     input = (symbol ? symbol : 'â‚¹ ') + input;
+                 }
+                 //                input = (allowCurrency ? 'â‚¹': "") + integerPart + "." + decimalPart;
+ 
+ 
+                 //        }
+             }
+ 
+             return input;
+         };
+     }
+ 
+     exports.mask = mask;
+     exports.maskNumbers = maskNumbers;
+     exports.dateFormat = dateFormat;
+     exports.splitWithChar = splitWithChar;
+     exports.beautifyAmount = beautifyAmount;
+     exports.accountMaskNumbers = accountMaskNumbers;
+ }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ 102:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+ 
+ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+ 
+ !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, module, __webpack_require__(103)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module, CryptoJS) {
+ 
+     var deviceMap = {
+         'phone': 'phone',
+         'tablet': 'tablet',
+         'web': 'web'
+     };
+     var domainUrl = "https://portaluat.hdfcbank.com/portalserveruat120/portal/";
+     var terms = domainUrl + "personal/useful-links/terms-and-conditions";
+ 
+     DeviceService.$inject = ['$q', '$timeout'];
+     function DeviceService($q, $timeout) {
+         if (!sessionStorage.getItem('deviceType')) {
+             setType();
+         }
+     }
+ 
+     DeviceService.prototype.getType = function () {
+         if (!sessionStorage.getItem('deviceType')) {
+             setType();
+         }
+         return sessionStorage.getItem("deviceType");
+     };
+ 
+     function OpenExternalUrlService() {}
+ 
+     OpenExternalUrlService.prototype.openExternalUrl = function (url) {
+         if (url == "terms") {
+             gadgets.pubsub.publish("openLink", { "nonAppLinks": terms });
+         } else {
+             var externalUrl = domainUrl + url;
+             gadgets.pubsub.publish("openLink", { "nonAppLinks": externalUrl });
+         }
+     };
+ 
+     function setType() {
+         var devicePlugin = typeof cxp !== 'undefined' && cxp.mobile.plugins['DeviceInfo'];
+ 
+         if (devicePlugin) {
+             if (!sessionStorage.getItem("deviceType")) {
+                 devicePlugin.getDeviceInfo(function (deviceObject) {
+                     sessionStorage.setItem('deviceType', deviceMap[deviceObject.deviceType]);
+                 });
+             }
+         } else {
+             sessionStorage.setItem('deviceType', 'web');
+         }
+     }
+ 
+     function setOSType() {
+         var devicePlugin = typeof cxp !== 'undefined' && cxp.mobile.plugins['DeviceInfo'];
+         if (devicePlugin) {
+             if (!sessionStorage.getItem("osType")) {
+                 devicePlugin.getDeviceInfo(function (deviceObject) {
+ 
+                     if (deviceObject.osType != undefined && deviceObject.osType.toLowerCase().indexOf("android") > -1) {
+                         sessionStorage.setItem('osType', "android");
+                     } else {
+                         sessionStorage.setItem('osType', "iOS");
+                     }
+                 });
+             }
+         } else {
+             sessionStorage.setItem('osType', 'web');
+         }
+     }
+ 
+     DeviceService.prototype.getOSType = function () {
+         if (!sessionStorage.getItem('osType')) {
+             setOSType();
+         }
+         return sessionStorage.getItem("osType");
+     };
+ 
+     /* Logout Service */
+     LogoutService.$inject = ['$q', '$timeout', '$http', 'lpPortal', '$window', '$location', 'EncryptDecryptService'];
+     function LogoutService($q, $timeout, $http, lpPortal, $window, $location, EncryptDecryptService) {
+         this.$q = $q;
+         this.$timeout = $timeout;
+         this.$http = $http;
+         this.lpPortal = lpPortal;
+         this.$window = $window;
+         this.$location = $location;
+         this.EncryptDecryptService = EncryptDecryptService;
+         var that = this;
+         /*  Created By SKC
+         Desc -  this function will logout the current session and re-direct to login page/clicked page.
+         */
+         this.goLogout = function (url, flag) {
+             sessionStorage.setItem('restrictNetworkCalls', true);
+             var that = this;
+             var redirectUrl = that.setRedirectURL(url);
+             var loginUrl = that.setRedirectURL('#');
+             var request = that.setRequest();
+ 
+             this.$http(request).then(onSuccess, onError);
+ 
+             function onSuccess(response) {
+                 if (response.status === 200) {
+                     that.senseForthLogout();
+                     that.postLogoutOps(flag);
+                     if (flag == 'epiebrokerLogout' || flag == 'rsaLogout') {
+                         console.debug("epi logout");
+                     } else if (redirectUrl.indexOf('http') > -1 && redirectUrl.indexOf('hdfcbank') < 0) {
+                         if (b$.portal.sameTab) {
+                             b$.portal.sameTab = false;
+                             window.open(redirectUrl, "_self");
+                         } else {
+                             window.open(redirectUrl);
+                             that.$window.location.href = loginUrl;
+                         }
+                     } else if (typeof flag != 'undefined' && flag != null && flag.sessionInvalidated) {
+                         document.getElementsByClassName("session-discontinue-overlay")[0].style.display = "block";
+                         document.getElementsByClassName("lp-page-children bp-area")[0].style.display = 'none';
+                         document.getElementById('redirectUrl').value = redirectUrl;
+                     } else if (typeof flag != 'undefined' && flag != null && flag.openNewTab) {
+                         window.open(redirectUrl, "_blank");
+                         that.$window.location.href = loginUrl;
+                     } else {
+                         that.$window.location.href = redirectUrl;
+                     }
+                 }
+             }
+ 
+             function onError(response) {
+                 that.postLogoutOps(flag);
+                 that.$window.location.href = redirectUrl;
+                 return false;
+             }
+         };
+ 
+         /*build the log-out request object*/
+         this.setRequest = function () {
+             var token = sessionStorage.getItem("token");
+             var request = {
+                 url: this.lpPortal.root + '/j_spring_security_logout?portalName=' + this.lpPortal.name,
+                 method: 'POST',
+                 timeout: 9000000,
+                 headers: {
+                     "channelIndicator": "NB",
+                     "inEncryptValue": token,
+                     "secondTabLogout": false
+                 }
+             };
+             if (typeof token == 'undefined' || token == null) {
+                 request.headers["secondTabLogout"] = true;
+             }
+             if (sessionStorage.getItem('fldAppId') !== null) {
+                 request.headers["fldAppId"] = sessionStorage.getItem('fldAppId');
+             }
+             if (sessionStorage.getItem('fldAppId') == "XT" && sessionStorage.getItem('epiLogoutLog')) {
+                 var MerchantData = JSON.parse(sessionStorage.getItem('epiLogoutLog'));
+                 request.headers["MerchantCode"] = MerchantData.MerchantCode || '';
+                 request.headers["MerchantRefNo"] = MerchantData.MerchantRefNo || MerchantData.txnid || '';
+                 sessionStorage.removeItem('epiLogoutLog');
+             }
+             if (sessionStorage.getItem('fldAppId') == "XT" && sessionStorage.getItem('eManLog')) {
+                 request.headers["flgSubAppId"] = "NACH";
+                 sessionStorage.removeItem('eManLog');
+             }
+             request = this.EncryptDecryptService.getRequest(request);
+             return request;
+         };
+ 
+         /*determine which page to redirect to after logout*/
+         this.setRedirectURL = function (url) {
+             var pseudoId = encodeURIComponent(sessionStorage.getItem('pseudoId'));
+             if (url !== '' && url !== undefined && url !== '#') {
+                 switch (url) {
+                     case 'CC':
+                         return b$.portal.urlRedirect + '/login#/openMarketLoginCC';break;
+                     case 'LN':
+                         return b$.portal.urlRedirect + '/login#/openMarketLoginLN';break;
+                     case 'RS':
+                         return b$.portal.urlRedirect + '/login';break;
+                     default:
+                         return url;
+                 }
+             } else {
+                 return b$.portal.urlRedirect + '/log-out?id=' + pseudoId;
+             }
+         };
+ 
+         /*operations post logout*/
+         this.postLogoutOps = function (flag) {
+             /*clear cookies, storage*/
+             this.$window.sessionStorage.clear();
+             sessionStorage.setItem('restrictNetworkCalls', true);
+             localStorage.removeItem('isEpiSession');
+             $.cookie('Authorization', null, { path: this.lpPortal.root });
+             $.cookie('IS_AUTH', null, { path: '/' });
+             b$.portal.isLogin = false;
+             delete b$.portal.isLogin;
+             /*set success/error messages after logout*/
+             if (flag !== undefined) {
+                 if (flag.showMegaMenuOverlay) {
+                     localStorage.setItem('showMegaMenuOverlay', true);
+                 } else if (flag.sessionExpire) {
+                     sessionStorage.setItem('showSucMsg', 'sessionExpire');
+                 } else if (flag.isEpiTermination) {
+                     localStorage.setItem('epiTermination', 'done');
+                     sessionStorage.setItem('showSucMsg', 'isEpiTermination'); /* delay login in case of 2 tab scenario for EPI */
+                 } else if (flag.allowReload) {
+                     window.location.reload();
+                 }
+             }
+         };
+ 
+         /* logout senseForth session */
+         this.senseForthLogout = function () {
+             try {
+                 if (typeof window.calllogout == 'function') {
+                     window.calllogout();
+                 }
+                 return true;
+             } catch (e) {
+                 return false;
+             }
+         };
+ 
+         /* triggered if user refreshes/clicks on browser back/forward btns or url manipulations */
+         gadgets.pubsub.subscribe("browserActivity", function (data) {
+             sessionStorage.setItem('restrictNetworkCalls', true);
+             if (typeof $window.browserActivity == "undefined") {
+                 if (typeof data != 'undefined' && data != null && data.isEpiTermination) {
+                     that.goLogout('#', { isEpiTermination: true });
+                 } else {
+                     that.goLogout(sessionStorage.getItem('fldAppId'), { sessionInvalidated: true });
+                 }
+                 $window.browserActivity = true;
+             }
+         });
+ 
+         /* triggered from seamless if user refreshes/clicks on browser back/forward btns or url manipulations */
+         if (window.seamlessBrowserActivity) {
+             sessionStorage.setItem('restrictNetworkCalls', true);
+             that.goLogout(sessionStorage.getItem('fldAppId'), { sessionInvalidated: true });
+             window.seamlessBrowserActivity = false;
+         }
+     }
+ 
+     /* Encrypt-Decrypt Service */
+     var timestamp = new Date().getTime();
+     sessionStorage.setItem('ANS', timestamp);
+     var resolveSecret = function resolveSecret(timestamp) {
+         var secret = '' + timestamp;
+         var padding = "XXXXXXXXXXXXXXXX";
+         var l = secret.length;
+         l = l < 16 ? l : 16;
+         l -= 1;
+         secret = secret.substring(0, l);
+         padding = padding.substring(l);
+         return btoa(secret + padding);
+     };
+ 
+     function EncryptDecryptService() {
+         var that = this;
+         var secret = resolveSecret(timestamp);
+         var key = CryptoJS.enc.Base64.parse(secret);
+         var iv = CryptoJS.enc.Base64.parse('5D9r9ZVzEYYgha93/aUK2w==');
+         var decryptSecret = resolveSecret(timestamp);
+         var decryptKey = CryptoJS.enc.Base64.parse(decryptSecret);
+         var decryptIv = CryptoJS.enc.Base64.parse('5D9r9ZVzEYYgha93/aUK2w==');
+ 
+         this.encrypt = function (value) {
+             if (value != undefined) {
+                 return CryptoJS.AES.encrypt(value.toString(), key, { iv: iv, padding: CryptoJS.pad.Pkcs7, mode: CryptoJS.mode.CBC }).toString();
+             }
+         };
+ 
+         this.decrypt = function (value) {
+             if (!value) {
+                 value = "";
+             }
+             return CryptoJS.AES.decrypt(value, decryptKey, { iv: decryptIv, padding: CryptoJS.pad.Pkcs7, mode: CryptoJS.mode.CBC }).toString(CryptoJS.enc.Utf8);
+         };
+ 
+         function queryStringToJSON(queryString) {
+             var pairs = queryString.split('&');
+             var result = {};
+             pairs.forEach(function (pair) {
+                 pair = pair.split('=');
+                 result[pair[0]] = decodeURIComponent(pair[1] || '');
+             });
+             return JSON.parse(JSON.stringify(result));
+         }
+ 
+         function jsonToQueryString(json) {
+             return Object.keys(json).map(function (key) {
+                 return encodeURIComponent(key) + '=' + encodeURIComponent(json[key]);
+             }).join('&');
+         }
+ 
+         function processEncrypt(prop, currentObject, mainObject) {
+             if (prop.indexOf('_encrypt') > -1) {
+                 if (_typeof(currentObject[prop]) == "object") {
+                     currentObject[prop] = JSON.stringify(currentObject[prop]);
+                     currentObject[prop.concat('_string')] = that.encrypt(currentObject[prop]);
+                     delete currentObject[prop];
+                 } else {
+                     currentObject[prop] = that.encrypt(currentObject[prop]);
+                 }
+                 if (!mainObject.hasOwnProperty('secretQuestion')) {
+                     mainObject.secretAnswer = "" + timestamp;
+                     /*if(mainObject.listOfTxns_encrypt_string){
+                         var encryptedData = {
+                             "encryptedObject": mainObject,
+                             "secretAnswer": mainObject.secretAnswer
+                         }
+                         sessionStorage.setItem("encryptedValue", JSON.stringify(encryptedData));
+                     }*/
+                 }
+             } else {
+                 mainObject.secretAnswer = "" + timestamp;
+             }
+         }
+ 
+         function processDecrypt(prop, currentObject, mainObject) {
+             if (prop.indexOf('_encrypt') > -1) {
+                 if (prop.indexOf('_string') > -1) {
+                     currentObject[prop] = that.decrypt(currentObject[prop]);
+                     currentObject[prop] = JSON.parse(currentObject[prop]);
+                     currentObject[prop.replace('_encrypt_string', '')] = currentObject[prop];
+                     /*if (mainObject.listOfTxns){
+                         var convertToString = mainObject.listOfTxns.toString();
+                         sessionStorage.setItem("decryptedValue", convertToString);
+                     }*/
+                     delete currentObject[prop];
+                 } else {
+                     currentObject[prop.replace('_encrypt', '')] = that.decrypt(currentObject[prop]);
+                     /*if (mainObject.listOfTxns){
+                         convertToString = mainObject.listOfTxns.toString();
+                         sessionStorage.setItem("decryptedValue", convertToString);
+                     }*/
+                     delete currentObject[prop];
+                 }
+             }
+         }
+ 
+         function traverseJSON(obj, func, mainObject) {
+             for (var i in obj) {
+                 if (i == '$$hashKey') {
+                     delete obj[i];
+                     obj = JSON.parse(angular.toJson(obj));
+                     func.apply(this, [i, obj, mainObject]);
+                 } else {
+                     func.apply(this, [i, obj, mainObject]);
+                     if (obj[i] !== null && _typeof(obj[i]) == "object") {
+                         traverseJSON(obj[i], func, mainObject);
+                     }
+                 }
+             }
+         }
+ 
+         this.encryptObject = function (obj) {
+             var isQueryString = false;
+             if (typeof obj == 'string') {
+                 obj = queryStringToJSON(obj);
+                 isQueryString = true;
+             }
+             traverseJSON(obj, processEncrypt, obj);
+             if (isQueryString) {
+                 obj = jsonToQueryString(obj);
+             }
+             return obj;
+         };
+ 
+         this.decryptObject = function (obj, timestamp, iv) {
+             decryptSecret = resolveSecret(timestamp);
+             decryptKey = CryptoJS.enc.Base64.parse(decryptSecret);
+             decryptIv = CryptoJS.enc.Base64.parse(iv);
+             traverseJSON(obj, processDecrypt, obj);
+             return obj;
+         };
+ 
+         this.getRequest = function (request) {
+             /*var decryptedValue = sessionStorage.getItem("decryptedValue");*/
+             /*if(decryptedValue == null || decryptedValue == undefined){
+                 var encryptedValue = JSON.parse(sessionStorage.getItem("encryptedValue"));
+                 if(encryptedValue !== null && encryptedValue != undefined ){
+                     this.decryptObject(encryptedValue.encryptedObject, encryptedValue.secretAnswer, '5D9r9ZVzEYYgha93/aUK2w==');
+                 }
+             }*/
+             var finalEncReq = "";
+             var finalEncReqSubstr = "";
+             if (request.method == "GET") {
+                 request.params = this.encryptObject(request.params);
+             } else {
+                 if (!!request && _typeof(request.data) === 'object' && (!request.hasOwnProperty('data') || Object.keys(request.data).length == 0)) {
+                     request.data = { 'channel': 'NB' };
+                 }
+                 if (!!request && !!request.data && !!request.data.content_length) {
+                     delete request.data.content_length;
+                 }
+                 request.data = this.encryptObject(request.data);
+                 finalEncReq = this.encrypt(JSON.stringify(request.data));
+                 if (null != finalEncReq && finalEncReq.length >= 10) {
+                     if (typeof request.data == 'undefined') {
+                         request.data = {};
+                     }
+                     finalEncReqSubstr = finalEncReq.substring(finalEncReq.length - 10, finalEncReq.length);
+                     request.data["content_length"] = finalEncReqSubstr;
+                 }
+             }
+             return request;
+         };
+     }
+ 
+     exports.DeviceService = DeviceService;
+     exports.LogoutService = LogoutService;
+     exports.OpenExternalUrlService = OpenExternalUrlService;
+     exports.EncryptDecryptService = EncryptDecryptService;
+ }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, exports) {
+
+ module.exports = __WEBPACK_EXTERNAL_MODULE_103__;
+
+/***/ }),
+
+/***/ 104:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+ 
+ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+ 
+ !(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+ 
+     CacheService.$inject = ['$q'];
+     function CacheService($q) {
+ 
+         function get(key) {
+             var deferred = $q.defer();
+             var object = sessionStorage.getItem(key);
+             if (object == null) {
+                 deferred.reject();
+             } else {
+                 deferred.resolve(JSON.parse(object));
+             }
+             return deferred.promise;
+         }
+ 
+         function set(key, value) {
+             var deferred = $q.defer();
+             var object = (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object' ? JSON.stringify(value) : value;
+             sessionStorage.setItem(key, object);
+             deferred.resolve();
+             return deferred.promise;
+         }
+ 
+         function purge(key) {
+             sessionStorage.removeItem(key);
+         }
+ 
+         return {
+             get: get,
+             set: set,
+             purge: purge
+         };
+     }
+ 
+     exports.CacheService = CacheService;
+ }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ 105:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+ 
+ !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, module, __webpack_require__(103)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module, CryptoJS) {
+ 
+     NetworkService.$inject = ['$http', '$q', 'DeviceService', '$window', 'lpPortal', 'EncryptDecryptService', 'LogoutService'];
+     function NetworkService($http, $q, DeviceService, $window, lpPortal, EncryptDecryptService, LogoutService) {
+         this.$http = $http;
+         this.$q = $q;
+         this.DeviceService = DeviceService;
+         this.EncryptDecryptService = EncryptDecryptService;
+         this.LogoutService = LogoutService;
+         this.lpPortal = lpPortal;
+         this.$window = $window;
+     }
+ 
+     NetworkService.prototype.makeCall = function (request) {
+         var dataPromise = this.$q.defer();
+         if (b$.portal && b$.portal.portalName == "epi-portal") {
+             var urlVal = request.url.replace("services/proxy", "services/epiproxy");
+             request.url = urlVal;
+         }
+         if (window.location.href.indexOf('login') > -1) {
+             sessionStorage.removeItem('restrictNetworkCalls');
+         }
+         var restrictCalls = sessionStorage.getItem('restrictNetworkCalls');
+         if (restrictCalls || window.location.href.indexOf('designmode') > -1) {
+             dataPromise.reject();
+             return dataPromise.promise;
+         }
+         request = this.EncryptDecryptService.getRequest(request);
+         if (typeof request.timeout == 'undefined') {
+             request.timeout = 9000000;
+         } else {
+             request.timeout = request.timeout;
+         }
+         if (!request.headers) {
+             request.headers = {};
+         }
+         if (this.DeviceService.getType() == "web") {
+             request.headers["channelIndicator"] = "NB";
+             if (request.url.indexOf("customerValidate") == -1 && sessionStorage.getItem("token") != null) {
+                 request.headers["inEncryptValue"] = sessionStorage.getItem("token");
+                 if (sessionStorage.getItem('fldAppId') != null && typeof sessionStorage.getItem('fldAppId') != 'undefined') {
+                     request.headers["fldAppId"] = sessionStorage.getItem('fldAppId');
+                 }
+             }
+         } else {
+             request.headers["channelIndicator"] = "MB";
+         }
+         this.$http(request).then(serverSuccess, serverError);
+         var model = this;
+ 
+         function serverSuccess(response) {
+             /*if encryptToken is tampered with, logout immediately*/
+             if (!response.config.url.contains("keep-alive-nb")) {
+                 if (b$.portal.knowYourBrowser == 'ie-11' || b$.portal.knowYourBrowser == 'ie-10' || b$.portal.knowYourBrowser == 'ie-9') {
+                     gadgets.pubsub.publish("Iescroll");
+                 }
+             }
+ 
+             if (window.location.href.indexOf('designmode') < -1 && typeof response.data.ExceptionResponse != 'undefined' && response.data.ExceptionResponse.rc.errorcode == 'LG1003') {
+                 if (typeof model.$window.tokenTampering == "undefined") {
+                     model.LogoutService.goLogout();
+                     model.$window.tokenTampering = true;
+                     return;
+                 }
+             }
+             var object = response.data;
+             /* we will no longer get secretAnswer, secretQuestion from back-end*/
+             response.data = model.EncryptDecryptService.decryptObject(object, object.secretAnswer, '5D9r9ZVzEYYgha93/aUK2w==');
+             if (typeof response.data.outEncryptValue != "undefined" && response.data.outEncryptValue != "") {
+                 sessionStorage.setItem("token", response.data.outEncryptValue);
+             }
+             dataPromise.resolve(response);
+         }
+ 
+         /*return Exception response during absence/mismatch of content length*/
+         /*function returnException(response){
+             response.status = 500;
+             response.data = {"ExceptionResponse":{"rc":{"errorcode":"222","message":"Sorry, something went wrong!","returncode":"222"}}};
+             dataPromise.reject(response);
+         }*/
+ 
+         function serverError(response) {
+             if (!response.config.url.contains("keep-alive-nb")) {
+                 if (b$.portal.knowYourBrowser == 'ie-11' || b$.portal.knowYourBrowser == 'ie-10' || b$.portal.knowYourBrowser == 'ie-9') {
+                     gadgets.pubsub.publish("Iescroll");
+                 }
+             }
+             if (response.status == 401) {
+                 if (typeof response.data.outEncryptValue != "undefined" && response.data.outEncryptValue != "") {
+                     sessionStorage.setItem("token", response.data.outEncryptValue);
+                 }
+                 gadgets.pubsub.publish("logout");
+             }
+             if (response.status == -1) {
+                 response.code = 504;
+                 response.message = "Request has been Time out";
+             }
+             /*if session got wipped out*/
+             if (typeof response.data.AuthResponse != 'undefined') {
+                 if (response.data.AuthResponse.rc.errorcode == 'LG1003' || response.data.AuthResponse.rc.errorcode == 'IAE') {
+                     /*to abort https request*/
+                     if (typeof model.$window.sessionExpireInit == "undefined") {
+                         var flag = { "sessionExpire": true };
+                         model.LogoutService.goLogout(sessionStorage.getItem('fldAppId'), flag);
+                         model.$window.sessionExpireInit = true;
+                     }
+                 }
+             }
+             dataPromise.reject(response);
+         }
+         return dataPromise.promise;
+     };
+ 
+     /* NetworkService.prototype.encryptObject = function(obj){
+          this.EncryptDecryptService.encryptObject(obj)
+      }
+      NetworkService.prototype.decryptObject = function(obj, timestamp, iv){
+          this.EncryptDecryptService.decryptObject(obj, timestamp, iv);
+      }*/
+ 
+     exports.NetworkService = NetworkService;
+ }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ 106:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+ 
+ !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports) {
+     var saveAs = function (view) {
+         "use strict";
+         /* IE <10 is explicitly unsupported*/
+ 
+         if (typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
+             return;
+         }
+         var doc = view.document
+         /* only get URL when necessary in case Blob.js hasn't overridden it yet*/
+         ,
+             get_URL = function get_URL() {
+             return view.URL || view.webkitURL || view;
+         },
+             save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a"),
+             can_use_save_link = "download" in save_link,
+             click = function click(node) {
+             var event = new MouseEvent("click");
+             node.dispatchEvent(event);
+         },
+             is_safari = /Version\/[\d\.]+.*Safari/.test(navigator.userAgent),
+             webkit_req_fs = view.webkitRequestFileSystem,
+             req_fs = view.requestFileSystem || webkit_req_fs || view.mozRequestFileSystem,
+             throw_outside = function throw_outside(ex) {
+             (view.setImmediate || view.setTimeout)(function () {
+                 throw ex;
+             }, 0);
+         },
+             force_saveable_type = "application/octet-stream",
+             fs_min_size = 0
+         /*/See https://code.google.com/p/chromium/issues/detail?id=375297#c7 and
+          https://github.com/eligrey/FileSaver.js/commit/485930a#commitcomment-8768047
+         for the reasoning behind the timeout and revocation flow*/
+         ,
+             arbitrary_revoke_timeout = 500 /* in ms*/
+         ,
+             revoke = function revoke(file) {
+             var revoker = function revoker() {
+                 if (typeof file === "string") {
+                     /* file is an object URL*/
+                     get_URL().revokeObjectURL(file);
+                 } else {
+                     file.remove();
+                 }
+             };
+             if (view.chrome) {
+                 revoker();
+             } else {
+                 setTimeout(revoker, arbitrary_revoke_timeout);
+             }
+         },
+             dispatch = function dispatch(filesaver, event_types, event) {
+             event_types = [].concat(event_types);
+             var i = event_types.length;
+             while (i--) {
+                 var listener = filesaver["on" + event_types[i]];
+                 if (typeof listener === "function") {
+                     try {
+                         listener.call(filesaver, event || filesaver);
+                     } catch (ex) {
+                         throw_outside(ex);
+                     }
+                 }
+             }
+         },
+             auto_bom = function auto_bom(blob) {
+             /* prepend BOM for UTF-8 XML and text*/ /* types (including HTML)*/
+             if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+                 return new Blob(['\uFEFF', blob], { type: blob.type });
+             }
+             return blob;
+         },
+             FileSaver = function FileSaver(blob, name, no_auto_bom) {
+             if (!no_auto_bom) {
+                 blob = auto_bom(blob);
+             }
+             /*First try a.download, then web filesystem, then object URLs*/
+             var filesaver = this,
+                 type = blob.type,
+                 blob_changed = false,
+                 object_url,
+                 target_view,
+                 dispatch_all = function dispatch_all() {
+                 dispatch(filesaver, "writestart progress write writeend".split(" "));
+             }
+             /*on any filesys errors revert to saving with object URLs*/
+             ,
+                 fs_error = function fs_error() {
+                 if (target_view && is_safari && typeof FileReader !== "undefined") {
+                     /*Safari doesn't allow downloading of blob urls*/
+                     var reader = new FileReader();
+                     reader.onloadend = function () {
+                         var base64Data = reader.result;
+                         var res = name.split(".");
+                         var format = res[res.length - 1];
+                         var href = "data:attachment/file" + base64Data.slice(base64Data.search(/[,;]/));
+                         if (format && format.toLowerCase() == 'pdf') {
+                             href = "data:application/pdf" + base64Data.slice(base64Data.search(/[,;]/));
+                         } else if (format && format.toLowerCase() == 'txt') {
+                             href = "data:text/plain" + base64Data.slice(base64Data.search(/[,;]/));
+                         } else if (format && format.toLowerCase() == 'xls') {
+                             href = "data:application/vnd.ms-excel" + base64Data.slice(base64Data.search(/[,;]/));
+                         }
+                         var new_tab = view.open(href, "_blank");
+                         if (new_tab == undefined && is_safari) {
+                             view.location.href = href;
+                         }
+                         filesaver.readyState = filesaver.DONE;
+                         dispatch_all();
+                     };
+                     reader.readAsDataURL(blob);
+                     filesaver.readyState = filesaver.INIT;
+                     return;
+                 }
+                 /*don't create more object URLs than needed*/
+                 if (blob_changed || !object_url) {
+                     object_url = get_URL().createObjectURL(blob);
+                 }
+                 if (target_view) {
+                     target_view.location.href = object_url;
+                 } else {
+                     var new_tab = view.open(object_url, "_blank");
+                     if (new_tab == undefined && is_safari) {
+                         /*Apple do not allow window.open, see http://bit.ly/1kZffRI*/
+                         view.location.href = object_url;
+                     }
+                 }
+                 filesaver.readyState = filesaver.DONE;
+                 dispatch_all();
+                 revoke(object_url);
+             },
+                 abortable = function abortable(func) {
+                 return function () {
+                     if (filesaver.readyState !== filesaver.DONE) {
+                         return func.apply(this, arguments);
+                     }
+                 };
+             },
+                 create_if_not_found = { create: true, exclusive: false },
+                 slice;
+             filesaver.readyState = filesaver.INIT;
+             if (!name) {
+                 name = "download";
+             }
+             if (can_use_save_link) {
+                 object_url = get_URL().createObjectURL(blob);
+                 save_link.href = object_url;
+                 save_link.download = name;
+                 setTimeout(function () {
+                     click(save_link);
+                     dispatch_all();
+                     revoke(object_url);
+                     filesaver.readyState = filesaver.DONE;
+                 });
+                 return;
+             }
+             /*Object and web filesystem URLs have a problem saving in Google Chrome when
+              viewed in a tab, so I force save with application/octet-stream
+              http://code.google.com/p/chromium/issues/detail?id=91158
+              Update: Google errantly closed 91158, I submitted it again:
+              https://code.google.com/p/chromium/issues/detail?id=389642*/
+             if (view.chrome && type && type !== force_saveable_type) {
+                 slice = blob.slice || blob.webkitSlice;
+                 blob = slice.call(blob, 0, blob.size, force_saveable_type);
+                 blob_changed = true;
+             }
+             /* Since I can't be sure that the guessed media type will trigger a download
+             in WebKit, I append .download to the filename.
+              https://bugs.webkit.org/show_bug.cgi?id=65440*/
+             if (webkit_req_fs && name !== "download") {
+                 name += ".download";
+             }
+             if (type === force_saveable_type || webkit_req_fs) {
+                 target_view = view;
+             }
+             if (!req_fs) {
+                 fs_error();
+                 return;
+             }
+             fs_min_size += blob.size;
+             req_fs(view.TEMPORARY, fs_min_size, abortable(function (fs) {
+                 fs.root.getDirectory("saved", create_if_not_found, abortable(function (dir) {
+                     var save = function save() {
+                         dir.getFile(name, create_if_not_found, abortable(function (file) {
+                             file.createWriter(abortable(function (writer) {
+                                 writer.onwriteend = function (event) {
+                                     target_view.location.href = file.toURL();
+                                     filesaver.readyState = filesaver.DONE;
+                                     dispatch(filesaver, "writeend", event);
+                                     revoke(file);
+                                 };
+                                 writer.onerror = function () {
+                                     var error = writer.error;
+                                     if (error.code !== error.ABORT_ERR) {
+                                         fs_error();
+                                     }
+                                 };
+                                 "writestart progress write abort".split(" ").forEach(function (event) {
+                                     writer["on" + event] = filesaver["on" + event];
+                                 });
+                                 writer.write(blob);
+                                 filesaver.abort = function () {
+                                     writer.abort();
+                                     filesaver.readyState = filesaver.DONE;
+                                 };
+                                 filesaver.readyState = filesaver.WRITING;
+                             }), fs_error);
+                         }), fs_error);
+                     };
+                     dir.getFile(name, { create: false }, abortable(function (file) {
+                         /* delete file if it already exists*/
+                         file.remove();
+                         save();
+                     }), abortable(function (ex) {
+                         if (ex.code === ex.NOT_FOUND_ERR) {
+                             save();
+                         } else {
+                             fs_error();
+                         }
+                     }));
+                 }), fs_error);
+             }), fs_error);
+         },
+             FS_proto = FileSaver.prototype,
+             saveAs = function saveAs(blob, name, no_auto_bom) {
+             return new FileSaver(blob, name, no_auto_bom);
+         };
+         /*IE 10+ (native saveAs)*/
+         if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+             return function (blob, name, no_auto_bom) {
+                 if (!no_auto_bom) {
+                     blob = auto_bom(blob);
+                 }
+                 return navigator.msSaveOrOpenBlob(blob, name || "download");
+             };
+         }
+ 
+         FS_proto.abort = function () {
+             var filesaver = this;
+             filesaver.readyState = filesaver.DONE;
+             dispatch(filesaver, "abort");
+         };
+         FS_proto.readyState = FS_proto.INIT = 0;
+         FS_proto.WRITING = 1;
+         FS_proto.DONE = 2;
+ 
+         FS_proto.error = FS_proto.onwritestart = FS_proto.onprogress = FS_proto.onwrite = FS_proto.onabort = FS_proto.onerror = FS_proto.onwriteend = null;
+ 
+         return saveAs;
+     }(typeof self !== "undefined" && self || typeof window !== "undefined" && window || this.content);
+     /*`self` is undefined in Firefox for Android content script context
+      while `this` is nsIContentFrameMessageManager
+      with an attribute `content` that corresponds to the window*/
+ 
+     if (typeof module !== "undefined" && module.exports) {
+         module.exports.saveAs = saveAs;
+     } else if ("function" !== "undefined" && __webpack_require__(107) !== null && __webpack_require__(108) != null) {
+         !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+             return saveAs;
+         }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+     }
+ 
+     downloadService.$inject = ['$http', '$q', 'DeviceService'];
+     function downloadService($http, $q, DeviceService) {
+         this.$http = $http;
+         this.$q = $q;
+         this.DeviceService = DeviceService;
+     }
+ 
+     downloadService.prototype.base64ToArrayBuffer = function (base64) {
+         var binaryString = window.atob(base64);
+         var binaryLength = binaryString.length;
+         var bytes = new Uint8Array(binaryLength);
+         for (var i = 0; i < binaryLength; i++) {
+             bytes[i] = binaryString.charCodeAt(i);
+         }
+         return bytes.buffer;
+     };
+ 
+     /* download byte stream */
+     downloadService.prototype.downloadFile = function (byteData, fileName, urlFlag) {
+         var byteArray = downloadService.prototype.base64ToArrayBuffer(byteData);
+         var blob = new Blob([byteArray], { type: 'application/octet-stream' });
+         saveAs(blob, fileName);
+     };
+ 
+     /* download file from URL*/
+     downloadService.prototype.DownloadStaticPdf = function (url, filename) {
+         var xhr = new XMLHttpRequest();
+         xhr.open('GET', url, true);
+         xhr.responseType = 'blob';
+         xhr.onload = function () {
+             if (this.status == 200) {
+                 var blob = this.response;
+                 saveAs(blob, filename);
+             }
+         };
+         xhr.send();
+     };
+ 
+     exports.downloadService = downloadService;
+ }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ 107:
+/***/ (function(module, exports) {
+
+ module.exports = function() { throw new Error("define cannot be used indirect"); };
+
+
+/***/ }),
+
+/***/ 108:
+/***/ (function(module, exports) {
+
+ /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
+ 
+ /* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ }),
+
+/***/ 109:
+/***/ (function(module, exports, __webpack_require__) {
+
+ var __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+ 
+ !(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports) {
+ 
+     'use strict';
+ 
+     var ENDPOINTS = {
+         keepAliveURL: '{contextRoot}/services/proxy/current/keep-alive-nb'
+     };
+ 
+     KeepAliveService.$inject = ['lpWidget', 'lpPortal', 'NetworkService', '$interval', 'LogoutService', '$timeout', '$document', '$window'];
+     function KeepAliveService(lpWidget, lpPortal, NetworkService, $interval, LogoutService, $timeout, $document, $window) {
+         this.lpWidget = lpWidget;
+         this.NetworkService = NetworkService;
+         this.lpPortal = lpPortal;
+         var model = this;
+         this.logout;
+         this.interval;
+         this.warning;
+         this.keepAlive;
+         this.printInterval;
+         this.keepAliveRequest;
+ 
+         ENDPOINTS.keepAliveURL = ENDPOINTS.keepAliveURL.replace('{contextRoot}', lpPortal.root);
+ 
+         /*user logged out*/
+         model.logout = function () {
+             LogoutService.goLogout();
+         };
+ 
+         /*show warning popup here*/
+         model.warning = function () {
+             window.timeoutTriggered = true;
+             gadgets.pubsub.publish("sessionTimeout");
+         };
+ 
+         model.keepAliveRequest = function () {
+             var request = {
+                 url: ENDPOINTS.keepAliveURL,
+                 method: 'PUT',
+                 data: {
+                     'req': ''
+                 }
+             };
+             if (b$.portal.isLogin && window.isTapped && !window.timeoutTriggered) {
+                 model.NetworkService.makeCall(request).then(onSuccess).catch(onError);
+                 window.isTapped = false;
+             }
+             function onSuccess(response) {}
+             function onError(error) {}
+         };
+ 
+         model.resetTimer = function () {
+             var logoutTimer = sessionStorage.getItem("sessionTimer");
+             if (b$.portal.isLogin && typeof logoutTimer != "undefined" && logoutTimer != null) {
+                 window.isTapped = true;
+                 $timeout.cancel(model.logout);
+                 $interval.cancel(model.interval);
+                 var sessionOutTimer = logoutTimer - 60000;
+                 model.logout = $timeout(model.logout, logoutTimer); /*T minutes session logout*/
+                 model.interval = $interval(model.warning, sessionOutTimer); /*show warning or logout popup after T-1 minutes*/
+             }
+         };
+ 
+         model.startKeepAlive = function () {
+             $interval.cancel(model.keepAlive);
+             model.keepAlive = $interval(model.keepAliveRequest, 100000); /*send keep alive request in every 100 seconds*/
+         };
+ 
+         if (typeof window.keepAliveStart == "undefined" && typeof $window.keepAliveInit == "undefined" && b$.portal.isLogin) {
+             window.isTapped = false;
+             window.timeoutTriggered = false;
+             model.resetTimer();
+             model.startKeepAlive();
+             model.keepAliveRequest();
+             $document.bind('mousemove', function (e) {
+                 model.resetTimer();
+             });
+             $document.bind('keypress', function (e) {
+                 model.resetTimer();
+             });
+             $window.keepAliveInit = true;
+         }
+ 
+         gadgets.pubsub.subscribe("triggerKeepAlive", function () {
+             if (typeof window.keepAliveTrigger == "undefined") {
+                 model.keepAliveRequest();
+                 window.keepAliveTrigger = true;
+             }
+         });
+     }
+     exports.KeepAliveService = KeepAliveService;
+ }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, exports) {
+
+ "use strict";
+ 
+ angular.module("uiSwitch", []).directive("switch", function () {
+   return {
+     restrict: "AE",
+     replace: !0,
+     transclude: !0,
+     template: function template(n, e) {
+       var s = "";
+       return s += "<span", s += ' class="switch' + (e.class ? " " + e.class : "") + '"', s += e.ngModel ? ' ng-click="' + e.disabled + " ? " + e.ngModel + " : " + e.ngModel + "=!" + e.ngModel + (e.ngChange ? "; " + e.ngChange + '()"' : '"') : "", s += ' ng-class="{ checked:' + e.ngModel + ", disabled:" + e.disabled + ' }"', s += ">", s += "<small></small>", s += '<input type="checkbox"', s += e.id ? ' id="' + e.id + '"' : "", s += e.name ? ' name="' + e.name + '"' : "", s += e.ngModel ? ' ng-model="' + e.ngModel + '"' : "", s += ' style="display:none" />', s += '<span class="switch-text">', s += e.on ? '<span class="on">' + e.on + "</span>" : "", s += e.off ? '<span class="off">' + e.off + "</span>" : " ", s += "</span>";
+     } };
+ });
+
+/***/ })
+
+/******/ })
+});
+;
+//# sourceMappingURL=feature-hdfc-common-utility.js.map

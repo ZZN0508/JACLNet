@@ -1,0 +1,31 @@
+// /116038490/gootop_pc/badge970_1
+(function () {
+    var parentWindow;
+    var gptDiv;
+    var adDiv;
+    parentWindow = window.top;
+
+    gptDiv = document.createElement('div');
+    gptDiv.id = 'div-gpt-ad-1531903089538-0';
+    adDiv = parentWindow.document.getElementById('gooad-badge970_1');
+    adDiv.appendChild(gptDiv);
+    parentWindow.googletag.cmd.push(function () { parentWindow.googletag.display('div-gpt-ad-1531903089538-0'); });
+
+    var headElem = parentWindow.document.getElementsByTagName('head')[0];
+
+    var styleElem1 = window.top.document.createElement('style');
+    headElem.appendChild(styleElem1);
+    styleElem1.type = 'text/css';
+    styleElem1.sheet.insertRule('#gooad-badge970_1 {text-align:center;}', 0);
+
+//    var styleElem2 = window.top.document.createElement('style');
+//    headElem.appendChild(styleElem2);
+//    styleElem2.type = 'text/css';
+//    styleElem2.sheet.insertRule('div#gBody > div#tcRight > div#pr, .NR-pr {margin-bottom:0px !important;}', 0);
+//
+//    var styleElem3 = window.top.document.createElement('style');
+//    headElem.appendChild(styleElem3);
+//    styleElem3.type = 'text/css';
+//    styleElem3.sheet.insertRule('div#rcol > div.pr {margin-bottom:0px !important;}', 0);
+
+}());

@@ -1,0 +1,145 @@
+_swg.iwg = (function () {
+  var _swi = {
+    iframeId: 'samsung-widget-iframe',
+    iframeCont: 'samsung-widget-iframe-cont',
+    iframeButton: 'widget-button',
+ iframeNotify: 'notify-icon',
+    ifrCssId: 'samsung-widget-iframe-css',
+    screenType: 'web',
+    loaded: function() {
+      return ($(this.iframeId).length > 0) ? true :  false;
+    },
+    isMobileScreen: function() {
+      return ($(window).width() < 500 || /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? true : false;
+    },
+    createIframeContainer: function() {
+      if (!document.getElementById(this.iframeCont))
+      {
+        var div = document.createElement('div');
+        div.id = this.iframeCont;
+        document.body.appendChild(div);
+        document.getElementById(this.iframeCont).innerHTML += '<div id="'+this.iframeButton+'"><div class="widget-button-img"></div></div>';
+  document.getElementById(this.iframeButton).innerHTML += '<div id="'+this.iframeNotify+'"><div class="notify-icon-img"></div></div>';
+        this.createIframe();
+      }
+    },
+    createIframe: function() {
+      {
+        var tempIframe = document.createElement('iframe');
+        tempIframe.frameBorder = 0;
+        tempIframe.style.display = "none";
+        tempIframe.src = 'javascript:var d=document.open();d.domain="'+document.domain+'";void(0);';
+        document.getElementById(this.iframeCont).appendChild(tempIframe);
+        var cont = document.getElementById(this.iframeCont);
+
+        var iframe = document.createElement('iframe');
+        iframe.name = 'swg';
+        iframe.onload = function() {
+          window.swg.postMessage({
+                                  type: 'config',
+                                  widget: {
+                                    wSettings: _swg.wSettings,
+                                    wLocaleStrings: _swg.wLocaleStrings,
+                                    wTitle: document.title,
+                                    wHref: document.location.href
+                                  }
+                                }, _swg.iframe_url);
+        }
+        iframe.src = _swg.iframe_url;
+        iframe.id = this.iframeId;
+        iframe.frameBorder = 0;
+        iframe.className = "widget-button";
+        cont.replaceChild(iframe, cont.childNodes[1]);
+      }
+    },
+    createIframeCSS: function () {
+      if (!document.getElementById(this.ifrCssId))
+      {
+          var head  = document.getElementsByTagName('head')[0];
+          var link  = document.createElement('link');
+          link.id   = this.ifrCssId;
+          link.rel  = 'stylesheet';
+          link.type = 'text/css';
+          link.href = _swg.iframe_css_url;
+          link.media = 'all';
+          head.appendChild(link);
+      }
+    },
+    getUriOrigin: function (url) {
+      return (new URL(url)).origin;
+    },
+    isDomainWhitelisted: function() {
+      return (_swg.wSettings.whitelisted_domains.indexOf(window.location.hostname) > -1 || _swg.wSettings.whitelisted_domains.length === 0) ? true : false;
+    },
+    setMessageEvents: function() {
+      var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+      var eventer = window[eventMethod];
+      var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+      // Listen to message from child window
+      eventer(messageEvent,function(e) {
+        //if(e.origin !== _swi.getUriOrigin(_swg.iframe_url)) return false;
+        var $iframe = $('#'+_swi.iframeId);
+        switch (e.data.type) {
+          case "iframe-resize":
+            if(_swg.iframe_display) {
+                if (e.data.el === ".w-cont") {
+                  $iframe.removeClass('proactive-screen').addClass('widget-screen').css('display', 'block');
+                  $('#'+_swi.iframeButton).addClass('hidden');
+                }
+
+                if (e.data.el === ".bot-cont") {
+                  $iframe.removeClass('widget-screen').addClass('proactive-screen').css('display', 'block');
+                  $('#'+_swi.iframeButton).addClass('hidden');
+                }
+
+    if ((e.data.el === ".w-cont-button") && !(e.data.isChatting)) {
+                  $iframe.removeClass('widget-screen').removeClass('proactive-screen').css('display', 'none');
+                  $('#'+_swi.iframeButton).removeClass('hidden').css('display', 'block');
+                } else if ((e.data.el === ".w-cont-button") && (e.data.isChatting == "Yes")) {
+                  $iframe.removeClass('widget-screen').removeClass('proactive-screen').css('display', 'none');
+                  $('#'+_swi.iframeButton).removeClass('hidden').css('display', 'block');
+                }
+              } else {
+                $('#'+_swi.iframeButton).addClass('hidden');
+              }
+            break;
+    case "iframe-notify":
+            if(_swg.iframe_display) {
+    if ((e.data.isChatting == "Yes") && (e.data.el == "sendNotify")) {
+      $('#'+_swi.iframeNotify).removeClass('hidden').css('display', 'block');
+    } else if ((e.data.isChatting == "Yes") && (e.data.el == "sendNotifyReset")) {
+      $('#'+_swi.iframeNotify).removeClass('hidden').css('display', 'none');
+    }
+   }
+            break;
+          case "iframe-display":
+              if(_swg.iframe_display) {
+                $('#'+_swi.iframeButton)[e.data.display]();
+              }
+            break;
+        }
+      },false);
+    },
+    showFrameWidget: function() {
+      window.swg.postMessage({type: 'show-widget'}, _swg.iframe_url);
+    },
+    sendOrderID: function(oID, pID) {
+      //window.swg._swg.sendOrderID(oID,pID);
+      window.swg.postMessage({type: 'send-order-id', order_id: oID, partner_id: pID}, _swg.iframe_url);
+    }
+  };
+  return _swi;
+}());
+
+window.addEventListener("load", function() {
+  if(_swg.iwg.isDomainWhitelisted()) {
+    _swg.iwg.createIframeCSS();
+    _swg.iwg.createIframeContainer();
+    _swg.iwg.setMessageEvents();
+
+    $('#'+_swg.iwg.iframeCont+' #'+_swg.iwg.iframeButton).on('click', function() {
+      _swg.iwg.showFrameWidget();
+    });
+  }
+});

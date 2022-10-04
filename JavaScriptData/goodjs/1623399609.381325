@@ -1,0 +1,29 @@
+
+var strOrig, strDic=""; //for globals nonexistent here
+function readCookie(name)
+{	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)===' ') {c = c.substring(1,c.length);}
+		if (c.indexOf(nameEQ) === 0) {return c.substring(nameEQ.length,c.length);}
+	}
+	return null;
+}
+var x = readCookie('llang');
+if (x && x.length > 0) {
+	var foption = document.getElementById(x.substring(0,x.length-1));
+	if(!foption) { //When it's a virtual dictionary
+		foption = document.getElementById(x.substr(0, 2) + "en");
+	}
+	if(foption) { foption.selected = true; }
+}
+
+
+{
+  "@context" : "http://schema.org",
+  "@type" : "WebSite",
+  "name" : "WordReference.com",
+  "alternateName" : "WordReference Dictionaries",
+  "url" : "https://www.wordreference.com"
+}
